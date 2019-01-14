@@ -1,0 +1,10 @@
+# You can automatically load this file using direnv: https://direnv.net/
+# or just `source .envrc`
+
+# Space-separated list of one or more required network ids
+export REACT_APP_REQUIRED_NETWORK_IDS="1234"
+
+export REACT_APP_ROPSTEN_PROVIDER_URL=https://ropsten.infura.io/<YOUR INFURA KEY>
+export REACT_APP_RINKEBY_PROVIDER_URL=https://rinkeby.infura.io/<YOUR INFURA KEY>
+export REACT_APP_MAINNET_PROVIDER_URL=https://mainnet.infura.io/<YOUR INFURA KEY>
+export REACT_APP_LOCALHOST_PROVIDER_URL=http://localhost:8545

@@ -1,0 +1,8 @@
+node_modules*
+build
+.envrc
+.DS_Store
+yarn-error.log
+zos.dev*.json
+.zos.session
+.zos.lock
