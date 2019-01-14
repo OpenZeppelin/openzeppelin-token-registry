@@ -16,29 +16,24 @@ const App = class _App extends PureComponent {
       <>
         <section className="section">
           <NavContainer />
-
-          <div className="container is-fluid">
-            <div className="columns">
-              <div className="column is-12-tablet is-10-widescreen is-offset-1-widescreen">
-                <TransitionGroup>
-                  <CSSTransition
-                    key={this.props.location.key}
-                    timeout={{ enter: 700, exit: 200 }}
-                    classNames="layout"
-                    appear={true}
-                  >
-                    <Switch location={this.props.location}>
-                      <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
-                      <Route path={routes.HOME} component={PackageList} />
-
-                      <Route component={FourOhFourContainer} />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
-              </div>
-            </div>
-          </div>
         </section>
+        <div>
+          <TransitionGroup>
+            <CSSTransition
+              key={this.props.location.key}
+              timeout={{ enter: 700, exit: 200 }}
+              classNames="layout"
+              appear={true}
+            >
+              <Switch location={this.props.location}>
+                <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
+                <Route path={routes.HOME} component={PackageList} />
+
+                <Route component={FourOhFourContainer} />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        </div>
       </>
     )
   }

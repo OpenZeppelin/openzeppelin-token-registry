@@ -36,7 +36,7 @@ export const Nav = class _Nav extends Component {
             'is-fixed-top'
           )
         }>
-          <div className="container is-fluid">
+          <div className="container">
             <div className="navbar-brand">
               <div className="navbar-item">
                 <Link to={routes.HOME} className="navbar-item">

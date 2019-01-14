@@ -7,7 +7,7 @@ export class PackageList extends PureComponent {
       <div>
         <section className="hero is-medium is-primary is-bold">
           <div className='container'>
-            <div className='row'>
+            <div className='columns'>
               <div className='column'>
                 <h2 className='title'>Gain confidence in the security of the EVM packages you use</h2>
                 <p>
