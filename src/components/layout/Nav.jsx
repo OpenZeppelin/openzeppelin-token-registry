@@ -59,7 +59,6 @@ export const Nav = class _Nav extends Component {
               </button>
             </div>
 
-
             <div id="navbar-menu" className={classnames(
               'navbar-menu',
               { 'is-active': this.state.mobileNavActive }
