@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { App } from '~/components/App'
+import { AppContainer } from '~/components/App'
 import * as serviceWorker from './serviceWorker'
 
 import './index.scss'
@@ -9,7 +9,7 @@ import './index.scss'
 window.addEventListener('load', () => {
   let coreApp =
     <BrowserRouter>
-      <App />
+      <AppContainer />
     </BrowserRouter>
 
   ReactDOM.render(coreApp, document.getElementById('root'))
