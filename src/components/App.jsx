@@ -16,23 +16,21 @@ const App = class _App extends PureComponent {
       <>
         <NavContainer />
 
-        <div>
-          <TransitionGroup>
-            <CSSTransition
-              key={this.props.location.key}
-              timeout={{ enter: 700, exit: 200 }}
-              classNames="layout"
-              appear={true}
-            >
-              <Switch location={this.props.location}>
-                <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
-                <Route path={routes.HOME} component={PackageListPage} />
+        <TransitionGroup>
+          <CSSTransition
+            key={this.props.location.key}
+            timeout={{ enter: 700, exit: 200 }}
+            classNames="layout"
+            appear={true}
+          >
+            <Switch location={this.props.location}>
+              <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
+              <Route path={routes.HOME} component={PackageListPage} />
 
-                <Route component={FourOhFourContainer} />
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
-        </div>
+              <Route component={FourOhFourContainer} />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
       </>
     )
   }

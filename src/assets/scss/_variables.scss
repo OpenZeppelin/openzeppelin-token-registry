@@ -1,23 +1,21 @@
 $body-line-height: 1.5;
-$body-size: 20px !default
-
-$text: #237;
-
-// $hr-background-color: $background !default
-// $hr-height: 2px !default
-// $hr-margin: 1.5rem 0 !default
+$body-size: 16px;
 
 $family-sans-serif: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
 $family-code: 'Roboto Mono', monospace;
 
-$navbar-background-color: transparent;
-$navbar-item-hover-background-color: none;
-$navbar-height: 5rem;
+$text: #141414;
+$navbar-grey: #212528;
+$navbar-item-color: white;
 
-$link-color: #8cf;
-$link-hover-color: #aef;
+// $hr-background-color: $background !default
+// $hr-height: 2px !default
+// $hr-margin: 1.5rem 0 !default
+
+$link-color: #120;
+$link-hover-color: #39e6e0;
 
 $link: $link-color;
 $link-invert: white;
@@ -29,4 +27,13 @@ $link-focus-border: $link-color;
 $link-active: $link-color;
 $link-active-border: $link-color;
 
+$dark: $navbar-grey;
+
 $success: #1fb90a;
+
+$code: $text;
+$code-background: #f7f7f7;
+
+$navbar-background-color: $navbar-grey;
+$navbar-item-hover-background-color: none;
+$navbar-height: 4rem;

@@ -17,16 +17,20 @@ export class PackageListItem extends PureComponent {
             <div className='column is-three-quarters'>
               <h1 className='title'>
                 {this.props.package.name}
-                <small>
-                  {this.props.package.version}
-                </small>
+
+                <span className="package-list-item--version has-text-grey has-text-weight-light">
+                  v{this.props.package.version}
+                </span>
               </h1>
-              <CodeSnippet code={'$ zos link openzeppelin-eth'} />
+              <code className="code--quick-install">
+                $ zos link openzeppelin-eth
+              </code>
             </div>
+
             <div className='column'>
-              <h2 className='subtitle'>
-                <small>repository</small>
-              </h2>
+              <h6 className='subtitle is-size-6'>
+                VOUCHED
+              </h6>
               <p>
                 <a href='https://github.com/DeltaCamp/zeppelin-vouching-app'>
                   <AntdIcon type={GithubFill} className="antd-icon" />&nbsp;

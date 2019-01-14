@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
-import {
-  BookOutline
-} from '@ant-design/icons'
-import AntdIcon from '@ant-design/icons-react'
 import * as routes from '~/../config/routes'
 
 export const Nav = class _Nav extends Component {
@@ -30,12 +26,7 @@ export const Nav = class _Nav extends Component {
   render () {
     return (
       <>
-        <nav
-          className={classnames(
-            'navbar',
-            'is-fixed-top'
-          )
-        }>
+        <nav className="navbar is-fixed-top is-dark">
           <div className="container">
             <div className="navbar-brand">
               <div className="navbar-item">
@@ -72,7 +63,6 @@ export const Nav = class _Nav extends Component {
                     className="navbar-item"
                     onClick={this.closeMobileNav}
                   >
-                    <AntdIcon type={BookOutline} className="antd-icon" />&nbsp;
                     Home
                   </NavLink>
                 </div>
@@ -84,7 +74,6 @@ export const Nav = class _Nav extends Component {
                     className='navbar-item'
                     onClick={this.closeMobileNav}
                   >
-                    <AntdIcon type={BookOutline} className="antd-icon " />&nbsp;
                     Page 2
                   </NavLink>
                 </div>
