@@ -19,7 +19,7 @@ export class PackageListPage extends PureComponent {
                   </p>
                 </div>
                 <div className='column'>
-                  <img src={gridImage} />
+                  <img alt="package grid" src={gridImage} />
                 </div>
               </div>
             </div>

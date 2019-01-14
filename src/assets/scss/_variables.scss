@@ -1,0 +1,31 @@
+$body-line-height: 1.5;
+$body-size: 20px !default
+
+$text: #237;
+
+// $hr-background-color: $background !default
+// $hr-height: 2px !default
+// $hr-margin: 1.5rem 0 !default
+
+$family-sans-serif: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+
+$navbar-background-color: transparent;
+$navbar-item-hover-background-color: none;
+$navbar-height: 5rem;
+
+$link-color: #8cf;
+$link-hover-color: #aef;
+
+$link: $link-color;
+$link-invert: white;
+$link-visited: $link-color;
+$link-hover: $link-hover-color;
+$link-hover-border: $link-hover-color;
+$link-focus: $link-color;
+$link-focus-border: $link-color;
+$link-active: $link-color;
+$link-active-border: $link-color;
+
+$success: #1fb90a;
