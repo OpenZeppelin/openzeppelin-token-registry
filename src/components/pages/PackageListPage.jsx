@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import gridImage from '~/assets/images/packages_grid.png'
 import { PackageList } from '~/components/packages/PackageList'
 
 export class PackageListPage extends PureComponent {

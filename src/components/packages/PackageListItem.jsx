@@ -1,12 +1,10 @@
 import React, {
   PureComponent
 } from 'react'
-import OpenZeppelinEthLogoImage from '~/assets/images/open-zeppelin-eth_logo.png'
 import AntdIcon from '@ant-design/icons-react'
 import {
   GithubFill
 } from '@ant-design/icons'
-import { CodeSnippet } from '~/components/CodeSnippet'
 
 export class PackageListItem extends PureComponent {
   render () {
