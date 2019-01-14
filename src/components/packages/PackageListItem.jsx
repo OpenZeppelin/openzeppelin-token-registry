@@ -6,6 +6,7 @@ import AntdIcon from '@ant-design/icons-react'
 import {
   GithubFill
 } from '@ant-design/icons'
+import { CodeSnippet } from '~/components/CodeSnippet'
 
 export class PackageListItem extends PureComponent {
   render () {
@@ -15,15 +16,15 @@ export class PackageListItem extends PureComponent {
           <div className='columns'>
             <div className='column is-three-quarters'>
               <h1 className='title'>
-                <img src={OpenZeppelinEthLogoImage} />
                 {this.props.package.name}
                 <small>
                   {this.props.package.version}
                 </small>
               </h1>
+              <CodeSnippet code={'$ zos link openzeppelin-eth'} />
             </div>
             <div className='column'>
-              <h2 className='subTitle'>
+              <h2 className='subtitle'>
                 <small>repository</small>
               </h2>
               <p>
