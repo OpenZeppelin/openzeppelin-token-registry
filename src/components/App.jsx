@@ -3,9 +3,9 @@ import { hot } from 'react-hot-loader'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
-import { Home } from '~/components/Pages/Home'
-import { OtherPage } from '~/components/Pages/OtherPage'
-import { FourOhFour } from '~/components/Pages/FourOhFour'
+import { HomeContainer } from '~/components/pages/Home'
+import { OtherPageContainer } from '~/components/pages/OtherPage'
+import { FourOhFourContainer } from '~/components/pages/FourOhFour'
 
 import * as routes from '~/../config/routes'
 
@@ -25,10 +25,10 @@ const App = class _App extends PureComponent {
                     appear={true}
                   >
                     <Switch location={this.props.location}>
-                      <Route path={routes.OTHER_PAGE} component={OtherPage} />
-                      <Route path={routes.HOME} component={Home} />
+                      <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
+                      <Route path={routes.HOME} component={HomeContainer} />
 
-                      <Route component={FourOhFour} />
+                      <Route component={FourOhFourContainer} />
                     </Switch>
                   </CSSTransition>
                 </TransitionGroup>
