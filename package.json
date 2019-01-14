@@ -38,6 +38,7 @@
     "babel-loader": "8.0.4",
     "babel-plugin-named-asset-import": "^0.2.2",
     "babel-preset-react-app": "^5.0.4",
+    "bfj": "^6.1.1",
     "bn.js": "4.11.8",
     "bulma": "^0.7.2",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
