@@ -1,5 +1,11 @@
+// App-specific vars:
 @import './assets/scss/_variables.scss';
 
+// CSS Framework:
 @import 'bulma/bulma.sass';
 
+// Component-specific and utility:
+@import './assets/scss/_animations.scss';
+
+// General stylesheet:
 @import './assets/scss/_style.scss';

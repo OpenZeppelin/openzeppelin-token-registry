@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import { PackageList } from '~/components/pages/PackageList'
+import { NavContainer } from '~/components/layout/Nav'
 import { OtherPageContainer } from '~/components/pages/OtherPage'
 import { FourOhFourContainer } from '~/components/pages/FourOhFour'
 
@@ -13,15 +14,17 @@ const App = class _App extends PureComponent {
   render () {
     return (
       <>
-        <section className='section'>
-          <div className='container is-fluid'>
-            <div className='columns'>
-              <div className='column is-12-tablet is-10-widescreen is-offset-1-widescreen'>
+        <section className="section">
+          <NavContainer />
+
+          <div className="container is-fluid">
+            <div className="columns">
+              <div className="column is-12-tablet is-10-widescreen is-offset-1-widescreen">
                 <TransitionGroup>
                   <CSSTransition
                     key={this.props.location.key}
                     timeout={{ enter: 700, exit: 200 }}
-                    classNames='page'
+                    classNames="layout"
                     appear={true}
                   >
                     <Switch location={this.props.location}>
