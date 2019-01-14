@@ -8,6 +8,9 @@ export class PackageListPage extends PureComponent {
     return (
       <div>
         <section className="hero is-black is-bold">
+          <p className="is-monospaced">
+            Here's a monospaced font using a css class.
+          </p>
           <div className='hero-body'>
             <div className='container'>
               <div className='has-text-centered'>

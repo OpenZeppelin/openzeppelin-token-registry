@@ -1,1 +1,8 @@
 @import "./components/index";
+
+.is-monospaced {
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
+
+  font-family: $code-family;
+}

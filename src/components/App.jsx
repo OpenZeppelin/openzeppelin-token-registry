@@ -15,6 +15,7 @@ const App = class _App extends PureComponent {
     return (
       <>
         <NavContainer />
+
         <div>
           <TransitionGroup>
             <CSSTransition
