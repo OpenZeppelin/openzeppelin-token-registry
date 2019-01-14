@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
-import { PackageList } from '~/components/pages/PackageList'
+import { PackageListPage } from '~/components/pages/PackageListPage'
 import { NavContainer } from '~/components/layout/Nav'
 import { OtherPageContainer } from '~/components/pages/OtherPage'
 import { FourOhFourContainer } from '~/components/pages/FourOhFour'
@@ -14,9 +14,7 @@ const App = class _App extends PureComponent {
   render () {
     return (
       <>
-        <section className="section">
-          <NavContainer />
-        </section>
+        <NavContainer />
         <div>
           <TransitionGroup>
             <CSSTransition
@@ -27,7 +25,7 @@ const App = class _App extends PureComponent {
             >
               <Switch location={this.props.location}>
                 <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
-                <Route path={routes.HOME} component={PackageList} />
+                <Route path={routes.HOME} component={PackageListPage} />
 
                 <Route component={FourOhFourContainer} />
               </Switch>
