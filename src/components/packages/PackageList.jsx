@@ -3,8 +3,6 @@ import { PackageListItem } from './PackageListItem'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import get from 'lodash.get'
-import Vouching from '#/Vouching.json'
-import { getNetworkAddress } from '~/utils/getNetworkAddress'
 
 const eventsQuery = gql`
   query eventsQuery {
