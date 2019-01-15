@@ -1,3 +1,19 @@
+button,
+a svg {
+  transition: transform 100ms ease-out;
+  transform: scale3d(1, 1, 1);
+}
+
+button:hover,
+a:hover svg {
+  transition: transform 150ms ease-in;
+  transform: scale3d(1.04, 1.04, 1.04);
+}
+
+a.is-dark {
+  color: $text;
+}
+
 .hero.is-dark.is-bold {
   background-color: $hero-dark;
   background-image: none;

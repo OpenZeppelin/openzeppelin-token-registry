@@ -6,6 +6,7 @@ import AntdIcon from '@ant-design/icons-react'
 import {
   GithubFill
 } from '@ant-design/icons'
+import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import get from 'lodash.get'
@@ -54,10 +55,20 @@ export class PackageListItem extends PureComponent {
                       </a>
                     </div>
 
-                    <div className='column'>
-                      <h6 className='subtitle is-size-6'>
+                    <div className='column has-text-right'>
+                      <h6 className='subtitle is-size-7 package-list-item--subtitle'>
                         VOUCHED
                       </h6>
+
+                      <span className='is-inline-block'>
+                        <ZeppelinOSLogo width='20' height='20' className='package-list-item--zep-token-logo' />
+                      </span>
+
+                      <h3 className='is-inline-block is-size-3 has-text-weight-light'>
+                        4,000
+                      </h3>
+
+                      <a href="#" className='is-block package-list-item--challenges-link'>2 challenges</a>
                     </div>
                   </div>
                 </div>

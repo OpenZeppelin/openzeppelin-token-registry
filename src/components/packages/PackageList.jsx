@@ -9,7 +9,7 @@ import { getNetworkAddress } from '~/utils/getNetworkAddress'
 const eventsQuery = gql`
   query eventsQuery {
     Vouching @contract {
-      registeredEvents: Registered @pastEvents
+      registeredEvents: Registered @pastEvents(fromBlock: "0", toBlock: "latest")
     }
   }
 `
