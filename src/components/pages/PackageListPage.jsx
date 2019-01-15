@@ -9,8 +9,8 @@ export class PackageListPage extends PureComponent {
         <section className="hero is-black is-bold">
           <div className='hero-body'>
             <div className='container'>
-              <div class='columns'>
-                <div class='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-6-fullhd is-offset-3-fullhd'>
+              <div className='columns'>
+                <div className='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-6-fullhd is-offset-3-fullhd'>
                   <div className='has-text-centered'>
                     <h2 className='title'>Gain confidence in the security of the EVM packages you use</h2>
                     <p>
