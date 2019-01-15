@@ -78,7 +78,7 @@ export class PackageListPage extends PureComponent {
               <div className='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
                 {
                   this.state.showPackages
-                    ? <PackageList />
+                    ? <PackageList location={this.props.location} />
                     : <p>Researchers list coming soon ...</p>
                 }
               </div>

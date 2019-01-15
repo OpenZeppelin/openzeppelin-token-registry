@@ -14,10 +14,12 @@ const eventsQuery = gql`
 export class PackageList extends PureComponent {
   render () {
     return (
-      <Query
-        query={eventsQuery}>
-        {({ data }) => {
-          const events = (data.Vouching ? data.Vouching.registeredEvents : []) || []
+      <Query query={eventsQuery}>
+        {({ loading, error, data }) => {
+          if (loading) return null
+          if (error) return `Error!: ${error}`
+
+          const events = data.Vouching ? data.Vouching.registeredEvents : []
 
           return (
             <>
@@ -25,6 +27,7 @@ export class PackageList extends PureComponent {
                 events.map(
                   event =>
                     <PackageListItem
+                      location={this.props.location}
                       package={event.returnValues}
                       key={event.returnValues.id}
                     />

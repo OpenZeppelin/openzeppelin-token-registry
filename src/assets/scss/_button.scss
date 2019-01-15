@@ -1,5 +1,34 @@
+.button:focus:not(:active),
+.button.is-focused:not(:active) {
+  box-shadow: none;
+}
+
+.button[disabled],
+button[disabled] {
+  cursor: not-allowed;
+}
+
+.button[disabled]:hover,
+.button[disabled]:focus,
+.button[disabled]:active,
+button[disabled]:hover,
+button[disabled]:focus,
+button[disabled]:active {
+  transform: scale3d(1, 1, 1);
+}
+
 .button {
   text-transform: uppercase;
+}
+
+.button.is-text {
+  text-decoration: none;
+}
+
+.button.is-text:hover,
+.button.is-text:active,
+.button.is-text:focus {
+  background-color: initial;
 }
 
 .button.is-primary {

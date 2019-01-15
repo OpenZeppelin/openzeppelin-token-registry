@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { PackageListPage } from '~/components/pages/PackageListPage'
 import { NavContainer } from '~/components/layout/Nav'
 import { OtherPageContainer } from '~/components/pages/OtherPage'
+import { PackageItemPage } from '~/components/pages/PackageItemPage'
 import { FourOhFourContainer } from '~/components/pages/FourOhFour'
 
 import * as routes from '~/../config/routes'
@@ -24,6 +25,7 @@ const App = class _App extends PureComponent {
             appear={true}
           >
             <Switch location={this.props.location}>
+              <Route path={routes.PACKAGE_ITEM} component={PackageItemPage} />
               <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
               <Route path={routes.HOME} component={PackageListPage} />
 

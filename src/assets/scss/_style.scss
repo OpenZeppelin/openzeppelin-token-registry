@@ -1,3 +1,7 @@
+::placeholder {
+  color: rgba(255, 255, 255, 0.15);
+}
+
 button,
 a svg {
   transition: transform 100ms ease-out;
@@ -41,6 +45,10 @@ a.is-dark {
   display: inline-block;
   padding: 0.5rem 1rem;
   min-width: 400px;
+
+  @media screen and (max-width: $tablet - 1px) {
+    min-width: 100%;
+  }
 }
 
 // This is used by the page / layout transitions

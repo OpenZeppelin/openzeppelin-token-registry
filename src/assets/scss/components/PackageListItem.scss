@@ -22,15 +22,17 @@
 }
 
 .package-list-item--github-icon {
-  color: $grey;
+  color: $grey !important;
   font-size: 26px;
+  height: auto;
   margin-left: 0.75rem;
   position: relative;
+  padding: 0;
   top: 0.4rem;
 }
 
 .package-list-item--github-icon:hover {
-  color: black;
+  color: black !important;
 }
 
 .package-list-item--subtitle.content:not(:last-child),
