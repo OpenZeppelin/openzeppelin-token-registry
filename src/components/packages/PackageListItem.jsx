@@ -13,6 +13,7 @@ import * as routes from '~/../config/routes'
 const packageQuery = gql`
   query packageQuery($path: String!) {
     metadata @rest(path: $path) {
+      id
       name
       version
       description
@@ -30,18 +31,19 @@ export class PackageListItem extends PureComponent {
   handlePackageItemClick = (e) => {
     e.preventDefault()
 
-    console.log('hi')
-
     this.setState({ toPackage: true })
   }
 
   render () {
+    // console.log(this.props.package)
     return (
       <Query query={packageQuery} variables={{ path: this.props.package.metadataURI }}>
         {
           ({ data }) => {
             const { metadata } = data || {}
             const { slug, version } = metadata || {}
+
+            console.log(metadata)
 
             if (this.state.toPackage) {
               return <Redirect to={formatRoute(routes.PACKAGE_ITEM, { slug, version })} />
