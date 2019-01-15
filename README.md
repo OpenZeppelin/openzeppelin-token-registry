@@ -1,31 +1,76 @@
-# Delta Camp Skeleton Dapp
+# zOS Vouching App
 
-### Setup
+The official front end for the Zeppelin OS vouching contracts.
 
-Start by installing node_modules via yarn:
+To run the project against a local node you can use the [zos-vouching-mock](https://github.com/DeltaCamp/zos-vouching-mock).  The mock project allows you to easily bootstrap a local Ganache instance with test data so that you can develop the app locally.
 
-`$ yarn`
+# Setup
 
-Link the contracts package in the other folder on your machine. For instance,
-if the contracts live in '~/Git/my-contracts':
+Install dependencies:
 
-`$ cd ~/Git/my-contracts && yarn link` (NOTE: the package.json name should match the directory name)
+```
+$ yarn
+```
 
-Then in this dapp directory:
+Make sure you have `direnv` installed and copy `.envrc.example` to `.envrc`:
 
-`$ yarn link my-contracts`
+```
+$ cp .envrc.example .envrc
+$ direnv allow
+```
 
-This project uses ZeppelinOS. Make sure you have compiled and deployed the contracts
-you would like to use (in the linked directory) and manually copy over the
-proxy contract addresses (found at the bottom of 'my-contracts/zos.dev-1234.json')
-to your networks/1234.json file. Then run:
+## Contract Addresses
 
-`$ yarn run update-local`
+We use [truffle-deploy-registry](https://github.com/MedXProtocol/truffle-deploy-registry) to manage the contract addresses.  TDR merges network config files into Truffle artifacts.  The network config files record deployed contracts (newest at the bottom).  The newest addresses are merged into a standard Truffle artifact JSON object.
 
-### Running the Webpack Dev Server
+Create a network config for the contracts deployed to the [zos-vouching-mock](https://github.com/DeltaCamp/zos-vouching-mock).  The network id for the `zos-vouching-mock` ganache-cli node is 1234, so create a file like so:
 
-`$ yarn start`
+`networks/1234.json`
 
-### Testing the DApp Components & Services
+```json
+[
+  {
+    "contractName": "ZepToken",
+    "address": "0x1111111111111111111111111111111111111111"
+  },
+  {
+    "contractName": "Vouching",
+    "address": "0x2222222222222222222222222222222222222222"
+  }
+]
+```
 
-`$ yarn test`
+Make sure to replace the above addresses with the actual addresses in the generated zos config file `zos.dev-1234.json` in the zos-vouching-mock project directory.
+
+Now generate the Truffle artifacts to be included in the build:
+
+```
+$ apply-registry
+```
+
+This will generate Truffle-compatible artifacts in the `build/contracts` directory.
+
+# Running
+
+Run the local server:
+
+```
+$ yarn start
+```
+
+# Building
+
+To build the site run:
+
+```
+$ yarn build
+```
+
+# Configuration
+
+You can configure the app using environment variables:
+
+| Environment Variable Name | Description | Default Value |
+| --- | --- | --- |
+| REACT_APP_DEFAULT_PROVIDER_URL | Configures the default web3 provider url if not provided by the browser | http://localhost:8545 |
+| REACT_APP_METADATA_URI | Configures the hostname for metadata URI paths (may not be needed in production) | http://localhost:3000 |
