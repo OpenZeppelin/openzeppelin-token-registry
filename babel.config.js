@@ -30,7 +30,7 @@ module.exports = function(api) {
     [
       "babel-plugin-root-import",
       {
-        "rootPathSuffix": "build/contracts",
+        "rootPathSuffix": "artifacts",
         "rootPathPrefix": "#"
       },
       "contract-root-import"

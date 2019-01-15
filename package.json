@@ -9,7 +9,7 @@
     "test": "node scripts/test.js",
     "build": "node --max-old-space-size=4096 scripts/build.js",
     "start": "node --max-old-space-size=4096 scripts/start.js",
-    "update-local": "$(npm bin)/apply-registry",
+    "apply-registry": "$(npm bin)/apply-registry -o artifacts",
     "reset-local": "rm -rf networks/1234.json && rm -rf build/contracts"
   },
   "devDependencies": {
