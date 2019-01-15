@@ -1,0 +1,40 @@
+.has-level {
+  border-bottom: 1px solid lighten($text, 50%);
+  padding: 0;
+}
+
+.is-secondary-nav {
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  text-transform: uppercase;
+
+  @media screen and (max-width: $tablet - 1px) {
+    max-width: 300px;
+  }
+}
+
+.is-secondary-nav .level-item {
+  border-bottom: 2px solid transparent;
+  font-size: 0.875rem;
+  margin: 0 1rem;
+  padding: 1rem 0 0 0;
+  position: relative;
+  top: 2px;
+}
+
+.is-secondary-nav .level-item.is-active,
+.is-secondary-nav .level-item:hover {
+  border-color: $text;
+  font-weight: 900;
+}
+
+.is-secondary-nav .level-item .link {
+  padding: 0.5rem 0;
+}
+
+.is-secondary-nav > .level-item:not(.is-narrow) {
+  @media screen and (min-width: $tablet) {
+    flex-grow: 0;
+  }
+}

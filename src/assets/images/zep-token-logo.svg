@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <polygon id="zep-token-logo-a" points="0 .026 13.78 .026 13.78 13.805 0 13.805"/>
+    <polygon id="zep-token-logo-c" points="4.134 3.726 4.134 5.111 7.124 5.111 4.004 10.442 5.846 10.442 9.754 10.442 9.754 9.05 6.659 9.05 8.961 5.111 9.774 3.726"/>
+    <polygon id="zep-token-logo-e" points="8.872 6.414 8.558 6.95 9.864 6.95 10.177 6.414"/>
+    <polygon id="zep-token-logo-g" points="4.387 6.414 4.073 6.95 5.379 6.95 5.693 6.414"/>
+    <polygon id="zep-token-logo-i" points="8.399 7.221 8.087 7.755 9.394 7.755 9.706 7.221"/>
+    <polygon id="zep-token-logo-k" points="3.915 7.221 3.602 7.755 4.909 7.755 5.221 7.221"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g transform="translate(0 .168)">
+      <mask id="zep-token-logo-b" fill="#fff">
+        <use xlink:href="#zep-token-logo-a"/>
+      </mask>
+      <path fill="#000" d="M6.88984722,12.4785694 C3.81743056,12.4785694 1.32698611,9.98793056 1.32698611,6.91590278 C1.32698611,3.84368056 3.81743056,1.35284722 6.88984722,1.35284722 C9.96206944,1.35284722 12.4525139,3.84368056 12.4525139,6.91590278 C12.4525139,9.98793056 9.96206944,12.4785694 6.88984722,12.4785694 M6.88984722,0.0259583333 C3.08476389,0.0259583333 -9.72222222e-05,3.110625 -9.72222222e-05,6.91590278 C-9.72222222e-05,10.7209861 3.08476389,13.8054583 6.88984722,13.8054583 C10.6949306,13.8054583 13.7795972,10.7209861 13.7795972,6.91590278 C13.7795972,3.110625 10.6949306,0.0259583333 6.88984722,0.0259583333" mask="url(#zep-token-logo-b)"/>
+    </g>
+    <polygon fill="#000" points="4.134 3.726 4.134 5.111 7.124 5.111 4.004 10.442 5.846 10.442 9.753 10.442 9.753 9.05 6.659 9.05 8.961 5.111 9.774 3.726"/>
+    <mask id="zep-token-logo-d" fill="#fff">
+      <use xlink:href="#zep-token-logo-c"/>
+    </mask>
+    <polygon fill="#000" points=".645 7.084 6.889 .841 13.132 7.084 6.889 13.327" mask="url(#zep-token-logo-d)"/>
+    <polygon fill="#000" points="8.872 6.414 8.558 6.95 9.864 6.95 10.178 6.414" mask="url(#zep-token-logo-d)"/>
+    <mask id="zep-token-logo-f" fill="#fff">
+      <use xlink:href="#zep-token-logo-e"/>
+    </mask>
+    <polygon fill="#000" points="8.289 6.682 9.368 5.604 10.446 6.682 9.368 7.76" mask="url(#zep-token-logo-f)"/>
+    <polygon fill="#000" points="4.387 6.414 4.073 6.95 5.379 6.95 5.693 6.414" mask="url(#zep-token-logo-f)"/>
+    <mask id="zep-token-logo-h" fill="#fff">
+      <use xlink:href="#zep-token-logo-g"/>
+    </mask>
+    <polygon fill="#000" points="3.805 6.682 4.883 5.604 5.961 6.682 4.883 7.76" mask="url(#zep-token-logo-h)"/>
+    <polygon fill="#000" points="8.399 7.221 8.087 7.755 9.394 7.755 9.706 7.221" mask="url(#zep-token-logo-h)"/>
+    <mask id="zep-token-logo-j" fill="#fff">
+      <use xlink:href="#zep-token-logo-i"/>
+    </mask>
+    <polygon fill="#000" points="7.82 7.488 8.896 6.411 9.973 7.488 8.896 8.564" mask="url(#zep-token-logo-j)"/>
+    <polygon fill="#000" points="3.914 7.221 3.602 7.755 4.909 7.755 5.221 7.221" mask="url(#zep-token-logo-j)"/>
+    <mask id="zep-token-logo-l" fill="#fff">
+      <use xlink:href="#zep-token-logo-k"/>
+    </mask>
+    <polygon fill="#000" points="3.335 7.488 4.412 6.411 5.488 7.488 4.412 8.564" mask="url(#zep-token-logo-l)"/>
+  </g>
+</svg>

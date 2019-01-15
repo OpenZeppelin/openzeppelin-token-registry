@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react'
+import classnames from 'classnames'
 import { PackageList } from '~/components/packages/PackageList'
 
 export class PackageListPage extends PureComponent {
+  state = {
+    showPackages: true
+  }
 
   render () {
     return (
@@ -31,24 +35,48 @@ export class PackageListPage extends PureComponent {
           </div>
         </section>
 
-        <section className='section has-background-light'>
-          <div className='container'>
-            <div className='columns'>
-              <div className='column has-text-right'>
-                <b>Not using Zeppelin OS yet?</b>
-              </div>
-              <div className='column has-text-left'>
-                <div className='button is-primary'>Get Started with ZOS</div>
-              </div>
-            </div>
-          </div>
+        <section className='section has-level'>
+          <nav className='level is-secondary-nav'>
+            <p
+              className={classnames(
+                'level-item',
+                'has-text-centered',
+                {
+                  'is-active': this.state.showPackages
+                }
+              )}
+            >
+              <a
+                className='link is-dark is-monospaced'
+                onClick={(e) => { this.setState({ showPackages: true }) } }
+              >EVM Packages</a>
+            </p>
+            <p
+              className={classnames(
+                'level-item',
+                'has-text-centered',
+                {
+                  'is-active': !this.state.showPackages
+                }
+              )}
+            >
+              <a
+                className='link is-dark is-monospaced'
+                onClick={(e) => { this.setState({ showPackages: false }) } }
+              >Security Researchers</a>
+            </p>
+          </nav>
         </section>
 
         <section className='section'>
           <div className='container'>
             <div className='columns'>
               <div className='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
-                <PackageList />
+                {
+                  this.state.showPackages
+                    ? <PackageList />
+                    : <p>Researchers list coming soon ...</p>
+                }
               </div>
             </div>
           </div>

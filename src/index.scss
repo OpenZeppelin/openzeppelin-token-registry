@@ -10,6 +10,7 @@
 @import 'bulma/sass/base/_all.sass';
 
 // Framework components:
+@import 'bulma/sass/components/level.sass';
 @import 'bulma/sass/components/navbar.sass';
 @import 'bulma/sass/elements/container.sass';
 @import 'bulma/sass/elements/button.sass';
@@ -23,6 +24,7 @@
 // CSS components and utilities:
 @import './assets/scss/_animations.scss';
 @import './assets/scss/_button.scss';
+@import './assets/scss/_level.scss';
 
 // General stylesheet:
 @import './assets/scss/_style.scss';
