@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
+import ZeppelinOSLogo from '~/assets/images/zeppelin-os-logo.svg'
 import * as routes from '~/../config/routes'
 
 export const Nav = class _Nav extends Component {
@@ -26,12 +27,12 @@ export const Nav = class _Nav extends Component {
   render () {
     return (
       <>
-        <nav className="navbar is-fixed-top is-dark">
+        <nav className="navbar is-dark">
           <div className="container">
             <div className="navbar-brand">
               <div className="navbar-item">
                 <Link to={routes.HOME} className="navbar-item">
-                  Brand
+                  <ZeppelinOSLogo />
                 </Link>
               </div>
 
@@ -63,7 +64,7 @@ export const Nav = class _Nav extends Component {
                     className="navbar-item"
                     onClick={this.closeMobileNav}
                   >
-                    Home
+                    Docs
                   </NavLink>
                 </div>
 
@@ -74,7 +75,18 @@ export const Nav = class _Nav extends Component {
                     className='navbar-item'
                     onClick={this.closeMobileNav}
                   >
-                    Page 2
+                    GitHub
+                  </NavLink>
+                </div>
+
+                <div className="navbar-item">
+                  <NavLink
+                    activeClassName="is-active"
+                    to={routes.OTHER_PAGE}
+                    className='navbar-item'
+                    onClick={this.closeMobileNav}
+                  >
+                    Site
                   </NavLink>
                 </div>
               </div>

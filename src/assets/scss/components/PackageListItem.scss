@@ -19,3 +19,15 @@
 .package-list-item--version {
   margin-left: 0.5rem;
 }
+
+.package-list-item--github-icon {
+  color: $grey;
+  font-size: 20px;
+  margin-left: 1rem;
+  position: relative;
+  top: 0.25rem;
+}
+
+.package-list-item--github-icon:hover {
+  color: black;
+}

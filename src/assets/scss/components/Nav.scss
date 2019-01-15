@@ -1,0 +1,13 @@
+.navbar > .container {
+  max-width: 960px;
+}
+
+a.navbar-item.is-active,
+.navbar-link.is-active {
+  color: $navbar-light-grey;
+}
+
+.navbar-item,
+.navbar-link {
+  padding: 0.5rem 0.25rem;
+}
