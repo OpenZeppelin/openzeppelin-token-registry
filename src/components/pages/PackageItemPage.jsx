@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import AntdIcon from '@ant-design/icons-react'
 import { GithubFill } from '@ant-design/icons'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import get from 'lodash.get'
 import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
-import * as routes from '~/../config/routes'
 
 const eventsQuery = gql`
   query eventsQuery {
@@ -70,7 +69,7 @@ export class PackageItemPage extends PureComponent {
                             if (error) return `Error!: ${error}`
 
                             const { metadata } = data
-                            const { version } = metadata
+                            // const { version } = metadata
 
                             return (
                               <div>

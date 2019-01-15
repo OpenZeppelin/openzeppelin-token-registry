@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react'
+import ReactTimeout from 'react-timeout'
+import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
@@ -22,11 +24,17 @@ const packageQuery = gql`
   }
 `
 
-export class PackageListItem extends PureComponent {
+export const PackageListItem = ReactTimeout(class _PackageListItem extends PureComponent {
   state = {}
 
   static propTypes = {
     package: PropTypes.object.isRequired
+  }
+
+  componentDidMount() {
+    this.props.setTimeout(() => {
+      this.setState({ startAnimating: true })
+    }, 50)
   }
 
   handlePackageItemClick = (e) => {
@@ -63,7 +71,23 @@ export class PackageListItem extends PureComponent {
             }
 
             return (
-              <div className='package-list-item panel' onClick={this.handlePackageItemClick}>
+              <div
+                className={
+                  classnames(
+                    'package-list-item',
+                    'panel',
+                    'slide-up',
+                    'fade-in',
+                    'slow',
+                    {
+                      'slide-up-enter': this.state.startAnimating,
+                      'fade-in-enter': this.state.startAnimating
+                    }
+                  )
+                }
+                onClick={this.handlePackageItemClick}
+                style={{ 'transitionDelay': `${this.props.index * 100}ms` }}
+              >
                 <div className='panel-block'>
                   <div className='columns'>
                     <div className='column is-three-quarters'>
@@ -122,4 +146,4 @@ export class PackageListItem extends PureComponent {
       </Query>
     )
   }
-}
+})

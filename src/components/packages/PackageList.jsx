@@ -24,13 +24,13 @@ export class PackageList extends PureComponent {
           return (
             <>
               {
-                events.map(
-                  event =>
-                    <PackageListItem
-                      location={this.props.location}
-                      package={event.returnValues}
-                      key={event.returnValues.id}
-                    />
+                events.map((event, index) =>
+                  <PackageListItem
+                    index={index}
+                    location={this.props.location}
+                    package={event.returnValues}
+                    key={event.returnValues.id}
+                  />
                 )
               }
             </>
