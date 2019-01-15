@@ -1,4 +1,17 @@
-@import "./components/index";
+.hero.is-dark.is-bold {
+  background-color: $hero-dark;
+  background-image: none;
+}
+
+.hero--title {
+  font-weight: 400;
+}
+
+.hero--title.content:not(:last-child),
+.hero--title.title:not(:last-child),
+.hero--title.subtitle:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
 
 .is-monospaced {
   -moz-osx-font-smoothing: auto;
@@ -12,4 +25,18 @@
   display: inline-block;
   padding: 0.5rem 1rem;
   min-width: 400px;
+}
+
+// This is used by the page / layout transitions
+.is-positioned-absolutely {
+  position: absolute;
+}
+
+// This is used by the page / layout transitions
+.is-full-width {
+  width: 100%;
+}
+
+.has-text-primary {
+  color: $turqoise !important;
 }
