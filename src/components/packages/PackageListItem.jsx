@@ -11,8 +11,8 @@ import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
 import * as routes from '~/../config/routes'
 
 const packageQuery = gql`
-  query packageQuery($path: String!) {
-    metadata @rest(path: $path) {
+  query packageQuery($path: String) {
+    metadata(path: $path) @rest(path: $path) {
       id
       name
       version
@@ -42,8 +42,6 @@ export class PackageListItem extends PureComponent {
           ({ data }) => {
             const { metadata } = data || {}
             const { slug, version } = metadata || {}
-
-            console.log(metadata)
 
             if (this.state.toPackage) {
               return <Redirect to={formatRoute(routes.PACKAGE_ITEM, { slug, version })} />
