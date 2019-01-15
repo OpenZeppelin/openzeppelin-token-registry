@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import { PackageListItem } from './PackageListItem'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import get from 'lodash.get'
 
 const eventsQuery = gql`
   query eventsQuery {
@@ -19,14 +18,19 @@ export class PackageList extends PureComponent {
         query={eventsQuery}>
         {({ data }) => {
           const events = data.Vouching ? data.Vouching.registeredEvents : []
+          console.log(events)
+
           return (
             <>
-              {events.map(
-                event =>
-                  <PackageListItem
-                    package={event.returnValues}
-                    key={event.returnValues.id} />
-              )}
+              {
+                events.map(
+                  event =>
+                    <PackageListItem
+                      package={event.returnValues}
+                      key={event.returnValues.id}
+                    />
+                )
+              }
             </>
           )
         }}
@@ -34,3 +38,5 @@ export class PackageList extends PureComponent {
     )
   }
 }
+
+// `${p.name}-${p.version}`

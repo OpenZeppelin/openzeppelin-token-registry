@@ -46,10 +46,12 @@ export class PackageListPage extends PureComponent {
                 }
               )}
             >
-              <a
-                className='link is-dark is-monospaced'
+              <button
+                className='button is-text link is-monospaced'
                 onClick={(e) => { this.setState({ showPackages: true }) } }
-              >EVM Packages</a>
+              >
+                EVM Packages
+              </button>
             </p>
             <p
               className={classnames(
@@ -60,10 +62,12 @@ export class PackageListPage extends PureComponent {
                 }
               )}
             >
-              <a
-                className='link is-dark is-monospaced'
+              <button
+                className='button is-text link is-monospaced'
                 onClick={(e) => { this.setState({ showPackages: false }) } }
-              >Security Researchers</a>
+              >
+                Security Researchers
+              </button>
             </p>
           </nav>
         </section>
