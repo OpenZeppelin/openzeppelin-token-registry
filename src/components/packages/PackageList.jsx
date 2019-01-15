@@ -17,8 +17,7 @@ export class PackageList extends PureComponent {
       <Query
         query={eventsQuery}>
         {({ data }) => {
-          const events = data.Vouching ? data.Vouching.registeredEvents : []
-          // console.log(events)
+          const events = (data.Vouching ? data.Vouching.registeredEvents : []) || []
 
           return (
             <>
