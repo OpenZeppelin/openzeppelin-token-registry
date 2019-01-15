@@ -1286,15 +1286,15 @@ apollo-link-dedup@^1.0.0:
   dependencies:
     apollo-link "^1.2.6"
 
-apollo-link-ethereum-resolver-web3js@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/apollo-link-ethereum-resolver-web3js/-/apollo-link-ethereum-resolver-web3js-0.0.6.tgz#66dbc655cc7a62786d606bf469f92ac48363a498"
-  integrity sha512-M6UCz78MMZKFivoivM/E1sh1SMAR8xN0cUbYdZ3ZORgJIToeYWuyDphF2SiClH1J2vsGe3DIJsfrRP3t1EpoSA==
+apollo-link-ethereum-resolver-web3js@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/apollo-link-ethereum-resolver-web3js/-/apollo-link-ethereum-resolver-web3js-0.0.8.tgz#73ca058920e3fc3a6b08d5eec399a7a6121b61f5"
+  integrity sha512-2PhWa+426FOeBa3EWDrJIpmOxAPnMSHVbR76zyG+rYHS2zB/JKlbufE65JuJ17L1mxOXsIpVlrKQvXXfTfbfzA==
 
-apollo-link-ethereum@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/apollo-link-ethereum/-/apollo-link-ethereum-0.0.6.tgz#8b64de24aea8374fd5b60c0afd44ea90a6912b25"
-  integrity sha512-p84M0HD7gERCKesEy7oPOsPurZ+pdSxXKh96i3OjJTqCz5Wf6n5C6ZhoEG6VJUt+ib8Z2kg+8pQV2L+Nw3i79w==
+apollo-link-ethereum@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/apollo-link-ethereum/-/apollo-link-ethereum-0.0.8.tgz#b4d1ea22bd78f8360367b07634523de98aec7384"
+  integrity sha512-DD5RDzdLhAlh+UYdEa66AHBpLr3n1QnVegCZpDlrEar/EgIHPVZTtF3N4473MWE9jliU6DpVP6t7trF+zp2ipw==
   dependencies:
     apollo-link "^1.2.6"
     apollo-utilities "^1.0.27"
