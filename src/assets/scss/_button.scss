@@ -46,7 +46,7 @@ button[disabled]:active {
 .button.is-primary:hover,
 .button.is-primary:focus,
 .button.is-primary:active {
-  background-color: lighten($turqoise, 10%);
+  background-color: lighten(saturate($turqoise, 100%), 10%);
   color: $button-text-color;
   transition: all 150ms ease-in-out;
 }
