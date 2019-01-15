@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from '~/components/App'
 import * as serviceWorker from './serviceWorker'
+import { ApolloProvider } from 'react-apollo'
+import { client } from '~/apollo/client'
 
 import './index.scss'
 
 window.addEventListener('load', () => {
   let coreApp =
-    <BrowserRouter>
-      <AppContainer />
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <AppContainer />
+      </BrowserRouter>
+    </ApolloProvider>
 
   ReactDOM.render(coreApp, document.getElementById('root'))
 })
