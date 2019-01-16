@@ -69,7 +69,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             if (error) return `Error!: ${error}`
 
             const { metadata, Vouching } = data
-            const { version } = metadata || {}
+            const { version } = metadata || ''
 
             const id = parseInt(this.props.package.id, 10)
             const link = formatRoute(routes.PACKAGE_ITEM, { id, version })

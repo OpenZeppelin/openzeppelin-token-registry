@@ -1,11 +1,36 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { get } from 'lodash'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { GitHubLink } from '~/components/GitHubLink'
+import { ChallengeRow } from '~/components/ChallengeRow'
 import { LevelVouch } from '~/components/LevelVouch'
 import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { get } from 'lodash'
+
+const CHALLENGE_1 = {
+  name: 'Large unsigned int overflow error',
+  status: 'Open',
+  priority: 'Low',
+  bounty: 800,
+  url: 'https://github.com/challenge1'
+}
+
+const CHALLENGE_2 = {
+  name: 'ERC20 does not support approval to zero',
+  status: 'Open',
+  priority: 'Medium',
+  bounty: 300,
+  url: 'https://github.com/challenge2'
+}
+
+const CHALLENGE_3 = {
+  name: 'ERC20 has a length of 0',
+  status: 'Closed',
+  priority: 'High',
+  bounty: undefined,
+  url: 'https://github.com/challenge3'
+}
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
@@ -14,6 +39,13 @@ export class PackageDetails extends PureComponent {
 
   render () {
     const { metadata, vouching } = this.props
+
+    // fake hard-coded data because my mock data isn't working at all:
+    CHALLENGE_3.bounty = displayWeiToEther(get(vouching, 'totalVouched'))
+
+    metadata.name = 'OpenZeppelin Eth'
+    metadata.version = '1.0.1'
+    metadata.description = 'OpenZeppelin is a library for secure smart contract development. It provides implementations of standards like ERC20 and ERC721 which you can deploy as-is or extend to suit your needs, as well as Solidity components to build custom contracts and more complex decentralized systems.'
 
     return (
       <div>
@@ -109,66 +141,9 @@ export class PackageDetails extends PureComponent {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      Large unsigned int overflow error
-                    </td>
-                    <td className="has-text-info">
-                      Open
-                    </td>
-                    <td className="has-text-success">
-                      Low
-                    </td>
-                    <td>
-                      300 Z
-                    </td>
-                    <td className="has-text-right">
-                      <GitHubLink
-                        url='https://github.com/challenge1'
-                        cssClassNames='icon-small'
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      ERC20 does not support approval to zero
-                    </td>
-                    <td className="has-text-info">
-                      Open
-                    </td>
-                    <td className="has-text-warning">
-                      Medium
-                    </td>
-                    <td>
-                      300 Z
-                    </td>
-                    <td className="has-text-right">
-                      <GitHubLink
-                        url='https://github.com/challenge1'
-                        cssClassNames='icon-small'
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      ERC20 has a length of 0
-                    </td>
-                    <td className="has-text-grey-light">
-                      Closed
-                    </td>
-                    <td className="has-text-danger">
-                      High
-                    </td>
-                    <td>
-                      {displayWeiToEther(get(vouching, 'totalVouched'))} Z
-                    </td>
-                    <td className="has-text-right">
-                      <GitHubLink
-                        url='https://github.com/challenge2'
-                        cssClassNames='icon-small'
-                      />
-                    </td>
-                  </tr>
+                  <ChallengeRow challenge={CHALLENGE_1} />
+                  <ChallengeRow challenge={CHALLENGE_2} />
+                  <ChallengeRow challenge={CHALLENGE_3} />
                 </tbody>
               </table>
             </div>
