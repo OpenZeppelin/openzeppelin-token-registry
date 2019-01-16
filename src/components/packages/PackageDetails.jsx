@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import AntdIcon from '@ant-design/icons-react'
 import { GithubFill } from '@ant-design/icons'
 import { CodeSnippet } from '~/components/CodeSnippet'
-import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
+import { LevelVouch } from '~/components/LevelVouch'
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
@@ -72,26 +72,79 @@ export class PackageDetails extends PureComponent {
         </div>
 
         <div className='columns'>
-          <div className='column is-12-widescreen'>
+          <div className='column is-6-widescreen'>
             <hr />
 
             <h5 className='is-size-5 has-text-weight-semibold'>
               3 addresses vouched 3,000 ZEP
             </h5>
 
-            <ul className='list--vouched'>
-              <li>
-                0x32Be343B94f860124dC4fEe278FDCBD38C102D88 <ZepTokenLogo width='20' height='20' className='package-list-item--zep-token-logo' /> 7,000
-              </li>
-            </ul>
+            <div class="level--wrapper">
+              <LevelVouch address='0x32Be343B94f860124dC4fEe278FDCBD38C102D88' amount='7000' />
+              <LevelVouch address='0xa786bc5f76a5bce6d7108a7bc7a3f4a786a786bc' amount='2200' />
+              <LevelVouch address='0x5f76a567abedf7faf8a4f83af7a3f4a786a67999' amount='800' />
+            </div>
+
+          </div>
+        </div>
+
+        <br />
+
+        <div className='columns'>
+          <div className='column is-12-widescreen'>
+            <h5 className='is-size-5 has-text-weight-semibold'>
+              Challenges
+            </h5>
 
             <p>
+              Create a challenge by running: &nbsp;
+              <CodeSnippet metadata={metadata} action='challenge' />
             </p>
 
+            <br />
 
-            <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-              4,000
-            </h3>
+            <div className="table--wrapper">
+              <table className="table is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>
+                      Name
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                    <th>
+                      Severity
+                    </th>
+                    <th>
+                      Bounty
+                    </th>
+                    <th>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Name
+                    </td>
+                    <td>
+                      Status
+                    </td>
+                    <td>
+                      Severity
+                    </td>
+                    <td>
+                      Bounty
+                    </td>
+                    <td>
+                      Github Link
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
         </div>
       </div>

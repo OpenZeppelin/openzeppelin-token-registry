@@ -42,3 +42,11 @@
     flex-grow: 0;
   }
 }
+
+.level--wrapper {
+  margin: 0.325rem 0;
+}
+
+.level--vouch:not(:last-child) {
+  margin-bottom: 0;
+}

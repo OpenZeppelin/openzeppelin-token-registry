@@ -9,8 +9,13 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { stringToSlug } from '~/utils/stringToSlug'
 
 export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent {
+  static defaultProps = {
+    action: 'link'
+  }
+
   static propTypes = {
-    metadata: PropTypes.object.isRequired
+    metadata: PropTypes.object.isRequired,
+    action: PropTypes.string
   }
 
   handleCodeClick = (e) => {
@@ -28,7 +33,7 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
 
   render () {
     const slug = stringToSlug(this.props.metadata.name)
-    const zosInstallSnippet = `zos link ${slug}`
+    const zosInstallSnippet = `zos ${this.props.action} ${slug}`
 
     return (
       <code className='code--quick-install' onClick={this.handleCodeClick}>

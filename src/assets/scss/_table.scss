@@ -1,0 +1,21 @@
+.table thead th {
+  color: #788899;
+  font-family: $code-family;
+  font-size: 0.625rem;
+  font-weight: 900;
+  letter-spacing: 0.05rem;
+  padding-left: 0;
+  text-transform: uppercase;
+
+  @media screen and (min-width: $tablet) {
+    min-width: 10rem;
+  }
+}
+
+.table tbody td {
+  padding-left: 0;
+}
+
+.table--wrapper {
+  overflow-x: auto;
+}
