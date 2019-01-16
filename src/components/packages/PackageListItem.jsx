@@ -9,15 +9,15 @@ import { GithubFill } from '@ant-design/icons'
 import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
+import gh from 'parse-github-url'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
 import * as routes from '~/../config/routes'
 
 const packageQuery = gql`
-  query packageQuery($path: String!, $id: String!) {
-    metadata(path: $path) @rest(path: $path) {
-      id
+  query packageQuery($uri: String!, $id: String!) {
+    metadata(uri: $uri) @client {
       name
       version
       description
@@ -62,17 +62,19 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
 
   render () {
     return (
-      <Query query={packageQuery} variables={{ path: this.props.package.metadataURI, id: this.props.package.id }}>
+      <Query query={packageQuery} variables={{ uri: this.props.package.metadataURI, id: this.props.package.id }}>
         {
           ({ loading, error, data }) => {
             if (loading) return null
             if (error) return `Error!: ${error}`
 
             const { metadata, Vouching } = data
-            const { version } = metadata
+            const { version } = metadata || {}
 
-            const id = parseInt(metadata.id, 10) - 1
+            const id = parseInt(this.props.package.id, 10)
             const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
+
+            const { name, owner, repo } = gh(this.props.package.metadataURI)
 
             if (this.state.toPackage) {
               return <Redirect to={link} />
@@ -109,7 +111,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                           </span>
                         </h4>
 
-                        <CodeSnippet metadata={metadata} />
+                        <CodeSnippet metadata={metadata || {}} />
 
                         <button
                           className='package-item--github-icon is-text button'
@@ -118,7 +120,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                             e.preventDefault()
 
                             // this should be coming from the json data
-                            const url = 'https://github.com/DeltaCamp/zeppelin-vouching-app'
+                            const url = `https://github.com/${repo}`
 
                             this.handleGitHubLinkClick(url)
                           }}

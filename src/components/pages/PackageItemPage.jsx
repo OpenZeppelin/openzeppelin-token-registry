@@ -15,9 +15,8 @@ const eventsQuery = gql`
 `
 
 const packageQuery = gql`
-  query packageQuery($path: String!, $id: String!) {
-    metadata(path: $path) @rest(path: $path) {
-      id
+  query packageQuery($uri: String!, $id: String!) {
+    metadata(uri: $uri) {
       name
       version
       description
@@ -63,7 +62,7 @@ export class PackageItemPage extends PureComponent {
                   const packageItem = event.returnValues
 
                   return (
-                    <Query query={packageQuery} variables={{ path: packageItem.metadataURI, id: packageItem.id }}>
+                    <Query query={packageQuery} variables={{ uri: packageItem.metadataURI, id: packageItem.id }}>
                       {
                         ({ loading, error, data }) => {
                           if (loading) return null
