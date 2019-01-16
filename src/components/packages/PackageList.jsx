@@ -19,7 +19,7 @@ export class PackageList extends PureComponent {
           if (loading) return null
           if (error) return `Error!: ${error}`
 
-          const events = data.Vouching ? data.Vouching.registeredEvents : []
+          const events = (data.Vouching ? data.Vouching.registeredEvents : []) || []
 
           return (
             <>
