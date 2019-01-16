@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import { formatRoute } from 'react-router-named-routes'
-import { Redirect, Link } from 'react-router-dom'
-import AntdIcon from '@ant-design/icons-react'
-import { GithubFill } from '@ant-design/icons'
-import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import get from 'lodash.get'
+import AntdIcon from '@ant-design/icons-react'
+import { CopyOutline, GithubFill } from '@ant-design/icons'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { formatRoute } from 'react-router-named-routes'
+import { Redirect, Link } from 'react-router-dom'
+import { Query } from 'react-apollo'
 import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
 import { stringToSlug } from '~/utils/stringToSlug'
 import * as routes from '~/../config/routes'
@@ -52,6 +53,19 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
     }
   }
 
+  handleCodeClick = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+  }
+
+  handleCopyClick = () => {
+    this.setState({ copied: true })
+
+    this.props.setTimeout(() => {
+      this.setState({ copied: false })
+    }, 3000)
+  }
+
   render () {
     return (
       <Query query={packageQuery} variables={{ path: this.props.package.metadataURI }}>
@@ -64,7 +78,9 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             const { version } = metadata
 
             const slug = stringToSlug(metadata.name)
-            const link = formatRoute(routes.PACKAGE_ITEM, { slug, version })
+            const id = parseInt(metadata.id, 10) - 1
+            const zosInstallSnippet = `zos link ${slug}`
+            const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
 
             if (this.state.toPackage) {
               return <Redirect to={link} />
@@ -94,26 +110,34 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       <h4 className='title is-size-4'>
                         {get(metadata, 'name')}
 
-                        <span className="package-list-item--version has-text-grey has-text-weight-light">
+                        <span className='package-list-item--version has-text-grey has-text-weight-light'>
                           v{get(metadata, 'version')}
                         </span>
                       </h4>
-                      <code className="code--quick-install">
-                        $ zos link {get(metadata, 'name')}
+                      <code className='code--quick-install' onClick={this.handleCodeClick}>
+                        $ {zosInstallSnippet}
+
+                        <span className='has-text-right is-inline-block is-copy-button'>
+                          {this.state.copied ? 'Copied!' : ''}
+                          <CopyToClipboard text={zosInstallSnippet}
+                            onCopy={this.handleCopyClick}>
+                            <span className='has-text-right'><AntdIcon type={CopyOutline} className='antd-icon' /></span>
+                          </CopyToClipboard>
+                        </span>
                       </code>
                       <button
-                        className="package-list-item--github-icon is-text button"
+                        className='package-list-item--github-icon is-text button'
                         onClick={(e) => {
                           e.stopPropagation()
                           e.preventDefault()
 
                           // this should be coming from the json data
-                          const url = "https://github.com/DeltaCamp/zeppelin-vouching-app"
+                          const url = 'https://github.com/DeltaCamp/zeppelin-vouching-app'
 
                           this.handleGitHubLinkClick(url)
                         }}
                       >
-                        <AntdIcon type={GithubFill} className="antd-icon" />
+                        <AntdIcon type={GithubFill} className='antd-icon' />
                       </button>
                     </div>
 

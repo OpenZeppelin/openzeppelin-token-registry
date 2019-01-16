@@ -2,12 +2,14 @@
   color: rgba(255, 255, 255, 0.15);
 }
 
+a.button,
 button,
 a svg {
   transition: transform 100ms ease-out;
   transform: scale3d(1, 1, 1);
 }
 
+a.button:hover,
 button:hover,
 a:hover svg {
   transition: transform 150ms ease-in;

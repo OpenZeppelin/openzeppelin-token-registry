@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react'
-// import PropTypes from 'prop-types'
-import AntdIcon from '@ant-design/icons-react'
-import { GithubFill } from '@ant-design/icons'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import get from 'lodash.get'
-import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
+import { PackageDetails } from '~/components/packages/PackageDetails'
+import * as routes from '~/../config/routes'
 
 const eventsQuery = gql`
   query eventsQuery {
@@ -27,102 +26,60 @@ const packageQuery = gql`
 `
 
 export class PackageItemPage extends PureComponent {
-  state = {}
-
-  // static propTypes = {
-  //   package: PropTypes.object.isRequired
-  // }
-
-  handleGitHubLinkClick = (url) => {
-    console.log('github link click')
-    if (window) {
-      window.location.href = url
-    }
+  static propTypes = {
+    match: PropTypes.object.isRequired
   }
 
   render () {
-    console.log(this.props)
-    console.log(this.props.match.params.slug)
     return (
-      <Query query={eventsQuery}>
-        {({ loading, error, data }) => {
-          if (loading) return null
-          if (error) return `Error!: ${error}`
+      <div className='is-positioned-absolutely is-full-width'>
+        <div className='container'>
+          <div className='columns'>
+            <div className='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-10-fullhd is-offset-2-fullhd'>
+              <br />
+              <br />
+              <Link to={routes.HOME} className='button is-monospaced is-text'>
+                {'<'} Back to Packages
+              </Link>
+              <br />
+              <br />
 
-          const events = data.Vouching ? data.Vouching.registeredEvents : []
+              <Query query={eventsQuery}>
+                {({ loading, error, data }) => {
+                  if (loading) return null
+                  if (error) return `Error!: ${error}`
 
-          return (
-            <>
-              {
-                events.map(
-                  event => {
-                    console.log('event', event)
-                    if (event) {
+                  const events = data.Vouching ? data.Vouching.registeredEvents : []
+                  const id = this.props.match.params.id
+                  const event = events.find((event) => event.returnValues.id === id)
 
-                    }
-
-                    return (
-                      <Query query={packageQuery} variables={{ path: this.props.package.metadataURI }}>
-                        {
-                          ({ loading, error, data }) => {
-                            if (loading) return null
-                            if (error) return `Error!: ${error}`
-
-                            const { metadata } = data
-                            // const { version } = metadata
-
-                            return (
-                              <div>
-                                <h4 className='title is-size-4'>
-                                  {get(metadata, 'name')}
-
-                                  <span className="package-list-item--version has-text-grey has-text-weight-light">
-                                    v{get(metadata, 'version')}
-                                  </span>
-                                </h4>
-                                <code className="code--quick-install">
-                                  $ zos link {get(metadata, 'name')}
-                                </code>
-                                <button
-                                  className="package-list-item--github-icon is-text button"
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    e.preventDefault()
-
-                                    // this should be coming from the json data
-                                    const url = "https://github.com/DeltaCamp/zeppelin-vouching-app"
-
-                                    this.handleGitHubLinkClick(url)
-                                  }}
-                                >
-                                  <AntdIcon type={GithubFill} className="antd-icon" />
-                                </button>
-
-                                <h6 className='subtitle is-size-7 package-list-item--subtitle'>
-                                  VOUCHED
-                                </h6>
-
-                                <span className='is-inline-block'>
-                                  <ZeppelinOSLogo width='20' height='20' className='package-list-item--zep-token-logo' />
-                                </span>
-
-                                <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                                  4,000
-                                </h3>
-                              </div>
-                            )
-                          }
-                        }
-                      </Query>
-                    )
+                  if (!event) {
+                    console.warn('event not found')
+                    return null
                   }
 
-                )
-              }
-            </>
-          )
-        }}
-      </Query>
+                  const packageItem = event.returnValues
+
+                  return (
+                    <Query query={packageQuery} variables={{ path: packageItem.metadataURI }}>
+                      {
+                        ({ loading, error, data }) => {
+                          if (loading) return null
+                          if (error) return `Error!: ${error}`
+
+                          return <PackageDetails
+                            metadata={data.metadata}
+                          />
+                        }
+                      }
+                    </Query>
+                  )
+                }}
+              </Query>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }

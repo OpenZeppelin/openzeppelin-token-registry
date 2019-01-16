@@ -22,6 +22,8 @@ button[disabled]:active {
 }
 
 .button.is-text {
+  padding-left: 0;
+  padding-right: 0;
   text-decoration: none;
 }
 
@@ -49,4 +51,16 @@ button[disabled]:active {
   background-color: lighten(saturate($turqoise, 100%), 10%);
   color: $button-text-color;
   transition: all 150ms ease-in-out;
+}
+
+.is-copy-button {
+  color: lighten($text, 30%);
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.625rem;
+}
+
+.is-copy-button:hover {
+  color: $text;
 }
