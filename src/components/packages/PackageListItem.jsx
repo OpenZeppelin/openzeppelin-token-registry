@@ -74,7 +74,8 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             const id = parseInt(this.props.package.id, 10)
             const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
 
-            const { name, owner, repo } = gh(this.props.package.metadataURI)
+            const { repo } = gh(this.props.package.metadataURI)
+            // const { name, owner, repo } = gh(this.props.package.metadataURI)
 
             if (this.state.toPackage) {
               return <Redirect to={link} />

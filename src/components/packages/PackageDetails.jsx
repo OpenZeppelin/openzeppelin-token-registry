@@ -4,9 +4,8 @@ import { CodeSnippet } from '~/components/CodeSnippet'
 import { GitHubLink } from '~/components/GitHubLink'
 import { LevelVouch } from '~/components/LevelVouch'
 import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
-import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import get from 'lodash.get'
+import { get } from 'lodash'
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
@@ -29,7 +28,7 @@ export class PackageDetails extends PureComponent {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <a href='#'>0xf19b...34</a>
+              Maintained by <a href='https://etherscan.com/address/0xf19b...34'>0xf19b...34</a>
             </h6>
 
             <p className='is-size-6 package-item--description'>
