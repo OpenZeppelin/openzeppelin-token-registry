@@ -130,7 +130,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                         </button>
                       </div>
 
-                      <div className='column has-text-right'>
+                      <div className='column has-text-right-desktop'>
                         <h6 className='subtitle is-size-7 package-list-item--subtitle is-monospaced'>
                           VOUCHED
                         </h6>

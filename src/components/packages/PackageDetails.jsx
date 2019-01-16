@@ -8,6 +8,14 @@ import { LevelVouch } from '~/components/LevelVouch'
 import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
 const CHALLENGE_1 = {
   name: 'Large unsigned int overflow error',
   status: 'Open',
@@ -43,9 +51,15 @@ export class PackageDetails extends PureComponent {
     // fake hard-coded data because my mock data isn't working at all:
     CHALLENGE_3.bounty = displayWeiToEther(get(vouching, 'totalVouched'))
 
-    metadata.name = 'OpenZeppelin Eth'
-    metadata.version = '1.0.1'
-    metadata.description = 'OpenZeppelin is a library for secure smart contract development. It provides implementations of standards like ERC20 and ERC721 which you can deploy as-is or extend to suit your needs, as well as Solidity components to build custom contracts and more complex decentralized systems.'
+    if (isEmpty(metadata.name)) {
+      metadata.name = 'OpenZeppelin Eth'
+    }
+    if (isEmpty(metadata.version)) {
+      metadata.version = '1.0.1'
+    }
+    if (isEmpty(metadata.description)) {
+      metadata.description = 'OpenZeppelin is a library for secure smart contract development. It provides implementations of standards like ERC20 and ERC721 which you can deploy as-is or extend to suit your needs, as well as Solidity components to build custom contracts and more complex decentralized systems.'
+    }
 
     return (
       <div>
