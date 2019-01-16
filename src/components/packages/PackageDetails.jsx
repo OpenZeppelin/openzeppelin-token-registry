@@ -4,6 +4,9 @@ import { CodeSnippet } from '~/components/CodeSnippet'
 import { GitHubLink } from '~/components/GitHubLink'
 import { LevelVouch } from '~/components/LevelVouch'
 import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
+import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import get from 'lodash.get'
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
@@ -11,7 +14,7 @@ export class PackageDetails extends PureComponent {
   }
 
   render () {
-    const { metadata } = this.props
+    const { metadata, vouching } = this.props
 
     return (
       <div>
@@ -158,7 +161,7 @@ export class PackageDetails extends PureComponent {
                       High
                     </td>
                     <td>
-                      1,300 Z
+                      {displayWeiToEther(get(vouching, 'totalVouched'))} Z
                     </td>
                     <td className="has-text-right">
                       <GitHubLink
@@ -170,7 +173,6 @@ export class PackageDetails extends PureComponent {
                 </tbody>
               </table>
             </div>
-
           </div>
         </div>
       </div>

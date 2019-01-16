@@ -15,12 +15,15 @@ const eventsQuery = gql`
 `
 
 const packageQuery = gql`
-  query packageQuery($path: String!) {
+  query packageQuery($path: String!, $id: String!) {
     metadata(path: $path) @rest(path: $path) {
       id
       name
       version
       description
+    }
+    Vouching @contract {
+      totalVouched(id: $id)
     }
   }
 `
@@ -60,7 +63,7 @@ export class PackageItemPage extends PureComponent {
                   const packageItem = event.returnValues
 
                   return (
-                    <Query query={packageQuery} variables={{ path: packageItem.metadataURI }}>
+                    <Query query={packageQuery} variables={{ path: packageItem.metadataURI, id: packageItem.id }}>
                       {
                         ({ loading, error, data }) => {
                           if (loading) return null
@@ -68,6 +71,7 @@ export class PackageItemPage extends PureComponent {
 
                           return <PackageDetails
                             metadata={data.metadata}
+                            vouching={data.Vouching}
                           />
                         }
                       }
