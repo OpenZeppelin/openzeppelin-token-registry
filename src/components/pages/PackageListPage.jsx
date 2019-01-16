@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { allowedNetworkIds } from '~/allowedNetworkIds'
+import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { PackageList } from '~/components/packages/PackageList'
 
 const networkIdQuery = gql`

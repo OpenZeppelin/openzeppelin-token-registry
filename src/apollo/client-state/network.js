@@ -1,4 +1,4 @@
-import { getInjectedWeb3 } from '~/getInjectedWeb3'
+import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
 
 export default {
   resolvers: {
