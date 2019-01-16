@@ -6,8 +6,10 @@ import { withClientState } from 'apollo-link-state'
 import { ContractLink } from 'apollo-link-ethereum'
 import { Web3JSResolver } from 'apollo-link-ethereum-resolver-web3js'
 import { abiMapping } from './abiMapping'
-import { getInjectedWeb3 } from '~/getInjectedWeb3'
-import { getReadWeb3 } from '~/getReadWeb3'
+import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
+import { getReadWeb3 } from '~/web3/getReadWeb3'
+import merge from 'lodash.merge'
+import network from './client-state/network'
 
 let web3 = getInjectedWeb3()
 if (!web3) {
@@ -22,11 +24,8 @@ const cache = new InMemoryCache({
 })
 
 const stateLink = withClientState({
-  cache,
-  resolvers: {},
-  defaults: {
-    networkId: 'unknown'
-  }
+  ...merge({}, network), //can put more resolvers in here
+  cache
 })
 
 const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI });
