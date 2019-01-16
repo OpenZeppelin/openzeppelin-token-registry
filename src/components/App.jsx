@@ -8,7 +8,7 @@ import { NavContainer } from '~/components/layout/Nav'
 import { OtherPageContainer } from '~/components/pages/OtherPage'
 import { PackageItemPage } from '~/components/pages/PackageItemPage'
 import { FourOhFourContainer } from '~/components/pages/FourOhFour'
-
+import { allowedNetworkIds } from '~/allowedNetworkIds'
 import * as routes from '~/../config/routes'
 
 const App = class _App extends PureComponent {

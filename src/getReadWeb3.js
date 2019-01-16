@@ -4,7 +4,7 @@ import Web3 from 'web3'
   Many mobile dapp browsers have incomplete web3 implementations so it's better to directly connect to Infura.
 */
 
-export async function getReadWeb3(networkId) {
+export function getReadWeb3(networkId) {
   var providerUrl
   switch (networkId) {
     case 1:

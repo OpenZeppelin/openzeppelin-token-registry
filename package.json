@@ -75,6 +75,7 @@
     "jest-resolve": "23.6.0",
     "lodash": "^4.17.11",
     "lodash.get": "^4.4.2",
+    "lodash.merge": "^4.6.1",
     "mini-css-extract-plugin": "0.4.3",
     "node-sass": "^4.9.4",
     "object-assign": "^4.1.1",

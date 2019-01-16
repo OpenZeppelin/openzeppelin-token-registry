@@ -1,6 +1,15 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+import { allowedNetworkIds } from '~/allowedNetworkIds'
 import { PackageList } from '~/components/packages/PackageList'
+
+const networkIdQuery = gql`
+  query networkIdQuery {
+    networkId @client
+  }
+`
 
 export class PackageListPage extends PureComponent {
   state = {
@@ -76,11 +85,17 @@ export class PackageListPage extends PureComponent {
           <div className='container'>
             <div className='columns'>
               <div className='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
-                {
-                  this.state.showPackages
-                    ? <PackageList location={this.props.location} />
-                    : <p>Researchers list coming soon ...</p>
-                }
+                <Query query={networkIdQuery}>
+                  {({ data }) => {
+                    if (allowedNetworkIds().indexOf(data.networkId) !== -1){
+                      return this.state.showPackages
+                        ? <PackageList location={this.props.location} />
+                        : <p>Researchers list coming soon ...</p>
+                    } else {
+                      return <span>No packages available on your current network.</span>
+                    }
+                  }}
+                </Query>
               </div>
             </div>
           </div>
