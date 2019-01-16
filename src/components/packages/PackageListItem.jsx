@@ -37,16 +37,9 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
     }, 50)
   }
 
-  handlePackageItemClick = (e) => {
-    e.stopPropagation()
-    e.preventDefault()
-    console.log('package link click')
-
-    this.setState({ toPackage: true })
-  }
-
   handleGitHubLinkClick = (url) => {
     console.log('github link click')
+    
     if (window) {
       window.location.href = url
     }
@@ -98,60 +91,63 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                     }
                   )
                 }
-                onClick={this.handlePackageItemClick}
                 style={{ 'transitionDelay': `${this.props.index * 100}ms` }}
               >
-                <div className='panel-block'>
-                  <div className='columns'>
-                    <div className='column is-three-quarters'>
-                      <h4 className='title is-size-4'>
-                        {get(metadata, 'name')}
+                <Link
+                  to={link}
+                >
+                  <div className='panel-block'>
+                    <div className='columns'>
+                      <div className='column is-three-quarters'>
+                        <h4 className='title is-size-4'>
+                          {get(metadata, 'name')}
 
-                        <span className='package-list-item--version has-text-grey has-text-weight-light'>
-                          v{get(metadata, 'version')}
+                          <span className='package-list-item--version has-text-grey has-text-weight-light'>
+                            v{get(metadata, 'version')}
+                          </span>
+                        </h4>
+
+                        <CodeSnippet metadata={metadata} />
+
+                        <button
+                          className='package-list-item--github-icon is-text button'
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            e.preventDefault()
+
+                            // this should be coming from the json data
+                            const url = 'https://github.com/DeltaCamp/zeppelin-vouching-app'
+
+                            this.handleGitHubLinkClick(url)
+                          }}
+                        >
+                          <AntdIcon type={GithubFill} className='antd-icon' />
+                        </button>
+                      </div>
+
+                      <div className='column has-text-right'>
+                        <h6 className='subtitle is-size-7 package-list-item--subtitle is-monospaced'>
+                          VOUCHED
+                        </h6>
+
+                        <span className='is-inline-block'>
+                          <ZeppelinOSLogo width='20' height='20' className='package-list-item--zep-token-logo' />
                         </span>
-                      </h4>
 
-                      <CodeSnippet metadata={metadata} />
+                        <h3 className='is-inline-block is-size-3 has-text-weight-light'>
+                          4,000
+                        </h3>
 
-                      <button
-                        className='package-list-item--github-icon is-text button'
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          e.preventDefault()
-
-                          // this should be coming from the json data
-                          const url = 'https://github.com/DeltaCamp/zeppelin-vouching-app'
-
-                          this.handleGitHubLinkClick(url)
-                        }}
-                      >
-                        <AntdIcon type={GithubFill} className='antd-icon' />
-                      </button>
-                    </div>
-
-                    <div className='column has-text-right'>
-                      <h6 className='subtitle is-size-7 package-list-item--subtitle is-monospaced'>
-                        VOUCHED
-                      </h6>
-
-                      <span className='is-inline-block'>
-                        <ZeppelinOSLogo width='20' height='20' className='package-list-item--zep-token-logo' />
-                      </span>
-
-                      <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                        4,000
-                      </h3>
-
-                      <Link
-                        to={link}
-                        className='is-block package-list-item--challenges-link'
-                      >
-                        2 challenges
-                      </Link>
+                        <span
+                          to={link}
+                          className='is-block package-list-item--challenges-link'
+                        >
+                          2 challenges
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             )
           }
