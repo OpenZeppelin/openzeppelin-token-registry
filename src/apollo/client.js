@@ -8,7 +8,6 @@ import { Web3JSResolver } from 'apollo-link-ethereum-resolver-web3js'
 import { abiMapping } from './abiMapping'
 import { getInjectedWeb3 } from '~/getInjectedWeb3'
 import { getReadWeb3 } from '~/getReadWeb3'
-import gql from 'graphql-tag'
 
 let web3 = getInjectedWeb3()
 if (!web3) {
