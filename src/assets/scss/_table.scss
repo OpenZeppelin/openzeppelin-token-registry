@@ -1,3 +1,7 @@
+.table--wrapper {
+  overflow-x: auto;
+}
+
 .table thead th {
   color: #788899;
   font-family: $code-family;
@@ -6,16 +10,20 @@
   letter-spacing: 0.05rem;
   padding-left: 0;
   text-transform: uppercase;
+}
 
-  @media screen and (min-width: $tablet) {
-    min-width: 10rem;
-  }
+.table thead td,
+.table thead th {
+  border-bottom-width: 1px;
+  padding-bottom: 0.5rem;
 }
 
 .table tbody td {
   padding-left: 0;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 
-.table--wrapper {
-  overflow-x: auto;
+.table tbody tr:hover {
+  font-weight: 500;
 }

@@ -11,15 +11,15 @@ export const LevelVouch = class _LevelVouch extends PureComponent {
 
   render () {
     return (
-      <nav class="level level--vouch is-size-6">
-        <div class="level-left">
-          <p class="level-item is-monospaced">
+      <nav className="level level--vouch is-size-6 truncate">
+        <div className="level-left">
+          <p className="level-item is-monospaced">
             {this.props.address}
           </p>
         </div>
 
-        <div class="level-right">
-          <p class="level-item">
+        <div className="level-right">
+          <p className="level-item">
             <ZepTokenLogo width='12' height='12' />&nbsp;{displayNumber(this.props.amount)}
           </p>
         </div>

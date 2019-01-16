@@ -68,10 +68,10 @@ a.is-dark {
   font-size: 0.75rem;
   padding: 0.5rem 1rem;
   position: relative;
-  min-width: 330px;
+  min-width: 310px;
 
   @media screen and (max-width: $tablet - 1px) {
-    min-width: 100%;
+    min-width: 86%;
   }
 }
 
@@ -97,4 +97,22 @@ a.is-dark {
 
 .package-list--column {
   max-width: 760px;
+}
+
+@media screen and (max-width: 769px) {
+  .reverse-column-order {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.icon-small {
+  height: 16px;
+  width: 16px;
+}
+
+.has-text-right--desktop {
+  @media screen and (min-width: $tablet) {
+    text-align: right;
+  }
 }

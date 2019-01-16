@@ -40,7 +40,7 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
         $ {zosInstallSnippet}
 
         <span className='has-text-right is-inline-block is-copy-button'>
-          <p ref='foo' data-tip='Copied to Clipboard' />
+          <div ref='foo' data-tip='Copied to Clipboard' />
           <ReactTooltip />
 
           <CopyToClipboard text={zosInstallSnippet}

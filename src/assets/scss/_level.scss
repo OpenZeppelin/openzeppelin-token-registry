@@ -50,3 +50,31 @@
 .level--vouch:not(:last-child) {
   margin-bottom: 0;
 }
+
+.level--vouch .level-item {
+  @media screen and (max-width: $tablet) {
+    justify-content: initial;
+  }
+}
+
+.level-left + .level-right {
+  @media screen and (max-width: $tablet) {
+    margin-top: 0;
+  }
+}
+
+.level.truncate .level-item {
+  @media screen and (max-width: $tablet) {
+    text-overflow: ellipsis;
+    max-width: 99%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+  }
+}
+
+.level.truncate:not(:last-child) {
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 1rem;
+  }
+}

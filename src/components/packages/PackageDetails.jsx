@@ -1,19 +1,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import AntdIcon from '@ant-design/icons-react'
-import { GithubFill } from '@ant-design/icons'
 import { CodeSnippet } from '~/components/CodeSnippet'
+import { GitHubLink } from '~/components/GitHubLink'
 import { LevelVouch } from '~/components/LevelVouch'
+import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
     metadata: PropTypes.object.isRequired
-  }
-
-  handleGitHubLinkClick = (url) => {
-    if (window) {
-      window.location.href = url
-    }
   }
 
   render () {
@@ -21,7 +15,7 @@ export class PackageDetails extends PureComponent {
 
     return (
       <div>
-        <div className='columns'>
+        <div className='columns reverse-column-order'>
           <div className='column is-6-widescreen'>
             <h1 className='title is-size-1 has-text-weight-normal'>
               {metadata.name}
@@ -41,24 +35,11 @@ export class PackageDetails extends PureComponent {
 
             <CodeSnippet metadata={metadata} />
 
-            <button
-              className='package-item--github-icon is-text button'
-              onClick={(e) => {
-                e.stopPropagation()
-                e.preventDefault()
-
-                // this should be coming from the json data
-                const url = 'https://github.com/DeltaCamp/zeppelin-vouching-app'
-
-                this.handleGitHubLinkClick(url)
-              }}
-            >
-              <AntdIcon type={GithubFill} className='antd-icon' />
-            </button>
+            <GitHubLink url='https://github.com/DeltaCamp/zeppelin-vouching-app' />
           </div>
 
-          <div className='column is-6-widescreen has-text-right'>
-            <img src='https://openzeppelin.org/img/openzeppelin-logo.svg' />
+          <div className='column is-6-widescreen has-text-right--desktop'>
+            <OpenZeppelinEthLogo />
 
             <br />
             <br />
@@ -71,15 +52,15 @@ export class PackageDetails extends PureComponent {
           </div>
         </div>
 
+        <hr />
+
         <div className='columns'>
           <div className='column is-6-widescreen'>
-            <hr />
-
             <h5 className='is-size-5 has-text-weight-semibold'>
               3 addresses vouched 3,000 ZEP
             </h5>
 
-            <div class="level--wrapper">
+            <div className="level--wrapper">
               <LevelVouch address='0x32Be343B94f860124dC4fEe278FDCBD38C102D88' amount='7000' />
               <LevelVouch address='0xa786bc5f76a5bce6d7108a7bc7a3f4a786a786bc' amount='2200' />
               <LevelVouch address='0x5f76a567abedf7faf8a4f83af7a3f4a786a67999' amount='800' />
@@ -88,18 +69,20 @@ export class PackageDetails extends PureComponent {
           </div>
         </div>
 
-        <br />
-
         <div className='columns'>
           <div className='column is-12-widescreen'>
             <h5 className='is-size-5 has-text-weight-semibold'>
               Challenges
             </h5>
 
-            <p>
+            <div>
               Create a challenge by running: &nbsp;
+              <br className="is-hidden-desktop" />
+              <br className="is-hidden-desktop" />
               <CodeSnippet metadata={metadata} action='challenge' />
-            </p>
+              <br className="is-hidden-desktop" />
+              <br className="is-hidden-desktop" />
+            </div>
 
             <br />
 
@@ -107,38 +90,81 @@ export class PackageDetails extends PureComponent {
               <table className="table is-fullwidth">
                 <thead>
                   <tr>
-                    <th>
+                    <th width="61%">
                       Name
                     </th>
-                    <th>
+                    <th width="12%">
                       Status
                     </th>
-                    <th>
+                    <th width="12%">
                       Severity
                     </th>
-                    <th>
+                    <th width="12%">
                       Bounty
                     </th>
-                    <th>
+                    <th width="3%">
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      Name
+                      Large unsigned int overflow error
+                    </td>
+                    <td className="has-text-info">
+                      Open
+                    </td>
+                    <td className="has-text-success">
+                      Low
                     </td>
                     <td>
-                      Status
+                      300 Z
+                    </td>
+                    <td className="has-text-right">
+                      <GitHubLink
+                        url='https://github.com/challenge1'
+                        cssClassNames='icon-small'
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      ERC20 does not support approval to zero
+                    </td>
+                    <td className="has-text-info">
+                      Open
+                    </td>
+                    <td className="has-text-warning">
+                      Medium
                     </td>
                     <td>
-                      Severity
+                      300 Z
+                    </td>
+                    <td className="has-text-right">
+                      <GitHubLink
+                        url='https://github.com/challenge1'
+                        cssClassNames='icon-small'
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      ERC20 has a length of 0
+                    </td>
+                    <td className="has-text-grey-light">
+                      Closed
+                    </td>
+                    <td className="has-text-danger">
+                      High
                     </td>
                     <td>
-                      Bounty
+                      1,300 Z
                     </td>
-                    <td>
-                      Github Link
+                    <td className="has-text-right">
+                      <GitHubLink
+                        url='https://github.com/challenge2'
+                        cssClassNames='icon-small'
+                      />
                     </td>
                   </tr>
                 </tbody>

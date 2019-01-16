@@ -25,6 +25,9 @@ $navbar-item-hover-background-color: none;
 $navbar-item-color: #ffffff;
 $navbar-light-grey: #d9d9d9;
 $text: #141414;
+$green: #00C853;
+$yellow: #FF9800;
+$red: #FF005C;
 $turqoise: #39e6e0;
 $cyan: #00C1DC;
 
@@ -42,7 +45,7 @@ $link-active-border: $link-hover-color;
 
 $hr-background-color: lighten($text, 70%) !default;
 $hr-height: 1px !default
-$hr-margin: 1rem 0 2rem 0 !default
+$hr-margin: 1rem 0 1.5rem 0 !default
 
 $code: $text;
 
