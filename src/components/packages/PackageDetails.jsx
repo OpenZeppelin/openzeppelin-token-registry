@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import AntdIcon from '@ant-design/icons-react'
 import { GithubFill } from '@ant-design/icons'
+import { CodeSnippet } from '~/components/CodeSnippet'
 import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
 
 export class PackageDetails extends PureComponent {
@@ -27,9 +28,9 @@ export class PackageDetails extends PureComponent {
             v{metadata.version}
           </span>
         </h4>
-        <code className="code--quick-install">
-          $ zos link {metadata.name}
-        </code>
+
+        <CodeSnippet metadata={metadata} />
+
         <button
           className="package-list-item--github-icon is-text button"
           onClick={(e) => {
@@ -47,7 +48,7 @@ export class PackageDetails extends PureComponent {
 
         <hr />
 
-        <h6 className='subtitle is-size-7 package-list-item--subtitle'>
+        <h6 className='subtitle is-size-7 package-list-item--subtitle is-monospaced'>
           VOUCHED
         </h6>
 

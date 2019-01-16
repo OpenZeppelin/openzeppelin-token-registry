@@ -46,6 +46,11 @@
   color: black !important;
 }
 
+.package-list-item--subtitle {
+  color: #788899;
+  font-weight: 900;
+}
+
 .package-list-item--subtitle.content:not(:last-child),
 .package-list-item--subtitle.title:not(:last-child),
 .package-list-item--subtitle.subtitle:not(:last-child) {

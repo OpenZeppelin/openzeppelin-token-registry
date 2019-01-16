@@ -1,3 +1,7 @@
+.navbar {
+  // border-bottom: 1px solid lighten($text, 50%);
+}
+
 .navbar > .container {
   max-width: 880px;
 }
@@ -9,5 +13,8 @@ a.navbar-item.is-active,
 
 .navbar-item,
 .navbar-link {
+  font-family: $code-family;
+  font-size: 0.85rem;
   padding: 0.5rem 0.25rem;
+  text-transform: uppercase;
 }

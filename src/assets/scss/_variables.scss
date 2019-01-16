@@ -17,14 +17,15 @@ $navbar-grey: #23272a;
 $navbar-item-hover-background-color: none;
 $navbar-item-color: #ffffff;
 $navbar-light-grey: #d9d9d9;
-$link-color: #085dff;
-$link-hover-color: #0719d2;
 $text: #141414;
 $turqoise: #39e6e0;
+$cyan: #13C9E2;
 
 // Derived variables
+$link-color: $cyan;
+$link-hover-color: lighten(saturate($cyan, 100%), 10%);
 $link: $link-color;
-$link-visited: $link-color;
+$link-visited: $link-hover-color;
 $link-hover: $link-hover-color;
 $link-hover-border: $link-hover-color;
 $link-focus: $link-hover-color;

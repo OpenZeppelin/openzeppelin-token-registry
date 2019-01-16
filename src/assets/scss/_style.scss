@@ -2,6 +2,11 @@
   color: rgba(255, 255, 255, 0.15);
 }
 
+::selection {
+  background-color: $cyan;
+  color: white;
+}
+
 a.button,
 button,
 a svg {
@@ -40,12 +45,14 @@ a.is-dark {
   -webkit-font-smoothing: auto;
 
   font-family: $code-family;
+  letter-spacing: 0.03rem;
 }
 
 .code--quick-install {
   border-radius: 30px;
   display: inline-block;
   padding: 0.5rem 1rem;
+  position: relative;
   min-width: 400px;
 
   @media screen and (max-width: $tablet - 1px) {

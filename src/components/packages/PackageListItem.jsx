@@ -5,13 +5,12 @@ import PropTypes from 'prop-types'
 import gql from 'graphql-tag'
 import get from 'lodash.get'
 import AntdIcon from '@ant-design/icons-react'
-import { CopyOutline, GithubFill } from '@ant-design/icons'
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { GithubFill } from '@ant-design/icons'
 import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
+import { CodeSnippet } from '~/components/CodeSnippet'
 import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
-import { stringToSlug } from '~/utils/stringToSlug'
 import * as routes from '~/../config/routes'
 
 const packageQuery = gql`
@@ -77,9 +76,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             const { metadata } = data
             const { version } = metadata
 
-            const slug = stringToSlug(metadata.name)
             const id = parseInt(metadata.id, 10) - 1
-            const zosInstallSnippet = `zos link ${slug}`
             const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
 
             if (this.state.toPackage) {
@@ -114,17 +111,9 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                           v{get(metadata, 'version')}
                         </span>
                       </h4>
-                      <code className='code--quick-install' onClick={this.handleCodeClick}>
-                        $ {zosInstallSnippet}
 
-                        <span className='has-text-right is-inline-block is-copy-button'>
-                          {this.state.copied ? 'Copied!' : ''}
-                          <CopyToClipboard text={zosInstallSnippet}
-                            onCopy={this.handleCopyClick}>
-                            <span className='has-text-right'><AntdIcon type={CopyOutline} className='antd-icon' /></span>
-                          </CopyToClipboard>
-                        </span>
-                      </code>
+                      <CodeSnippet metadata={metadata} />
+
                       <button
                         className='package-list-item--github-icon is-text button'
                         onClick={(e) => {
@@ -142,7 +131,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                     </div>
 
                     <div className='column has-text-right'>
-                      <h6 className='subtitle is-size-7 package-list-item--subtitle'>
+                      <h6 className='subtitle is-size-7 package-list-item--subtitle is-monospaced'>
                         VOUCHED
                       </h6>
 
