@@ -19,7 +19,7 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "jsdom": "^13.0.0",
     "react-hot-loader": "^4.3.11",
-    "truffle-deploy-registry": "^0.5.0"
+    "truffle-deploy-registry": "^0.5.1"
   },
   "dependencies": {
     "@ant-design/icons": "^1.1.15",
