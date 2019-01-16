@@ -42,8 +42,6 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
   }
 
   handleGitHubLinkClick = (url) => {
-    console.log('github link click')
-
     if (window) {
       window.location.href = url
     }
