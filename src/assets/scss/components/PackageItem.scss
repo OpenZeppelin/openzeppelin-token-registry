@@ -6,7 +6,7 @@
 .package-item--maintained-by {
   color: lighten($text, 22%);
   margin-top: -1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .package-item--version {
@@ -15,14 +15,19 @@
 
 .package-item--github-icon {
   color: $grey !important;
-  font-size: 24px;
+  font-size: 23px;
   height: auto;
-  margin-left: 0.75rem;
+  margin-left: 0.625rem;
   position: relative;
   padding: 0;
-  top: 0.4rem;
+  top: 0.25rem;
 }
 
 .package-item--github-icon:hover {
   color: black !important;
+}
+
+.package-item--description {
+  margin-bottom: 1.5rem;
+  margin-top: 0;
 }

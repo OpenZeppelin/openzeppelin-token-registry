@@ -7,6 +7,20 @@
   color: white;
 }
 
+.column {
+  @media screen and (max-width: $desktop) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.column .column {
+  @media screen and (max-width: $desktop) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
 a.button,
 button,
 a svg {
@@ -51,6 +65,7 @@ a.is-dark {
 .code--quick-install {
   border-radius: 30px;
   display: inline-block;
+  font-size: 0.75rem;
   padding: 0.5rem 1rem;
   position: relative;
   min-width: 330px;

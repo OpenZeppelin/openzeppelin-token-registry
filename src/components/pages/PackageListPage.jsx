@@ -35,7 +35,7 @@ export class PackageListPage extends PureComponent {
                     </p>
                     <br />
                     <p>
-                      <button className='button is-primary'>Sign me up!</button>
+                      <button className='button is-primary is-pill'>Sign me up!</button>
                     </p>
                   </div>
                 </div>

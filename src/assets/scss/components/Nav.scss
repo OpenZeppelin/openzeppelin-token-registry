@@ -26,3 +26,11 @@ a.navbar-item.is-active,
 .navbar.is-dark .navbar-burger {
   background-color: $navbar-background-color;
 }
+
+.navbar .navbar-brand > .navbar-item,
+.navbar .navbar-brand .navbar-link {
+  @media screen and (max-width: $desktop) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

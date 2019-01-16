@@ -35,7 +35,7 @@ export class PackageItemPage extends PureComponent {
       <div className='is-positioned-absolutely is-full-width'>
         <div className='container'>
           <div className='columns'>
-            <div className='column main-content--column is-full-desktop is-8-widescreen is-offset-2-widescreen is-12-fullhd'>
+            <div className='column main-content--column is-full-desktop is-12-widescreen'>
               <Link
                 to={routes.HOME}
                 className='button is-monospaced is-text has-text-weight-bold package-page--back-button'

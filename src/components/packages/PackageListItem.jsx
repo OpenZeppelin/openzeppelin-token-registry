@@ -10,7 +10,7 @@ import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { CodeSnippet } from '~/components/CodeSnippet'
-import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
+import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
 import * as routes from '~/../config/routes'
 
 const packageQuery = gql`
@@ -131,7 +131,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                         </h6>
 
                         <span className='is-inline-block'>
-                          <ZeppelinOSLogo width='20' height='20' className='package-list-item--zep-token-logo' />
+                          <ZepTokenLogo width='20' height='20' className='package-list-item--zep-token-logo' />
                         </span>
 
                         <h3 className='is-inline-block is-size-3 has-text-weight-light'>
