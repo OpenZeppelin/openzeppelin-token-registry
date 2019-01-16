@@ -84,7 +84,7 @@ export class PackageListPage extends PureComponent {
         <section className='section'>
           <div className='container'>
             <div className='columns'>
-              <div className='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+              <div className='column main-content--column package-list--column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
                 <Query query={networkIdQuery}>
                   {({ data }) => {
                     if (allowedNetworkIds().indexOf(data.networkId) !== -1){

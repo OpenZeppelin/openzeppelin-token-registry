@@ -1,0 +1,28 @@
+.package-page--back-button {
+  font-size: 0.875rem;
+  margin: 2.325rem 0 1.75rem;
+}
+
+.package-item--maintained-by {
+  color: lighten($text, 22%);
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+.package-item--version {
+  margin-left: 0.5rem;
+}
+
+.package-item--github-icon {
+  color: $grey !important;
+  font-size: 24px;
+  height: auto;
+  margin-left: 0.75rem;
+  position: relative;
+  padding: 0;
+  top: 0.4rem;
+}
+
+.package-item--github-icon:hover {
+  color: black !important;
+}

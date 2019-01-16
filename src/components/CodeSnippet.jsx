@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
+import ReactDOM from 'react-dom'
 import ReactTimeout from 'react-timeout'
+import ReactTooltip from 'react-tooltip'
 import PropTypes from 'prop-types'
 import AntdIcon from '@ant-design/icons-react'
 import { CopyOutline } from '@ant-design/icons'
@@ -7,8 +9,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { stringToSlug } from '~/utils/stringToSlug'
 
 export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent {
-  state = {}
-
   static propTypes = {
     metadata: PropTypes.object.isRequired
   }
@@ -19,10 +19,10 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
   }
 
   handleCopyClick = () => {
-    this.setState({ copied: true })
+    ReactTooltip.show(ReactDOM.findDOMNode(this.refs.foo))
 
     this.props.setTimeout(() => {
-      this.setState({ copied: false })
+      ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.foo))
     }, 3000)
   }
 
@@ -35,7 +35,8 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
         $ {zosInstallSnippet}
 
         <span className='has-text-right is-inline-block is-copy-button'>
-          {this.state.copied ? 'Copied!' : ''}
+          <p ref='foo' data-tip='Copied to Clipboard' />
+          <ReactTooltip />
 
           <CopyToClipboard text={zosInstallSnippet}
             onCopy={this.handleCopyClick}>

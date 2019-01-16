@@ -21,18 +21,22 @@ export class PackageDetails extends PureComponent {
 
     return (
       <div>
-        <h4 className='title is-size-4'>
+        <h1 className='title is-size-1 has-text-weight-normal'>
           {metadata.name}
 
-          <span className="package-list-item--version has-text-grey has-text-weight-light">
+          <span className="package-item--version has-text-grey has-text-weight-light">
             v{metadata.version}
           </span>
-        </h4>
+        </h1>
+
+        <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
+          Maintained by <a href="#">0xf19ea93b...34</a>
+        </h6>
 
         <CodeSnippet metadata={metadata} />
 
         <button
-          className="package-list-item--github-icon is-text button"
+          className="package-item--github-icon is-text button"
           onClick={(e) => {
             e.stopPropagation()
             e.preventDefault()

@@ -45,7 +45,7 @@ Make sure to replace the above addresses with the actual addresses in the genera
 Now generate the Truffle artifacts to be included in the build:
 
 ```
-$ apply-registry
+$ yarn apply-registry
 ```
 
 This will generate Truffle-compatible artifacts in the `build/contracts` directory.

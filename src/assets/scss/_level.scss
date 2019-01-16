@@ -10,7 +10,7 @@
   text-transform: uppercase;
 
   @media screen and (max-width: $tablet - 1px) {
-    max-width: 300px;
+    width: 100%;
   }
 }
 
@@ -27,6 +27,10 @@
 .is-secondary-nav .level-item:hover {
   border-color: $text;
   font-weight: 900;
+}
+
+.is-secondary-nav .level-item.is-active button:hover {
+  transform: scale3d(1, 1, 1);
 }
 
 .is-secondary-nav .level-item .link {

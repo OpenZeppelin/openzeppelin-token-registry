@@ -3,7 +3,7 @@
 }
 
 .navbar > .container {
-  max-width: 880px;
+  max-width: 960px;
 }
 
 a.navbar-item.is-active,
@@ -17,4 +17,12 @@ a.navbar-item.is-active,
   font-size: 0.85rem;
   padding: 0.5rem 0.25rem;
   text-transform: uppercase;
+}
+
+.navbar .navbar-burger {
+  border: 0;
+}
+
+.navbar.is-dark .navbar-burger {
+  background-color: $navbar-background-color;
 }

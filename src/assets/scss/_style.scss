@@ -45,7 +45,7 @@ a.is-dark {
   -webkit-font-smoothing: auto;
 
   font-family: $code-family;
-  letter-spacing: 0.03rem;
+  letter-spacing: 0.05rem;
 }
 
 .code--quick-install {
@@ -53,7 +53,7 @@ a.is-dark {
   display: inline-block;
   padding: 0.5rem 1rem;
   position: relative;
-  min-width: 400px;
+  min-width: 330px;
 
   @media screen and (max-width: $tablet - 1px) {
     min-width: 100%;
@@ -72,4 +72,14 @@ a.is-dark {
 
 .has-text-primary {
   color: $turqoise !important;
+}
+
+.main-content--column {
+  max-width: 1000px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.package-list--column {
+  max-width: 760px;
 }

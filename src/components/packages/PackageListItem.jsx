@@ -39,7 +39,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
 
   handleGitHubLinkClick = (url) => {
     console.log('github link click')
-    
+
     if (window) {
       window.location.href = url
     }
@@ -99,10 +99,10 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                   <div className='panel-block'>
                     <div className='columns'>
                       <div className='column is-three-quarters'>
-                        <h4 className='title is-size-4'>
+                        <h4 className='title is-size-4 has-text-weight-normal'>
                           {get(metadata, 'name')}
 
-                          <span className='package-list-item--version has-text-grey has-text-weight-light'>
+                          <span className='package-item--version has-text-grey has-text-weight-light'>
                             v{get(metadata, 'version')}
                           </span>
                         </h4>
@@ -110,7 +110,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                         <CodeSnippet metadata={metadata} />
 
                         <button
-                          className='package-list-item--github-icon is-text button'
+                          className='package-item--github-icon is-text button'
                           onClick={(e) => {
                             e.stopPropagation()
                             e.preventDefault()
