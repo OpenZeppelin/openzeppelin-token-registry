@@ -6,10 +6,16 @@ import { withClientState } from 'apollo-link-state'
 import { ContractLink } from 'apollo-link-ethereum'
 import { Web3JSResolver } from 'apollo-link-ethereum-resolver-web3js'
 import { abiMapping } from './abiMapping'
-import { getWeb3 } from '~/getWeb3'
+import { getInjectedWeb3 } from '~/getInjectedWeb3'
+import { getReadWeb3 } from '~/getReadWeb3'
 import gql from 'graphql-tag'
 
-const web3Resolver = new Web3JSResolver(abiMapping)
+let web3 = getInjectedWeb3()
+if (!web3) {
+  web3 = getReadWeb3()
+}
+
+const web3Resolver = new Web3JSResolver(abiMapping, web3)
 const contractLink = new ContractLink(web3Resolver)
 
 const cache = new InMemoryCache({
@@ -34,26 +40,4 @@ export const client = new ApolloClient({
   }
 })
 
-getWeb3().then((web3) => {
-  web3Resolver.web3 = web3
-  client.resetStore()
-
-  window.setInterval(async function () {
-    const networkId = await web3.eth.net.getId()
-    window.client = client
-
-    let networkIdQuery
-
-    try {
-      networkIdQuery = cache.readQuery({
-        query: gql`query networkIdQuery { networkId @client }`
-      })
-    } catch (error) {
-      networkIdQuery = {}
-    }
-
-    if (networkId !== networkIdQuery.networkId) {
-      client.writeData({ data: { networkId }})
-    }
-  }, 1000)
-})
+window.client = client
