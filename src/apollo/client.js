@@ -8,7 +8,7 @@ import { Web3JSResolver } from 'apollo-link-ethereum-resolver-web3js'
 import { abiMapping } from './abiMapping'
 import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
 import { getReadWeb3 } from '~/web3/getReadWeb3'
-import merge from 'lodash.merge'
+import { merge } from 'lodash'
 import network from './client-state/network'
 
 let web3 = getInjectedWeb3()
