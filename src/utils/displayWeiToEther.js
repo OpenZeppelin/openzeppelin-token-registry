@@ -7,6 +7,6 @@ export function displayWeiToEther(wei) {
   // if (!(wei instanceof BN)) {
   //   wei = new BN(wei)
   // }
-
+  if (!wei) { return '0' }
   return web3.utils.fromWei(wei, 'ether')
 }

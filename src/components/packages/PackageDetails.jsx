@@ -4,6 +4,8 @@ import AntdIcon from '@ant-design/icons-react'
 import { GithubFill } from '@ant-design/icons'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import get from 'lodash.get'
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
@@ -17,7 +19,7 @@ export class PackageDetails extends PureComponent {
   }
 
   render () {
-    const { metadata } = this.props
+    const { metadata, vouching } = this.props
 
     return (
       <div>
@@ -57,7 +59,7 @@ export class PackageDetails extends PureComponent {
         </span>
 
         <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-          4,000
+          {displayWeiToEther(get(vouching, 'totalVouched'))}
         </h3>
       </div>
     )
