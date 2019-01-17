@@ -7,14 +7,11 @@ import * as routes from '~/../config/routes'
 
 export const Nav = class _Nav extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      mobileNavActive: false
-    }
+  state = {
+    mobileNavActive: false
   }
 
-  toggleMobileNav = (e) => {
+  handleToggleMobileNav = (e) => {
     const mobileNavActive = !this.state.mobileNavActive
 
     this.setState({ mobileNavActive })
@@ -43,7 +40,7 @@ export const Nav = class _Nav extends Component {
                   { 'is-active': this.state.mobileNavActive }
                 )}
                 data-target="navbar-menu"
-                onClick={this.toggleMobileMenu}
+                onClick={this.handleToggleMobileNav}
               >
                 <span></span>
                 <span></span>
