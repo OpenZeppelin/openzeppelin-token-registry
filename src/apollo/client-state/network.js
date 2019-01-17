@@ -4,7 +4,12 @@ export default {
   resolvers: {
     Query: {
       networkId: async function () {
-        return getInjectedWeb3().eth.net.getId()
+        var web3 = getInjectedWeb3()
+        if (!web3) {
+          return 3
+        } else {
+          return web3.eth.net.getId()
+        }
       }
     }
   }
