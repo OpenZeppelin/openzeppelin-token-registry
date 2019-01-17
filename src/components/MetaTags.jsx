@@ -16,107 +16,96 @@ export const MetaTags = class _MetaTags extends PureComponent {
 
     const logoPath = '/zeppelin-os-logo.svg'
     const siteTitle = 'ZeppelinOS Vouch'
-    const siteUrl = 'https://zeppelin-vouching-app.netlify.com'
+    const siteURL = 'https://zeppelin-vouching-app.netlify.com'
     const siteDescription = 'This is the desc'
-
+    const twitterHandle = 'zeppelinorg'
+    const ownerCoName = 'Zeppelin Solutions'
+    const author = 'Zeppelin Solutions & Delta Camp'
+    const keywords = 'zeppelinos zos vouch'
+    const themeColor = '#53fff9'
+    const googleFontsURL = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono:400,700,900'
     const year = (new Date()).getFullYear()
-
-    /*titleTemplate={`%s | ${siteTitle}`}
-    defaultTitle={siteTitle}
-    htmlAttributes={{
-      lang: 'en',
-      class: this.props.cssClass
-    }}*/
 
     return (
       <Helmet
-
+        titleTemplate={`%s | ${siteTitle}`}
+        defaultTitle={siteTitle}
+        htmlAttributes={{
+          'lang': 'en',
+          'class': this.props.cssClass
+        }}
         link={
           [
             {
-              href: "https://fonts.googleapis.com/css?family=PT+Mono&subset=cyrillic,cyrillic-ext,latin-ext",
-              rel: "stylesheet"
-            },
-            {
-              rel: "stylesheet",
-              href: "https://use.typekit.net/xce0plw.css"
-            },
-            {
-              rel: 'alternate',
-              type: 'application/atom+xml',
-              href: `${siteUrl}/rss.xml`,
-              title: `The Delta Camp blog feed`
+              href: googleFontsURL,
+              rel: 'stylesheet'
             }
           ]
         }
         meta={[
           {
-            name: "google-site-verification",
-            content: "AgulHzqJ6_2xljkDwUNxoCen8X7-qzKbGx_DJBGJjgg"
-          },
-          {
             name: 'theme-color',
-            content: '#50286d'
+            content: themeColor
           },
           {
-            name: "description",
+            name: 'description',
             content: siteDescription
           },
           {
-            name: "keywords",
-            content: "zeppelinos zos vouch"
+            name: 'keywords',
+            content: keywords
           },
           {
-            name: "author",
-            content: "Zeppelin & Delta Camp"
+            name: 'author',
+            content: author
           },
           {
-            name: "copyright",
-            content: `© ${year} Zeppelin Solutions`
+            name: 'copyright',
+            content: `© ${year} ${ownerCoName}`
           },
           {
-            property: "og:title",
+            property: 'og:title',
             content: siteTitle
           },
           {
-            property: "og:description",
+            property: 'og:description',
             content: siteDescription
           },
           {
-            property: "og:site_name",
-            content: "deltacamp"
-          },
-          {
-            property: "og:url",
-            content: `${siteUrl}${location.pathname}`
-          },
-          {
-            property: "og:type",
-            content: "website"
-          },
-          {
-            property: "og:image",
-            content: `${siteUrl}${logoPath}`
-          },
-          {
-            property: "twitter:title",
+            property: 'og:site_name',
             content: siteTitle
           },
           {
-            property: "twitter:card",
-            content: "summary"
+            property: 'og:url',
+            content: `${siteURL}${location.pathname}`
           },
           {
-            property: "twitter:site",
-            content: "@teamdeltacamp"
+            property: 'og:type',
+            content: 'website'
           },
           {
-            property: "twitter:image",
-            content: `${siteUrl}${logoPath}`
+            property: 'og:image',
+            content: `${siteURL}${logoPath}`
           },
           {
-            property: "twitter:url",
-            content: 'https://twitter.com/teamdeltacamp'
+            property: 'twitter:title',
+            content: siteTitle
+          },
+          {
+            property: 'twitter:card',
+            content: 'summary'
+          },
+          {
+            property: 'twitter:site',
+            content: `@${twitterHandle}`
+          },
+          {
+            property: 'twitter:image',
+            content: `${siteURL}${logoPath}`
+          },
+          {
+            property: 'twitter:url',
+            content: `https://twitter.com/${twitterHandle}`
           }
         ]}
       />

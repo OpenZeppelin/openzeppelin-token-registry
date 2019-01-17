@@ -1,6 +1,6 @@
 {
   "name": "zeppelin-vouching-app",
-  "author": "Brendan Asselstine, Chuck Bergeron",
+  "author": "Zeppelin Solutions & Delta Camp",
   "license": "MIT",
   "version": "1.0.0",
   "description": "Vouch for EVM packages using ZEP tokens.",
