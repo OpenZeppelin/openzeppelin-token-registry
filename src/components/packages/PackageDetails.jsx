@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { ChallengeRow } from '~/components/packages/ChallengeRow'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -10,8 +12,7 @@ import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import { shortenAddress } from '~/utils/shortenAddress'
 
 const vouchesQuery = gql`
   query vouchesQuery($id: String!) {
@@ -48,7 +49,7 @@ export class PackageDetails extends PureComponent {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <EtherscanAddressLink address={returnValues.owner}>{returnValues.owner}</EtherscanAddressLink>
+              Maintained by <EtherscanAddressLink address={returnValues.owner}>{shortenAddress(returnValues.owner)}</EtherscanAddressLink>
             </h6>
 
             <p className='is-size-6 package-item--description'>
