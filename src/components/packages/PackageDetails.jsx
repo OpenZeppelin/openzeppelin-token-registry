@@ -9,6 +9,7 @@ import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
+import { GithubProfileImage } from '~/components/GithubProfileImage'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -30,7 +31,8 @@ export class PackageDetails extends PureComponent {
   render () {
     const { metadata, vouching, registeredEvent } = this.props
     const { returnValues } = registeredEvent || {}
-    const { repo } = gh(returnValues.metadataURI || '')
+    const githubDetails = gh(returnValues.metadataURI || '')
+    const { owner, repo } = githubDetails
     const { id } = returnValues || {}
 
     return (
@@ -59,7 +61,9 @@ export class PackageDetails extends PureComponent {
           </div>
 
           <div className='column is-6-widescreen has-text-right--desktop'>
-            <OpenZeppelinEthLogo />
+            <div className='package-details-image'>
+              <GithubProfileImage user={owner} />
+            </div>
 
             <br />
             <br />
