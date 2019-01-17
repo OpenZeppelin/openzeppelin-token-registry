@@ -8,9 +8,10 @@ export function projectPackageEvents(events) {
 
   for (var i in events) {
     const event = events[i]
+    var { id, amount } = event.returnValues
     switch (event.event) {
       case 'Registered':
-        var { id, owner, amount } = event.returnValues
+        var { owner } = event.returnValues
         var addr = normalizeAddr(owner)
 
         // Ensure an object exists
@@ -25,8 +26,8 @@ export function projectPackageEvents(events) {
 
         break
       case 'Vouched':
-        var { id, sender, amount } = event.returnValues
-        var addr = normalizeAddr(sender)
+        var { sender } = event.returnValues
+        addr = normalizeAddr(sender)
         // Ensure an object exists
         result.packages[id] =
           result.packages[id] ||
@@ -34,15 +35,15 @@ export function projectPackageEvents(events) {
             vouchTotals: {}
           }
 
-        var currentVouchTotal = result.packages[id].vouchTotals[addr] || new BN(0)
+        currentVouchTotal = result.packages[id].vouchTotals[addr] || new BN(0)
         result.packages[id].vouchTotals[addr] = currentVouchTotal.add(new BN(amount))
 
         break
       case 'Unvouched':
-        var { id, sender, amount } = event.returnValues
-        var addr = normalizeAddr(sender)
+        sender = event.returnValues.sender
+        addr = normalizeAddr(sender)
 
-        var currentVouchTotal = result.packages[id].vouchTotals[addr]
+        currentVouchTotal = result.packages[id].vouchTotals[addr]
         result.packages[id].vouchTotals[addr] = currentVouchTotal.sub(new BN(amount))
 
         if (result.packages[id].vouchTotals[addr].eq(new BN(0))) {
@@ -50,6 +51,7 @@ export function projectPackageEvents(events) {
         }
 
         break
+      // no default
     }
   }
 
