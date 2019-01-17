@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import gql from 'graphql-tag'
+import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/packages/PackageDetails'
 import { VouchingQueries } from '~/queries/VouchingQueries'
@@ -36,6 +37,10 @@ export class PackageItemPage extends PureComponent {
   render () {
     return (
       <div className='is-positioned-absolutely is-full-width'>
+        <Helmet
+          title='EVM Package'
+        />
+
         <ScrollToTop />
 
         <div className='container'>
@@ -73,11 +78,18 @@ export class PackageItemPage extends PureComponent {
 
                           const { metadata, Vouching } = data
 
-                          return <PackageDetails
-                            metadata={metadata}
-                            vouching={Vouching}
-                            registeredEvent={event}
-                          />
+                          return (
+                            <>
+                              <Helmet
+                                title={`${metadata.name}`}
+                              />
+                              <PackageDetails
+                                metadata={metadata}
+                                vouching={Vouching}
+                                registeredEvent={event}
+                              />
+                            </>
+                          )
                         }
                       }
                     </Query>
