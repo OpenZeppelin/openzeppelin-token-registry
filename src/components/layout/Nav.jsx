@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import ZeppelinOSLogo from '~/assets/images/zeppelin-os-logo.svg'
 import * as routes from '~/../config/routes'
 
@@ -22,9 +22,12 @@ export const Nav = class _Nav extends Component {
   }
 
   render () {
+    const heroColor = ''
+    // const heroColor = 'is-dark'
+
     return (
       <>
-        <nav className="navbar is-dark">
+        <nav className={`navbar ${heroColor}`}>
           <div className="container">
             <div className="navbar-brand">
               <div className="navbar-item">
@@ -54,37 +57,30 @@ export const Nav = class _Nav extends Component {
             )}>
               <div className="navbar-end">
                 <div className="navbar-item">
-                  <NavLink
-                    exact
-                    activeClassName="is-active"
-                    to={routes.HOME}
+                  <a
+                    href="https://docs.zeppelinos.org/"
                     className="navbar-item"
-                    onClick={this.closeMobileNav}
                   >
                     Docs
-                  </NavLink>
+                  </a>
                 </div>
 
                 <div className="navbar-item">
-                  <NavLink
-                    activeClassName="is-active"
-                    to={routes.OTHER_PAGE}
+                  <a
+                    href="https://github.com/zeppelinos"
                     className='navbar-item'
-                    onClick={this.closeMobileNav}
                   >
                     GitHub
-                  </NavLink>
+                  </a>
                 </div>
 
                 <div className="navbar-item">
-                  <NavLink
-                    activeClassName="is-active"
-                    to={routes.OTHER_PAGE}
+                  <a
+                    href="https://zeppelinos.org/"
                     className='navbar-item'
-                    onClick={this.closeMobileNav}
                   >
                     Site
-                  </NavLink>
+                  </a>
                 </div>
               </div>
             </div>

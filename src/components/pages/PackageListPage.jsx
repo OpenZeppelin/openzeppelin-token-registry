@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import gql from 'graphql-tag'
+import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
+import { ResearchersList } from '~/components/packages/ResearchersList'
+import * as routes from '~/../config/routes'
 
 const networkIdQuery = gql`
   query networkIdQuery {
@@ -13,32 +16,33 @@ const networkIdQuery = gql`
 `
 
 export class PackageListPage extends PureComponent {
-  state = {
-    showPackages: true
-  }
-
   render () {
+    const heroColor = 'is-light'
+    // const heroColor = 'is-dark'
+    const showResearchersList = this.props.location.pathname === '/researchers-list'
+
     return (
       <div className='is-positioned-absolutely is-full-width'>
         <ScrollToTop />
 
-        <section className='hero is-dark is-bold'>
+        <section className={`hero ${heroColor}`}>
           <div className='hero-body'>
             <div className='container'>
               <div className='columns'>
                 <div className='column is-full-desktop is-8-widescreen is-offset-2-widescreen is-6-fullhd is-offset-3-fullhd'>
                   <div className='has-text-centered'>
-                    <h2 className='title hero--title'>
-                      zeppelin<span className='has-text-primary'>OS</span> Beta
+                    <h2 className='title hero--title is-size-1'>
+                      {/*zeppelin<span className='has-text-primary'>OS</span> Beta*/}
+                      zeppelinOS Beta
                     </h2>
-                    <p className='is-monospaced'>
+                    <p className="is-size-6">
                       Interested in developing your own EVM package?
                       <br />
                       Want to vouch for your favourite libraries?
                     </p>
                     <br />
                     <p>
-                      <button className='button is-primary is-pill'>Sign me up!</button>
+                      <button className={`button is-pill ${heroColor === 'is-light' ? 'is-black' : 'is-primary'}`}>Sign me up!</button>
                     </p>
                   </div>
                 </div>
@@ -54,32 +58,32 @@ export class PackageListPage extends PureComponent {
                 'level-item',
                 'has-text-centered',
                 {
-                  'is-active': this.state.showPackages
+                  'is-active': !showResearchersList
                 }
               )}
             >
-              <button
+              <Link
                 className='button is-text link is-monospaced'
-                onClick={(e) => { this.setState({ showPackages: true }) } }
+                to={routes.HOME}
               >
                 EVM Packages
-              </button>
+              </Link>
             </p>
             <p
               className={classnames(
                 'level-item',
                 'has-text-centered',
                 {
-                  'is-active': !this.state.showPackages
+                  'is-active': showResearchersList
                 }
               )}
             >
-              <button
+              <Link
                 className='button is-text link is-monospaced'
-                onClick={(e) => { this.setState({ showPackages: false }) } }
+                to={routes.HOME_RESEARCHERS_LIST}
               >
                 Security Researchers
-              </button>
+              </Link>
             </p>
           </nav>
         </section>
@@ -91,12 +95,13 @@ export class PackageListPage extends PureComponent {
                 <Query query={networkIdQuery}>
                   {({ data }) => {
                     const wrongNetwork = !data || allowedNetworkIds().indexOf(data.networkId) === -1
+
                     if (wrongNetwork) {
                       return <span>No packages available on your current network.</span>
                     } else {
-                      return this.state.showPackages
-                        ? <PackageList location={this.props.location} />
-                        : <p>Researchers list coming soon ...</p>
+                      return showResearchersList
+                        ? <ResearchersList location={this.props.location} />
+                        : <PackageList location={this.props.location} />
                     }
                   }}
                 </Query>

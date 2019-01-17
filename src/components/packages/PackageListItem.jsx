@@ -103,7 +103,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
               <div
                 className={
                   classnames(
-                    'package-list-item',
+                    'list-item',
                     'panel',
                     'slide-up',
                     'fade-in',
@@ -149,12 +149,12 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       </div>
 
                       <div className='column has-text-right-desktop'>
-                        <h6 className='subtitle is-size-7 package-list-item--subtitle is-monospaced'>
+                        <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
                           VOUCHED
                         </h6>
 
                         <span className='is-inline-block'>
-                          <ZepTokenLogo width='20' height='20' className='package-list-item--zep-token-logo' />
+                          <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
                         </span>
 
                         <h3 className='is-inline-block is-size-3 has-text-weight-light'>
@@ -163,7 +163,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
 
                         <span
                           to={link}
-                          className='is-block package-list-item--challenges-link'
+                          className='is-block list-item--challenges-link'
                         >
                           {challenges}
                         </span>
