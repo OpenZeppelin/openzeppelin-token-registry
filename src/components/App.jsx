@@ -9,7 +9,7 @@ import { PackageListPage } from '~/components/pages/PackageListPage'
 import { NavContainer } from '~/components/layout/Nav'
 import { OtherPageContainer } from '~/components/pages/OtherPage'
 import { PackageItemPage } from '~/components/pages/PackageItemPage'
-import { FourOhFourContainer } from '~/components/pages/FourOhFour'
+import { FourOhFour } from '~/components/pages/FourOhFour'
 import { getPurePathname } from '~/utils/getPurePathname'
 import * as routes from '~/../config/routes'
 
@@ -43,9 +43,9 @@ const App = class _App extends PureComponent {
             <Switch location={this.props.location}>
               <Route path={routes.PACKAGE_ITEM} component={PackageItemPage} />
               <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
-              <Route path={routes.HOME} component={PackageListPage} />
+              <Route exact path={routes.HOME} component={PackageListPage} />
 
-              <Route component={FourOhFourContainer} />
+              <Route component={FourOhFour} />
             </Switch>
           </CSSTransition>
         </TransitionGroup>
