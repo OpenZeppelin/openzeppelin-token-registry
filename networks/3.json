@@ -1,10 +1,10 @@
 [
   {
     "contractName": "ZepToken",
-    "address": "0x3f3b7c6ad31e13e69d77cccd178efc320b66cddc"
+    "address": "0x4947bd344e7f0c3be0a0952ef8648e4b365f81e5"
   },
   {
     "contractName": "Vouching",
-    "address": "0xaaf81c87cbbf1c35abee320e9c88c156d2da7531"
+    "address": "0x8d3719bc52f2f2d2111fecc9a525cfb53bea9edb"
   }
 ]
