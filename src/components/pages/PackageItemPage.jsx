@@ -76,6 +76,7 @@ export class PackageItemPage extends PureComponent {
                           return <PackageDetails
                             metadata={metadata}
                             vouching={Vouching}
+                            registeredEvent={event}
                           />
                         }
                       }

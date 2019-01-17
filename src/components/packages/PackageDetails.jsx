@@ -5,14 +5,19 @@ import { ChallengeRow } from '~/components/packages/ChallengeRow'
 import { GitHubLink } from '~/components/GitHubLink'
 import { LevelVouch } from '~/components/LevelVouch'
 import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
+import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
-    metadata: PropTypes.object.isRequired
+    metadata: PropTypes.object.isRequired,
+    vouching: PropTypes.object.isRequired,
+    registeredEvent: PropTypes.object.isRequired
   }
 
   render () {
-    const { metadata, vouching } = this.props
+    const { metadata, vouching, registeredEvent } = this.props
+
+    const { returnValues } = registeredEvent || {}
 
     return (
       <div>
@@ -27,7 +32,7 @@ export class PackageDetails extends PureComponent {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <a href='https://etherscan.com/address/0xf19b...34'>0xf19b...34</a>
+              Maintained by <EtherscanAddressLink address={returnValues.owner}>{returnValues.owner}</EtherscanAddressLink>
             </h6>
 
             <p className='is-size-6 package-item--description'>
