@@ -64,10 +64,14 @@ a.is-dark {
   font-weight: 400;
 }
 
+.hero.is-light {
+  background-color: $hero-light;
+}
+
 .hero--title.content:not(:last-child),
 .hero--title.title:not(:last-child),
 .hero--title.subtitle:not(:last-child) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .is-monospaced {

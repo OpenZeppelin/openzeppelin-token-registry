@@ -44,6 +44,7 @@ const App = class _App extends PureComponent {
               <Route path={routes.PACKAGE_ITEM} component={PackageItemPage} />
               <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
               <Route exact path={routes.HOME} component={PackageListPage} />
+              <Route exact path={routes.HOME_RESEARCHERS_LIST} component={PackageListPage} />
 
               <Route component={FourOhFour} />
             </Switch>

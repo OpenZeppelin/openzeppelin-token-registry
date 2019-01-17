@@ -19,11 +19,15 @@ $family-code: 'Roboto Mono', monospace;
 $button-text-color: #191D1F;
 $code-background: #f7f7f7;
 $link-invert: #ffffff;
+$hero-light: #f7f7f9;
 $hero-dark: #252c31;
+$navbar-background-color: #f6f6f9;
 $navbar-grey: #23272a;
+$navbar-item-color: #fff;
+$navbar-item-hover: #141414;
 $navbar-item-hover-background-color: none;
-$navbar-item-color: #ffffff;
-$navbar-light-grey: #d9d9d9;
+$navbar-dark-item-color: white;
+$navbar-dark-item-hover-color: #d9d9d9;
 $text: #141414;
 $green: #00C853;
 $yellow: #FF9800;
@@ -31,7 +35,12 @@ $red: #FF005C;
 $turqoise: #39e6e0;
 $cyan: #00C1DC;
 
+// $navbar-item-color: #ffffff;
+// $navbar-light-grey: #d9d9d9;
+
 // Derived variables
+$navbar-item-hover-color: $navbar-item-hover;
+
 $link-color: $cyan;
 $link-hover-color: lighten(saturate($cyan, 100%), 10%);
 $link: $link-color;
@@ -48,8 +57,5 @@ $hr-height: 1px !default
 $hr-margin: 1rem 0 1.5rem 0 !default
 
 $code: $text;
-
-$navbar-background-color: $navbar-grey;
-$navbar-item-hover-color: $navbar-light-grey;
 
 $dark: $navbar-grey;
