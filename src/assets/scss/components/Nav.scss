@@ -11,6 +11,13 @@ a.navbar-item.is-active,
   color: $navbar-light-grey;
 }
 
+.navbar-brand .navbar-item,
+.navbar-brand .navbar-link {
+  @media screen and (max-width: 1280px) and (min-width: 1090px) {
+    padding-left: 0.5rem;
+  }
+}
+
 .navbar-item,
 .navbar-link {
   font-family: $code-family;
@@ -19,18 +26,45 @@ a.navbar-item.is-active,
   text-transform: uppercase;
 }
 
+.navbar-menu.is-active {
+  @media screen and (max-width: $desktop) {
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+  }
+}
+
 .navbar .navbar-burger {
   border: 0;
+  outline: none;
+}
+
+.navbar .navbar-burger:hover {
+  transform: scale3d(1, 1, 1);
 }
 
 .navbar.is-dark .navbar-burger {
   background-color: $navbar-background-color;
+  transition: all 500ms ease-in-out;
+}
+
+.navbar.is-dark .navbar-burger:hover,
+.navbar.is-dark .navbar-burger:active {
+  background-color: darken($navbar-background-color, 5%);
 }
 
 .navbar .navbar-brand > .navbar-item,
 .navbar .navbar-brand .navbar-link {
-  @media screen and (max-width: $desktop) {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+  @media screen and (max-width: 970px) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+.navbar .navbar-item,
+.navbar .navbar-link {
+  @media screen and (max-width: 970px) {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
   }
 }
