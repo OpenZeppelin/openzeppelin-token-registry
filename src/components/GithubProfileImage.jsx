@@ -24,7 +24,7 @@ export function GithubProfileImage (props) {
           src: avatar_url
         }
 
-        return <img {...newProps} />
+        return <img {...newProps} alt="package organization's github avatar" />
       }}
     </Query>
   )
