@@ -93,11 +93,9 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             }
 
             var challenges
-            if (challengeCount === 0) {
-              challenges = <span>No challenges</span>
-            } else if (challengeCount === 1) {
+            if (challengeCount === 1) {
               challenges = <span>1 challenge</span>
-            } else {
+            } else if (challengeCount > 1){
               challenges = <span>{challengeCount} challenges</span>
             }
 
