@@ -7,6 +7,18 @@ import { GitHubLink } from '~/components/GitHubLink'
 import { LevelVouch } from '~/components/LevelVouch'
 import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import { projectPackageEvents } from '~/projections/projectPackageEvents'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const vouchesQuery = gql`
+  query vouchesQuery($id: String!) {
+    Vouching @contract {
+      allEvents @pastEvents(filter: { id: $id }, fromBlock: "0", toBlock: "latest")
+    }
+  }
+`
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
@@ -19,6 +31,7 @@ export class PackageDetails extends PureComponent {
     const { metadata, vouching, registeredEvent } = this.props
     const { returnValues } = registeredEvent || {}
     const { repo } = gh(returnValues.metadataURI || '')
+    const { id } = returnValues || {}
 
     return (
       <div>
@@ -63,15 +76,33 @@ export class PackageDetails extends PureComponent {
 
         <div className='columns'>
           <div className='column is-6-widescreen'>
-            <h5 className='is-size-5 has-text-weight-semibold'>
-              3 addresses vouched 3,000 ZEP
-            </h5>
+            <Query query={vouchesQuery} variables={{ id }}>
+              {({ data }) => {
+                const { Vouching } = data || {}
+                const { allEvents } = Vouching || {}
+                const packageProjection = projectPackageEvents(allEvents || [])
+                const { vouchTotals } = packageProjection.packages[id] || {}
+                const addresses = Object.keys(vouchTotals || {})
+                const vouches =
+                  addresses.map(address =>
+                    ({ address, amount: vouchTotals[address].toString() })
+                  ).sort((a, b) => b.amount - a.amount)
 
-            <div className="level--wrapper">
-              <LevelVouch address='0x32Be343B94f860124dC4fEe278FDCBD38C102D88' amount='7000' />
-              <LevelVouch address='0xa786bc5f76a5bce6d7108a7bc7a3f4a786a786bc' amount='2200' />
-              <LevelVouch address='0x5f76a567abedf7faf8a4f83af7a3f4a786a67999' amount='800' />
-            </div>
+                return (
+                  <>
+                    <h5 className='is-size-5 has-text-weight-semibold'>
+                      {vouches.length} addresses vouched {displayWeiToEther(vouching.totalVouched)} ZEP
+                    </h5>
+
+                    <div className="level--wrapper">
+                      {vouches.map(vouch => <LevelVouch address={vouch.address} amount={vouch.amount} key={vouch.address} />)}
+                    </div>
+                  </>
+                )
+
+              }}
+
+            </Query>
 
           </div>
         </div>
