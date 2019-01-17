@@ -27,7 +27,7 @@ export class PackageDetails extends PureComponent {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <a href='#'>0xf19b...34</a>
+              Maintained by <a href='https://etherscan.com/address/0xf19b...34'>0xf19b...34</a>
             </h6>
 
             <p className='is-size-6 package-item--description'>

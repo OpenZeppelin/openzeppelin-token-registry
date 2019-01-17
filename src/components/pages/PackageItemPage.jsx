@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/packages/PackageDetails'
 import { VouchingQueries } from '~/queries/VouchingQueries'
 import * as routes from '~/../config/routes'
@@ -35,6 +36,8 @@ export class PackageItemPage extends PureComponent {
   render () {
     return (
       <div className='is-positioned-absolutely is-full-width'>
+        <ScrollToTop />
+
         <div className='container'>
           <div className='columns'>
             <div className='column main-content--column is-full-desktop is-12-widescreen'>

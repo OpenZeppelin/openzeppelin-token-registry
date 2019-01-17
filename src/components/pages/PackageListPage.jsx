@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
+import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
 
 const networkIdQuery = gql`
@@ -19,6 +20,8 @@ export class PackageListPage extends PureComponent {
   render () {
     return (
       <div className='is-positioned-absolutely is-full-width'>
+        <ScrollToTop />
+
         <section className='hero is-dark is-bold'>
           <div className='hero-body'>
             <div className='container'>
