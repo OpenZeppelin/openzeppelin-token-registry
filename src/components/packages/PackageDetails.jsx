@@ -154,6 +154,11 @@ export class PackageDetails extends PureComponent {
                       <ChallengeRow challenged={challenged} key={challenged.returnValues._challengeID} />
                     )
                   }
+                  {vouching.Challenged.length === 0 &&
+                    <tr>
+                      <td>No challenges have been made</td>
+                    </tr>
+                  }
                 </tbody>
               </table>
             </div>
