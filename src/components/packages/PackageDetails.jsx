@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { CodeSnippet } from '~/components/CodeSnippet'
+import { ChallengeRow } from '~/components/packages/ChallengeRow'
 import { GitHubLink } from '~/components/GitHubLink'
 import { LevelVouch } from '~/components/LevelVouch'
 import OpenZeppelinEthLogo from '~/assets/images/openzeppelin-eth-logo.svg'
-import ZeppelinOSLogo from '~/assets/images/zep-token-logo.svg'
-import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import get from 'lodash.get'
 
 export class PackageDetails extends PureComponent {
   static propTypes = {
@@ -110,66 +108,11 @@ export class PackageDetails extends PureComponent {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      Large unsigned int overflow error
-                    </td>
-                    <td className="has-text-info">
-                      Open
-                    </td>
-                    <td className="has-text-success">
-                      Low
-                    </td>
-                    <td>
-                      300 Z
-                    </td>
-                    <td className="has-text-right">
-                      <GitHubLink
-                        url='https://github.com/challenge1'
-                        cssClassNames='icon-small'
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      ERC20 does not support approval to zero
-                    </td>
-                    <td className="has-text-info">
-                      Open
-                    </td>
-                    <td className="has-text-warning">
-                      Medium
-                    </td>
-                    <td>
-                      300 Z
-                    </td>
-                    <td className="has-text-right">
-                      <GitHubLink
-                        url='https://github.com/challenge1'
-                        cssClassNames='icon-small'
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      ERC20 has a length of 0
-                    </td>
-                    <td className="has-text-grey-light">
-                      Closed
-                    </td>
-                    <td className="has-text-danger">
-                      High
-                    </td>
-                    <td>
-                      {displayWeiToEther(get(vouching, 'totalVouched'))} Z
-                    </td>
-                    <td className="has-text-right">
-                      <GitHubLink
-                        url='https://github.com/challenge2'
-                        cssClassNames='icon-small'
-                      />
-                    </td>
-                  </tr>
+                  {
+                    vouching.Challenged.map(challenged =>
+                      <ChallengeRow challenged={challenged} key={challenged.returnValues._challengeID} />
+                    )
+                  }
                 </tbody>
               </table>
             </div>

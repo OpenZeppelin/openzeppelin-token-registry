@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { PackageDetails } from '~/components/packages/PackageDetails'
+import { VouchingQueries } from '~/queries/VouchingQueries'
 import * as routes from '~/../config/routes'
 
 const eventsQuery = gql`
@@ -16,15 +17,14 @@ const eventsQuery = gql`
 
 const packageQuery = gql`
   query packageQuery($uri: String!, $id: String!) {
-    metadata(uri: $uri) {
-      name
-      version
-      description
-    }
+    ...Metadata
     Vouching @contract {
       totalVouched(id: $id)
+      ...ChallengedEvents
     }
   }
+  ${VouchingQueries.Metadata}
+  ${VouchingQueries.ChallengedEvents}
 `
 
 export class PackageItemPage extends PureComponent {
@@ -68,9 +68,11 @@ export class PackageItemPage extends PureComponent {
                           if (loading) return null
                           if (error) return `Error!: ${error}`
 
+                          const { metadata, Vouching } = data
+
                           return <PackageDetails
-                            metadata={data.metadata}
-                            vouching={data.Vouching}
+                            metadata={metadata}
+                            vouching={Vouching}
                           />
                         }
                       }

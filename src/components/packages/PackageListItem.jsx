@@ -16,7 +16,7 @@ import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
 import * as routes from '~/../config/routes'
 
 const packageQuery = gql`
-  query packageQuery($uri: String!, $id: String!) {
+  query packageQuery($uri: String!, $id: String!, $formattedId: String!) {
     metadata(uri: $uri) @client {
       name
       version
@@ -24,6 +24,7 @@ const packageQuery = gql`
     }
     Vouching @contract {
       totalVouched(id: $id)
+      Challenged @pastEvents(filter: {id: $id}, fromBlock: "0", toBlock: "latest")
     }
   }
 `
@@ -62,7 +63,12 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
 
   render () {
     return (
-      <Query query={packageQuery} variables={{ uri: this.props.package.metadataURI, id: this.props.package.id }}>
+      <Query
+        query={packageQuery}
+        variables={{
+          uri: this.props.package.metadataURI,
+          id: this.props.package.id
+        }}>
         {
           ({ loading, error, data }) => {
             if (loading) return null
@@ -70,14 +76,29 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
 
             const { metadata, Vouching } = data
             const { version } = metadata || {}
+            const { Challenged } = Vouching || {}
 
             const id = parseInt(this.props.package.id, 10)
             const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
 
-            const { name, owner, repo } = gh(this.props.package.metadataURI)
+            const { repo } = gh(this.props.package.metadataURI)
 
             if (this.state.toPackage) {
               return <Redirect to={link} />
+            }
+
+            var challengeCount = 0
+            if (Challenged) {
+              challengeCount = Challenged.length
+            }
+
+            var challenges
+            if (challengeCount === 0) {
+              challenges = <span>No challenges</span>
+            } else if (challengeCount === 1) {
+              challenges = <span>1 challenge</span>
+            } else {
+              challenges = <span>{challengeCount} challenges</span>
             }
 
             return (
@@ -146,7 +167,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                           to={link}
                           className='is-block package-list-item--challenges-link'
                         >
-                          2 challenges
+                          {challenges}
                         </span>
                       </div>
                     </div>
