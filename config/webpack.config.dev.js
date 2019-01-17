@@ -326,6 +326,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
+      { from: './src/assets/images' },
       { from: './config/_redirects' }
     ]),
     // Generates an `index.html` file with the <script> injected.
