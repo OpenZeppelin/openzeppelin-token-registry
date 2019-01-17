@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import gh from 'parse-github-url'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { ChallengeRow } from '~/components/packages/ChallengeRow'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -16,8 +17,8 @@ export class PackageDetails extends PureComponent {
 
   render () {
     const { metadata, vouching, registeredEvent } = this.props
-
     const { returnValues } = registeredEvent || {}
+    const { repo } = gh(returnValues.metadataURI || '')
 
     return (
       <div>
@@ -41,7 +42,7 @@ export class PackageDetails extends PureComponent {
 
             <CodeSnippet metadata={metadata} />
 
-            <GitHubLink url='https://github.com/DeltaCamp/zeppelin-vouching-app' />
+            <GitHubLink url={`https://github.com/${repo}`} />
           </div>
 
           <div className='column is-6-widescreen has-text-right--desktop'>
