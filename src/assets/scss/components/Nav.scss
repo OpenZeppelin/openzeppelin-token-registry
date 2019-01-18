@@ -54,6 +54,10 @@ a.navbar-item,
   text-transform: uppercase;
 }
 
+.navbar.is-dark .navbar-menu {
+  background-color: $navbar-dark-background-color;
+}
+
 .navbar-menu.is-active {
   @media screen and (max-width: $desktop) {
     box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.3);
@@ -65,10 +69,14 @@ a.navbar-item,
 .navbar .navbar-burger {
   border: 0;
   outline: none;
+  background-color: transparent;
 }
 
 .navbar .navbar-burger:hover {
   transform: scale3d(1, 1, 1);
+}
+
+.navbar.is-dark .navbar-burger:hover {
 }
 
 .navbar.is-dark .navbar-brand svg path {
@@ -80,13 +88,11 @@ a.navbar-item,
 }
 
 .navbar.is-dark .navbar-burger {
-  background-color: $navbar-dark-item-hover-color;
   transition: all 500ms ease-in-out;
 }
 
 .navbar.is-dark .navbar-burger:hover,
 .navbar.is-dark .navbar-burger:active {
-  background-color: darken($navbar-dark-item-hover-color, 5%);
 }
 
 .navbar .navbar-brand > .navbar-item,
