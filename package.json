@@ -6,7 +6,7 @@
   "description": "Vouch for EVM packages using ZEP tokens.",
   "main": "index.js",
   "scripts": {
-    "test": "standard --verbose | snazzy && node scripts/test.js",
+    "test": "eslint src && standard --verbose | snazzy && node scripts/test.js",
     "build": "node --max-old-space-size=4096 scripts/build.js",
     "start": "node --max-old-space-size=4096 scripts/start.js",
     "apply-registry": "$(npm bin)/apply-registry -o artifacts",
@@ -128,6 +128,17 @@
     ]
   },
   "eslintConfig": {
+    "rules": {
+      "vars-on-top": [
+        "error"
+      ],
+      "no-use-before-define": [
+        "error", {
+          "functions": true,
+          "classes": true
+        }
+      ]
+    },
     "extends": "react-app"
   },
   "browserslist": [

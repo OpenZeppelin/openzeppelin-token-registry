@@ -1,7 +1,11 @@
 const expression = /^(\w{6})\w*(\w{2})$/
 
 export function shortenAddress (address) {
+  let result
+
   if (!address) { return null }
-  var result = expression.exec(address)
+
+  result = expression.exec(address)
+
   return `${result[1]}...${result[2]}`
 }

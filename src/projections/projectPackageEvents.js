@@ -2,38 +2,41 @@ import BN from 'bn.js'
 import { normalizeAddr } from '~/utils/normalizeAddr'
 
 export function projectPackageEvents (events) {
+  let currentVouchTotal
+
   const result = {
     packages: {}
   }
 
-  for (var i in events) {
+  for (let i in events) {
     const event = events[i]
-    var { id, amount } = event.returnValues
+    let { id, amount } = event.returnValues
+
     switch (event.event) {
       case 'Registered':
-        var { owner } = event.returnValues
-        var addr = normalizeAddr(owner)
+        let { owner } = event.returnValues
+        let addr = normalizeAddr(owner)
 
         // Ensure an object exists
         result.packages[id] =
           result.packages[id] ||
-          {
-            vouchTotals: {}
-          }
+            {
+              vouchTotals: {}
+            }
 
-        var currentVouchTotal = result.packages[id].vouchTotals[addr] || new BN(0)
+        currentVouchTotal = result.packages[id].vouchTotals[addr] || new BN(0)
         result.packages[id].vouchTotals[addr] = currentVouchTotal.add(new BN(amount))
 
         break
       case 'Vouched':
-        var { sender } = event.returnValues
+        let { sender } = event.returnValues
         addr = normalizeAddr(sender)
         // Ensure an object exists
         result.packages[id] =
           result.packages[id] ||
-          {
-            vouchTotals: {}
-          }
+            {
+              vouchTotals: {}
+            }
 
         currentVouchTotal = result.packages[id].vouchTotals[addr] || new BN(0)
         result.packages[id].vouchTotals[addr] = currentVouchTotal.add(new BN(amount))
