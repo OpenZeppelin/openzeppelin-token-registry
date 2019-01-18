@@ -14,10 +14,11 @@ export const researchersVouchedTotals = function(events) {
     if (!address) { return null }
 
     const researcherAlreadyPresent = (typeof researchers[address] !== 'undefined')
+
     researchers[address] = {
       address: address,
       amount: researcherAlreadyPresent ?
-        new BN(researchers[address].amount).add(new BN(amount))
+        new BN(researchers[address].amount).add(new BN(amount)).toString()
         : amount
     }
   })
