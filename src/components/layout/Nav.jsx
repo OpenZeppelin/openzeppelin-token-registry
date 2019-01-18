@@ -28,7 +28,7 @@ export const Nav = class _Nav extends Component {
     return (
       <>
         <div
-          className={classnames('nav-background', { 'is-active': this.state.mobileNavActive })}
+          className={classnames('nav-background no-select', { 'is-active': this.state.mobileNavActive })}
           onClick={this.closeMobileNav} />
         <nav className={`navbar ${heroColor}`}>
           <div className="container">
