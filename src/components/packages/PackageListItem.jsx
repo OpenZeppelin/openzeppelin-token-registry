@@ -14,6 +14,7 @@ import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
 import * as routes from '~/../config/routes'
+import { PackageListItemLoader } from './PackageListItemLoader'
 
 const packageQuery = gql`
   query packageQuery($uri: String!, $id: String!, $formattedId: String!) {
@@ -37,9 +38,9 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
   }
 
   componentDidMount () {
-    this.props.setTimeout(() => {
-      this.setState({ startAnimating: true })
-    }, 50)
+    // this.props.setTimeout(() => {
+    //   this.setState({ startAnimating: true })
+    // }, 0)
   }
 
   handleGitHubLinkClick = (url) => {
@@ -71,7 +72,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
         }}>
         {
           ({ loading, error, data }) => {
-            if (loading) return null
+            if (loading) return <PackageListItemLoader />
             if (error) return `Error!: ${error}`
 
             const { metadata, Vouching } = data
@@ -104,17 +105,9 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                 className={
                   classnames(
                     'list-item',
-                    'panel',
-                    'slide-up',
-                    'fade-in',
-                    'slow',
-                    {
-                      'slide-up-enter': this.state.startAnimating,
-                      'fade-in-enter': this.state.startAnimating
-                    }
+                    'panel'
                   )
                 }
-                style={{ 'transitionDelay': `${this.props.index * 100}ms` }}
               >
                 <Link
                   to={link}

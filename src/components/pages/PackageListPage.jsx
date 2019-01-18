@@ -94,10 +94,10 @@ export class PackageListPage extends PureComponent {
               <div className='column main-content--column package-list--column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
                 <Query query={networkIdQuery}>
                   {({ data }) => {
-                    const wrongNetwork = !data || allowedNetworkIds().indexOf(data.networkId) === -1
+                    const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
 
                     if (wrongNetwork) {
-                      return <span>No packages available on your current network.</span>
+                      return <span className='has-delayed-display'>No packages available on your current network.</span>
                     } else {
                       return showResearchersList
                         ? <ResearchersList location={this.props.location} />
