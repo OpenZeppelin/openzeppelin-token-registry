@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import gql from 'graphql-tag'
-import { sortBy } from 'lodash'
 import { Query } from 'react-apollo'
 import { researchersVouchedTotals } from '~/utils/researchersVouchedTotals'
+import { sortBigNumbers } from '~/utils/sortBigNumbers'
 import { ResearchersListItem } from '~/components/researchers/ResearchersListItem'
 
 const vouchesQuery = gql`
@@ -24,15 +24,12 @@ export class ResearchersList extends PureComponent {
           const events = (data.Vouching ? data.Vouching.allEvents : []) || []
           const researchers = researchersVouchedTotals(events)
           const researchersArray = Object.values(researchers)
-          const sortedResearchersArray = sortBy(
-            researchersArray,
-            (researcher) => researcher.amount
-          ).reverse()
+          const sortedResearchersArray = sortBigNumbers(researchersArray, 'amount')
 
           return (
             <>
               {
-                sortedResearchersArray.map((researcher, index) =>
+                sortedResearchersArray.reverse().map((researcher, index) =>
                   <ResearchersListItem
                     index={index}
                     researcher={researcher}
