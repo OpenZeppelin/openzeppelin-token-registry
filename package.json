@@ -6,7 +6,7 @@
   "description": "Vouch for EVM packages using ZEP tokens.",
   "main": "index.js",
   "scripts": {
-    "test": "node scripts/test.js",
+    "test": "standard --verbose | snazzy && node scripts/test.js",
     "build": "node --max-old-space-size=4096 scripts/build.js",
     "start": "node --max-old-space-size=4096 scripts/start.js",
     "apply-registry": "$(npm bin)/apply-registry -o artifacts",
@@ -19,6 +19,8 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "jsdom": "^13.0.0",
     "react-hot-loader": "^4.3.11",
+    "snazzy": "^8.0.0",
+    "standard": "^12.0.1",
     "truffle-deploy-registry": "^0.5.1"
   },
   "dependencies": {
@@ -111,6 +113,18 @@
     "webpack-dev-server": "3.1.9",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.2"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

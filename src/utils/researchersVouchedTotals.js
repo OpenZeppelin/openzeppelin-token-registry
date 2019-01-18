@@ -3,7 +3,7 @@ import BN from 'bn.js'
 // Iterates through all events in the Vouching contract and
 // pull out amounts only for vouches (RegisteredEvent owners and
 // VouchedEvent senders)
-export const researchersVouchedTotals = function(events) {
+export const researchersVouchedTotals = function (events) {
   const researchers = {}
 
   events.forEach((event, index) => {

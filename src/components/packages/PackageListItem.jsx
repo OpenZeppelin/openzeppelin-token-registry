@@ -87,12 +87,12 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
               return <Redirect to={link} />
             }
 
-            var challengeCount = 0
+            let challengeCount = 0
             if (Challenged) {
               challengeCount = Challenged.length
             }
 
-            var challenges
+            let challenges
             if (challengeCount === 1) {
               challenges = <span>1 challenge</span>
             } else if (challengeCount > 1){
