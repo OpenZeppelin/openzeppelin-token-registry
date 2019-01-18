@@ -13,15 +13,15 @@ export const LevelVouch = class _LevelVouch extends PureComponent {
 
   render () {
     return (
-      <nav className="level level--vouch is-size-6 truncate">
-        <div className="level-left">
-          <p className="level-item is-monospaced">
+      <nav className='level level--vouch is-size-6 truncate'>
+        <div className='level-left'>
+          <p className='level-item is-monospaced'>
             <EtherscanAddressLink address={this.props.address}>{this.props.address}</EtherscanAddressLink>
           </p>
         </div>
 
-        <div className="level-right">
-          <p className="level-item">
+        <div className='level-right'>
+          <p className='level-item'>
             <ZepTokenLogo width='12' height='12' />&nbsp;{displayNumber(displayWeiToEther(this.props.amount))}
           </p>
         </div>

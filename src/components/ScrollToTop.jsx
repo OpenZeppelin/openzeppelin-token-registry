@@ -1,7 +1,7 @@
 import { PureComponent } from 'react'
 
 export const ScrollToTop = class _ScrollToTop extends PureComponent {
-  componentDidMount() {
+  componentDidMount () {
     if (window) {
       window.scrollTo(0, 0)
     }

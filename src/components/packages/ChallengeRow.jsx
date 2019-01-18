@@ -32,7 +32,7 @@ export const ChallengeRow = ({ challenged }) => {
   var status = 'Open'
   var priority = 'Low'
 
-  const statusColor   = STATUS_COLORS[status]
+  const statusColor = STATUS_COLORS[status]
   const priorityColor = PRIORITY_COLORS[priority]
 
   return (
@@ -53,7 +53,7 @@ export const ChallengeRow = ({ challenged }) => {
             <td>
               {displayWeiToEther(amount)} Z
             </td>
-            <td className="has-text-right">
+            <td className='has-text-right'>
               <GitHubLink
                 url={`https://github.com/${repo}`}
                 cssClassNames='icon-small'

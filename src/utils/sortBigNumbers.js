@@ -9,9 +9,9 @@ import _ from 'lodash'
 //   { amount: '1208' }
 // ] => 123, 1208, 4302
 //
-export const sortBigNumbers = function(array, key) {
+export const sortBigNumbers = function (array, key) {
   _.mixin({
-    sortWith: function(arr, customFn) {
+    sortWith: function (arr, customFn) {
       return _.map(arr).sort(customFn)
     }
   })

@@ -20,7 +20,7 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
     researcher: PropTypes.object.isRequired
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.setTimeout(() => {
       this.setState({ startAnimating: true })
     }, 20)
@@ -92,7 +92,7 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
           </h6>
           <h3 className='is-size-3 is-monospaced'>
             <span className='item--version has-text-black has-text-weight-light'>
-              <ZepTokenLogo width='22' height='22' className="researcher--zep-token-icon" />{displayWeiToEther(this.props.researcher.amount)}
+              <ZepTokenLogo width='22' height='22' className='researcher--zep-token-icon' />{displayWeiToEther(this.props.researcher.amount)}
             </span>
           </h3>
         </div>

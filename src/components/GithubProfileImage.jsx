@@ -1,3 +1,5 @@
+/* eslint camelcase: 0 */
+
 import React from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
@@ -35,7 +37,7 @@ export function GithubProfileImage (props) {
           src
         }
 
-        return <img {...newProps} />
+        return <img alt='github avatar img' {...newProps} />
       }}
     </Query>
   )

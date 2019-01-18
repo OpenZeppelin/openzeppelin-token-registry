@@ -6,7 +6,6 @@ import ZeppelinOSLogo from '~/assets/images/zeppelin-os-logo.svg'
 import * as routes from '~/../config/routes'
 
 export const Nav = class _Nav extends Component {
-
   state = {
     mobileNavActive: false
   }
@@ -31,10 +30,10 @@ export const Nav = class _Nav extends Component {
           className={classnames('nav-background no-select', { 'is-active': this.state.mobileNavActive })}
           onClick={this.closeMobileNav} />
         <nav className={`navbar ${heroColor}`}>
-          <div className="container">
-            <div className="navbar-brand">
-              <div className="navbar-item">
-                <Link to={routes.HOME} className="navbar-item">
+          <div className='container'>
+            <div className='navbar-brand'>
+              <div className='navbar-item'>
+                <Link to={routes.HOME} className='navbar-item'>
                   <ZeppelinOSLogo />
                 </Link>
               </div>
@@ -45,41 +44,41 @@ export const Nav = class _Nav extends Component {
                   'burger',
                   { 'is-active': this.state.mobileNavActive }
                 )}
-                data-target="navbar-menu"
+                data-target='navbar-menu'
                 onClick={this.handleToggleMobileNav}
               >
-                <span></span>
-                <span></span>
-                <span></span>
+                <span />
+                <span />
+                <span />
               </button>
             </div>
 
-            <div id="navbar-menu" className={classnames(
+            <div id='navbar-menu' className={classnames(
               'navbar-menu',
               { 'is-active': this.state.mobileNavActive }
             )}>
-              <div className="navbar-end">
-                <div className="navbar-item">
+              <div className='navbar-end'>
+                <div className='navbar-item'>
                   <a
-                    href="https://docs.zeppelinos.org/"
-                    className="navbar-item"
+                    href='https://docs.zeppelinos.org/'
+                    className='navbar-item'
                   >
                     Docs
                   </a>
                 </div>
 
-                <div className="navbar-item">
+                <div className='navbar-item'>
                   <a
-                    href="https://github.com/zeppelinos"
+                    href='https://github.com/zeppelinos'
                     className='navbar-item'
                   >
                     GitHub
                   </a>
                 </div>
 
-                <div className="navbar-item">
+                <div className='navbar-item'>
                   <a
-                    href="https://zeppelinos.org/"
+                    href='https://zeppelinos.org/'
                     className='navbar-item'
                   >
                     Site

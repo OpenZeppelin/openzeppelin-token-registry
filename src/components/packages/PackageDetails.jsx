@@ -98,12 +98,11 @@ export class PackageDetails extends PureComponent {
                       {vouches.length} addresses vouched {displayWeiToEther(vouching.totalVouched)} ZEP
                     </h5>
 
-                    <div className="level--wrapper">
+                    <div className='level--wrapper'>
                       {vouches.map(vouch => <LevelVouch address={vouch.address} amount={vouch.amount} key={vouch.address} />)}
                     </div>
                   </>
                 )
-
               }}
 
             </Query>
@@ -119,33 +118,32 @@ export class PackageDetails extends PureComponent {
 
             <div>
               Create a challenge by running: &nbsp;
-              <br className="is-hidden-desktop" />
-              <br className="is-hidden-desktop" />
+              <br className='is-hidden-desktop' />
+              <br className='is-hidden-desktop' />
               <CodeSnippet metadata={metadata} action='challenge' />
-              <br className="is-hidden-desktop" />
-              <br className="is-hidden-desktop" />
+              <br className='is-hidden-desktop' />
+              <br className='is-hidden-desktop' />
             </div>
 
             <br />
 
-            <div className="table--wrapper">
-              <table className="table is-fullwidth">
+            <div className='table--wrapper'>
+              <table className='table is-fullwidth'>
                 <thead>
                   <tr>
-                    <th width="61%">
+                    <th width='61%'>
                       Name
                     </th>
-                    <th width="12%">
+                    <th width='12%'>
                       Status
                     </th>
-                    <th width="12%">
+                    <th width='12%'>
                       Severity
                     </th>
-                    <th width="12%">
+                    <th width='12%'>
                       Bounty
                     </th>
-                    <th width="3%">
-                    </th>
+                    <th width='3%' />
                   </tr>
                 </thead>
                 <tbody>

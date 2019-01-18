@@ -1,39 +1,39 @@
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true)
 
   const presets = [
     [
-      "@babel/preset-env"
+      '@babel/preset-env'
     ],
     [
-      "@babel/preset-react"
+      '@babel/preset-react'
     ]
   ]
 
   const plugins = [
     [
-      "inline-react-svg"
+      'inline-react-svg'
     ],
     [
-      "@babel/transform-runtime"
+      '@babel/transform-runtime'
     ],
     [
-      "@babel/plugin-proposal-class-properties",
+      '@babel/plugin-proposal-class-properties'
     ],
     [
-      "babel-plugin-root-import",
+      'babel-plugin-root-import',
       {
-        "rootPathSuffix": "src",
-        "rootPathPrefix": "~"
+        'rootPathSuffix': 'src',
+        'rootPathPrefix': '~'
       }
     ],
     [
-      "babel-plugin-root-import",
+      'babel-plugin-root-import',
       {
-        "rootPathSuffix": "artifacts",
-        "rootPathPrefix": "#"
+        'rootPathSuffix': 'artifacts',
+        'rootPathPrefix': '#'
       },
-      "contract-root-import"
+      'contract-root-import'
     ]
   ]
 

@@ -37,8 +37,8 @@ const App = class _App extends PureComponent {
           <CSSTransition
             key={this.props.location.key}
             timeout={{ enter: 700, exit: 200 }}
-            classNames="layout"
-            appear={true}
+            classNames='layout'
+            appear
           >
             <Switch location={this.props.location}>
               <Route path={routes.PACKAGE_ITEM} component={PackageItemPage} />

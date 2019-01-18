@@ -1,7 +1,7 @@
 import BN from 'bn.js'
 import { normalizeAddr } from '~/utils/normalizeAddr'
 
-export function projectPackageEvents(events) {
+export function projectPackageEvents (events) {
   const result = {
     packages: {}
   }

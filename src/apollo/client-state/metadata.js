@@ -1,3 +1,5 @@
+/* eslint-env worker */
+
 export default {
   resolvers: {
     Query: {

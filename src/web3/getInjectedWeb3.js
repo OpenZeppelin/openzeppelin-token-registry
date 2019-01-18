@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 
-export function getInjectedWeb3() {
+export function getInjectedWeb3 () {
   let web3 = null
   try {
     if (window.ethereum) {

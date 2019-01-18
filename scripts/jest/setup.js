@@ -1,7 +1,6 @@
-import Web3 from 'web3'
+// import Web3 from 'web3'
 // import { getWeb3 } from '~/utils/getWeb3'
-import { shallow, mount, render } from 'enzyme'
-import Enzyme from 'enzyme'
+import Enzyme, { shallow, mount, render } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() })

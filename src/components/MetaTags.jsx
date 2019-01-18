@@ -11,7 +11,7 @@ export const MetaTags = class _MetaTags extends PureComponent {
     location: {}
   }
 
-  render() {
+  render () {
     const location = this.props.location || {}
 
     const logoPath = '/zeppelin-os-logo.svg'

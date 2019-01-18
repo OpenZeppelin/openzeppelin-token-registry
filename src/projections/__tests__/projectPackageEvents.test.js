@@ -1,7 +1,7 @@
 import BN from 'bn.js'
 import { projectPackageEvents } from '../projectPackageEvents'
 
-function Vouched(id, sender, amount) {
+function Vouched (id, sender, amount) {
   return {
     event: 'Vouched',
     returnValues: {
@@ -12,7 +12,7 @@ function Vouched(id, sender, amount) {
   }
 }
 
-function Unvouched(id, sender, amount) {
+function Unvouched (id, sender, amount) {
   return {
     event: 'Unvouched',
     returnValues: {
@@ -23,7 +23,7 @@ function Unvouched(id, sender, amount) {
   }
 }
 
-function Registered(id, owner, amount) {
+function Registered (id, owner, amount) {
   return {
     event: 'Registered',
     returnValues: {
@@ -48,7 +48,7 @@ describe('projectPackageEvents', () => {
         '0': {
           vouchTotals: {
             '0x9999': new BN(4000),
-            '0xabcd': new BN(500),
+            '0xabcd': new BN(500)
           }
         },
         '1': {

@@ -1,3 +1,3 @@
-export function normalizeAddr(address) {
+export function normalizeAddr (address) {
   return address.toLowerCase()
 }

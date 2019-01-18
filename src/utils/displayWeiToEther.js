@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 
-export function displayWeiToEther(wei) {
+export function displayWeiToEther (wei) {
   if (!wei) {
     return ''
   }

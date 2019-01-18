@@ -25,11 +25,11 @@ const cache = new InMemoryCache({
 })
 
 const stateLink = withClientState({
-  ...merge({}, network, metadata), //can put more resolvers in here
+  ...merge({}, network, metadata), // can put more resolvers in here
   cache
 })
 
-const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI });
+const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI })
 
 export const client = new ApolloClient({
   cache,

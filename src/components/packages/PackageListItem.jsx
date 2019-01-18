@@ -36,7 +36,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
     package: PropTypes.object.isRequired
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.setTimeout(() => {
       this.setState({ startAnimating: true })
     }, 50)
@@ -95,7 +95,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             let challenges
             if (challengeCount === 1) {
               challenges = <span>1 challenge</span>
-            } else if (challengeCount > 1){
+            } else if (challengeCount > 1) {
               challenges = <span>{challengeCount} challenges</span>
             }
 

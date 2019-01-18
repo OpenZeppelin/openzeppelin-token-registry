@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import PropTypes from 'prop-types'
 import AntdIcon from '@ant-design/icons-react'
 import { CopyOutline } from '@ant-design/icons'
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { stringToSlug } from '~/utils/stringToSlug'
 
 export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent {

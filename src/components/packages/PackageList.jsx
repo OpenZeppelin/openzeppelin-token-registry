@@ -40,7 +40,7 @@ export const PackageList = withApollo(graphql(eventsQuery)(class _PackageList ex
       events.map(event => {
         const id = event.returnValues.id
         return (
-          client.query({ query: totalVouchesQuery, variables: {id} })
+          client.query({ query: totalVouchesQuery, variables: { id } })
             .then(result => {
               return {
                 id,

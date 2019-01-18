@@ -115,6 +115,7 @@
     "workbox-webpack-plugin": "3.6.2"
   },
   "standard": {
+    "parser": "babel-eslint",
     "globals": [
       "describe",
       "context",
