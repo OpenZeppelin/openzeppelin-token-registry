@@ -2,6 +2,7 @@ import BN from 'bn.js'
 import React, { PureComponent } from 'react'
 import gql from 'graphql-tag'
 import { PackageListItem } from '~/components/packages/PackageListItem'
+import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 import { graphql, withApollo } from 'react-apollo'
 
 const eventsQuery = gql`
@@ -20,7 +21,7 @@ const totalVouchesQuery = gql`
   }
 `
 
-export const PackageList = withApollo(graphql(eventsQuery)(class _PackageList extends PureComponent {
+export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -71,14 +72,26 @@ export const PackageList = withApollo(graphql(eventsQuery)(class _PackageList ex
   }
 
   render () {
-    const { loading, error } = this.props
+    const packageListLoader =
+      <React.Fragment>
+        <PackageListItemLoader key='0' />
+        <PackageListItemLoader key='1' />
+        <PackageListItemLoader key='2' />
+      </React.Fragment>
 
-    if (loading) return null
-    if (error) return `Error!: ${error}`
+    if (this.props.loading) {
+      return packageListLoader
+    }
+
+    if (this.props.error) {
+      return this.props.error
+    }
 
     const events = this.eventsFromProps(this.props)
 
-    // console.log(events)
+    if (Object.keys(this.state.totalVouches).length !== events.length) {
+      return packageListLoader
+    }
 
     var sortedEvents = events.sort((a, b) => {
       const idA = a.returnValues.id
@@ -87,7 +100,7 @@ export const PackageList = withApollo(graphql(eventsQuery)(class _PackageList ex
     })
 
     return (
-      <>
+      <React.Fragment>
         {
           sortedEvents.map((event, index) => {
             const id = event.returnValues.id
@@ -101,7 +114,7 @@ export const PackageList = withApollo(graphql(eventsQuery)(class _PackageList ex
             )
           })
         }
-      </>
+      </React.Fragment>
     )
   }
 }))
