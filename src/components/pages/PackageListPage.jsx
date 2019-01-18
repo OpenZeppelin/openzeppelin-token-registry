@@ -6,7 +6,7 @@ import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
-import { ResearchersList } from '~/components/packages/ResearchersList'
+import { ResearchersList } from '~/components/researchers/ResearchersList'
 import * as routes from '~/../config/routes'
 
 const networkIdQuery = gql`

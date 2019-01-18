@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
-import { PackageListItem } from './PackageListItem'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import { PackageListItem } from '~/components/packages/PackageListItem'
 
 const eventsQuery = gql`
   query eventsQuery {

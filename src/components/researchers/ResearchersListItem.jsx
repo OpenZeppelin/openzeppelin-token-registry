@@ -91,8 +91,8 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
             TOTAL VOUCHED
           </h6>
           <h3 className='is-size-3 is-monospaced'>
-            <span className='item--version has-text-grey has-text-weight-light'>
-              <ZepTokenLogo width='20' height='20' /> {displayWeiToEther(this.props.researcher.amount)}
+            <span className='item--version has-text-black has-text-weight-light'>
+              <ZepTokenLogo width='22' height='22' className="researcher--zep-token-icon" />{displayWeiToEther(this.props.researcher.amount)}
             </span>
           </h3>
         </div>
