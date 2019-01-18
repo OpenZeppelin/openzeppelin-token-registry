@@ -118,6 +118,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
               >
                 <Link
                   to={link}
+                  className='no-select'
                 >
                   <div className='panel-block'>
                     <div className='columns'>
