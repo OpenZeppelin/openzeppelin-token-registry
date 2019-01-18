@@ -68,6 +68,7 @@
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
+    "identicon.js": "^2.3.3",
     "identity-obj-proxy": "3.0.0",
     "immutability-helper": "^2.8.1",
     "jest": "23.6.0",
