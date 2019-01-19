@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
-import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { ChallengeRow } from '~/components/packages/ChallengeRow'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -104,9 +104,7 @@ export class PackageDetails extends PureComponent {
                   </>
                 )
               }}
-
             </Query>
-
           </div>
         </div>
 
@@ -149,7 +147,11 @@ export class PackageDetails extends PureComponent {
                 <tbody>
                   {
                     vouching.Challenged.map(challenged =>
-                      <ChallengeRow challenged={challenged} key={challenged.returnValues._challengeID} />
+                      <ChallengeRow
+                        packageTotalVouched={vouching.totalVouched}
+                        challenged={challenged}
+                        key={challenged.returnValues._challengeID}
+                      />
                     )
                   }
                   {vouching.Challenged.length === 0 &&

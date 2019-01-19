@@ -1,21 +1,26 @@
 import React from 'react'
+import BN from 'bn.js'
 import gh from 'parse-github-url'
-import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 import { get } from 'lodash'
 import { VouchingQueries } from '~/queries/VouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { GitHubLink } from '~/components/GitHubLink'
+import * as constants from '~/constants'
 
-const STATUS_COLORS = {
-  'Open': 'success',
-  'Closed': 'grey'
-}
+function displayPriority (packageTotalVouched, amount) {
+  const packageAmount = displayWeiToEther(packageTotalVouched)
+  const challengeAmount = displayWeiToEther(amount)
+  const severityPercent = challengeAmount / packageAmount
 
-const PRIORITY_COLORS = {
-  'Low': 'info',
-  'Medium': 'warning',
-  'High': 'danger'
+  if (severityPercent >= 0.66 && severityPercent <= 1) {
+    return 'High'
+  } else if (severityPercent >= 0.33 && severityPercent < 0.66) {
+    return 'Medium'
+  } else {
+    return 'Low'
+  }
 }
 
 const challengeMetadataQuery = gql`
@@ -25,15 +30,18 @@ const challengeMetadataQuery = gql`
   ${VouchingQueries.Metadata}
 `
 
-export const ChallengeRow = ({ challenged }) => {
-  const { amount, challengeURI } = challenged.returnValues
+export const ChallengeRow = ({ packageTotalVouched, challenged }) => {
+  const amount = new BN(challenged.returnValues.amount)
+  const { challengeURI } = challenged.returnValues
   const { repo } = gh(challengeURI)
 
-  var status = 'Open'
-  var priority = 'Low'
+  const status = (Math.random() > 0.5) ?
+    constants.CHALLENGE_STATUS_OPEN :
+    constants.CHALLENGE_STATUS_CLOSED
+  const priority = displayPriority(packageTotalVouched, amount)
 
-  const statusColor = STATUS_COLORS[status]
-  const priorityColor = PRIORITY_COLORS[priority]
+  const statusColor = constants.CHALLENGE_STATUS_COLORS[status]
+  const priorityColor = constants.CHALLENGE_PRIORITY_COLORS[priority]
 
   return (
     <Query query={challengeMetadataQuery} variables={{ uri: challengeURI }}>

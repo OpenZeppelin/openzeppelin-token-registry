@@ -93,7 +93,7 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
       return packageListLoader
     }
 
-    var sortedEvents = events.sort((a, b) => {
+    const sortedEvents = events.sort((a, b) => {
       const idA = a.returnValues.id
       const idB = b.returnValues.id
       return this.totalVouched(idB).cmp(this.totalVouched(idA))

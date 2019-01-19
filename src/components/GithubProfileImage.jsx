@@ -21,18 +21,20 @@ export function GithubProfileImage (props) {
   return (
     <Query query={webpageImageQuery} variables={{ uri }}>
       {({ data }) => {
+        let src
+
         const { metadata } = data || {}
         const { avatar_url } = metadata || {}
 
         const hash = sha3(uri)
 
         if (avatar_url) {
-          var src = avatar_url
+          src = avatar_url
         } else {
           src = `data:image/png;base64,${new Identicon(hash, 420).toString()}`
         }
 
-        var newProps = {
+        const newProps = {
           ...props,
           src
         }
