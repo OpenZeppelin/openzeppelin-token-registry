@@ -15,11 +15,11 @@ function displayPriority (packageTotalVouched, amount) {
   const severityPercent = challengeAmount / packageAmount
 
   if (severityPercent >= 0.66 && severityPercent <= 1) {
-    return 'High'
+    return constants.CHALLENGE_PRIORITY_HIGH
   } else if (severityPercent >= 0.33 && severityPercent < 0.66) {
-    return 'Medium'
+    return constants.CHALLENGE_PRIORITY_MEDIUM
   } else {
-    return 'Low'
+    return constants.CHALLENGE_PRIORITY_LOW
   }
 }
 
