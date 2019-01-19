@@ -49,9 +49,9 @@
 }
 
 .slide-up {
-  transform: translate3d(0, 100px, 0);
+  transform: translate3d(0, 10px, 0);
   transition-property: all;
-  transition-timing-function: ease-in;
+  transition-timing-function: ease-out;
 }
 
 .slide-up-enter {
@@ -61,7 +61,7 @@
 .fade-in {
   opacity: 0.01;
   transition-property: all;
-  transition-timing-function: ease-in;
+  transition-timing-function: ease-out;
 }
 
 .fade-in-enter {

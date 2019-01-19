@@ -28,6 +28,17 @@
 }
 
 .package-item--description {
+  min-height: 2rem;
   margin-bottom: 1.5rem;
   margin-top: 0;
+}
+
+.package-item--image {
+  margin: 0 0 1.5rem auto;
+  height: 109px;
+  width: 109px;
+
+  @media screen and (max-width: $tablet) {
+    margin-left: 0;
+  }
 }

@@ -61,13 +61,9 @@ export class PackageDetails extends PureComponent {
           </div>
 
           <div className='column is-6-widescreen has-text-right--desktop'>
-            <div className='package-details-image'>
+            <div className='package-item--image'>
               <GithubProfileImage user={owner} />
             </div>
-
-            <br />
-            <br />
-
             <button
               className='button is-dark is-pill'
             >

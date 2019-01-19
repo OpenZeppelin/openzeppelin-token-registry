@@ -14,7 +14,7 @@ import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
 import * as routes from '~/../config/routes'
-import { PackageListItemLoader } from './PackageListItemLoader'
+import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 
 const packageQuery = gql`
   query packageQuery($uri: String!, $id: String!, $formattedId: String!) {
@@ -75,6 +75,10 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             if (loading) return <PackageListItemLoader />
             if (error) return `Error!: ${error}`
 
+            this.props.setTimeout(() => {
+              this.setState({ startAnimating: true })
+            }, 20)
+
             const { metadata, Vouching } = data
             const { version } = metadata || {}
             const { Challenged } = Vouching || {}
@@ -116,7 +120,18 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                   <div className='panel-block'>
                     <div className='columns'>
                       <div className='column is-three-quarters'>
-                        <h4 className='title is-size-4 has-text-weight-normal'>
+                        <h4 className={classnames(
+                          'title',
+                          'is-size-4',
+                          'has-text-weight-normal',
+                          'fade-in',
+                          'slide-up',
+                          'medium',
+                          {
+                            'slide-up-enter': this.state.startAnimating,
+                            'fade-in-enter': this.state.startAnimating
+                          }
+                        )}>
                           {get(metadata, 'name')}
 
                           <span className='package-item--version has-text-grey has-text-weight-light'>
@@ -127,7 +142,18 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                         <CodeSnippet metadata={metadata || {}} />
 
                         <button
-                          className='package-item--github-icon is-text button'
+                          className={classnames(
+                            'package-item--github-icon',
+                            'is-text',
+                            'button',
+                            'fade-in',
+                            'slide-up',
+                            'medium',
+                            {
+                              'slide-up-enter': this.state.startAnimating,
+                              'fade-in-enter': this.state.startAnimating
+                            }
+                          )}
                           onClick={(e) => {
                             e.stopPropagation()
                             e.preventDefault()
@@ -142,7 +168,17 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                         </button>
                       </div>
 
-                      <div className='column has-text-right-desktop'>
+                      <div className={classnames(
+                        'column',
+                        'has-text-right-desktop',
+                        'fade-in',
+                        'slide-up',
+                        'medium',
+                        {
+                          'slide-up-enter': this.state.startAnimating,
+                          'fade-in-enter': this.state.startAnimating
+                        }
+                      )}>
                         <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
                           VOUCHED
                         </h6>

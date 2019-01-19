@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import Identicon from 'identicon.js'
 import { sha3 } from '~/utils/sha3'
+import { GithubProfileImageLoader } from '~/components/packages/GithubProfileimageLoader'
 
 const webpageImageQuery = gql`
   query webpageImageQuery($uri: String!) {
@@ -22,6 +23,7 @@ export function GithubProfileImage (props) {
     <Query query={webpageImageQuery} variables={{ uri }}>
       {({ data }) => {
         let src
+        let content
 
         const { metadata } = data || {}
         const { avatar_url } = metadata || {}
@@ -29,17 +31,12 @@ export function GithubProfileImage (props) {
         const hash = sha3(uri)
 
         if (avatar_url) {
-          src = avatar_url
+          content = <img alt='github avatar img' src={avatar_url} {...props} />
         } else {
-          src = `data:image/png;base64,${new Identicon(hash, 420).toString()}`
+          content = <GithubProfileImageLoader />
         }
 
-        const newProps = {
-          ...props,
-          src
-        }
-
-        return <img alt='github avatar img' {...newProps} />
+        return content
       }}
     </Query>
   )
