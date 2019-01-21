@@ -29,13 +29,13 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
     }
   }
 
-  componentDidUpdate (nextProps, nextState) {
-    const events = this.eventsFromProps(nextProps)
-    if (Object.keys(nextState.totalVouches).length === events.length) {
+  componentDidUpdate (prevProps, prevState, snapshot) {
+    const events = this.eventsFromProps(this.props)
+    if (Object.keys(this.state.totalVouches).length === events.length) {
       return
     }
 
-    const { client } = nextProps
+    const { client } = this.props
 
     Promise.all(
       events.map(event => {
