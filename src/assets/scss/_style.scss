@@ -154,10 +154,41 @@ a.is-dark {
 
 .no-select {
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.no-scale:hover {
+  transform: scale3d(1, 1, 1);
+}
+
+.has-text-white a,
+.has-text-white button,
+.has-text-black a,
+.has-text-black button,
+.has-text-light a,
+.has-text-light button,
+.has-text-dark a,
+.has-text-dark button,
+.has-text-primary a,
+.has-text-primary button,
+.has-text-link a,
+.has-text-link button,
+.has-text-info a,
+.has-text-info button,
+.has-text-success a,
+.has-text-success button,
+.has-text-warning a,
+.has-text-warning button,
+.has-text-grey-darker a,
+.has-text-grey-darker button,
+.has-text-grey-dark a,
+.has-text-grey-dark button,
+.has-text-grey a,
+.has-text-grey button,
+.has-text-grey-light a,
+.has-text-grey-light button,
+.has-text-grey-lighter a
+.has-text-grey-lighter button,{
+  color: inherit;
 }

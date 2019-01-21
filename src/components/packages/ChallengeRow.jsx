@@ -14,7 +14,7 @@ function displayPriority (packageTotalVouched, amount) {
   const challengeAmount = displayWeiToEther(amount)
   const severityPercent = challengeAmount / packageAmount
 
-  if (severityPercent >= 0.66 && severityPercent <= 1) {
+  if (severityPercent >= 0.66) {
     return constants.CHALLENGE_PRIORITY_HIGH
   } else if (severityPercent >= 0.33 && severityPercent < 0.66) {
     return constants.CHALLENGE_PRIORITY_MEDIUM
@@ -43,31 +43,56 @@ export const ChallengeRow = ({ packageTotalVouched, challenged }) => {
   const statusColor = constants.CHALLENGE_STATUS_COLORS[status]
   const priorityColor = constants.CHALLENGE_PRIORITY_COLORS[priority]
 
+  const handleChallengeRowClick = (e) => {
+    e.preventDefault()
+    console.log(e)
+  }
+
   return (
     <Query query={challengeMetadataQuery} variables={{ uri: challengeURI }}>
       {({ data }) => {
         const { metadata } = data || {}
         return (
-          <tr>
-            <td>
-              {get(metadata, 'description')}
-            </td>
-            <td className={`has-text-${statusColor}`}>
-              {status}
-            </td>
-            <td className={`has-text-${priorityColor}`}>
-              {priority}
-            </td>
-            <td>
-              {displayWeiToEther(amount)} Z
-            </td>
-            <td className='has-text-right'>
+          <li className='list--row list--row_challenge'>
+            <span className='list--cell'>
+              <button
+                onClick={handleChallengeRowClick}
+                className='list__wrapping-anchor list__has-padding'
+              >
+                {get(metadata, 'description')}
+              </button>
+            </span>
+            <span className={`list--cell has-text-${statusColor}`}>
+              <button
+                onClick={handleChallengeRowClick}
+                className='list__wrapping-anchor list__has-padding'
+              >
+                {status}
+              </button>
+            </span>
+            <span className={`list--cell has-text-${priorityColor}`}>
+              <button
+                onClick={handleChallengeRowClick}
+                className='list__wrapping-anchor list__has-padding'
+              >
+                {priority}
+              </button>
+            </span>
+            <span className='list--cell'>
+              <button
+                onClick={handleChallengeRowClick}
+                className='list__wrapping-anchor list__has-padding'
+              >
+                {displayWeiToEther(amount)} Z
+              </button>
+            </span>
+            <span className='list--cell has-text-right'>
               <GitHubLink
                 url={`https://github.com/${repo}`}
-                cssClassNames='icon-small'
+                cssClassNames='list__wrapping-anchor no-scale'
               />
-            </td>
-          </tr>
+            </span>
+          </li>
         )
       }}
     </Query>

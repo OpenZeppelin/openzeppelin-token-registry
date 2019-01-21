@@ -121,42 +121,38 @@ export class PackageDetails extends PureComponent {
 
             <br />
 
-            <div className='table--wrapper'>
-              <table className='table is-fullwidth'>
-                <thead>
-                  <tr>
-                    <th width='61%'>
-                      Name
-                    </th>
-                    <th width='12%'>
-                      Status
-                    </th>
-                    <th width='12%'>
-                      Severity
-                    </th>
-                    <th width='12%'>
-                      Bounty
-                    </th>
-                    <th width='3%' />
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    vouching.Challenged.map(challenged =>
-                      <ChallengeRow
-                        packageTotalVouched={vouching.totalVouched}
-                        challenged={challenged}
-                        key={challenged.returnValues._challengeID}
-                      />
-                    )
-                  }
-                  {vouching.Challenged.length === 0 &&
-                    <tr>
-                      <td>No challenges have been made</td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
+            <div className='list--wrapper'>
+              <ul className='list is-fullwidth'>
+                <li className='list--row list--row_challenge'>
+                  <span className="list--cell list--header">
+                    Name
+                  </span>
+                  <span className="list--cell list--header">
+                    Status
+                  </span>
+                  <span className="list--cell list--header">
+                    Severity
+                  </span>
+                  <span className="list--cell list--header">
+                    Bounty
+                  </span>
+                  <span className="list--cell list--header" />
+                </li>
+                {
+                  vouching.Challenged.map(challenged =>
+                    <ChallengeRow
+                      packageTotalVouched={vouching.totalVouched}
+                      challenged={challenged}
+                      key={challenged.returnValues._challengeID}
+                    />
+                  )
+                }
+                {vouching.Challenged.length === 0 &&
+                  <li>
+                    <span>No challenges have been made</span>
+                  </li>
+                }
+              </ul>
             </div>
           </div>
         </div>

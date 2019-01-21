@@ -1,0 +1,74 @@
+.list--wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.list.is-fullwidth {
+  width: 100%;
+}
+
+.list--row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.list--header {
+  border-bottom-width: 1px;
+  border-width: 0 0 2px;
+  color: #788899;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.625rem;
+  font-weight: 900;
+  letter-spacing: 0.05rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  text-transform: uppercase;
+}
+
+.list--cell {
+  border: 1px solid #dbdbdb;
+  border-width: 0 0 1px;
+  text-align: left;
+}
+
+.list__has-padding:first-child {
+  padding-left: 0;
+}
+
+.list__has-padding:last-child {
+  padding-right: 0;
+}
+
+.list__has-padding {
+  padding: 1rem 0.75rem;
+}
+
+.list__wrapping-anchor {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  font-size: inherit;
+  text-align: inherit;
+  width: 100%;
+}
+
+.list__wrapping-anchor:focus {
+  outline: none;
+}
+
+.list__wrapping-anchor:hover {
+  transform: scale3d(1, 1, 1);
+}
+
+.list--row:hover,
+.list--row:hover .list__wrapping-anchor {
+  background-color: $white-bis;
+  font-weight: 500;
+}
+
+.list--row_challenge {
+  grid-template-columns: 20fr minmax(50px, 90px) minmax(50px, 90px) minmax(50px, 90px) minmax(30px, 30px);
+}
