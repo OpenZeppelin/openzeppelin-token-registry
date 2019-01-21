@@ -4,10 +4,10 @@
 # Space-separated list of one or more required network ids
 export REACT_APP_REQUIRED_NETWORK_IDS="1234"
 
-export REACT_APP_ROPSTEN_PROVIDER_URL=https://ropsten.infura.io/<YOUR INFURA KEY>
-export REACT_APP_RINKEBY_PROVIDER_URL=https://rinkeby.infura.io/<YOUR INFURA KEY>
-export REACT_APP_MAINNET_PROVIDER_URL=https://mainnet.infura.io/<YOUR INFURA KEY>
-export REACT_APP_DEFAULT_PROVIDER_URL=http://localhost:8545
+export REACT_APP_ROPSTEN_PROVIDER_URL=wss://ropsten.infura.io/ws/v3/<YOUR INFURA KEY>
+export REACT_APP_RINKEBY_PROVIDER_URL=wss://rinkeby.infura.io/ws/v3/<YOUR INFURA KEY>
+export REACT_APP_MAINNET_PROVIDER_URL=wss://mainnet.infura.io/ws/v3/<YOUR INFURA KEY>
+export REACT_APP_DEFAULT_PROVIDER_URL=ws://localhost:8545
 export REACT_APP_DEFAULT_PROVIDER_URL_NETWORK_ID=1234
 
 export REACT_APP_METADATA_URI=http://localhost:3000
