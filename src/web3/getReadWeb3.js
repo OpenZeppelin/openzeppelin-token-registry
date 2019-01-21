@@ -20,7 +20,8 @@ export function getReadWeb3 (networkId) {
       default:
         providerUrl = process.env.REACT_APP_DEFAULT_PROVIDER_URL
     }
-  } else {
+  }
+  if (!providerUrl) {
     providerUrl = process.env.REACT_APP_DEFAULT_PROVIDER_URL
   }
   return new Web3(new Web3.providers.HttpProvider(providerUrl))
