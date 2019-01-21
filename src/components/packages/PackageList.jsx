@@ -72,6 +72,8 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
   }
 
   render () {
+    const { loading, error } = this.props.data
+
     const packageListLoader =
       <React.Fragment>
         <PackageListItemLoader key='0' />
@@ -79,12 +81,13 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
         <PackageListItemLoader key='2' />
       </React.Fragment>
 
-    if (this.props.loading) {
+    if (loading) {
       return packageListLoader
     }
 
-    if (this.props.error) {
-      return this.props.error
+    if (error) {
+      console.error(error)
+      return 'There was an error fetching the data'
     }
 
     const events = this.eventsFromProps(this.props)
