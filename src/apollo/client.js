@@ -11,6 +11,7 @@ import { getReadWeb3 } from '~/web3/getReadWeb3'
 import { merge } from 'lodash'
 import network from './client-state/network'
 import metadata from './client-state/metadata'
+import mutations from './client-state/mutations'
 import web3js from './client-state/web3'
 
 let web3 = getInjectedWeb3()
@@ -26,7 +27,7 @@ const cache = new InMemoryCache({
 })
 
 const stateLink = withClientState({
-  ...merge({}, network, metadata, web3js), // can put more resolvers in here
+  ...merge({}, network, metadata, mutations, web3js),
   cache
 })
 

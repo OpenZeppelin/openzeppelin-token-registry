@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Mutation, Query } from 'react-apollo'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { ChallengeRow } from '~/components/packages/ChallengeRow'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -12,6 +12,7 @@ import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
 import { shortenAddress } from '~/utils/shortenAddress'
+import { toWei } from '~/utils/toWei'
 
 const vouchesQuery = gql`
   query vouchesQuery($id: String!) {
@@ -21,7 +22,15 @@ const vouchesQuery = gql`
   }
 `
 
-export class PackageDetails extends PureComponent {
+const SEND_VOUCH_TRANSACTION = gql`
+  mutation SendTransaction($web3Call: Object!) {
+    sendTransaction(web3Call: $web3Call) @client
+  }
+`
+
+export class PackageDetails extends Component {
+  state = {}
+
   static propTypes = {
     metadata: PropTypes.object.isRequired,
     vouching: PropTypes.object.isRequired,
@@ -69,6 +78,32 @@ export class PackageDetails extends PureComponent {
             >
               Vouch
             </button>
+
+            <input name="amount" onChange={(e) => {
+              const method = 'vouch'
+              const amount = toWei(e.target.value)
+              const args = [id, amount]
+              const web3Call = { method, args }
+
+              this.setState({ web3Call })
+            }} />
+
+            <Mutation mutation={SEND_VOUCH_TRANSACTION} variables={{
+              web3Call: this.state.web3Call
+            }}>
+              {sendTransaction => (
+                <button
+                  onClick={sendTransaction}
+                  style={{
+                    'fontSize': 20
+                  }}
+                  className="button is-info"
+                >
+                  Send
+                </button>
+              )}
+            </Mutation>
+
           </div>
         </div>
 
