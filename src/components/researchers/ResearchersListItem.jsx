@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 // import { Redirect, Link } from 'react-router-dom'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
+import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 // import * as routes from '~/../config/routes'
 
 export const ResearchersListItem = ReactTimeout(class _ResearchersListItem extends PureComponent {

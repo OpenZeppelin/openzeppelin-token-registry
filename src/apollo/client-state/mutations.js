@@ -27,7 +27,7 @@ export default {
 
         contractMethod(...args).send({ from: currentAddress })
 
-        return _
+        return null
       }
     }
   }

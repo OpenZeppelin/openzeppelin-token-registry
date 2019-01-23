@@ -1,0 +1,87 @@
+.is-addons-form-height {
+  height: 57px;
+}
+
+.field.has-addons {
+  background-color: $code-background;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom: 2px solid black;
+  max-width: 300px;
+
+  @media screen and (max-width: 330px) {
+    max-width: 100%;
+  }
+}
+
+.field.has-addons:hover path,
+.field.has-addons:hover .input,
+.field.has-addons:hover .button,
+.field.has-addons .input:focus {
+  fill: white;
+  color: black;
+}
+
+.field.has-addons:hover svg {
+  filter: invert(100%);
+}
+
+.field.has-addons.is-right {
+  margin: 0 0 0 auto;
+
+  @media screen and (max-width: $tablet) {
+    margin-left: 0;
+  }
+}
+
+.field.has-addons .input.is-large {
+  padding: 0;
+  height: 100%;
+}
+
+.input {
+  border: 0;
+  box-shadow: none;
+  color: $grey;
+  font-weight: 300;
+}
+
+.input:focus {
+  box-shadow: none;
+}
+
+.input.is-large {
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 2rem;
+  padding: 1.5rem 1rem 1rem;
+
+  @media screen and (max-width: $tablet - 1px) {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+.field.has-addons .button {
+  color: $grey;
+  font-weight: 900;
+  font-family: $code-family;
+  height: 100%;
+  margin: 0;
+  padding: 1rem 1.5rem;
+}
+
+.field.has-addons .button:hover,
+.field.has-addons .button:focus {
+  background-color: lighten($grey-lighter, 6%);
+}
+
+.field-addon--zep-token-logo {
+  height: 1.375rem;
+  margin: 1rem 1rem 0.5rem;
+  width: 1.375rem;
+}
+
+.field-addon--zep-token-logo path {
+  fill: $grey;
+}

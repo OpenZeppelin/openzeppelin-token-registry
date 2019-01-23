@@ -12,7 +12,7 @@ import { Query } from 'react-apollo'
 import gh from 'parse-github-url'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { CodeSnippet } from '~/components/CodeSnippet'
-import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
+import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import * as routes from '~/../config/routes'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 
