@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { GitHubLink } from '~/components/GitHubLink'
-import { LevelVouch } from '~/components/LevelVouch'
+import { VouchRow } from '~/components/VouchRow'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { ChallengeRow } from '~/components/packages/ChallengeRow'
 import { VouchMutationForm } from '~/components/packages/VouchMutationForm'
@@ -87,7 +87,7 @@ export class PackageDetails extends Component {
         <hr />
 
         <div className='columns'>
-          <div className='column is-6-widescreen'>
+          <div className='column is-10-widescreen'>
             <Query query={vouchesQuery} variables={{ id }}>
               {({ data }) => {
                 const { Vouching } = data || {}
@@ -106,14 +106,21 @@ export class PackageDetails extends Component {
                       {vouches.length} addresses vouched {displayWeiToEther(vouching.totalVouched)} ZEP
                     </h5>
 
-                    <div className='level--wrapper'>
-                      {vouches.map(vouch => {
-                        return <LevelVouch
-                          address={vouch.address}
-                          amount={vouch.amount}
-                          key={vouch.address}
-                        />
-                      })}
+                    <div className='list--wrapper'>
+                      <ul className='list is-fullwidth'>
+                        {vouches.map(vouch => {
+                          return <VouchRow
+                            address={vouch.address}
+                            amount={vouch.amount}
+                            key={vouch.address}
+                          />
+                        })}
+                        {vouches.length === 0 &&
+                          <li>
+                            <span>No vouches have been made</span>
+                          </li>
+                        }
+                      </ul>
                     </div>
                   </>
                 )

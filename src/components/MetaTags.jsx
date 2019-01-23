@@ -22,7 +22,7 @@ export const MetaTags = class _MetaTags extends PureComponent {
     const ownerCoName = 'Zeppelin Solutions'
     const author = 'Zeppelin Solutions & Delta Camp'
     const keywords = 'zeppelinos zos vouch'
-    const themeColor = '#53fff9'
+    const themeColor = '#085DFF'
     const googleFontsURL = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono:400,700,900'
     const year = (new Date()).getFullYear()
 

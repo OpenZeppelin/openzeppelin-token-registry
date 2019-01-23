@@ -82,6 +82,10 @@ a.is-dark {
   letter-spacing: 0.05rem;
 }
 
+.is-borderless {
+  border: 0;
+}
+
 .code--quick-install {
   border-radius: 30px;
   display: inline-block;
@@ -108,7 +112,12 @@ a.is-dark {
 }
 
 .has-text-primary {
-  color: $turqoise !important;
+  color: $link !important;
+}
+
+a.has-text-primary:hover,
+a.has-text-primary:focus {
+  color: $link-hover !important;
 }
 
 .main-content--column {
@@ -191,4 +200,28 @@ a.is-dark {
 .has-text-grey-lighter a
 .has-text-grey-lighter button,{
   color: inherit;
+}
+
+.tag:not(body) {
+  font-family: $code-family;
+  font-size: 0.625rem;
+  font-weight: 900;
+  height: 1.25rem;
+}
+
+.tag.has-arrow-left {
+  position: relative;
+}
+
+.tag.has-arrow-left::before {
+  content: "";
+
+  border-radius: 40px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid $blue;
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  left: -8px;
 }

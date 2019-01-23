@@ -9,13 +9,13 @@ const networkQuery = gql`
   }
 `
 
-export function EtherscanAddressLink ({ address, children }) {
+export function EtherscanAddressLink ({ address, children, className }) {
   return (
     <Query query={networkQuery}>
       {({ data }) => {
         const url = formatEtherscanAddressUrl(address, data.networkId)
         return (
-          <a href={url}>
+          <a href={url} className={className}>
             {children}
           </a>
         )
