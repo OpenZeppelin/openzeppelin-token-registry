@@ -3,7 +3,7 @@
 export default {
   resolvers: {
     Query: {
-      metadata: async function (data, args, options, info) {
+      metadata: async function (object, args, options, info) {
         const { uri, format } = args
         if (!uri) { throw new Error('You must pass a URI') }
 

@@ -225,3 +225,7 @@ a.has-text-primary:focus {
   position: absolute;
   left: -8px;
 }
+
+.tx-in-progress .field.has-addons {
+  border-color: $blue;
+}

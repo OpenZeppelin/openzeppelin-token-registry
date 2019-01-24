@@ -7,7 +7,7 @@ export default {
   resolvers: {
     Mutation: {
       sendTransaction: async (_, variables, { cache, getCacheKey }) => {
-        const { packageId, method, args } = variables.txData
+        const { method, args } = variables.txData
 
         const injectedWeb3 = getInjectedWeb3()
         const networkId = await injectedWeb3.eth.net.getId()
@@ -30,53 +30,27 @@ export default {
         contractMethod(...args).send({ from: currentAddress }).on(
           'transactionHash', function (hash) {
             let data = { transactions: [] }
+            const query = transactionQueries.allTransactionsQuery
 
-            console.log('packageId: ', packageId)
-            console.log(getCacheKey({ id: packageId, __typename: 'Transaction'}))
+            // console.log('getCacheKey', getCacheKey({ hash, __typename: 'Transaction'}))
 
             try {
-              data = window.client.readQuery({
-                query: transactionQueries.allTransactionsQuery
-              })
+              data = window.client.readQuery({ query })
             } catch (error) {
               // console.log(error)
             }
 
-            // data = {
-            //   ...data.transactions,
-            //   {
-            //     id: packageId,
-            //     __typename: 'Transaction',
-            //     hash,
-            //     txData: variables.txData
-            //   }
-            // }
-            // transactions.push()
-            console.log('data', data)
-
             const newTx = {
-              id: packageId,
               hash,
-              txData: variables.txData,
+              completed: false,
+              ...variables.txData,
               __typename: 'Transaction'
             }
 
-            // Note: This should work but using window.client.write* works much
-            // better for broadcasting / reloading query data on write
-            // const result = cache.writeData({
-            //   data
-            // })
+            data.transactions.push(newTx)
 
-            // shouldn't be necessary
+            window.client.writeQuery({ query, data })
             // cache.broadcastWatches()
-
-            window.client.writeQuery({
-              query: transactionQueries.allTransactionsQuery,
-              data: {
-                transactions: [...data.transactions, newTx]
-              }
-            })
-            console.log('data', data)
 
             return {
               data

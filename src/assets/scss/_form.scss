@@ -1,5 +1,11 @@
+$addonsFormHeight: 57px;
+
+.is-addons-form-toggler-height {
+  height: $addonsFormHeight + 24px;
+}
+
 .is-addons-form-height {
-  height: 57px;
+  height: $addonsFormHeight;
 }
 
 .field.has-addons {
@@ -14,15 +20,16 @@
   }
 }
 
-.field.has-addons:hover path,
-.field.has-addons:hover .input,
-.field.has-addons:hover .button,
-.field.has-addons .input:focus {
+.form:not(.tx-in-progress) .field.has-addons:hover path,
+.form:not(.tx-in-progress) .field.has-addons:hover .input,
+.form:not(.tx-in-progress) .field.has-addons:hover .button,
+.form:not(.tx-in-progress) .field.has-addons .input:focus {
   fill: white;
   color: black;
 }
 
-.field.has-addons:hover svg {
+
+.form:not(.tx-in-progress) .field.has-addons:hover svg {
   filter: invert(100%);
 }
 
@@ -71,8 +78,8 @@
   padding: 1rem 1.5rem;
 }
 
-.field.has-addons .button:hover,
-.field.has-addons .button:focus {
+.form:not(.tx-in-progress) .field.has-addons .button:hover,
+.form:not(.tx-in-progress) .field.has-addons .button:focus {
   background-color: lighten($grey-lighter, 6%);
 }
 

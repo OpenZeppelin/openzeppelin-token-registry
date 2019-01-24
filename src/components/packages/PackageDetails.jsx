@@ -71,7 +71,7 @@ export class PackageDetails extends Component {
             {this.state.isVouching
               ? <VouchMutationForm packageId={id} />
               : (
-                <div className='is-addons-form-height'>
+                <div className='is-addons-form-toggler-height'>
                   <button
                     className='button is-dark is-pill'
                     onClick={(e) => { this.setState({ isVouching: true }) }}

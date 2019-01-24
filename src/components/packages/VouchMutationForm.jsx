@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import { Mutation, Query, withApollo } from 'react-apollo'
 import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { transactionQueries } from '~/queries/transactionQueries'
@@ -63,14 +64,20 @@ export const VouchMutationForm = withApollo(
     render() {
       return (
         <Query
-          query={transactionQueries.findTransactionQuery}
-          variables={{ id: this.props.packageId }}
-          pollInterval={5000}
+          query={transactionQueries.getUncompletedTransactionsByPackageId}
+          variables={{ packageId: this.props.packageId }}
+          pollInterval={2000}
         >
-          {({ data, refetch }) => {
-            // alert(data)
-            console.log('in query, Query data: ', data)
-            // refetch()
+          {({ data, refetch, loading, errors, startPolling }) => {
+            let hasUncompletedTransaction = false
+            if (errors) { console.error('errors', errors) }
+            if (loading) { console.log('loading ', loading) }
+
+            if (data && data.getUncompletedTransactionsByPackageId) {
+              console.log(`got ${data.getUncompletedTransactionsByPackageId.length} transactions!`)
+              console.log(data.getUncompletedTransactionsByPackageId[0])
+              hasUncompletedTransaction = (data.getUncompletedTransactionsByPackageId.length > 0)
+            }
 
             return (
               <Mutation
@@ -80,16 +87,31 @@ export const VouchMutationForm = withApollo(
                 }}
               >
                 {sendTransaction => (
-                  <form onSubmit={(e) => {
-                    e.preventDefault()
-                    sendTransaction()
-                  }}>
+                  <form
+                    className={classnames(
+                      'form',
+                      {
+                        'tx-in-progress': hasUncompletedTransaction
+                      }
+                    )}
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      sendTransaction()
+                      // startPolling(2000)
+                      // refetch()
+                    }}
+                  >
                     <div className='field has-addons is-right'>
-                      <div className='control'>
-                        <ZepTokenLogo width='40' height='40' className='field-addon--zep-token-logo' />
+                      <div className='control is-addons-form-height'>
+                        <ZepTokenLogo
+                          width='40'
+                          height='40'
+                          className='field-addon--zep-token-logo'
+                        />
                       </div>
-                      <div className='control'>
+                      <div className='control is-addons-form-height'>
                         <input
+                          disabled={hasUncompletedTransaction}
                           ref={this.textInputRef}
                           type='number'
                           placeholder='0'
@@ -97,14 +119,25 @@ export const VouchMutationForm = withApollo(
                           onChange={this.handleAmountChange}
                         />
                       </div>
-                      <div className='control'>
+                      <div className='control is-addons-form-height'>
                         <button
                           className='button is-text no-scale'
                         >
-                          Vouch
+                          {!hasUncompletedTransaction ? 'Vouch' : ''}
                         </button>
                       </div>
+                      
                     </div>
+                    <p className={
+                      classnames(
+                        'help',
+                        {
+                          'has-text-link': hasUncompletedTransaction
+                        }
+                      )
+                    }>
+                      {hasUncompletedTransaction ? 'Waiting for confirmation...' : <span>&nbsp;</span>}
+                    </p>
                   </form>
                 )}
               </Mutation>

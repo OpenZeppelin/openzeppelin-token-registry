@@ -1,32 +1,33 @@
 import gql from 'graphql-tag'
 
+const transactionFragment = gql`
+  fragment myTransaction on Transaction {
+    hash
+    method
+    args
+    packageId
+    amount
+    completed
+  }
+`
+
 export const transactionQueries = {
   allTransactionsQuery: gql`
     query allTransactionsQuery {
-      transactions {
-        id
-        hash
-        txData {
-          method
-          args
-          packageId
-          amount
-        }
+      transactions @client {
+        ...myTransaction
       }
     }
+    ${transactionFragment}
   `,
-  findTransactionQuery: gql`
-    query findTransactionQuery($id: String!) {
-      transaction(id: $id) {
-        id
-        hash
-        txData {
-          method
-          args
-          packageId
-          amount
-        }
+  getUncompletedTransactionsByPackageId: gql`
+    query getUncompletedTransactionsByPackageId($packageId: String!) {
+      getUncompletedTransactionsByPackageId(packageId: $packageId) @client {
+        ...myTransaction
       }
     }
+    ${transactionFragment}
   `
 }
+
+window.gql = gql
