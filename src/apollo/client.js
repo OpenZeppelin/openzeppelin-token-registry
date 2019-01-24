@@ -40,7 +40,15 @@ const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI })
 
 export const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([restLink, stateLink, contractLink])
+  link: ApolloLink.from([restLink, stateLink, contractLink]),
+  cacheRedirects: {
+    Query: {
+      transaction: (_, { id }, { getCacheKey }) => getCacheKey({ id, __typename: 'Transaction' }),
+      transactions: (_, args, { getCacheKey }) =>
+        args.ids.map(id =>
+          getCacheKey({ __typename: 'Transaction', id: id }))
+    }
+  }
 })
 
 window.client = client

@@ -42,14 +42,14 @@ export const VouchMutationForm = withApollo(
     // componentDidUpdate(prevProps, prevState) {
     //   const packageId = this.props.packageId
     //   // alert('found!')
-    // 
+    //
     //   try {
     //     const ongoingTx = this.props.client.readQuery({
     //       query: transactionQueries.transactionsQuery,
     //       variables: { packageId }
     //     })
     //     console.log(ongoingTx)
-    // 
+    //
     //     if (!this.state.ongoingTx) {
     //       this.setState({
     //         ongoingTx
@@ -63,13 +63,13 @@ export const VouchMutationForm = withApollo(
     render() {
       return (
         <Query
-          query={transactionQueries.transactionsQuery}
+          query={transactionQueries.findTransactionQuery}
           variables={{ id: this.props.packageId }}
           pollInterval={5000}
         >
           {({ data, refetch }) => {
             // alert(data)
-            console.log('data', data)
+            console.log('in query, Query data: ', data)
             // refetch()
 
             return (
@@ -77,11 +77,6 @@ export const VouchMutationForm = withApollo(
                 mutation={Web3Mutations.sendTransaction}
                 variables={{
                   txData: this.state.txData
-                }}
-                update={cache => {
-                  console.log('cache', cache)
-                  // cannot use this here
-                  // see mutation resolver for web3 sendTransaction
                 }}
               >
                 {sendTransaction => (

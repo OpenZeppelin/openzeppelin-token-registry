@@ -6,7 +6,7 @@ import { transactionQueries } from '~/queries/transactionQueries'
 export default {
   resolvers: {
     Mutation: {
-      sendTransaction: async (_, variables, { cache }) => {
+      sendTransaction: async (_, variables, { cache, getCacheKey }) => {
         const { packageId, method, args } = variables.txData
 
         const injectedWeb3 = getInjectedWeb3()
@@ -29,25 +29,55 @@ export default {
 
         contractMethod(...args).send({ from: currentAddress }).on(
           'transactionHash', function (hash) {
-            const data = {
-              transactions: {
-                id: packageId,
-                __typename: 'Transaction',
-                packageId,
-                hash,
-                txData: variables.txData
-              }
+            let data = { transactions: [] }
+
+            console.log('packageId: ', packageId)
+            console.log(getCacheKey({ id: packageId, __typename: 'Transaction'}))
+
+            try {
+              data = window.client.readQuery({
+                query: transactionQueries.allTransactionsQuery
+              })
+            } catch (error) {
+              // console.log(error)
             }
 
-            const result = cache.writeQuery({
-              query: transactionQueries.transactionsQuery,
-              data
+            // data = {
+            //   ...data.transactions,
+            //   {
+            //     id: packageId,
+            //     __typename: 'Transaction',
+            //     hash,
+            //     txData: variables.txData
+            //   }
+            // }
+            // transactions.push()
+            console.log('data', data)
+
+            const newTx = {
+              id: packageId,
+              hash,
+              txData: variables.txData,
+              __typename: 'Transaction'
+            }
+
+            // Note: This should work but using window.client.write* works much
+            // better for broadcasting / reloading query data on write
+            // const result = cache.writeData({
+            //   data
+            // })
+
+            // shouldn't be necessary
+            // cache.broadcastWatches()
+
+            window.client.writeQuery({
+              query: transactionQueries.allTransactionsQuery,
+              data: {
+                transactions: [...data.transactions, newTx]
+              }
             })
-            // console.log(_, variables, cache)
+            console.log('data', data)
 
-            cache.broadcastWatches()
-
-            // console.log('result', result)
             return {
               data
             }
