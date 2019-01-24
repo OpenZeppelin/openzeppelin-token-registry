@@ -5,10 +5,10 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { GitHubLink } from '~/components/GitHubLink'
-import { VouchRow } from '~/components/VouchRow'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { ChallengeRow } from '~/components/packages/ChallengeRow'
-import { VouchMutationForm } from '~/components/packages/VouchMutationForm'
+import { VouchButton } from '~/components/packages/VouchButton'
+import { VouchRow } from '~/components/packages/VouchRow'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
@@ -68,19 +68,7 @@ export class PackageDetails extends Component {
               <GithubProfileImage user={owner} />
             </div>
 
-            {this.state.isVouching
-              ? <VouchMutationForm packageId={id} />
-              : (
-                <div className='is-addons-form-toggler-height'>
-                  <button
-                    className='button is-dark is-pill'
-                    onClick={(e) => { this.setState({ isVouching: true }) }}
-                  >
-                    Vouch
-                  </button>
-                </div>
-              )
-            }
+            <VouchButton packageId={id} />
           </div>
         </div>
 

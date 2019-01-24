@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 const transactionFragment = gql`
-  fragment myTransaction on Transaction {
+  fragment transaction on Transaction {
     hash
     method
     args
@@ -15,7 +15,7 @@ export const transactionQueries = {
   allTransactionsQuery: gql`
     query allTransactionsQuery {
       transactions @client {
-        ...myTransaction
+        ...transaction
       }
     }
     ${transactionFragment}
@@ -23,7 +23,7 @@ export const transactionQueries = {
   getUncompletedTransactionsByPackageId: gql`
     query getUncompletedTransactionsByPackageId($packageId: String!) {
       getUncompletedTransactionsByPackageId(packageId: $packageId) @client {
-        ...myTransaction
+        ...transaction
       }
     }
     ${transactionFragment}
