@@ -16,7 +16,6 @@ export const VouchRow = class _VouchRow extends Component {
   async componentDidMount() {
     const accounts = await getInjectedWeb3().eth.getAccounts()
     this.currentAddress = accounts[0]
-    console.log(this.currentAddress)
   }
 
   render () {

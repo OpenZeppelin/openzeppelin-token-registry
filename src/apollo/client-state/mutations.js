@@ -1,12 +1,14 @@
 import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
 import { abiMapping } from '~/apollo/abiMapping'
 import { getMetamaskPermissions } from '~/web3/getMetamaskPermissions'
+import { transactionQueries } from '~/queries/transactionQueries'
 
 export default {
   resolvers: {
     Mutation: {
-      sendTransaction: async (_, variables, { cache, getCacheKey }) => {
-        const { method, args } = variables.web3Call
+      sendTransaction: async (_, variables, { cache }) => {
+        const { packageId, method, args } = variables.txData
+
         const injectedWeb3 = getInjectedWeb3()
         const networkId = await injectedWeb3.eth.net.getId()
 
@@ -25,7 +27,32 @@ export default {
           return
         }
 
-        contractMethod(...args).send({ from: currentAddress })
+        contractMethod(...args).send({ from: currentAddress }).on(
+          'transactionHash', function (hash) {
+            const data = {
+              transactions: {
+                id: packageId,
+                __typename: 'Transaction',
+                packageId,
+                hash,
+                txData: variables.txData
+              }
+            }
+
+            const result = cache.writeQuery({
+              query: transactionQueries.transactionsQuery,
+              data
+            })
+            // console.log(_, variables, cache)
+
+            cache.broadcastWatches()
+
+            // console.log('result', result)
+            return {
+              data
+            }
+          }
+        )
 
         return null
       }

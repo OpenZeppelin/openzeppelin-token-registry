@@ -28,17 +28,19 @@ const cache = new InMemoryCache({
 
 const stateLink = withClientState({
   ...merge({}, network, metadata, mutations, web3js),
-  cache
+  cache,
+  defaults: {
+    // transactions: [
+    // ]
+    // networkId: null
+  }
 })
 
 const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI })
 
 export const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([restLink, stateLink, contractLink]),
-  defaults: {
-    networkId: null
-  }
+  link: ApolloLink.from([restLink, stateLink, contractLink])
 })
 
 window.client = client

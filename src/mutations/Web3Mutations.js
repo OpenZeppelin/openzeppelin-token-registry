@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
-export const web3Mutations = {
-  SEND_TRANSACTION: gql`
-    mutation SendTransaction($web3Call: Object!) {
-      sendTransaction(web3Call: $web3Call) @client
+export const Web3Mutations = {
+  sendTransaction: gql`
+    mutation SendTransaction($txData: Object!) {
+      sendTransaction(txData: $txData) @client
     }
   `
 }
