@@ -7,5 +7,6 @@ export async function getClient() {
   if (injectedWeb3) {
     networkId = await injectedWeb3.eth.net.getId()
   }
-  return getReadWeb3(networkId)
+  const web3 = getReadWeb3(networkId)
+  return web3
 }

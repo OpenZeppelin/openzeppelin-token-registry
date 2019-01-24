@@ -24,5 +24,11 @@ export function getReadWeb3 (networkId) {
   if (!providerUrl) {
     providerUrl = process.env.REACT_APP_DEFAULT_PROVIDER_URL
   }
-  return new Web3(new Web3.providers.HttpProvider(providerUrl))
+  let provider
+  if (providerUrl.startsWith('ws')) {
+    provider = new Web3.providers.WebsocketProvider(providerUrl)
+  } else {
+    provider = new Web3.providers.HttpProvider(providerUrl)
+  }
+  return new Web3(provider)
 }

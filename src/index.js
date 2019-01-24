@@ -5,15 +5,9 @@ import { AppContainer } from '~/components/App'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
 import { client } from '~/apollo/client'
-// import { blockObserver } from '~/apollo/blockObserver'
+import { blockObserver } from '~/apollo/blockObserver'
 
 import './index.scss'
-
-// blockObserver.subscribe({
-//   next: function ({ data: { block }, loading }) {
-//     console.log('Newest block: ', block)
-//   }
-// })
 
 window.addEventListener('load', () => {
   let coreApp =
