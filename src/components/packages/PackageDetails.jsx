@@ -62,54 +62,58 @@ export class PackageDetails extends Component {
               <GithubProfileImage user={owner} />
             </div>
 
-            <VouchButton packageId={id} />
+            {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+              <VouchButton packageId={id} />
+            )}
           </div>
         </div>
 
         <hr />
 
-        <div className='columns'>
-          <div className='column is-10-widescreen'>
-            <Query query={vouchingQueries.vouchesQuery} variables={{ id }}>
-              {({ data }) => {
-                const { Vouching } = data || {}
-                const { allEvents } = Vouching || {}
-                const packageProjection = projectPackageEvents(allEvents || [])
-                const { vouchTotals } = packageProjection.packages[id] || {}
-                const addresses = Object.keys(vouchTotals || {})
-                const vouches =
-                  addresses.map(address =>
-                    ({ address, amount: vouchTotals[address].toString() })
-                  ).sort((a, b) => b.amount - a.amount)
+        {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+          <div className='columns'>
+            <div className='column is-10-widescreen'>
+              <Query query={vouchingQueries.vouchesQuery} variables={{ id }}>
+                {({ data }) => {
+                  const { Vouching } = data || {}
+                  const { allEvents } = Vouching || {}
+                  const packageProjection = projectPackageEvents(allEvents || [])
+                  const { vouchTotals } = packageProjection.packages[id] || {}
+                  const addresses = Object.keys(vouchTotals || {})
+                  const vouches =
+                    addresses.map(address =>
+                      ({ address, amount: vouchTotals[address].toString() })
+                    ).sort((a, b) => b.amount - a.amount)
 
-                return (
-                  <>
-                    <h5 className='is-size-5 has-text-weight-semibold'>
-                      {vouches.length} addresses vouched {displayWeiToEther(vouching.totalVouched)} ZEP
-                    </h5>
+                  return (
+                    <>
+                      <h5 className='is-size-5 has-text-weight-semibold'>
+                        {vouches.length} addresses vouched {displayWeiToEther(vouching.totalVouched)} ZEP
+                      </h5>
 
-                    <div className='list--wrapper'>
-                      <ul className='list is-fullwidth'>
-                        {vouches.map(vouch => {
-                          return <VouchRow
-                            address={vouch.address}
-                            amount={vouch.amount}
-                            key={vouch.address}
-                          />
-                        })}
-                        {vouches.length === 0 &&
-                          <li>
-                            <span>No vouches have been made</span>
-                          </li>
-                        }
-                      </ul>
-                    </div>
-                  </>
-                )
-              }}
-            </Query>
+                      <div className='list--wrapper'>
+                        <ul className='list is-fullwidth'>
+                          {vouches.map(vouch => {
+                            return <VouchRow
+                              address={vouch.address}
+                              amount={vouch.amount}
+                              key={vouch.address}
+                            />
+                          })}
+                          {vouches.length === 0 &&
+                            <li>
+                              <span>No vouches have been made</span>
+                            </li>
+                          }
+                        </ul>
+                      </div>
+                    </>
+                  )
+                }}
+              </Query>
+            </div>
           </div>
-        </div>
+        )}
 
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
           <div className='columns'>

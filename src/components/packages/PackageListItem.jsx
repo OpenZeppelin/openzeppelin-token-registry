@@ -3,6 +3,7 @@ import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
+import yn from 'yn'
 import AntdIcon from '@ant-design/icons-react'
 import { GithubFill } from '@ant-design/icons'
 import { get } from 'lodash'
@@ -165,24 +166,28 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                           'fade-in-enter': this.state.startAnimating
                         }
                       )}>
-                        <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
-                          VOUCHED
-                        </h6>
+                        {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                          <>
+                            <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
+                              VOUCHED
+                            </h6>
 
-                        <span className='is-inline-block'>
-                          <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
-                        </span>
+                            <span className='is-inline-block'>
+                              <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+                            </span>
 
-                        <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                          {displayWeiToEther(get(Vouching, 'totalVouched'))}
-                        </h3>
+                            <h3 className='is-inline-block is-size-3 has-text-weight-light'>
+                              {displayWeiToEther(get(Vouching, 'totalVouched'))}
+                            </h3>
 
-                        <span
-                          to={link}
-                          className='is-block list-item--challenges-link'
-                        >
-                          {challenges}
-                        </span>
+                            <span
+                              to={link}
+                              className='is-block list-item--challenges-link'
+                            >
+                              {challenges}
+                            </span>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
