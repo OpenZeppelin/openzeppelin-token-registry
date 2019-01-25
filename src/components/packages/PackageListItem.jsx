@@ -92,72 +92,17 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             }
 
             return (
-              <div
-                className={
-                  classnames(
-                    'list-item',
-                    'panel'
-                  )
-                }
-              >
+              <div className='list-item'>
                 <Link
                   to={link}
                   className='no-select'
                 >
-                  <div className='panel-block'>
-                    <div className='columns'>
-                      <div className='column is-three-quarters'>
-                        <h4 className={classnames(
-                          'title',
-                          'is-size-4',
-                          'has-text-weight-normal',
-                          'fade-in',
-                          'slide-up',
-                          'medium',
-                          {
-                            'slide-up-enter': this.state.startAnimating,
-                            'fade-in-enter': this.state.startAnimating
-                          }
-                        )}>
-                          {get(metadata, 'name')}
-
-                          <span className='package-item--version has-text-grey has-text-weight-light'>
-                            v{get(metadata, 'version')}
-                          </span>
-                        </h4>
-
-                        <CodeSnippet metadata={metadata || {}} />
-
-                        <button
-                          className={classnames(
-                            'package-item--github-icon',
-                            'is-text',
-                            'button',
-                            'fade-in',
-                            'slide-up',
-                            'medium',
-                            {
-                              'slide-up-enter': this.state.startAnimating,
-                              'fade-in-enter': this.state.startAnimating
-                            }
-                          )}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-
-                            // this should be coming from the json data
-                            const url = `https://github.com/${repo}`
-
-                            this.handleGitHubLinkClick(url)
-                          }}
-                        >
-                          <AntdIcon type={GithubFill} className='antd-icon' />
-                        </button>
-                      </div>
-
-                      <div className={classnames(
-                        'column',
-                        'has-text-right-desktop',
+                  <div className='columns'>
+                    <div className='column is-three-quarters'>
+                      <h4 className={classnames(
+                        'title',
+                        'is-size-4',
+                        'has-text-weight-normal',
                         'fade-in',
                         'slide-up',
                         'medium',
@@ -166,29 +111,75 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                           'fade-in-enter': this.state.startAnimating
                         }
                       )}>
-                        {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
-                          <>
-                            <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
-                              VOUCHED
-                            </h6>
+                        {get(metadata, 'name')}
 
-                            <span className='is-inline-block'>
-                              <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
-                            </span>
+                        <span className='package-item--version has-text-grey has-text-weight-light'>
+                          v{get(metadata, 'version')}
+                        </span>
+                      </h4>
 
-                            <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                              {displayWeiToEther(get(Vouching, 'totalVouched'))}
-                            </h3>
+                      <CodeSnippet metadata={metadata || {}} />
 
-                            <span
-                              to={link}
-                              className='is-block list-item--challenges-link'
-                            >
-                              {challenges}
-                            </span>
-                          </>
+                      <button
+                        className={classnames(
+                          'package-item--github-icon',
+                          'is-text',
+                          'button',
+                          'fade-in',
+                          'slide-up',
+                          'medium',
+                          {
+                            'slide-up-enter': this.state.startAnimating,
+                            'fade-in-enter': this.state.startAnimating
+                          }
                         )}
-                      </div>
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+
+                          // this should be coming from the json data
+                          const url = `https://github.com/${repo}`
+
+                          this.handleGitHubLinkClick(url)
+                        }}
+                      >
+                        <AntdIcon type={GithubFill} className='antd-icon' />
+                      </button>
+                    </div>
+
+                    <div className={classnames(
+                      'column',
+                      'has-text-right-desktop',
+                      'fade-in',
+                      'slide-up',
+                      'medium',
+                      {
+                        'slide-up-enter': this.state.startAnimating,
+                        'fade-in-enter': this.state.startAnimating
+                      }
+                    )}>
+                      {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                        <>
+                          <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
+                            VOUCHED
+                          </h6>
+
+                          <span className='is-inline-block'>
+                            <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+                          </span>
+
+                          <h3 className='is-inline-block is-size-3 has-text-weight-light'>
+                            {displayWeiToEther(get(Vouching, 'totalVouched'))}
+                          </h3>
+
+                          <span
+                            to={link}
+                            className='is-block list-item--challenges-link'
+                          >
+                            {challenges}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </Link>

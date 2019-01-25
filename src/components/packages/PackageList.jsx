@@ -87,7 +87,23 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
     })
 
     return (
-      <React.Fragment>
+      <>
+        <div className="has-text-centered">
+          <h2 className="is-size-2">
+            Top Trusted Packages
+          </h2>
+          <div className="message">
+            <div class="message-body message--cta">
+              <h5 className="is-size-5 has-text-grey">
+                Psst! Want to see your package here?
+              </h5>
+              <button className="button is-warning is-pill">
+                Join the Beta
+              </button>
+            </div>
+          </div>
+        </div>
+
         {
           sortedEvents.map((event, index) => {
             const id = event.returnValues.id
@@ -101,7 +117,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             )
           })
         }
-      </React.Fragment>
+      </>
     )
   }
 }))
