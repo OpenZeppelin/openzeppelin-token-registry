@@ -1,27 +1,11 @@
 import { ethers } from 'ethers'
 import React, { PureComponent } from 'react'
-import gql from 'graphql-tag'
 import { PackageListItem } from '~/components/packages/PackageListItem'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
+import { vouchingQueries } from '~/queries/vouchingQueries'
 import { graphql, withApollo } from 'react-apollo'
 
-const eventsQuery = gql`
-  query eventsQuery {
-    Vouching @contract {
-      registeredEvents: Registered @pastEvents(fromBlock: 0, toBlock: "latest")
-    }
-  }
-`
-
-const totalVouchesQuery = gql`
-  query totalVouchesQuery($id: String!) {
-    Vouching @contract {
-      totalVouched(id: $id)
-    }
-  }
-`
-
-export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList extends PureComponent {
+export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class _PackageList extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -41,7 +25,7 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
       events.map(event => {
         const id = event.parsedLog.values.id
         return (
-          client.query({ query: totalVouchesQuery, variables: { id } })
+          client.query({ query: vouchingQueries.totalVouchesQuery, variables: { id } })
             .then(result => {
               return {
                 id,
@@ -88,7 +72,7 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
 
     if (error) {
       console.error(error)
-      return 'There was an error fetching the data'
+      return 'There was an error fetching the data. (Wrong Ethereum network?)'
     }
 
     const events = this.eventsFromProps(this.props)
@@ -104,7 +88,23 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
     })
 
     return (
-      <React.Fragment>
+      <>
+        <div className="has-text-centered">
+          <h2 className="is-size-2">
+            Top Trusted Packages
+          </h2>
+          <div className="message">
+            <div class="message-body message--cta">
+              <h5 className="is-size-5 has-text-grey">
+                Psst! Want to see your package here?
+              </h5>
+              <button className="button is-warning is-pill">
+                Join the Beta
+              </button>
+            </div>
+          </div>
+        </div>
+
         {
           sortedEvents.map((event, index) => {
             const id = event.parsedLog.values.id
@@ -118,7 +118,7 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
             )
           })
         }
-      </React.Fragment>
+      </>
     )
   }
 }))

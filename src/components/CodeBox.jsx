@@ -6,9 +6,8 @@ import PropTypes from 'prop-types'
 import AntdIcon from '@ant-design/icons-react'
 import { CopyOutline } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { stringToSlug } from '~/utils/stringToSlug'
 
-export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent {
+export const CodeBox = ReactTimeout(class _CodeBox extends PureComponent {
   static defaultProps = {
     action: 'link'
   }
@@ -32,18 +31,21 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
   }
 
   render () {
-    const slug = stringToSlug(this.props.metadata.name)
-    const zosInstallSnippet = `zos ${this.props.action} ${slug}`
-
     return (
-      <code className='code code--quick-install' onClick={this.handleCodeClick}>
-        $ {zosInstallSnippet}
+      <code className='code code--example' onClick={this.handleCodeClick}>
+        <span className='has-text-grey'>$</span> zos link &lt;package-name&gt;
+        <br />
+        <br />
+        <span className='has-text-grey'># Example:</span>
+        <br />
+        <span className='has-text-grey'>$</span> <span className='has-text-success'>zos</span> <span className='has-text-info'>link</span> openzeppelin-eth
 
         <span className='has-text-right is-inline-block is-copy-button'>
           <div ref='foo' data-tip='Copied to Clipboard' />
           <ReactTooltip />
 
-          <CopyToClipboard text={zosInstallSnippet}
+          <CopyToClipboard
+            text='zos link openzeppelin-eth'
             onCopy={this.handleCopyClick}>
             <span className='has-text-right'><AntdIcon type={CopyOutline} className='antd-icon' /></span>
           </CopyToClipboard>

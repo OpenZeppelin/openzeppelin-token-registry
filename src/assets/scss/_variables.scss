@@ -33,17 +33,15 @@ $text: #141414;
 $green: #00C853;
 $yellow: #FF9800;
 $red: #FF005C;
-$turqoise: #39e6e0;
+// $turqoise: #39e6e0;
 $cyan: #00C1DC;
-
-// $navbar-item-color: #ffffff;
-// $navbar-light-grey: #d9d9d9;
+$blue: #085DFF;
 
 // Derived variables
 $navbar-item-hover-color: $navbar-item-hover;
 
-$link-color: $cyan;
-$link-hover-color: lighten(saturate($cyan, 100%), 10%);
+$link-color: $blue;
+$link-hover-color: darken($blue, 20%);
 $link: $link-color;
 $link-visited: $link-hover-color;
 $link-hover: $link-hover-color;
@@ -58,5 +56,7 @@ $hr-height: 1px !default
 $hr-margin: 1rem 0 1.5rem 0 !default
 
 $code: $text;
+
+$turqoise: $blue;
 
 $dark: $navbar-grey;

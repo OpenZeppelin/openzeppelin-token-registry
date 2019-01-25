@@ -2,33 +2,20 @@ import React, { PureComponent } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import gql from 'graphql-tag'
-import { get } from 'lodash'
+import gh from 'parse-github-url'
+import yn from 'yn'
 import AntdIcon from '@ant-design/icons-react'
 import { GithubFill } from '@ant-design/icons'
+import { get } from 'lodash'
 import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
-import gh from 'parse-github-url'
-import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { CodeSnippet } from '~/components/CodeSnippet'
-import ZepTokenLogo from '~/assets/images/zep-token-logo.svg'
-import * as routes from '~/../config/routes'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
-
-const packageQuery = gql`
-  query packageQuery($uri: String!, $id: String!, $formattedId: String!) {
-    metadata(uri: $uri) @client {
-      name
-      version
-      description
-    }
-    Vouching @contract {
-      totalVouched(id: $id)
-      Challenged @pastEvents(filter: {id: $id}, fromBlock: 0, toBlock: "latest")
-    }
-  }
-`
+import { vouchingQueries } from '~/queries/vouchingQueries'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
+import * as routes from '~/../config/routes'
 
 export const PackageListItem = ReactTimeout(class _PackageListItem extends PureComponent {
   state = {}
@@ -65,7 +52,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
   render () {
     return (
       <Query
-        query={packageQuery}
+        query={vouchingQueries.packageQuery}
         variables={{
           uri: this.props.package.metadataURI,
           id: this.props.package.id
@@ -105,72 +92,17 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             }
 
             return (
-              <div
-                className={
-                  classnames(
-                    'list-item',
-                    'panel'
-                  )
-                }
-              >
+              <div className='list-item'>
                 <Link
                   to={link}
                   className='no-select'
                 >
-                  <div className='panel-block'>
-                    <div className='columns'>
-                      <div className='column is-three-quarters'>
-                        <h4 className={classnames(
-                          'title',
-                          'is-size-4',
-                          'has-text-weight-normal',
-                          'fade-in',
-                          'slide-up',
-                          'medium',
-                          {
-                            'slide-up-enter': this.state.startAnimating,
-                            'fade-in-enter': this.state.startAnimating
-                          }
-                        )}>
-                          {get(metadata, 'name')}
-
-                          <span className='package-item--version has-text-grey has-text-weight-light'>
-                            v{get(metadata, 'version')}
-                          </span>
-                        </h4>
-
-                        <CodeSnippet metadata={metadata || {}} />
-
-                        <button
-                          className={classnames(
-                            'package-item--github-icon',
-                            'is-text',
-                            'button',
-                            'fade-in',
-                            'slide-up',
-                            'medium',
-                            {
-                              'slide-up-enter': this.state.startAnimating,
-                              'fade-in-enter': this.state.startAnimating
-                            }
-                          )}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-
-                            // this should be coming from the json data
-                            const url = `https://github.com/${repo}`
-
-                            this.handleGitHubLinkClick(url)
-                          }}
-                        >
-                          <AntdIcon type={GithubFill} className='antd-icon' />
-                        </button>
-                      </div>
-
-                      <div className={classnames(
-                        'column',
-                        'has-text-right-desktop',
+                  <div className='columns'>
+                    <div className='column is-three-quarters'>
+                      <h4 className={classnames(
+                        'title',
+                        'is-size-4',
+                        'has-text-weight-normal',
                         'fade-in',
                         'slide-up',
                         'medium',
@@ -179,25 +111,75 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                           'fade-in-enter': this.state.startAnimating
                         }
                       )}>
-                        <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
-                          VOUCHED
-                        </h6>
+                        {get(metadata, 'name')}
 
-                        <span className='is-inline-block'>
-                          <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+                        <span className='package-item--version has-text-grey has-text-weight-light'>
+                          v{get(metadata, 'version')}
                         </span>
+                      </h4>
 
-                        <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                          {displayWeiToEther(get(Vouching, 'totalVouched'))}
-                        </h3>
+                      <CodeSnippet metadata={metadata || {}} />
 
-                        <span
-                          to={link}
-                          className='is-block list-item--challenges-link'
-                        >
-                          {challenges}
-                        </span>
-                      </div>
+                      <button
+                        className={classnames(
+                          'package-item--github-icon',
+                          'is-text',
+                          'button',
+                          'fade-in',
+                          'slide-up',
+                          'medium',
+                          {
+                            'slide-up-enter': this.state.startAnimating,
+                            'fade-in-enter': this.state.startAnimating
+                          }
+                        )}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+
+                          // this should be coming from the json data
+                          const url = `https://github.com/${repo}`
+
+                          this.handleGitHubLinkClick(url)
+                        }}
+                      >
+                        <AntdIcon type={GithubFill} className='antd-icon' />
+                      </button>
+                    </div>
+
+                    <div className={classnames(
+                      'column',
+                      'has-text-right-desktop',
+                      'fade-in',
+                      'slide-up',
+                      'medium',
+                      {
+                        'slide-up-enter': this.state.startAnimating,
+                        'fade-in-enter': this.state.startAnimating
+                      }
+                    )}>
+                      {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                        <>
+                          <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
+                            VOUCHED
+                          </h6>
+
+                          <span className='is-inline-block'>
+                            <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+                          </span>
+
+                          <h3 className='is-inline-block is-size-3 has-text-weight-light'>
+                            {displayWeiToEther(get(Vouching, 'totalVouched'))}
+                          </h3>
+
+                          <span
+                            to={link}
+                            className='is-block list-item--challenges-link'
+                          >
+                            {challenges}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </Link>

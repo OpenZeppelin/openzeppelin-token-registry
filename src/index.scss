@@ -12,11 +12,13 @@
 // Framework components:
 @import 'bulma/sass/components/level.sass';
 @import 'bulma/sass/components/navbar.sass';
+@import 'bulma/sass/components/message.sass';
 @import 'bulma/sass/elements/container.sass';
 @import 'bulma/sass/elements/button.sass';
 @import 'bulma/sass/elements/content.sass';
 @import 'bulma/sass/elements/form.sass';
 @import 'bulma/sass/elements/table.sass';
+@import 'bulma/sass/elements/tag.sass';
 @import 'bulma/sass/elements/title.sass';
 @import 'bulma/sass/grid/columns.sass';
 @import 'bulma/sass/layout/section.sass';
@@ -25,8 +27,12 @@
 // CSS components and utilities:
 @import './assets/scss/_animations.scss';
 @import './assets/scss/_button.scss';
+@import './assets/scss/_code.scss';
+@import './assets/scss/_form.scss';
+@import './assets/scss/_hero.scss';
 @import './assets/scss/_level.scss';
 @import './assets/scss/_list.scss';
+@import './assets/scss/_message.scss';
 @import './assets/scss/_table.scss';
 @import './assets/scss/_tooltip.scss';
 

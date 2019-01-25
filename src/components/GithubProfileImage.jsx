@@ -1,24 +1,15 @@
 /* eslint camelcase: 0 */
 
 import React from 'react'
-import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { GithubProfileImageLoader } from '~/components/packages/GithubProfileimageLoader'
-
-const webpageImageQuery = gql`
-  query webpageImageQuery($uri: String!) {
-    metadata(uri: $uri) @client {
-      id
-      avatar_url
-    }
-  }
-`
+import { metadataQueries } from '~/queries/metadataQueries'
 
 export function GithubProfileImage (props) {
   const uri = `https://api.github.com/users/${props.user}`
 
   return (
-    <Query query={webpageImageQuery} variables={{ uri }}>
+    <Query query={metadataQueries.webpageImageQuery} variables={{ uri }}>
       {({ data }) => {
         let content
 

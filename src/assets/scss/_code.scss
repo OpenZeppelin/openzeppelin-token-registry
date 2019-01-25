@@ -1,0 +1,43 @@
+.code {
+  border-radius: 30px;
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+
+  @media screen and (max-width: $tablet - 1px) {
+    max-width: 100%;
+    min-width: 100%;
+    padding-right: 1.25rem;
+  }
+}
+
+.code.code--quick-install {
+  min-width: 310px;
+
+  @media screen and (max-width: $tablet - 1px) {
+    max-width: 82%;
+    min-width: 82%;
+  }
+}
+
+.code.code--example {
+  background-color: $black-bis;
+  border-radius: 10px;
+  color: white;
+  padding: 1rem 1rem;
+  position: relative;
+  width: 100%;
+}
+
+.code.code--example svg {
+  fill: $grey-light;
+}
+
+.code.code--example svg:hover {
+  fill: white;
+}
+
+.code--comment {
+  color: $grey;
+}

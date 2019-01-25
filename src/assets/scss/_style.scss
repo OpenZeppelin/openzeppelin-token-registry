@@ -55,25 +55,6 @@ a.is-dark {
   color: $text;
 }
 
-.hero.is-dark.is-bold {
-  background-color: $hero-dark;
-  background-image: none;
-}
-
-.hero--title {
-  font-weight: 400;
-}
-
-.hero.is-light {
-  background-color: $hero-light;
-}
-
-.hero--title.content:not(:last-child),
-.hero--title.title:not(:last-child),
-.hero--title.subtitle:not(:last-child) {
-  margin-bottom: 0.8rem;
-}
-
 .is-monospaced {
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
@@ -82,19 +63,8 @@ a.is-dark {
   letter-spacing: 0.05rem;
 }
 
-.code--quick-install {
-  border-radius: 30px;
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.5rem 1rem;
-  position: relative;
-  min-width: 310px;
-
-  @media screen and (max-width: $tablet - 1px) {
-    max-width: 82%;
-    min-width: 82%;
-    padding-right: 1.25rem;
-  }
+.is-borderless {
+  border: 0;
 }
 
 // This is used by the page / layout transitions
@@ -108,7 +78,12 @@ a.is-dark {
 }
 
 .has-text-primary {
-  color: $turqoise !important;
+  color: $link !important;
+}
+
+a.has-text-primary:hover,
+a.has-text-primary:focus {
+  color: $link-hover !important;
 }
 
 .main-content--column {
@@ -191,4 +166,32 @@ a.is-dark {
 .has-text-grey-lighter a
 .has-text-grey-lighter button,{
   color: inherit;
+}
+
+.tag:not(body) {
+  font-family: $code-family;
+  font-size: 0.625rem;
+  font-weight: 900;
+  height: 1.25rem;
+}
+
+.tag.has-arrow-left {
+  position: relative;
+}
+
+.tag.has-arrow-left::before {
+  content: "";
+
+  border-radius: 40px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid $blue;
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  left: -8px;
+}
+
+.tx-in-progress .field.has-addons {
+  border-color: $blue;
 }

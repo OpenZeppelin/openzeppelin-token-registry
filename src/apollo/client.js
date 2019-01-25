@@ -8,8 +8,10 @@ import { EthersResolver } from 'apollo-link-ethereum-resolver-ethersjs'
 import { abiMapping } from './abiMapping'
 import { getProvider } from '~/web3/getProvider'
 import { merge } from 'lodash'
-import networkId from './client-state/networkId'
-import metadata from './client-state/metadata'
+import { metadataResolvers } from './client-state/metadataResolvers'
+import { transactionResolvers } from './client-state/transactionResolvers'
+import { web3Resolvers } from './client-state/web3Resolvers'
+import { mutations } from './client-state/mutations'
 
 let ethers = getProvider()
 window.ethers = ethers
@@ -22,18 +24,27 @@ const cache = new InMemoryCache({
 })
 
 const stateLink = withClientState({
-  ...merge({}, metadata, networkId), // can put more resolvers in here
-  cache
+  ...merge(
+    {},
+    metadataResolvers,
+    transactionResolvers,
+    web3Resolvers,
+    mutations
+  ),
+  cache,
+  defaults: {
+    // networkId: null
+  }
 })
 
+if (!process.env.REACT_APP_METADATA_URI) {
+  throw new Error('The "REACT_APP_METADATA_URI" env var is not set (need to direnv allow?)')
+}
 const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI })
 
 export const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([restLink, stateLink, contractLink]),
-  defaults: {
-    networkId: null
-  }
+  link: ApolloLink.from([restLink, stateLink, contractLink])
 })
 
 window.client = client
