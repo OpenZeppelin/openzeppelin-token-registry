@@ -12,7 +12,15 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.list--header {
+.list--cell {
+  border: 1px solid #dbdbdb;
+  border-width: 0 0 1px;
+  display: inline-flex;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.list--cell__head {
   border-bottom-width: 1px;
   border-width: 0 0 2px;
   color: #788899;
@@ -26,15 +34,7 @@
   text-transform: uppercase;
 }
 
-.list--cell {
-  border: 1px solid #dbdbdb;
-  border-width: 0 0 1px;
-  display: inline-flex;
-  font-size: 0.9rem;
-  text-align: left;
-}
-
-.list--cell.list--header {
+.list--cell.list--cell__head {
   font-size: 0.625rem;
 }
 
@@ -69,6 +69,12 @@
   font-weight: 500;
 }
 
+.list--row.list--row__blank-state:hover,
+.list--row.list--row__head:hover {
+  font-weight: 400;
+  background-color: transparent;
+}
+
 .list--row_challenge {
   grid-template-columns: 600px minmax(50px, 120px) minmax(50px, 120px) minmax(50px, 120px) minmax(30px, 30px);
 
@@ -96,4 +102,15 @@
 
 .list--cell.break-words {
   word-break: break-all;
+}
+
+.list--row__blank-state {
+  grid-template-columns: 1fr;
+}
+
+.list--cell__blank-state {
+  display: block;
+  font-size: 1rem;
+  padding: 2rem;
+  text-align: center;
 }

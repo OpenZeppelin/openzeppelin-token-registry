@@ -42,6 +42,9 @@ const stateLink = withClientState({
   }
 })
 
+if (!process.env.REACT_APP_METADATA_URI) {
+  throw new Error('The "REACT_APP_METADATA_URI" env var is not set (need to direnv allow?)')
+}
 const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI })
 
 export const client = new ApolloClient({

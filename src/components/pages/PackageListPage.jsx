@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
+import yn from 'yn'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
@@ -44,43 +45,46 @@ export class PackageListPage extends PureComponent {
             </div>
           </div>
         </section>
-
-        <section className='section has-level'>
-          <nav className='level is-secondary-nav'>
-            <p
-              className={classnames(
-                'level-item',
-                'has-text-centered',
-                {
-                  'is-active': !showResearchersList
-                }
-              )}
-            >
-              <Link
-                className='button is-text link is-monospaced'
-                to={routes.HOME}
-              >
-                EVM Packages
-              </Link>
-            </p>
-            <p
-              className={classnames(
-                'level-item',
-                'has-text-centered',
-                {
-                  'is-active': showResearchersList
-                }
-              )}
-            >
-              <Link
-                className='button is-text link is-monospaced'
-                to={routes.HOME_RESEARCHERS_LIST}
-              >
-                Security Researchers
-              </Link>
-            </p>
-          </nav>
-        </section>
+        {
+          yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+            <section className='section has-level'>
+              <nav className='level is-secondary-nav'>
+                <p
+                  className={classnames(
+                    'level-item',
+                    'has-text-centered',
+                    {
+                      'is-active': !showResearchersList
+                    }
+                  )}
+                >
+                  <Link
+                    className='button is-text link is-monospaced'
+                    to={routes.HOME}
+                  >
+                    EVM Packages
+                  </Link>
+                </p>
+                <p
+                  className={classnames(
+                    'level-item',
+                    'has-text-centered',
+                    {
+                      'is-active': showResearchersList
+                    }
+                  )}
+                >
+                  <Link
+                    className='button is-text link is-monospaced'
+                    to={routes.HOME_RESEARCHERS_LIST}
+                  >
+                    Security Researchers
+                  </Link>
+                </p>
+              </nav>
+            </section>
+          )
+        }
 
         <section className='section'>
           <div className='container'>

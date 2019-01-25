@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
+import yn from 'yn'
 import { Query } from 'react-apollo'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -29,9 +30,10 @@ export class PackageDetails extends Component {
     const githubDetails = gh(returnValues.metadataURI || '')
     const { owner, repo } = githubDetails
     const { id } = returnValues || {}
+    const noChallenges = (vouching.Challenged.length === 0)
 
     return (
-      <div>
+      <>
         <div className='columns reverse-column-order'>
           <div className='column is-6-widescreen'>
             <h1 className='title is-size-1 has-text-weight-normal'>
@@ -109,59 +111,70 @@ export class PackageDetails extends Component {
           </div>
         </div>
 
-        <div className='columns'>
-          <div className='column is-12-widescreen'>
-            <h5 className='is-size-5 has-text-weight-semibold'>
-              Challenges
-            </h5>
+        {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+          <div className='columns'>
+            <div className='column is-12-widescreen'>
+              <h5 className='is-size-5 has-text-weight-semibold'>
+                Challenges
+              </h5>
 
-            <div>
-              Create a challenge by running: &nbsp;
-              <br className='is-hidden-desktop' />
-              <br className='is-hidden-desktop' />
-              <CodeSnippet metadata={metadata} action='challenge' />
-              <br className='is-hidden-desktop' />
-              <br className='is-hidden-desktop' />
-            </div>
+              {!noChallenges &&
+                <div>
+                  Create a challenge by running: &nbsp;
+                  <br className='is-hidden-desktop' />
+                  <br className='is-hidden-desktop' />
+                  <CodeSnippet metadata={metadata} action='challenge' />
+                  <br className='is-hidden-desktop' />
+                  <br className='is-hidden-desktop' />
+                </div>
+              }
 
-            <br />
+              <br />
 
-            <div className='list--wrapper'>
-              <ul className='list is-fullwidth'>
-                <li className='list--row list--row_challenge'>
-                  <span className="list--cell list--header">
-                    Name
-                  </span>
-                  <span className="list--cell list--header">
-                    Status
-                  </span>
-                  <span className="list--cell list--header">
-                    Severity
-                  </span>
-                  <span className="list--cell list--header">
-                    Bounty
-                  </span>
-                  <span className="list--cell list--header" />
-                </li>
-                {
-                  vouching.Challenged.map(challenged =>
-                    <ChallengeRow
-                      packageTotalVouched={vouching.totalVouched}
-                      challenged={challenged}
-                      key={challenged.returnValues._challengeID}
-                    />
-                  )
-                }
-                {vouching.Challenged.length === 0 &&
-                  <li>
-                    <span>No challenges have been made</span>
+              <div className='list--wrapper'>
+                <ul className='list is-fullwidth'>
+                  <li className='list--row list--row__head list--row_challenge'>
+                    <span className="list--cell list--cell__head">
+                      Name
+                    </span>
+                    <span className="list--cell list--cell__head">
+                      Status
+                    </span>
+                    <span className="list--cell list--cell__head">
+                      Severity
+                    </span>
+                    <span className="list--cell list--cell__head">
+                      Bounty
+                    </span>
+                    <span className="list--cell list--cell__head" />
                   </li>
-                }
-              </ul>
+                  {
+                    vouching.Challenged.map(challenged =>
+                      <ChallengeRow
+                        packageTotalVouched={vouching.totalVouched}
+                        challenged={challenged}
+                        key={challenged.returnValues._challengeID}
+                      />
+                    )
+                  }
+                  {noChallenges &&
+                    <li className='list--row list--row__blank-state'>
+                      <span className="list--cell list--cell__blank-state">
+                        There are currently no challenges. Create a challenge by running: &nbsp;
+                        <br />
+                        <br />
+                        <CodeSnippet metadata={metadata} action='challenge' />
+                      </span>
+                    </li>
+                  }
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )
+      }
+
+      </>
     )
   }
 }
