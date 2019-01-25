@@ -71,7 +71,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
     if (error) {
       console.error(error)
-      return 'There was an error fetching the data'
+      return 'There was an error fetching the data. (Wrong Ethereum network?)'
     }
 
     const events = this.eventsFromProps(this.props)
