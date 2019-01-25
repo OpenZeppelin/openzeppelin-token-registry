@@ -2,33 +2,19 @@ import React, { PureComponent } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import gql from 'graphql-tag'
-import { get } from 'lodash'
+import gh from 'parse-github-url'
 import AntdIcon from '@ant-design/icons-react'
 import { GithubFill } from '@ant-design/icons'
+import { get } from 'lodash'
 import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
-import gh from 'parse-github-url'
-import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { CodeSnippet } from '~/components/CodeSnippet'
+import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
+import { vouchingQueries } from '~/queries/vouchingQueries'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import * as routes from '~/../config/routes'
-import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
-
-const packageQuery = gql`
-  query packageQuery($uri: String!, $id: String!, $formattedId: String!) {
-    metadata(uri: $uri) @client {
-      name
-      version
-      description
-    }
-    Vouching @contract {
-      totalVouched(id: $id)
-      Challenged @pastEvents(filter: {id: $id}, fromBlock: "0", toBlock: "latest")
-    }
-  }
-`
 
 export const PackageListItem = ReactTimeout(class _PackageListItem extends PureComponent {
   state = {}
@@ -65,7 +51,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
   render () {
     return (
       <Query
-        query={packageQuery}
+        query={vouchingQueries.packageQuery}
         variables={{
           uri: this.props.package.metadataURI,
           id: this.props.package.id

@@ -10,7 +10,7 @@ export const VouchButton = class _VouchButton extends Component {
 
   render() {
     const { packageId } = this.props
-    
+
     return (
       <Query
         query={transactionQueries.getUncompletedTransactionsByPackageId}
@@ -24,8 +24,8 @@ export const VouchButton = class _VouchButton extends Component {
           // if (loading) { console.log('loading ', loading) }
 
           if (!hasUncompletedTransaction && data && data.getUncompletedTransactionsByPackageId) {
-            console.log(`got ${data.getUncompletedTransactionsByPackageId.length} transactions!`)
-            console.log(data.getUncompletedTransactionsByPackageId[0])
+            // console.log(`got ${data.getUncompletedTransactionsByPackageId.length} transactions!`)
+            // console.log(data.getUncompletedTransactionsByPackageId[0])
             hasUncompletedTransaction = (data.getUncompletedTransactionsByPackageId.length > 0)
           }
 

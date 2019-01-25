@@ -1,19 +1,13 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
-import gql from 'graphql-tag'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
 import { ResearchersList } from '~/components/researchers/ResearchersList'
+import { web3Queries } from '~/queries/web3Queries'
 import * as routes from '~/../config/routes'
-
-const networkIdQuery = gql`
-  query networkIdQuery {
-    networkId @client
-  }
-`
 
 export class PackageListPage extends PureComponent {
   render () {
@@ -92,7 +86,7 @@ export class PackageListPage extends PureComponent {
           <div className='container'>
             <div className='columns'>
               <div className='column main-content--column package-list--column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
-                <Query query={networkIdQuery}>
+                <Query query={web3Queries.networkIdQuery}>
                   {({ data }) => {
                     const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
 

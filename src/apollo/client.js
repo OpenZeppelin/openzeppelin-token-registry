@@ -9,11 +9,12 @@ import { abiMapping } from './abiMapping'
 import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
 import { getReadWeb3 } from '~/web3/getReadWeb3'
 import { merge } from 'lodash'
+
+import { metadataResolvers } from './client-state/metadataResolvers'
 import { transactionResolvers } from './client-state/transactionResolvers'
-import network from './client-state/network'
-import metadata from './client-state/metadata'
-import mutations from './client-state/mutations'
-import web3js from './client-state/web3'
+import { web3Resolvers } from './client-state/web3Resolvers'
+
+import { mutations } from './client-state/mutations'
 
 let web3 = getInjectedWeb3()
 if (!web3) {
@@ -28,7 +29,13 @@ const cache = new InMemoryCache({
 })
 
 const stateLink = withClientState({
-  ...merge({}, transactionResolvers, network, metadata, mutations, web3js),
+  ...merge(
+    {},
+    metadataResolvers,
+    transactionResolvers,
+    web3Resolvers,
+    mutations
+  ),
   cache,
   defaults: {
     // networkId: null

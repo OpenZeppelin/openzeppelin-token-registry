@@ -1,12 +1,11 @@
 import React from 'react'
 import BN from 'bn.js'
 import gh from 'parse-github-url'
-import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { get } from 'lodash'
-import { VouchingQueries } from '~/queries/VouchingQueries'
-import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { GitHubLink } from '~/components/GitHubLink'
+import { metadataQueries } from '~/queries/metadataQueries'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import * as constants from '~/constants'
 
 function displayPriority (packageTotalVouched, amount) {
@@ -22,13 +21,6 @@ function displayPriority (packageTotalVouched, amount) {
     return constants.CHALLENGE_PRIORITY_LOW
   }
 }
-
-const challengeMetadataQuery = gql`
-  query ChallengeMetadata($uri: String!) {
-    ...Metadata
-  }
-  ${VouchingQueries.Metadata}
-`
 
 export const ChallengeRow = ({ packageTotalVouched, challenged }) => {
   const amount = new BN(challenged.returnValues.amount)
@@ -49,7 +41,7 @@ export const ChallengeRow = ({ packageTotalVouched, challenged }) => {
   }
 
   return (
-    <Query query={challengeMetadataQuery} variables={{ uri: challengeURI }}>
+    <Query query={metadataQueries.challengeMetadataQuery} variables={{ uri: challengeURI }}>
       {({ data }) => {
         const { metadata } = data || {}
         return (

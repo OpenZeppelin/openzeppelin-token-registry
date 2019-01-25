@@ -1,6 +1,6 @@
 /* eslint-env worker */
 
-export default {
+export const metadataResolvers = {
   resolvers: {
     Query: {
       metadata: async function (object, args, options, info) {

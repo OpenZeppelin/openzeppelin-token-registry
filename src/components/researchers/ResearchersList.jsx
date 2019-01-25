@@ -1,22 +1,14 @@
 import React, { PureComponent } from 'react'
-import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import { ResearchersListItem } from '~/components/researchers/ResearchersListItem'
+import { vouchingQueries } from '~/queries/vouchingQueries'
 import { researchersVouchedTotals } from '~/utils/researchersVouchedTotals'
 import { sortBigNumbers } from '~/utils/sortBigNumbers'
-import { ResearchersListItem } from '~/components/researchers/ResearchersListItem'
-
-const vouchesQuery = gql`
-  query vouchesQuery {
-    Vouching @contract {
-      allEvents @pastEvents(filter: { id: $id }, fromBlock: "0", toBlock: "latest")
-    }
-  }
-`
 
 export class ResearchersList extends PureComponent {
   render () {
     return (
-      <Query query={vouchesQuery}>
+      <Query query={vouchingQueries.vouchesQuery}>
         {({ loading, error, data }) => {
           if (loading) return null
           if (error) return `Error!: ${error}`

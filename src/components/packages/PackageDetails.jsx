@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
-import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -12,15 +11,8 @@ import { VouchRow } from '~/components/packages/VouchRow'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
+import { vouchingQueries } from '~/queries/vouchingQueries'
 import { shortenAddress } from '~/utils/shortenAddress'
-
-const vouchesQuery = gql`
-  query vouchesQuery($id: String!) {
-    Vouching @contract {
-      allEvents @pastEvents(filter: { id: $id }, fromBlock: "0", toBlock: "latest")
-    }
-  }
-`
 
 export class PackageDetails extends Component {
   state = {}
@@ -76,7 +68,7 @@ export class PackageDetails extends Component {
 
         <div className='columns'>
           <div className='column is-10-widescreen'>
-            <Query query={vouchesQuery} variables={{ id }}>
+            <Query query={vouchingQueries.vouchesQuery} variables={{ id }}>
               {({ data }) => {
                 const { Vouching } = data || {}
                 const { allEvents } = Vouching || {}

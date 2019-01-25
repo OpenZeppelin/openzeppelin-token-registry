@@ -1,12 +1,21 @@
 import { getClient } from '~/web3/getClient'
+import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
 
-export default {
+export const web3Resolvers = {
   resolvers: {
     Query: {
+      networkId: async function () {
+        var web3 = getInjectedWeb3()
+        if (!web3) {
+          return parseInt(process.env.REACT_APP_DEFAULT_PROVIDER_URL_NETWORK_ID, 10)
+        } else {
+          return web3.eth.net.getId()
+        }
+      },
       block: async function (object, args, context, info) {
         args = Object.assign({
-           numberOrHash: 'latest',
-           includeTransactions: false
+          numberOrHash: 'latest',
+          includeTransactions: false
         }, args)
 
         const web3 = await getClient()

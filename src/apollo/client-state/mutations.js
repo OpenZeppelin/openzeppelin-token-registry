@@ -3,7 +3,7 @@ import { abiMapping } from '~/apollo/abiMapping'
 import { getMetamaskPermissions } from '~/web3/getMetamaskPermissions'
 import { transactionQueries } from '~/queries/transactionQueries'
 
-export default {
+export const mutations = {
   resolvers: {
     Mutation: {
       sendTransaction: async (_, variables, { cache, getCacheKey }) => {

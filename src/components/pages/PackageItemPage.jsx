@@ -1,33 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import gql from 'graphql-tag'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/packages/PackageDetails'
-import { VouchingQueries } from '~/queries/VouchingQueries'
+import { vouchingQueries } from '~/queries/vouchingQueries'
 import * as routes from '~/../config/routes'
-
-const eventsQuery = gql`
-  query eventsQuery {
-    Vouching @contract {
-      registeredEvents: Registered @pastEvents(fromBlock: "0", toBlock: "latest")
-    }
-  }
-`
-
-const packageQuery = gql`
-  query packageQuery($uri: String!, $id: String!) {
-    ...Metadata
-    Vouching @contract {
-      totalVouched(id: $id)
-      ...ChallengedEvents
-    }
-  }
-  ${VouchingQueries.Metadata}
-  ${VouchingQueries.ChallengedEvents}
-`
 
 export class PackageItemPage extends PureComponent {
   static propTypes = {
@@ -53,7 +32,7 @@ export class PackageItemPage extends PureComponent {
                 {'<'} Back to Packages
               </Link>
 
-              <Query query={eventsQuery}>
+              <Query query={vouchingQueries.eventsQuery}>
                 {({ loading, error, data }) => {
                   if (loading) return null
                   if (error) return `Error!: ${error}`
@@ -70,7 +49,10 @@ export class PackageItemPage extends PureComponent {
                   const packageItem = event.returnValues
 
                   return (
-                    <Query query={packageQuery} variables={{ uri: packageItem.metadataURI, id: packageItem.id }}>
+                    <Query
+                      query={vouchingQueries.packageQuery}
+                      variables={{ uri: packageItem.metadataURI, id: packageItem.id }}
+                    >
                       {
                         ({ loading, error, data }) => {
                           if (loading) return null

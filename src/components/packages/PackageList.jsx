@@ -1,27 +1,11 @@
 import BN from 'bn.js'
 import React, { PureComponent } from 'react'
-import gql from 'graphql-tag'
 import { PackageListItem } from '~/components/packages/PackageListItem'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
+import { vouchingQueries } from '~/queries/vouchingQueries'
 import { graphql, withApollo } from 'react-apollo'
 
-const eventsQuery = gql`
-  query eventsQuery {
-    Vouching @contract {
-      registeredEvents: Registered @pastEvents(fromBlock: "0", toBlock: "latest")
-    }
-  }
-`
-
-const totalVouchesQuery = gql`
-  query totalVouchesQuery($id: String!) {
-    Vouching @contract {
-      totalVouched(id: $id)
-    }
-  }
-`
-
-export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList extends PureComponent {
+export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class _PackageList extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -41,7 +25,7 @@ export const PackageList = graphql(eventsQuery)(withApollo(class _PackageList ex
       events.map(event => {
         const id = event.returnValues.id
         return (
-          client.query({ query: totalVouchesQuery, variables: { id } })
+          client.query({ query: vouchingQueries.totalVouchesQuery, variables: { id } })
             .then(result => {
               return {
                 id,
