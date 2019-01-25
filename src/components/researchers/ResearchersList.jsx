@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { researchersVouchedTotals } from '~/utils/researchersVouchedTotals'
+import { researchersVouchedTotals } from '~/projections/researchersVouchedTotals'
 import { sortBigNumbers } from '~/utils/sortBigNumbers'
 import { ResearchersListItem } from '~/components/researchers/ResearchersListItem'
 
 const vouchesQuery = gql`
   query vouchesQuery {
     Vouching @contract {
-      allEvents @pastEvents(filter: { id: $id }, fromBlock: "0", toBlock: "latest")
+      allEvents @pastEvents(filter: { id: $id }, fromBlock: 0, toBlock: "latest")
     }
   }
 `

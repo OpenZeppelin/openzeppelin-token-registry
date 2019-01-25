@@ -1,4 +1,4 @@
-import BN from 'bn.js'
+import { ethers } from 'ethers'
 import _ from 'lodash'
 
 // Sorts an array of objects with BN (bn.js big numbers) using a specific key
@@ -21,7 +21,7 @@ export const sortBigNumbers = function (array, key) {
     (a, b) => {
       let order = -1
 
-      if (new BN(a[key]).gte(new BN(b[key]))) {
+      if (ethers.utils.bigNumberify(a[key]).gte(ethers.utils.bigNumberify(b[key]))) {
         // console.log(`${a.amount} is greater than or equal to ${b.amount}`)
         order = 1
       }

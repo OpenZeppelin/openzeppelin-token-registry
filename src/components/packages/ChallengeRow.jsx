@@ -1,5 +1,5 @@
 import React from 'react'
-import BN from 'bn.js'
+import { ethers } from 'ethers'
 import gh from 'parse-github-url'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
@@ -31,13 +31,13 @@ const challengeMetadataQuery = gql`
 `
 
 export const ChallengeRow = ({ packageTotalVouched, challenged }) => {
-  const amount = new BN(challenged.returnValues.amount)
-  const { challengeURI } = challenged.returnValues
+  const amount = ethers.utils.bigNumberify(challenged.parsedLog.values.amount.toString())
+  const { challengeURI } = challenged.parsedLog.values
   const { repo } = gh(challengeURI)
 
-  const status = (Math.random() > 0.5) ?
-    constants.CHALLENGE_STATUS_OPEN :
-    constants.CHALLENGE_STATUS_CLOSED
+  const status = (Math.random() > 0.5)
+    ? constants.CHALLENGE_STATUS_OPEN
+    : constants.CHALLENGE_STATUS_CLOSED
   const priority = displayPriority(packageTotalVouched, amount)
 
   const statusColor = constants.CHALLENGE_STATUS_COLORS[status]

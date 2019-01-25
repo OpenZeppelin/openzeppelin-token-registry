@@ -5,9 +5,9 @@ import { AppContainer } from '~/components/App'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
 import { client } from '~/apollo/client'
-import { blockObserver } from '~/apollo/blockObserver'
-
 import './index.scss'
+
+require('./ethers.extension')
 
 window.addEventListener('load', () => {
   let coreApp =

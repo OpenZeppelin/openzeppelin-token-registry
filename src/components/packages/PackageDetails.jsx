@@ -16,7 +16,7 @@ import { shortenAddress } from '~/utils/shortenAddress'
 const vouchesQuery = gql`
   query vouchesQuery($id: String!) {
     Vouching @contract {
-      allEvents @pastEvents(filter: { id: $id }, fromBlock: "0", toBlock: "latest")
+      allEvents @pastEvents(filter: { id: $id }, fromBlock: 0, toBlock: "latest")
     }
   }
 `
@@ -30,10 +30,11 @@ export class PackageDetails extends PureComponent {
 
   render () {
     const { metadata, vouching, registeredEvent } = this.props
-    const { returnValues } = registeredEvent || {}
-    const githubDetails = gh(returnValues.metadataURI || '')
+    const { parsedLog } = registeredEvent || {}
+    const { values } = parsedLog || {}
+    const githubDetails = gh(values.metadataURI || '')
     const { owner, repo } = githubDetails
-    const { id } = returnValues || {}
+    const { id } = values || {}
 
     return (
       <div>
@@ -48,7 +49,7 @@ export class PackageDetails extends PureComponent {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <EtherscanAddressLink address={returnValues.owner}>{shortenAddress(returnValues.owner)}</EtherscanAddressLink>
+              Maintained by <EtherscanAddressLink address={values.owner}>{shortenAddress(values.owner)}</EtherscanAddressLink>
             </h6>
 
             <p className='is-size-6 package-item--description'>
@@ -124,26 +125,26 @@ export class PackageDetails extends PureComponent {
             <div className='list--wrapper'>
               <ul className='list is-fullwidth'>
                 <li className='list--row list--row_challenge'>
-                  <span className="list--cell list--header">
+                  <span className='list--cell list--header'>
                     Name
                   </span>
-                  <span className="list--cell list--header">
+                  <span className='list--cell list--header'>
                     Status
                   </span>
-                  <span className="list--cell list--header">
+                  <span className='list--cell list--header'>
                     Severity
                   </span>
-                  <span className="list--cell list--header">
+                  <span className='list--cell list--header'>
                     Bounty
                   </span>
-                  <span className="list--cell list--header" />
+                  <span className='list--cell list--header' />
                 </li>
                 {
                   vouching.Challenged.map(challenged =>
                     <ChallengeRow
                       packageTotalVouched={vouching.totalVouched}
                       challenged={challenged}
-                      key={challenged.returnValues._challengeID}
+                      key={challenged.parsedLog.values._challengeID}
                     />
                   )
                 }

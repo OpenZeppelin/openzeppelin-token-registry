@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export const VouchingQueries = {
   ChallengedEvents: gql`
     fragment ChallengedEvents on Vouching {
-      Challenged @pastEvents(filter: {id: $id}, fromBlock: "0", toBlock: "latest")
+      Challenged @pastEvents(filter: {id: $id}, fromBlock: 0, toBlock: "latest")
     }
   `,
   Metadata: gql`

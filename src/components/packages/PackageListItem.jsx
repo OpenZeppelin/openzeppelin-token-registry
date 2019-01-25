@@ -25,7 +25,7 @@ const packageQuery = gql`
     }
     Vouching @contract {
       totalVouched(id: $id)
-      Challenged @pastEvents(filter: {id: $id}, fromBlock: "0", toBlock: "latest")
+      Challenged @pastEvents(filter: {id: $id}, fromBlock: 0, toBlock: "latest")
     }
   }
 `

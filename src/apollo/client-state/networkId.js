@@ -1,15 +1,11 @@
-import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
+import { getProvider } from '~/web3/getProvider'
 
 export default {
   resolvers: {
     Query: {
       networkId: async function () {
-        var web3 = getInjectedWeb3()
-        if (!web3) {
-          return parseInt(process.env.REACT_APP_DEFAULT_PROVIDER_URL_NETWORK_ID, 10)
-        } else {
-          return web3.eth.net.getId()
-        }
+        const network = await getProvider().getNetwork()
+        return network.chainId
       }
     }
   }

@@ -1,11 +1,9 @@
-import Web3 from 'web3'
-
-const web3 = new Web3()
+import { ethers } from 'ethers'
 
 export function displayWeiToEther (wei) {
   if (!wei) {
     return ''
   }
 
-  return web3.utils.fromWei(wei, 'ether')
+  return ethers.utils.commify(ethers.utils.formatEther(wei.toString()))
 }
