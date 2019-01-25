@@ -55,25 +55,6 @@ a.is-dark {
   color: $text;
 }
 
-.hero.is-dark.is-bold {
-  background-color: $hero-dark;
-  background-image: none;
-}
-
-.hero--title {
-  font-weight: 400;
-}
-
-.hero.is-light {
-  background-color: $hero-light;
-}
-
-.hero--title.content:not(:last-child),
-.hero--title.title:not(:last-child),
-.hero--title.subtitle:not(:last-child) {
-  margin-bottom: 0.8rem;
-}
-
 .is-monospaced {
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
@@ -84,21 +65,6 @@ a.is-dark {
 
 .is-borderless {
   border: 0;
-}
-
-.code--quick-install {
-  border-radius: 30px;
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.5rem 1rem;
-  position: relative;
-  min-width: 310px;
-
-  @media screen and (max-width: $tablet - 1px) {
-    max-width: 82%;
-    min-width: 82%;
-    padding-right: 1.25rem;
-  }
 }
 
 // This is used by the page / layout transitions

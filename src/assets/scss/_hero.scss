@@ -1,0 +1,44 @@
+.hero.is-dark.is-bold {
+  background-color: $hero-dark;
+  background-image: none;
+}
+
+.hero.is-link {
+  background-color: $blue;
+  background-image: linear-gradient(darken($blue, 5%), darken($blue, 8%), darken($blue, 10%)), radial-gradient(#fff,transparent);
+}
+
+.hero--title {
+  font-weight: 400;
+}
+
+.hero.is-light {
+  background-color: $hero-light;
+}
+
+.hero--title.content:not(:last-child),
+.hero--title.title:not(:last-child),
+.hero--title.subtitle:not(:last-child) {
+  margin-bottom: 0.8rem;
+}
+
+.hero a {
+  transition: border 300ms ease-in-out;
+}
+
+.hero a:hover {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.hero p {
+  font-size: 1.125rem;
+  margin: 1rem 0;
+}
+
+.hero p:first-child {
+  margin-top: 0;
+}
+
+.hero p:last-child {
+  margin-bottom: 0;
+}
