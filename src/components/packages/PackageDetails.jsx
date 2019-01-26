@@ -26,10 +26,11 @@ export class PackageDetails extends Component {
 
   render () {
     const { metadata, vouching, registeredEvent } = this.props
-    const { returnValues } = registeredEvent || {}
-    const githubDetails = gh(returnValues.metadataURI || '')
+    const { parsedLog } = registeredEvent || {}
+    const { values } = parsedLog || {}
+    const githubDetails = gh(values.metadataURI || '')
     const { owner, repo } = githubDetails
-    const { id } = returnValues || {}
+    const { id } = values || {}
     const noChallenges = (vouching.Challenged.length === 0)
 
     return (
@@ -45,7 +46,7 @@ export class PackageDetails extends Component {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <EtherscanAddressLink address={returnValues.owner}>{shortenAddress(returnValues.owner)}</EtherscanAddressLink>
+              Maintained by <EtherscanAddressLink address={values.owner}>{shortenAddress(values.owner)}</EtherscanAddressLink>
             </h6>
 
             <p className='is-size-6 package-item--description'>
@@ -157,7 +158,7 @@ export class PackageDetails extends Component {
                       <ChallengeRow
                         packageTotalVouched={vouching.totalVouched}
                         challenged={challenged}
-                        key={challenged.returnValues._challengeID}
+                        key={challenged.parsedLog.values._challengeID}
                       />
                     )
                   }

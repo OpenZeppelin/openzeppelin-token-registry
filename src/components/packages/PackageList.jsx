@@ -1,4 +1,4 @@
-import BN from 'bn.js'
+import { ethers } from 'ethers'
 import React, { PureComponent } from 'react'
 import { PackageListItem } from '~/components/packages/PackageListItem'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
@@ -23,13 +23,13 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
     Promise.all(
       events.map(event => {
-        const id = event.returnValues.id
+        const id = event.parsedLog.values.id
         return (
           client.query({ query: vouchingQueries.totalVouchesQuery, variables: { id } })
             .then(result => {
               return {
                 id,
-                totalVouched: new BN(result.data.Vouching.totalVouched)
+                totalVouched: result.data.Vouching.totalVouched
               }
             })
         )
@@ -48,15 +48,16 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
   eventsFromProps (props) {
     const { data } = props
-    return (data.Vouching ? data.Vouching.registeredEvents : []) || []
+    const { Vouching } = data || {}
+    return (Vouching ? Vouching.registeredEvents : []) || []
   }
 
   totalVouched (id) {
-    return this.state.totalVouches[id] || new BN('0')
+    return this.state.totalVouches[id] ? ethers.utils.bigNumberify(this.state.totalVouches[id].toString()) : ethers.utils.bigNumberify('0')
   }
 
   render () {
-    const { loading, error } = this.props.data
+    const { loading, error } = this.props.data || {}
 
     const packageListLoader =
       <React.Fragment>
@@ -81,9 +82,9 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
     }
 
     const sortedEvents = events.sort((a, b) => {
-      const idA = a.returnValues.id
-      const idB = b.returnValues.id
-      return this.totalVouched(idB).cmp(this.totalVouched(idA))
+      const idA = a.parsedLog.values.id
+      const idB = b.parsedLog.values.id
+      return this.totalVouched(idA).cmp(this.totalVouched(idB))
     })
 
     return (
@@ -93,7 +94,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             Top Trusted Packages
           </h2>
           <div className="message">
-            <div class="message-body message--cta">
+            <div className="message-body message--cta">
               <h5 className="is-size-5 has-text-grey">
                 Psst! Want to see your package here?
               </h5>
@@ -106,12 +107,12 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
         {
           sortedEvents.map((event, index) => {
-            const id = event.returnValues.id
+            const id = event.parsedLog.values.id
             return (
               <PackageListItem
                 index={index}
                 location={this.props.location}
-                package={event.returnValues}
+                package={event.parsedLog.values}
                 key={id}
               />
             )

@@ -4,25 +4,20 @@ import { RestLink } from 'apollo-link-rest'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { withClientState } from 'apollo-link-state'
 import { ContractLink } from 'apollo-link-ethereum'
-import { Web3JSResolver } from 'apollo-link-ethereum-resolver-web3js'
+import { EthersResolver } from 'apollo-link-ethereum-resolver-ethersjs'
 import { abiMapping } from './abiMapping'
-import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
-import { getReadWeb3 } from '~/web3/getReadWeb3'
+import { getProvider } from '~/web3/getProvider'
 import { merge } from 'lodash'
-
 import { metadataResolvers } from './client-state/metadataResolvers'
 import { transactionResolvers } from './client-state/transactionResolvers'
 import { web3Resolvers } from './client-state/web3Resolvers'
-
 import { mutations } from './client-state/mutations'
 
-let web3 = getInjectedWeb3()
-if (!web3) {
-  web3 = getReadWeb3()
-}
+let ethers = getProvider()
+window.ethers = ethers
 
-const web3Resolver = new Web3JSResolver(abiMapping, web3)
-const contractLink = new ContractLink(web3Resolver)
+const ethersResolver = new EthersResolver(abiMapping, ethers)
+const contractLink = new ContractLink(ethersResolver)
 
 const cache = new InMemoryCache({
   addTypename: false

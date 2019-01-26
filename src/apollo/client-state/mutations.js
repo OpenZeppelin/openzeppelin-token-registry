@@ -1,7 +1,7 @@
-import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
+import { getProvider } from '~/web3/getProvider'
 import { abiMapping } from '~/apollo/abiMapping'
 import { getMetamaskPermissions } from '~/web3/getMetamaskPermissions'
-import { transactionQueries } from '~/queries/transactionQueries'
+// import { transactionQueries } from '~/queries/transactionQueries'
 
 export const mutations = {
   resolvers: {
@@ -9,25 +9,34 @@ export const mutations = {
       sendTransaction: async (_, variables, { cache, getCacheKey }) => {
         const { method, args } = variables.txData
 
-        const injectedWeb3 = getInjectedWeb3()
-        const networkId = await injectedWeb3.eth.net.getId()
+        const ethers = getProvider()
+        const network = await ethers.getNetwork()
+        const { networkId } = network
 
         await getMetamaskPermissions()
 
-        const accounts = await injectedWeb3.eth.getAccounts()
+        const accounts = await ethers.eth.getAccounts()
         const currentAddress = accounts[0]
 
         const abi = abiMapping.getAbi('Vouching')
         const contractAddress = abiMapping.getAddress('Vouching', networkId)
-        const contract = new injectedWeb3.eth.Contract(abi, contractAddress)
-        const contractMethod = contract.methods[method]
+        const contract = new ethers.Contract(abi, contractAddress)
+        const contractMethod = contract[method]
 
         if (!contractMethod) {
           console.error(`Address ${contractAddress} does not have method '${method}'`)
           return
         }
 
-        contractMethod(...args).send({ from: currentAddress }).on(
+        let result = contractMethod(...(args.concat([{ from: currentAddress }])))
+        console.log(result)
+
+        result.then(function () {
+          console.log('promise args: ', arguments)
+        })
+
+        /*
+        .on(
           'transactionHash', function (hash) {
             let data = { transactions: [] }
             const query = transactionQueries.allTransactionsQuery
@@ -57,7 +66,7 @@ export const mutations = {
             }
           }
         )
-
+*/
         return null
       }
     }

@@ -1,7 +1,5 @@
-import Web3 from 'web3'
-
-const web3 = new Web3()
+import { ethers } from 'ethers'
 
 export function sha3 (string) {
-  return web3.utils.sha3(string)
+  return ethers.utils.sha256(string)
 }

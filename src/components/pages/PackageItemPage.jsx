@@ -39,14 +39,14 @@ export class PackageItemPage extends PureComponent {
 
                   const events = data.Vouching ? data.Vouching.registeredEvents : []
                   const id = this.props.match.params.id
-                  const event = events.find((event) => event.returnValues.id === id)
+                  const event = events.find((event) => event.parsedLog.values.id.eq(id))
 
                   if (!event) {
                     console.warn('event not found')
                     return null
                   }
 
-                  const packageItem = event.returnValues
+                  const packageItem = event.parsedLog.values
 
                   return (
                     <Query

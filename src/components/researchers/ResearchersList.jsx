@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { Query } from 'react-apollo'
 import { ResearchersListItem } from '~/components/researchers/ResearchersListItem'
 import { vouchingQueries } from '~/queries/vouchingQueries'
-import { researchersVouchedTotals } from '~/utils/researchersVouchedTotals'
+import { researchersVouchedTotals } from '~/projections/researchersVouchedTotals'
 import { sortBigNumbers } from '~/utils/sortBigNumbers'
 
 export class ResearchersList extends PureComponent {

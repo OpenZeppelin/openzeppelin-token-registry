@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export const vouchingFragments = {
   challengedEventsFragment: gql`
     fragment ChallengedEvents on Vouching {
-      Challenged @pastEvents(filter: {id: $id}, fromBlock: "0", toBlock: "latest")
+      Challenged @pastEvents(filter: {id: $id}, fromBlock: 0, toBlock: "latest")
     }
   `,
   metadataFragment: gql`
@@ -21,14 +21,14 @@ export const vouchingQueries = {
   vouchesQuery: gql`
     query vouchesQuery($id: String!) {
       Vouching @contract {
-        allEvents @pastEvents(filter: { id: $id }, fromBlock: "0", toBlock: "latest")
+        allEvents @pastEvents(filter: { id: $id }, fromBlock: 0, toBlock: "latest")
       }
     }
   `,
   eventsQuery: gql`
     query eventsQuery {
       Vouching @contract {
-        registeredEvents: Registered @pastEvents(fromBlock: "0", toBlock: "latest")
+        registeredEvents: Registered @pastEvents(fromBlock: 0, toBlock: "latest")
       }
     }
   `,

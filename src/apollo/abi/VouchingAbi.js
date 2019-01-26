@@ -399,6 +399,30 @@ export default [
     'anonymous': false,
     'inputs': [
       {
+        'indexed': false,
+        'name': '_amount',
+        'type': 'uint256'
+      }
+    ],
+    'name': 'Test',
+    'type': 'event'
+  },
+  {
+    'anonymous': false,
+    'inputs': [
+      {
+        'indexed': false,
+        'name': '_amount',
+        'type': 'uint256'
+      }
+    ],
+    'name': 'Test2',
+    'type': 'event'
+  },
+  {
+    'anonymous': false,
+    'inputs': [
+      {
         'indexed': true,
         'name': 'id',
         'type': 'uint256'
@@ -512,5 +536,33 @@ export default [
     ],
     'name': 'Challenged',
     'type': 'event'
+  },
+  {
+    'constant': false,
+    'inputs': [
+      {
+        'name': '_amount',
+        'type': 'uint256'
+      }
+    ],
+    'name': 'doTest',
+    'outputs': [],
+    'payable': false,
+    'stateMutability': 'nonpayable',
+    'type': 'function'
+  },
+  {
+    'constant': false,
+    'inputs': [
+      {
+        'name': '_amount',
+        'type': 'uint256'
+      }
+    ],
+    'name': 'doTest2',
+    'outputs': [],
+    'payable': false,
+    'stateMutability': 'nonpayable',
+    'type': 'function'
   }
 ]

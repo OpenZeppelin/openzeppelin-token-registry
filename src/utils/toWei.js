@@ -1,9 +1,9 @@
-import Web3 from 'web3'
+import { ethers } from 'ethers'
 
 export function toWei (ether) {
   if (!ether) {
     return ''
   }
 
-  return new Web3().utils.toWei(ether, 'ether')
+  return ethers.utils.parseUnits(ether, 'ether')
 }

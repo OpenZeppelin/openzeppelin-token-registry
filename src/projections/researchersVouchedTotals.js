@@ -1,4 +1,4 @@
-import BN from 'bn.js'
+import { ethers } from 'ethers'
 
 // Iterates through all events in the Vouching contract and
 // pull out amounts only for vouches (RegisteredEvent owners and
@@ -8,7 +8,7 @@ export const researchersVouchedTotals = function (events) {
 
   events.forEach((event, index) => {
     let address
-    const { amount, owner, sender } = event.returnValues
+    const { amount, owner, sender } = event.parsedLog.values
 
     address = sender || owner
     if (!address) { return null }
@@ -18,7 +18,7 @@ export const researchersVouchedTotals = function (events) {
     researchers[address] = {
       address: address,
       amount: researcherAlreadyPresent
-        ? new BN(researchers[address].amount).add(new BN(amount)).toString()
+        ? ethers.utils.bigNumberify(researchers[address].amount).add(ethers.utils.bigNumberify(amount)).toString()
         : amount
     }
   })
