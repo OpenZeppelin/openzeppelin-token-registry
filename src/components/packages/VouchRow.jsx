@@ -4,22 +4,21 @@ import classnames from 'classnames'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import { displayNumber } from '~/utils/displayNumber'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { getInjectedWeb3 } from '~/web3/getInjectedWeb3'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
+import { web3Queries } from '~/queries/web3Queries'
+import { graphql } from 'react-apollo'
 
-export const VouchRow = class _VouchRow extends Component {
+export const VouchRow = graphql(web3Queries.accountQuery)(class _VouchRow extends Component {
   static propTypes = {
     address: PropTypes.string.isRequired,
     amount: PropTypes.string.isRequired
   }
 
-  async componentDidMount() {
-    const accounts = await getInjectedWeb3().eth.getAccounts()
-    this.currentAddress = accounts[0]
-  }
-
   render () {
-    const isUser = (this.currentAddress && (this.currentAddress.toLowerCase() === this.props.address))
+    const { account } = this.props.data || {}
+    const currentAddress = account || ''
+
+    const isUser = (currentAddress && (currentAddress.toLowerCase() === this.props.address))
 
     return (
       <li className={classnames(
@@ -51,4 +50,4 @@ export const VouchRow = class _VouchRow extends Component {
       </li>
     )
   }
-}
+})

@@ -13,7 +13,7 @@ export const CodeBox = ReactTimeout(class _CodeBox extends PureComponent {
   }
 
   static propTypes = {
-    metadata: PropTypes.object.isRequired,
+    metadata: PropTypes.object,
     action: PropTypes.string
   }
 

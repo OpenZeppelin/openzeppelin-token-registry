@@ -5,5 +5,10 @@ export const web3Queries = {
     query networkIdQuery {
       networkId @client
     }
+  `,
+  accountQuery: gql`
+    query accountQuery {
+      account @client
+    }
   `
 }

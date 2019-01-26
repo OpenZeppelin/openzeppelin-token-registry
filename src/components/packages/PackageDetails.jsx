@@ -30,7 +30,7 @@ export class PackageDetails extends Component {
     const { values } = parsedLog || {}
     const githubDetails = gh(values.metadataURI || '')
     const { owner, repo } = githubDetails
-    const { id } = returnValues || {}
+    const { id } = values || {}
     const noChallenges = (vouching.Challenged.length === 0)
 
     return (
@@ -158,7 +158,7 @@ export class PackageDetails extends Component {
                       <ChallengeRow
                         packageTotalVouched={vouching.totalVouched}
                         challenged={challenged}
-                        key={challenged.returnValues._challengeID}
+                        key={challenged.parsedLog.values._challengeID}
                       />
                     )
                   }
