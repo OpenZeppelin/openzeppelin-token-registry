@@ -38,8 +38,8 @@ export const mutations = {
         // console.log(...args)
         contract[method](...args).then(res => console.log(res))
 
-        // const result = await contract[method](...args)
-        console.log(result)
+        const result = await contract[method](...args)
+        // console.log(result)
         // const result = await contract[method](...args.concat([{ gasLimit: gasCost.add(2000) }]))
 
         console.log('Result: ', result)
