@@ -29,7 +29,6 @@ export const mutations = {
         }
 
         let result = contractMethod(...(args.concat([{ from: currentAddress }])))
-        console.log(result)
 
         result.then(function () {
           console.log('promise args: ', arguments)
