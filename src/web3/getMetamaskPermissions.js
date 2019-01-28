@@ -6,7 +6,6 @@ export async function getMetamaskPermissions () {
       if (error !== 'User rejected provider access') {
         console.error(error)
       }
-      // this.setState({ error: error })
     }
   } else {
     console.error('Could not find `window` or `window.ethereum`')
