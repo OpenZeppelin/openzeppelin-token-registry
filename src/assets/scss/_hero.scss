@@ -4,8 +4,8 @@
 }
 
 .hero.is-link {
-  background-color: $blue;
-  background-image: linear-gradient(darken($blue, 5%), darken($blue, 8%), darken($blue, 10%)), radial-gradient(#fff,transparent);
+  background-color: #0095e4;
+  background-image: linear-gradient(lighten(#0095e4, 2%), #0095e4, #0083d0);
 }
 
 .hero--title {

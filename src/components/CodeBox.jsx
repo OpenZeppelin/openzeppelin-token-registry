@@ -2,20 +2,11 @@ import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import ReactTimeout from 'react-timeout'
 import ReactTooltip from 'react-tooltip'
-import PropTypes from 'prop-types'
 import AntdIcon from '@ant-design/icons-react'
 import { CopyOutline } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 export const CodeBox = ReactTimeout(class _CodeBox extends PureComponent {
-  static defaultProps = {
-    action: 'link'
-  }
-
-  static propTypes = {
-    metadata: PropTypes.object,
-    action: PropTypes.string
-  }
 
   handleCodeClick = (e) => {
     e.stopPropagation()

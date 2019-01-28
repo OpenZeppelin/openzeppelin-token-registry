@@ -96,9 +96,9 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
           <div className="message">
             <div className="message-body message--cta">
               <h5 className="is-size-5 has-text-grey">
-                Psst! Want to see your package here?
+                Want to see your package here?
               </h5>
-              <button className="button is-warning is-pill">
+              <button className="button is-info is-pill">
                 Join the Beta
               </button>
             </div>

@@ -21,7 +21,8 @@ $code-background: #f7f7f7;
 $link-invert: #ffffff;
 $hero-light: #f7f7f9;
 $hero-dark: #252c31;
-$navbar-background-color: #f6f6f9;
+// $navbar-background-color: #f6f6f9;
+$navbar-background-color: white;
 $navbar-grey: #23272a;
 $navbar-item-color: #6f6f6f;
 $navbar-item-hover: black;
@@ -34,14 +35,14 @@ $green: #00C853;
 $yellow: #FF9800;
 $red: #FF005C;
 // $turqoise: #39e6e0;
-$cyan: #00C1DC;
+$cyan: #05a5f1;
 $blue: #085DFF;
 
 // Derived variables
 $navbar-item-hover-color: $navbar-item-hover;
 
-$link-color: $blue;
-$link-hover-color: darken($blue, 20%);
+$link-color: $cyan;
+$link-hover-color: darken($cyan, 10%);
 $link: $link-color;
 $link-visited: $link-hover-color;
 $link-hover: $link-hover-color;
