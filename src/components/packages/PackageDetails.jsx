@@ -103,7 +103,7 @@ export class PackageDetails extends Component {
                         Would you endorse this package?
                       </h5>
                       <button
-                        className="button is-info is-pill"
+                        className="button is-purple is-pill"
                         onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
                       >
                         Yes

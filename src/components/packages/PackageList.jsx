@@ -98,7 +98,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
               <h5 className="is-size-5 has-text-grey">
                 Want to see your package here?
               </h5>
-              <button className="button is-info is-pill">
+              <button className="button is-purple is-pill">
                 Join the Beta
               </button>
             </div>

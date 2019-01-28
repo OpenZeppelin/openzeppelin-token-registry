@@ -44,14 +44,26 @@ button[disabled]:active {
   font-family: $family-code;
   font-size: 1rem;
   font-weight: 700;
-  padding: 0.2rem 2.125rem 0.3rem;
+  padding: 0.2rem 1.125rem 0.3rem;
   min-height: 2.375rem;
-  min-width: 140px;
+  min-width: 110px;
   transition: all 150ms ease-in-out;
 }
 
 .button.is-pill:hover {
   box-shadow: 0px 4px 20px rgba(121, 132, 153, 0.3);
+}
+
+.button.is-purple {
+  background-color: $purple;
+  border: none;
+  color: white;
+}
+
+.button.is-purple:hover {
+  background-color: lighten($purple, 10%);
+  box-shadow: 0px 4px 20px rgba(255, 132, 153, 0.3);
+  border: none;
 }
 
 .button.is-primary:hover,
