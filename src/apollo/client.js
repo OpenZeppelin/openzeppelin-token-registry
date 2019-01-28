@@ -3,7 +3,7 @@ import { ApolloLink } from 'apollo-link'
 import { RestLink } from 'apollo-link-rest'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { withClientState } from 'apollo-link-state'
-import { ContractLink } from 'apollo-link-ethereum'
+import { EthereumLink } from 'apollo-link-ethereum'
 import { EthersResolver } from 'apollo-link-ethereum-resolver-ethersjs'
 import { abiMapping } from './abiMapping'
 import { getProvider } from '~/web3/getProvider'
@@ -17,7 +17,7 @@ let ethers = getProvider()
 window.ethers = ethers
 
 const ethersResolver = new EthersResolver(abiMapping, ethers)
-const contractLink = new ContractLink(ethersResolver)
+const ethereumLink = new EthereumLink(ethersResolver)
 
 const cache = new InMemoryCache({
   addTypename: false
@@ -44,7 +44,7 @@ const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI })
 
 export const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([restLink, stateLink, contractLink])
+  link: ApolloLink.from([restLink, stateLink, ethereumLink])
 })
 
 window.client = client

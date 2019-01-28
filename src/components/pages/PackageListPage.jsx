@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import yn from 'yn'
 import { Link } from 'react-router-dom'
-import { Query } from 'react-apollo'
+import { Query, Subscription } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
@@ -71,19 +71,25 @@ export class PackageListPage extends PureComponent {
           <div className='container'>
             <div className='columns'>
               <div className='column main-content--column package-list--column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
-                <Query query={web3Queries.networkIdQuery}>
+                <Subscription subscription={web3Queries.blockSubscription}>
                   {({ data }) => {
-                    const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
+                    return (
+                      <Query query={web3Queries.networkIdQuery}>
+                        {({ data }) => {
+                          const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
 
-                    if (wrongNetwork) {
-                      return <span className='has-delayed-display'>No packages available on your current network.</span>
-                    } else {
-                      return showResearchersList
-                        ? <ResearchersList location={this.props.location} />
-                        : <PackageList location={this.props.location} />
-                    }
+                          if (wrongNetwork) {
+                            return <span className='has-delayed-display'>No packages available on your current network.</span>
+                          } else {
+                            return showResearchersList
+                              ? <ResearchersList location={this.props.location} />
+                              : <PackageList location={this.props.location} />
+                          }
+                        }}
+                      </Query>
+                    )
                   }}
-                </Query>
+                </Subscription>
               </div>
             </div>
           </div>
