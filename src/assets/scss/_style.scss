@@ -17,8 +17,8 @@
 
 .column .column {
   @media screen and (max-width: $desktop) {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
 
@@ -90,10 +90,6 @@ a.has-text-primary:focus {
   max-width: 1000px;
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-.package-list--column {
-  max-width: 760px;
 }
 
 @media screen and (max-width: 769px) {
@@ -194,4 +190,8 @@ a.has-text-primary:focus {
 
 .tx-in-progress .field.has-addons {
   border-color: $blue;
+}
+
+.has-half-margin {
+  margin-bottom: 0.5rem !important;
 }

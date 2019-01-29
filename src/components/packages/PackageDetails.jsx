@@ -99,7 +99,6 @@ export class PackageDetails extends Component {
                   {state => (
                     <div className="message-body message--cta has-text-centered slide-enter">
                       <br />
-                      <br />
                       <h5 className="is-size-5 has-text-grey">
                         Thanks for your input!
                       </h5>

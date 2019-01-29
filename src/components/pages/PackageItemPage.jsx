@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
+import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/packages/PackageDetails'
 import { vouchingQueries } from '~/queries/vouchingQueries'
@@ -24,7 +25,7 @@ export class PackageItemPage extends PureComponent {
 
         <div className='container'>
           <div className='columns'>
-            <div className='column main-content--column is-full-desktop is-12-widescreen'>
+            <div className='column main-content--column is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
               <Link
                 to={routes.HOME}
                 className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
@@ -35,7 +36,7 @@ export class PackageItemPage extends PureComponent {
               <Query query={vouchingQueries.eventsQuery}>
                 {({ loading, error, data }) => {
                   if (loading) return null
-                  if (error) return `Error!: ${error}`
+                  if (error) return <ErrorMessage errorMessage={error} />
 
                   const events = data.Vouching ? data.Vouching.registeredEvents : []
                   const id = this.props.match.params.id
@@ -56,7 +57,7 @@ export class PackageItemPage extends PureComponent {
                       {
                         ({ loading, error, data }) => {
                           if (loading) return null
-                          if (error) return `Error!: ${error}`
+                          if (error) return <ErrorMessage errorMessage={error} />
 
                           const { metadata, Vouching } = data
 

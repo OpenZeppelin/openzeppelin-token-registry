@@ -11,6 +11,7 @@ import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 // import { CodeSnippet } from '~/components/CodeSnippet'
+import { ErrorMessage } from '~/components/ErrorMessage'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 import { vouchingQueries } from '~/queries/vouchingQueries'
@@ -61,7 +62,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
         {
           ({ loading, error, data }) => {
             if (loading) return <PackageListItemLoader />
-            if (error) return `Error!: ${error}`
+            if (error) return <ErrorMessage errorMessage={error} />
 
             this.props.setTimeout(() => {
               this.setState({ startAnimating: true })

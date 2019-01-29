@@ -22,9 +22,12 @@ button[disabled]:active {
 }
 
 .button.is-text {
-  padding-left: 0;
-  padding-right: 0;
   text-decoration: none;
+
+  @media screen and (min-width: $desktop) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .button.is-text:hover,

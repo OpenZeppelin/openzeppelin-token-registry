@@ -1,5 +1,6 @@
 import { ethers } from 'ethers'
 import React, { PureComponent } from 'react'
+import { ErrorMessage } from '~/components/ErrorMessage'
 import { PackageListItem } from '~/components/packages/PackageListItem'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 import { vouchingQueries } from '~/queries/vouchingQueries'
@@ -71,8 +72,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
     }
 
     if (error) {
-      console.error(error)
-      return 'There was an error fetching the data. (Wrong Ethereum network?)'
+      return <ErrorMessage errorMessage={error} />
     }
 
     const events = this.eventsFromProps(this.props)
