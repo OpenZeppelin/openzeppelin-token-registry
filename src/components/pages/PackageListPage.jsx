@@ -70,7 +70,7 @@ export class PackageListPage extends PureComponent {
         <section className='section'>
           <div className='container'>
             <div className='columns'>
-              <div className='column main-content--column package-list--column is-full-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+              <div className='column main-content--column is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
                 <Subscription subscription={web3Queries.blockSubscription}>
                   {({ data }) => {
                     return (
