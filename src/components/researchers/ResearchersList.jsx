@@ -11,7 +11,7 @@ export class ResearchersList extends PureComponent {
       <Query query={vouchingQueries.vouchesQuery}>
         {({ loading, error, data }) => {
           if (loading) return null
-          if (error) return `Error!: ${error}`
+          if (error) return `${error}`
 
           const events = (data.Vouching ? data.Vouching.allEvents : []) || []
           const researchers = researchersVouchedTotals(events)

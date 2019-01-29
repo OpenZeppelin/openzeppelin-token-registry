@@ -4,6 +4,7 @@ import yn from 'yn'
 import { Link } from 'react-router-dom'
 import { Query, Subscription } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
+import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
 import { PhaseOneHero } from '~/components/packages/PhaseOneHero'
@@ -79,7 +80,9 @@ export class PackageListPage extends PureComponent {
                           const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
 
                           if (wrongNetwork) {
-                            return <span className='has-delayed-display'>No packages available on your current network.</span>
+                            return <ErrorMessage errorMessage={
+                              `No packages available on the currently selected Ethereum network.`
+                            } />
                           } else {
                             return showResearchersList
                               ? <ResearchersList location={this.props.location} />
