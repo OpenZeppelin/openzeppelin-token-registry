@@ -3,6 +3,8 @@ import { getMetamaskPermissions } from '~/web3/getMetamaskPermissions'
 import { ethers } from 'ethers'
 import { transactionQueries } from '~/queries/transactionQueries'
 
+let nextTxId = 1
+
 export const mutations = {
   resolvers: {
     Mutation: {
@@ -16,43 +18,64 @@ export const mutations = {
         const abi = abiMapping.getAbi('Vouching')
         const contract = new ethers.Contract(address, abi, signer)
 
+        window.contract = contract
+
         const methodFxn = contract[method]
 
         if (!methodFxn) {
           throw new Error(`Unknown function ${method} for contract Vouching`)
         }
 
-        methodFxn(...args)
-          .then(function (event) {
-            console.log('received hash', event.hash)
+        let data = { transactions: [] }
+        const query = transactionQueries.allTransactionsQuery
 
-            let data = { transactions: [] }
-            const query = transactionQueries.allTransactionsQuery
+        const txId = nextTxId++
 
-            // console.log('getCacheKey', getCacheKey({ hash, __typename: 'Transaction'}))
+        try {
+          data = cache.readQuery({ query })
+        } catch (error) {
+          console.error(error)
+        }
 
-            try {
-              data = window.client.readQuery({ query })
-            } catch (error) {
-              console.error(error)
-            }
+        const newTx = {
+          completed: false,
+          hash: '',
+          ...variables.txData,
+          id: txId,
+          __typename: 'Transaction',
+          type: 'Transaction'
+        }
 
-            const newTx = {
-              hash: event.hash,
-              completed: false,
-              ...variables.txData,
-              __typename: 'Transaction'
-            }
+        if (data.transactions) {
+          data.transactions.push(newTx)
+        } else {
+          data.transactions = [newTx]
+        }
 
-            if (data.transactions) {
-              data.transactions.push(newTx)
-            } else {
-              data.transactions = [newTx]
-            }
+        cache.writeQuery({ query, data })
 
-            window.client.writeQuery({ query, data })
+        const gasLimit = await contract.estimate[method](...args)
+        // Hack to ensure it works!
+        const newGasLimit = gasLimit.add(2000)
 
-            return null
+        return methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
+          .then(async function (event) {
+            const receipt = await provider.getTransactionReceipt(event.hash)
+            const error = receipt.status === 0
+            const id = `Transaction:${txId}`
+            const transaction = cache.readFragment({fragment: transactionQueries.transactionFragment, id})
+            const data = {...transaction, hash: event.hash, completed: true, error}
+            cache.writeData({id, data})
+
+            return data
+          })
+          .catch(error => {
+            const id = `Transaction:${txId}`
+            const transaction = cache.readFragment({fragment: transactionQueries.transactionFragment, id})
+            const data = {...transaction, completed: true, error}
+            cache.writeData({id, data})
+
+            return data
           })
       }
     }

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
-import { displayNumber } from '~/utils/displayNumber'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { web3Queries } from '~/queries/web3Queries'
@@ -41,7 +40,7 @@ export const VouchRow = graphql(web3Queries.accountQuery)(class _VouchRow extend
         </span>
 
         <span className='list--cell list__has-padding is-borderless'>
-          <ZepTokenLogo width='12' height='12' />&nbsp;{displayNumber(displayWeiToEther(this.props.amount))}
+          <ZepTokenLogo width='12' height='12' />&nbsp;{displayWeiToEther(this.props.amount)}
         </span>
 
         <span className='list--cell list__has-padding is-borderless'>

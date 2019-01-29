@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { transactionQueries } from '~/queries/transactionQueries'
 import { VouchMutationForm } from '~/components/packages/VouchMutationForm'
+import { get } from 'lodash'
 
 export const VouchButton = class _VouchButton extends Component {
   state = {
@@ -18,16 +19,7 @@ export const VouchButton = class _VouchButton extends Component {
         pollInterval={2000}
       >
         {({ data, refetch, loading, errors }) => {
-          let hasUncompletedTransaction = false
-
-          // if (errors) { console.error('errors', errors) }
-          // if (loading) { console.log('loading ', loading) }
-
-          if (!hasUncompletedTransaction && data && data.getUncompletedTransactionsByPackageId) {
-            // console.log(`got ${data.getUncompletedTransactionsByPackageId.length} transactions!`)
-            // console.log(data.getUncompletedTransactionsByPackageId[0])
-            hasUncompletedTransaction = (data.getUncompletedTransactionsByPackageId.length > 0)
-          }
+          const hasUncompletedTransaction = get(data, 'getUncompletedTransactionsByPackageId', []).length > 0
 
           const showVouchMutationForm = (this.state.isVouching || hasUncompletedTransaction)
 

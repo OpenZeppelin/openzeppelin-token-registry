@@ -41,7 +41,8 @@ const stateLink = withClientState({
     }
 
     type Transaction {
-      hash: ID!
+      id: ID
+      hash: String
       method: String
       args: [String]
       packageId: String

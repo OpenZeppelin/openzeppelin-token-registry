@@ -8,7 +8,11 @@ export const web3Resolvers = {
         return network.chainId
       },
       account: async function () {
-        return getProvider().getAddress()
+        const signer = getProvider().getSigner()
+        if (signer) {
+          return signer.getAddress()
+        }
+        return null
       }
     }
   }

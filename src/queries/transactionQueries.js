@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 const transactionFragment = gql`
   fragment transaction on Transaction {
+    id
     hash
     method
     args
@@ -12,6 +13,7 @@ const transactionFragment = gql`
 `
 
 export const transactionQueries = {
+  transactionFragment,
   allTransactionsQuery: gql`
     query allTransactionsQuery {
       transactions @client {

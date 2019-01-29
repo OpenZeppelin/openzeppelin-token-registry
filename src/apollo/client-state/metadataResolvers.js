@@ -13,7 +13,9 @@ export const metadataResolvers = {
           if (format === 'text') {
             return response.text()
           } else {
-            return response.json()
+            const json = await response.json()
+            json.__typename = 'Metadata'
+            return json
           }
         }).catch(error => {
           return {

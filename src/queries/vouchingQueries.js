@@ -14,6 +14,11 @@ export const vouchingFragments = {
         description
       }
     }
+  `,
+  totalVouchedFragment: gql`
+    fragment totalVouchedFragment on Vouching {
+      totalVouched(id: $id) @client
+    }
   `
 }
 

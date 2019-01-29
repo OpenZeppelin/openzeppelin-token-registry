@@ -12,7 +12,6 @@ export const transactionResolvers = {
         const { packageId } = args
 
         const allTransactions = context.cache.readQuery({
-          variables: { packageId },
           query: transactionQueries.allTransactionsQuery
         })
 

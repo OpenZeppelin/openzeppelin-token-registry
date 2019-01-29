@@ -4,6 +4,7 @@ import { Mutation, withApollo } from 'react-apollo'
 import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { toWei } from '~/utils/toWei'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
+import { vouchingQueries } from '~/queries/vouchingQueries'
 
 export const VouchMutationForm = withApollo(
   class _VouchMutationForm extends Component {
@@ -40,7 +41,7 @@ export const VouchMutationForm = withApollo(
     }
 
     render() {
-      const { hasUncompletedTransaction } = this.props
+      const { hasUncompletedTransaction, packageId } = this.props
       return (
         <Mutation
           mutation={Web3Mutations.sendTransaction}
@@ -59,8 +60,6 @@ export const VouchMutationForm = withApollo(
               onSubmit={(e) => {
                 e.preventDefault()
                 sendTransaction()
-                // startPolling(2000)
-                // refetch()
               }}
             >
               <div className='field has-addons is-right'>
@@ -88,7 +87,7 @@ export const VouchMutationForm = withApollo(
                     {!hasUncompletedTransaction ? 'Vouch' : ''}
                   </button>
                 </div>
-                
+
               </div>
               <p className={
                 classnames(
