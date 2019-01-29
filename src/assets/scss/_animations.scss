@@ -67,3 +67,36 @@
 .fade-in-enter {
   opacity: 1;
 }
+
+
+.slide-enter {
+  opacity: 0.01;
+  transition: all 1000ms ease-in-out;
+  transform: translate3d(0, 100px, 0);
+}
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transition: all 1000ms ease-in-out;
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-exit {
+  opacity: 1;
+  left: 0;
+  top: 0;
+  height: auto;
+  position: absolute;
+  transition: all 1000ms ease-in-out;
+  transform: translate3d(0, 0, 0);
+  width: 100%;
+}
+
+.slide-exit.slide-exit-active {
+  opacity: 0.01;
+  transform: translate3d(0, -100px, 0);
+}
+
+.slide-exit-done {
+  display: none;
+}

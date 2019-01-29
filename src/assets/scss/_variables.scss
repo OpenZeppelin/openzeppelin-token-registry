@@ -31,12 +31,13 @@ $navbar-dark-background-color: $navbar-grey;
 $navbar-dark-item-color: white;
 $navbar-dark-item-hover-color: #d9d9d9;
 $text: #141414;
-$green: #00C853;
-$yellow: #FF9800;
-$red: #FF005C;
+$green: #00c853;
+$yellow: #ff9800;
+$red: #ff005c;
 // $turqoise: #39e6e0;
 $cyan: #05a5f1;
-$blue: #085DFF;
+$blue: #085dff;
+$purple: #f105bc;
 
 // Derived variables
 $navbar-item-hover-color: $navbar-item-hover;
@@ -52,9 +53,9 @@ $link-focus-border: $link-hover-color;
 $link-active: $link-hover-color;
 $link-active-border: $link-hover-color;
 
-$hr-background-color: lighten($text, 70%) !default;
+$hr-background-color: lighten($text, 80%) !default;
 $hr-height: 1px !default
-$hr-margin: 1rem 0 1.5rem 0 !default
+$hr-margin: 1.5rem 0 1rem 0 !default
 
 $code: $text;
 

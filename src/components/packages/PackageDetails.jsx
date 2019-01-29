@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
 import yn from 'yn'
 import { Query } from 'react-apollo'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -14,14 +15,25 @@ import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { shortenAddress } from '~/utils/shortenAddress'
+import { mixpanel } from '~/mixpanel'
 
 export class PackageDetails extends Component {
-  state = {}
+  state = { voted: false }
 
   static propTypes = {
     metadata: PropTypes.object.isRequired,
     vouching: PropTypes.object.isRequired,
     registeredEvent: PropTypes.object.isRequired
+  }
+
+  handleVoteClick = (answer, packageName, packageId) => {
+    mixpanel().track('vote', {
+      answer,
+      packageName,
+      packageId: packageId.toString()
+    })
+
+    this.setState({ voted: true })
   }
 
   render () {
@@ -36,7 +48,7 @@ export class PackageDetails extends Component {
     return (
       <>
         <div className='columns reverse-column-order'>
-          <div className='column is-6-widescreen'>
+          <div className='column is-8-tablet'>
             <h1 className='title is-size-1 has-text-weight-normal'>
               {metadata.name}
 
@@ -53,12 +65,17 @@ export class PackageDetails extends Component {
               {metadata.description}
             </p>
 
+            <h5 className='is-size-5'>
+              Link this package:
+            </h5>
+            <br />
+
             <CodeSnippet metadata={metadata} />
 
-            <GitHubLink url={`https://github.com/${repo}`} />
+            <GitHubLink url={`https://github.com/${repo}`} viewLink />
           </div>
 
-          <div className='column is-6-widescreen has-text-right--desktop'>
+          <div className='column is-4-desktop has-text-right--desktop'>
             <div className='package-item--image'>
               <GithubProfileImage user={owner} />
             </div>
@@ -71,9 +88,62 @@ export class PackageDetails extends Component {
 
         <hr />
 
+        <div className='columns'>
+          <div className='column'>
+            <div className='message'>
+                <CSSTransition
+                  timeout={1000}
+                  classNames='slide'
+                  in={this.state.voted}
+                >
+                  {state => (
+                    <div className="message-body message--cta has-text-centered slide-enter">
+                      <br />
+                      <br />
+                      <h5 className="is-size-5 has-text-grey">
+                        Thanks for your input!
+                      </h5>
+                    </div>
+                  )}
+                </CSSTransition>
+
+                <CSSTransition
+                  timeout={1000}
+                  classNames='slide'
+                  in={!this.state.voted}
+                >
+                  {state => (
+                    <div className="message-body message--cta has-text-centered slide-exit">
+                      <h5 className="is-size-5 has-text-grey">
+                        Would you endorse this package?
+                      </h5>
+                      <button
+                        className="button is-purple is-pill"
+                        onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
+                      >
+                        Yes
+                      </button>
+                      &nbsp;
+                      &nbsp;
+                      <button
+                        className="button is-dark is-pill"
+                        onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
+                      >
+                        No
+                      </button>
+                    </div>
+                  )}
+                </CSSTransition>
+
+            </div>
+          </div>
+        </div>
+
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+
+
           <div className='columns'>
-            <div className='column is-10-widescreen'>
+            <div className='column is-10-tablet'>
               <Query query={vouchingQueries.vouchesQuery} variables={{ id }}>
                 {({ data }) => {
                   const { Vouching } = data || {}
@@ -118,7 +188,7 @@ export class PackageDetails extends Component {
 
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
           <div className='columns'>
-            <div className='column is-12-widescreen'>
+            <div className='column is-12-tablet'>
               <h5 className='is-size-5 has-text-weight-semibold'>
                 Challenges
               </h5>
