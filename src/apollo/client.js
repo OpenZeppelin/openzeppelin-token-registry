@@ -32,9 +32,45 @@ const stateLink = withClientState({
     mutations
   ),
   cache,
-  defaults: {
-    // networkId: null
-  }
+  typeDefs: `
+    type Metadata {
+      name: String
+      description: String
+      version: String
+      metadata(id: String!): Metadata
+    }
+
+    type Transaction {
+      hash: ID!
+      method: String
+      args: [String]
+      packageId: String
+      amount: String
+      completed: String
+    }
+
+    type Event {
+    }
+
+    type Vouching {
+      allEvents: [Event]
+      Challenged: [Event]
+      Registered: [Event]
+      totalVouched(id: String!)
+    }
+
+    type Block {
+    }
+
+    type Query {
+      networkId: String
+      account: String
+      getUncompletedTransactionsByPackageId: [Transaction]
+      metadata: Metadata
+      transactions: [Transaction]
+      block: Block
+    }
+  `
 })
 
 if (!process.env.REACT_APP_METADATA_URI) {

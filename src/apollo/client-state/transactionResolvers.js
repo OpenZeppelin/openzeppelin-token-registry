@@ -1,6 +1,9 @@
 import { transactionQueries } from '~/queries/transactionQueries'
 
 export const transactionResolvers = {
+  defaults: {
+    transactions: []
+  },
   resolvers: {
     Query: {
       getUncompletedTransactionsByPackageId: async function (object, args, context, info) {

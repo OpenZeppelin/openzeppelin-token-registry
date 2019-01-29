@@ -7,7 +7,7 @@ export const vouchingFragments = {
     }
   `,
   metadataFragment: gql`
-    fragment Metadata on Vouching {
+    fragment md on Metadata {
       metadata(uri: $uri) @client {
         name
         version
@@ -41,7 +41,7 @@ export const vouchingQueries = {
   `,
   packageQuery: gql`
     query packageQuery($uri: String!, $id: String!) {
-      ...Metadata
+      ...md
       Vouching @contract {
         totalVouched(id: $id)
         ...ChallengedEvents
