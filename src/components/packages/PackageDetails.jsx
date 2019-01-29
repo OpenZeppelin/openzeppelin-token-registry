@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
 import yn from 'yn'
 import { Query } from 'react-apollo'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -17,7 +18,7 @@ import { shortenAddress } from '~/utils/shortenAddress'
 import { mixpanel } from '~/mixpanel'
 
 export class PackageDetails extends Component {
-  state = {}
+  state = { voted: false }
 
   static propTypes = {
     metadata: PropTypes.object.isRequired,
@@ -90,15 +91,29 @@ export class PackageDetails extends Component {
         <div className='columns'>
           <div className='column'>
             <div className='message'>
+                <CSSTransition
+                  timeout={1000}
+                  classNames='slide'
+                  in={this.state.voted}
+                >
+                  {state => (
+                    <div className="message-body message--cta has-text-centered slide-enter">
+                      <br />
+                      <br />
+                      <h5 className="is-size-5 has-text-grey">
+                        Thanks for your input!
+                      </h5>
+                    </div>
+                  )}
+                </CSSTransition>
 
-              <div className="message-body message--cta has-text-centered">
-                {
-                  this.state.voted ? (
-                    <h5 className="is-size-5 has-text-grey">
-                      Thanks for your input!
-                    </h5>
-                  ) : (
-                    <>
+                <CSSTransition
+                  timeout={1000}
+                  classNames='slide'
+                  in={!this.state.voted}
+                >
+                  {state => (
+                    <div className="message-body message--cta has-text-centered slide-exit">
                       <h5 className="is-size-5 has-text-grey">
                         Would you endorse this package?
                       </h5>
@@ -116,10 +131,9 @@ export class PackageDetails extends Component {
                       >
                         No
                       </button>
-                    </>
-                  )
-                }
-              </div>
+                    </div>
+                  )}
+                </CSSTransition>
 
             </div>
           </div>
