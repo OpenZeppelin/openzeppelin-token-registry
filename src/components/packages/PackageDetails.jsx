@@ -15,7 +15,6 @@ import { VouchRow } from '~/components/packages/VouchRow'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-// import { shortenAddress } from '~/utils/shortenAddress'
 import { mixpanel } from '~/mixpanel'
 import { challengeProjection } from '~/projections/challengeProjection'
 
@@ -64,8 +63,7 @@ export class PackageDetails extends Component {
               Maintained by <EtherscanAddressLink
                 address={values.owner}
               >
-                <EnsName address={values.owner} />
-                {/*shortenAddress(values.owner)*/}
+                <EnsName address={values.owner} shorten />
               </EtherscanAddressLink>
             </h6>
 
