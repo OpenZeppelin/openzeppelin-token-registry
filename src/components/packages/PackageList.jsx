@@ -66,11 +66,11 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
     var content
 
     const packageListLoader =
-      <React.Fragment>
+      <>
         <PackageListItemLoader key='0' />
         <PackageListItemLoader key='1' />
         <PackageListItemLoader key='2' />
-      </React.Fragment>
+      </>
 
     if (error) {
       return <ErrorMessage errorMessage={error} />
@@ -116,7 +116,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
               }
 
               item = (
-                <>
+                <React.Fragment key={`package-item-fragment-${index}`}>
                   {item}
                   <Query
                     key={`package-item-query-${index}`}
@@ -150,11 +150,11 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
                         )
                       }
                     }
-                  </Query>    
-                </>
+                  </Query>
+                </React.Fragment>
               )
-                
-                
+
+
               return item
             })
           }
@@ -181,7 +181,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             </div>
           </div>
         */}
-        
+
         {content}
       </>
     )

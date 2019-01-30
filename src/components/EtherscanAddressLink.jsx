@@ -1,7 +1,7 @@
 import React from 'react'
-import { formatEtherscanAddressUrl } from '~/utils/formatEtherscanAddressUrl'
 import { Query } from 'react-apollo'
 import { web3Queries } from '~/queries/web3Queries'
+import { formatEtherscanAddressUrl } from '~/utils/formatEtherscanAddressUrl'
 
 export function EtherscanAddressLink ({ address, children, className }) {
   return (
