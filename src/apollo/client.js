@@ -13,6 +13,7 @@ import { transactionResolvers } from './client-state/transactionResolvers'
 import { web3Resolvers } from './client-state/web3Resolvers'
 import { mutations } from './client-state/mutations'
 import { ethers } from 'ethers'
+import { subscribeAndRefetch } from './subscribeAndRefetch'
 
 let provider = getProvider()
 window.provider = provider
@@ -33,53 +34,7 @@ const stateLink = withClientState({
     web3Resolvers,
     mutations
   ),
-  cache,
-  typeDefs: `
-    type Metadata {
-      name: String
-      description: String
-      version: String
-      metadata(uri: String!): Metadata
-    }
-
-    type Transaction {
-      id: ID
-      hash: String
-      method: String
-      args: [String]
-      packageId: String
-      amount: String
-      completed: String
-    }
-
-    type Event {
-    }
-
-    type Package {
-      id: ID
-      totalVouched: String
-      allEvents: [Event]
-    }
-
-    type Vouching {
-      allEvents: [Event]
-      Challenged: [Event]
-      Registered: [Event]
-      totalVouched(id: String!)
-    }
-
-    type Block {
-    }
-
-    type Query {
-      networkId: String
-      account: String
-      getUncompletedTransactionsByPackageId: [Transaction]
-      metadata: Metadata
-      transactions: [Transaction]
-      block: Block
-    }
-  `
+  cache
 })
 
 if (!process.env.REACT_APP_METADATA_URI) {
@@ -91,5 +46,7 @@ export const client = new ApolloClient({
   cache,
   link: ApolloLink.from([restLink, stateLink, ethereumLink])
 })
+
+subscribeAndRefetch(client)
 
 window.client = client
