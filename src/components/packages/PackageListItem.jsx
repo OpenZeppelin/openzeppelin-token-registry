@@ -140,14 +140,14 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                     to={link}
                     className='no-select'
                   >
-                    <h4 className='is-size-4 has-text-weight-normal'>
+                    <h4 className='is-size-4 has-text-weight-normal is-inline-grid-top'>
                       {get(metadata, 'name')}
                       <span className='package-item--version has-text-grey has-text-weight-light'>
                         v{get(metadata, 'version')}
                       </span>
                     </h4>
 
-                    <p className='is-size-6 description'>
+                    <p className='is-size-6 description is-inline-grid-bottom'>
                       {description}
                     </p>
                   </Link>
@@ -183,6 +183,15 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                 </button>
                 */}
 
+                <span className='list-item__cell list-item__cell--blank'>
+                  <Link
+                    to={link}
+                    className='no-select'
+                  >
+                    &nbsp;
+                  </Link>
+                </span>
+
                 <span className={`
                   ${animatingCssClassNames}
                   list-item__cell
@@ -198,20 +207,21 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                     </span>
                   </Link>
 
+
                   {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
                     <>
                       <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
                         VOUCHED
                       </h6>
-
+ 
                       <span className='is-inline-block'>
                         <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
                       </span>
-
+ 
                       <h3 className='is-inline-block is-size-3 has-text-weight-light'>
                         {displayWeiToEther(get(Vouching, 'totalVouched'))}
                       </h3>
-
+ 
                       <span
                         to={link}
                         className='is-block list-item--challenges-link'
@@ -220,6 +230,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       </span>
                     </>
                   )}
+
                 </span>
 
               </div>

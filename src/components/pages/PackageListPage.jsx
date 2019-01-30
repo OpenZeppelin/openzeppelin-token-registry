@@ -44,7 +44,7 @@ export class PackageListPage extends PureComponent {
                     className='button is-text link is-monospaced'
                     to={routes.HOME}
                   >
-                    EVM Packages
+                    Top Packages
                   </Link>
                 </p>
                 <p
