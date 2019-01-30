@@ -4,6 +4,7 @@ import yn from 'yn'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
+import { FooterContainer } from '~/components/layout/Footer'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
@@ -91,6 +92,8 @@ export class PackageListPage extends PureComponent {
             </div>
           </div>
         </section>
+
+        <FooterContainer />
       </div>
     )
   }

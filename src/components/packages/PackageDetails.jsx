@@ -5,6 +5,7 @@ import yn from 'yn'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { CodeSnippet } from '~/components/CodeSnippet'
+import { EnsName } from '~/components/EnsName'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
@@ -14,7 +15,7 @@ import { VouchRow } from '~/components/packages/VouchRow'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { shortenAddress } from '~/utils/shortenAddress'
+// import { shortenAddress } from '~/utils/shortenAddress'
 import { mixpanel } from '~/mixpanel'
 import { challengeProjection } from '~/projections/challengeProjection'
 
@@ -60,7 +61,12 @@ export class PackageDetails extends Component {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <EtherscanAddressLink address={values.owner}>{shortenAddress(values.owner)}</EtherscanAddressLink>
+              Maintained by <EtherscanAddressLink
+                address={values.owner}
+              >
+                <EnsName address={values.owner} />
+                {/*shortenAddress(values.owner)*/}
+              </EtherscanAddressLink>
             </h6>
 
             <p className='is-size-6 package-item--description'>

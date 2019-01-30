@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { ScrollToTop } from '~/components/ScrollToTop'
+import { FooterContainer } from '~/components/layout/Footer'
 import * as routes from '~/../config/routes'
 
 export const FourOhFour = class _FourOhFour extends PureComponent {
@@ -16,7 +17,7 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
 
         <div className='container'>
           <div className='columns'>
-            <div className='column main-content--column is-full-desktop is-12-widescreen'>
+            <div className='column main-content--column is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
               <Link
                 to={routes.HOME}
                 className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
@@ -41,13 +42,15 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
 
               <Link
                 to={routes.HOME}
-                className='button is-pill is-info'
+                className='button is-pill is-purple'
               >
-                {'<'} Take me back to the homepage!
+                {'<'} Take me back to the packages
               </Link>
             </div>
           </div>
         </div>
+
+        <FooterContainer />
       </div>
     )
   }

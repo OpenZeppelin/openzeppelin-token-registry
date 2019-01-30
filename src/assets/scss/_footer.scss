@@ -1,0 +1,38 @@
+.footer {
+  flex: 0 0 350px;
+  margin-top: auto;
+}
+
+.footer {
+  background-color: $dark;
+  color: $grey-light;
+  padding: 0;
+}
+
+.footer-brand .footer-item svg {
+  width: 130px;
+}
+
+.footer--secondary {
+  background-color: #0095e4;
+}
+
+.footer--secondary .footer-item {
+  color: white;
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.footer .container {
+  padding: 3rem 0 3.5rem;
+}
+
+.footer .container-fluid {
+  padding: 3.5rem 0 4rem;
+}
+
+.footer--secondary .footer-item--copyright {
+  color: #7ac9f3;
+  display: block;
+  margin-top: 0.5rem;
+}
