@@ -16,7 +16,8 @@ export const metadataResolvers = {
           return json
         }).catch(error => {
           return {
-            error
+            error,
+            __typename: 'Metadata'
           }
         })
       }

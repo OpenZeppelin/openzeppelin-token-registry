@@ -36,7 +36,7 @@ export const vouchingQueries = {
       Vouching @contract(type: "GlobalInfo", id: "1") {
         id
         __typename
-        registeredEvents: Registered @pastEvents(fromBlock: 0, toBlock: "latest")
+        Registered @pastEvents(fromBlock: 0, toBlock: "latest")
       }
     }
   `,

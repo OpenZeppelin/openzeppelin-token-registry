@@ -38,7 +38,7 @@ export class PackageItemPage extends PureComponent {
                   if (loading) return null
                   if (error) return <ErrorMessage errorMessage={error} />
 
-                  const events = data.Vouching ? data.Vouching.registeredEvents : []
+                  const events = data.Vouching ? data.Vouching.Registered : []
                   const id = this.props.match.params.id
                   const event = events.find((event) => event.parsedLog.values.id.eq(id))
 
@@ -52,7 +52,7 @@ export class PackageItemPage extends PureComponent {
                   return (
                     <Query
                       query={vouchingQueries.packageQuery}
-                      variables={{ uri: packageItem.metadataURI, id: packageItem.id }}
+                      variables={{ uri: packageItem.metadataURI, id: packageItem.id.toString() }}
                     >
                       {
                         ({ loading, error, data }) => {
