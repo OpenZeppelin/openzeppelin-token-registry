@@ -142,7 +142,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                   >
                     <h4 className='is-size-4 has-text-weight-normal is-inline-grid-top'>
                       {get(metadata, 'name')}
-                      <span className='package-item--version has-text-grey has-text-weight-light'>
+                      <span className='package-item--version has-text-grey has-text-weight-light is-size-5'>
                         v{get(metadata, 'version')}
                       </span>
                     </h4>

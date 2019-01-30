@@ -7,6 +7,15 @@
   color: white;
 }
 
+.has-text-primary {
+  color: $link !important;
+}
+
+a.has-text-primary:hover,
+a.has-text-primary:focus {
+  color: $link-hover !important;
+}
+
 // This fixes issues with Bulma and columns on mobile
 .column {
   @media screen and (max-width: $desktop) {
@@ -69,7 +78,10 @@ a.is-dark {
 
 // This is used by the page / layout transitions
 .is-positioned-absolutely {
+  display: flex;
   position: absolute;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 // This is used by the page / layout transitions
@@ -77,19 +89,11 @@ a.is-dark {
   width: 100%;
 }
 
-.has-text-primary {
-  color: $link !important;
-}
-
-a.has-text-primary:hover,
-a.has-text-primary:focus {
-  color: $link-hover !important;
-}
-
 .main-content--column {
   max-width: 1000px;
   margin-left: auto !important;
   margin-right: auto !important;
+  margin-bottom: 100px;
 }
 
 @media screen and (max-width: 769px) {
