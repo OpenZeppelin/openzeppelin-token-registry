@@ -7,7 +7,6 @@ import { CopyOutline } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 export const CodeBox = ReactTimeout(class _CodeBox extends PureComponent {
-
   handleCodeClick = (e) => {
     e.stopPropagation()
     e.preventDefault()

@@ -9,7 +9,7 @@ export const VouchButton = class _VouchButton extends Component {
     isVouching: false
   }
 
-  render() {
+  render () {
     const { packageId } = this.props
 
     return (

@@ -15,7 +15,7 @@ export const VouchMutationForm = withApollo(
       ongoingTx: null
     }
 
-    constructor(props) {
+    constructor (props) {
       super(props)
 
       this.textInputRef = React.createRef()
@@ -35,7 +35,7 @@ export const VouchMutationForm = withApollo(
       this.setState({ txData: { ...this.state.txData, args, packageId, amount } })
     }
 
-    componentDidMount() {
+    componentDidMount () {
       this.textInputRef.current.focus()
     }
 
@@ -86,7 +86,6 @@ export const VouchMutationForm = withApollo(
                     {!hasUncompletedTransaction ? 'Vouch' : ''}
                   </button>
                 </div>
-
               </div>
               <p className={
                 classnames(

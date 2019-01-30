@@ -27,9 +27,9 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
   }
 
   componentDidMount () {
-    // this.props.setTimeout(() => {
-    //   this.setState({ startAnimating: true })
-    // }, 0)
+    this.props.setTimeout(() => {
+      this.setState({ startAnimating: true })
+    }, 200)
   }
 
   handleGitHubLinkClick = (url) => {
@@ -64,11 +64,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             if (loading) return <PackageListItemLoader />
             if (error) return <ErrorMessage errorMessage={error} />
 
-            this.props.setTimeout(() => {
-              this.setState({ startAnimating: true })
-            }, 20)
-
-            const { metadata, Vouching } = data
+            const { metadata, Vouching } = this.props.data
             const { description, version } = metadata || {}
             const { Challenged } = Vouching || {}
 
@@ -201,7 +197,6 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       View More &gt;
                     </span>
                   </Link>
-
 
                   {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
                     <>
