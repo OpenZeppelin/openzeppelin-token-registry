@@ -8,13 +8,15 @@ export const PhaseOneHero = ({ heroColor }) => {
         <div className='container'>
           <div className='columns'>
             <div className='column is-5-tablet is-offset-1-tablet is-5-desktop is-offset-1-desktop is-4-widescreen is-offset-2-widescreen is-4-fullhd is-offset-2-fullhd'>
+              {/*
               <h4 className='title hero--title is-size-4 is-hidden-touch'>
                 ZeppelinOS Registry
               </h4>
-              <p>
+              */}
+              <p className='is-size-5'>
                 Introducing the list of most trusted on on-chain EVM packages.
               </p>
-              <p>
+              <p className='is-size-5'>
                 EVM packages are reusable on-chain smart contract libraries, vetted by the open source community.
               </p>
             </div>

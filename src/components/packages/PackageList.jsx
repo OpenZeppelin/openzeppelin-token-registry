@@ -90,48 +90,72 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
         const idB = b.parsedLog.values.id
         return this.totalVouched(idA).cmp(this.totalVouched(idB))
       })
+      // const sortedEventsDuplicated = sortedEvents.concat(sortedEvents)
+
 
       content = (
         <>
           {
             sortedEvents.map((event, index) => {
+              let item
               const packageValues = event.parsedLog.values
 
-              return (
-                <Query
-                  key={`package-item-query-${index}`}
-                  query={vouchingQueries.packageQuery}
-                  variables={{
-                    uri: packageValues.metadataURI,
-                    id: packageValues.id.toString()
-                  }}
-                >
-                  {
-                    ({ loading, error, data }) => {
-                      // using the PackageListItemLoader here can cause packages to not load
-                      // if (loading) return <PackageListItemLoader />
-                      if (error) return <ErrorMessage errorMessage={error} />
+              if (index === 0) {
+                item = (
+                  <div className='beta-message has-text-centered'>
+                    <div className='beta-message-body'>
+                      <h5 className='is-size-5 has-text-grey'>
+                        Want to see your package here?
+                      </h5>
+                      <button className='button is-purple is-pill'>
+                        Join the Beta
+                      </button>
+                    </div>
+                  </div>
+                )
+              }
 
-                      const { Vouching } = data
+              item = (
+                <>
+                  {item}
+                  <Query
+                    key={`package-item-query-${index}`}
+                    query={vouchingQueries.packageQuery}
+                    variables={{
+                      uri: packageValues.metadataURI,
+                      id: packageValues.id.toString()
+                    }}
+                  >
+                    {
+                      ({ loading, error, data }) => {
+                        // using the PackageListItemLoader here can cause packages to not load
+                        // if (loading) return <PackageListItemLoader />
+                        if (error) return <ErrorMessage errorMessage={error} />
 
-                      if (displayWeiToEther(get(Vouching, 'totalVouched')) === '0') {
-                        console.log('skipping package with 0 vouched ZEP')
-                        return null
+                        const { Vouching } = data
+
+                        if (displayWeiToEther(get(Vouching, 'totalVouched')) === '0') {
+                          console.log('skipping package with 0 vouched ZEP')
+                          return null
+                        }
+
+                        return (
+                          <PackageListItem
+                            index={index}
+                            location={this.props.location}
+                            data={data}
+                            package={packageValues}
+                            key={`package-item-${index}`}
+                          />
+                        )
                       }
-
-                      return (
-                        <PackageListItem
-                          index={index}
-                          location={this.props.location}
-                          data={data}
-                          package={packageValues}
-                          key={`package-item-${index}`}
-                        />
-                      )
                     }
-                  }
-                </Query>
+                  </Query>    
+                </>
               )
+                
+                
+              return item
             })
           }
         </>
@@ -140,12 +164,14 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
     return (
       <>
-        <div className='has-text-centered'>
-          {/*}<h2 className='is-size-2'>
-            Top Trusted Packages
-          </h2>*/}
-          <div className='message'>
-            <div className='message-body message--cta'>
+        <h5 className='is-size-5'>
+          Top Trusted Packages
+        </h5>
+        <br />
+
+        {/*
+          <div className='beta-message has-text-centered'>
+            <div className='beta-message-body'>
               <h5 className='is-size-5 has-text-grey'>
                 Want to see your package here?
               </h5>
@@ -154,7 +180,8 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
               </button>
             </div>
           </div>
-        </div>
+        */}
+        
         {content}
       </>
     )
