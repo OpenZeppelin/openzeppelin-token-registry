@@ -91,55 +91,54 @@ export class PackageDetails extends Component {
         <div className='columns'>
           <div className='column'>
             <div className='message'>
-                <CSSTransition
-                  timeout={1000}
-                  classNames='slide'
-                  in={this.state.voted}
-                >
-                  {state => (
-                    <div className="message-body message--cta has-text-centered slide-enter">
-                      <br />
-                      <h5 className="is-size-5 has-text-grey">
+              <CSSTransition
+                timeout={1000}
+                classNames='slide'
+                in={this.state.voted}
+              >
+                {state => (
+                  <div className='message-body message--cta has-text-centered slide-enter'>
+                    <br />
+                    <h5 className='is-size-5 has-text-grey'>
                         Thanks for your input!
-                      </h5>
-                    </div>
-                  )}
-                </CSSTransition>
+                    </h5>
+                  </div>
+                )}
+              </CSSTransition>
 
-                <CSSTransition
-                  timeout={1000}
-                  classNames='slide'
-                  in={!this.state.voted}
-                >
-                  {state => (
-                    <div className="message-body message--cta has-text-centered slide-exit">
-                      <h5 className="is-size-5 has-text-grey">
+              <CSSTransition
+                timeout={1000}
+                classNames='slide'
+                in={!this.state.voted}
+              >
+                {state => (
+                  <div className='message-body message--cta has-text-centered slide-exit'>
+                    <h5 className='is-size-5 has-text-grey'>
                         Would you endorse this package?
-                      </h5>
-                      <button
-                        className="button is-purple is-pill"
-                        onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
-                      >
+                    </h5>
+                    <button
+                      className='button is-purple is-pill'
+                      onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
+                    >
                         Yes
-                      </button>
+                    </button>
                       &nbsp;
                       &nbsp;
-                      <button
-                        className="button is-dark is-pill"
-                        onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
-                      >
+                    <button
+                      className='button is-dark is-pill'
+                      onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
+                    >
                         No
-                      </button>
-                    </div>
-                  )}
-                </CSSTransition>
+                    </button>
+                  </div>
+                )}
+              </CSSTransition>
 
             </div>
           </div>
         </div>
 
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
-
 
           <div className='columns'>
             <div className='column is-10-tablet'>
@@ -158,7 +157,7 @@ export class PackageDetails extends Component {
                   return (
                     <>
                       <h5 className='is-size-5 has-text-weight-semibold'>
-                        {vouches.length} addresses vouched {displayWeiToEther(vouching.totalVouched)} ZEP
+                        {vouches.length} {vouches.length === 1 ? 'address' : 'addresses'} vouched {displayWeiToEther(vouching.totalVouched)} ZEP
                       </h5>
 
                       <div className='list--wrapper'>
@@ -208,19 +207,19 @@ export class PackageDetails extends Component {
               <div className='list--wrapper'>
                 <ul className='list is-fullwidth'>
                   <li className='list--row list--row__head list--row_challenge'>
-                    <span className="list--cell list--cell__head">
+                    <span className='list--cell list--cell__head'>
                       Name
                     </span>
-                    <span className="list--cell list--cell__head">
+                    <span className='list--cell list--cell__head'>
                       Status
                     </span>
-                    <span className="list--cell list--cell__head">
+                    <span className='list--cell list--cell__head'>
                       Severity
                     </span>
-                    <span className="list--cell list--cell__head">
+                    <span className='list--cell list--cell__head'>
                       Bounty
                     </span>
-                    <span className="list--cell list--cell__head" />
+                    <span className='list--cell list--cell__head' />
                   </li>
                   {
                     vouching.Challenged.map(challenged =>
@@ -233,7 +232,7 @@ export class PackageDetails extends Component {
                   }
                   {noChallenges &&
                     <li className='list--row list--row__blank-state'>
-                      <span className="list--cell list--cell__blank-state">
+                      <span className='list--cell list--cell__blank-state'>
                         There are currently no challenges. Create a challenge by running: &nbsp;
                         <br />
                         <br />
@@ -246,7 +245,7 @@ export class PackageDetails extends Component {
             </div>
           </div>
         )
-      }
+        }
 
       </>
     )

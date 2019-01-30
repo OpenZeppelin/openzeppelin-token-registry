@@ -44,7 +44,7 @@ export const VouchRow = graphql(web3Queries.accountQuery)(class _VouchRow extend
         </span>
 
         <span className='list--cell list__has-padding is-borderless'>
-          {isUser ? <span className="tag has-arrow-left is-uppercase is-link">You</span> : null}
+          {isUser ? <span className='tag has-arrow-left is-uppercase is-link'>You</span> : null}
         </span>
       </li>
     )
