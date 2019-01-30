@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 
-export function subscribeAndRefetch(apolloClient) {
-
+export function subscribeAndRefetch (apolloClient) {
   // The following subscription listens for new vouches
   apolloClient.subscribe({
     query: gql`
@@ -16,10 +15,15 @@ export function subscribeAndRefetch(apolloClient) {
     if (error) {
       console.error(error)
     } else {
+      if (!result.args) {
+        console.warn('no args')
+        return
+      }
+
       apolloClient.query({
         query: vouchingQueries.vouchQuery,
         variables: { id: result.args[0].toString() },
-        fetchPolicy: "network-only"
+        fetchPolicy: 'network-only'
       })
     }
   })
@@ -38,7 +42,7 @@ export function subscribeAndRefetch(apolloClient) {
     } else {
       apolloClient.query({
         query: vouchingQueries.eventsQuery,
-        fetchPolicy: "network-only"
+        fetchPolicy: 'network-only'
       })
     }
   })

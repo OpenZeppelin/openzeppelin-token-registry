@@ -1,40 +1,48 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
+import { shortenAddress } from '~/utils/shortenAddress'
 import { getProvider } from '~/web3/getProvider'
 
 export const EnsName = class _EnsName extends Component {
   state = {}
 
   resolveEnsName = async (provider) => {
-    let value
     let address = this.props.address
 
     // test address w/ ens registered on ropsten & mainnet
     // address = '0x6fC21092DA55B392b045eD78F4732bff3C580e2c'
-    value = await provider.lookupAddress(address)
 
-    return value
-  }
-
-  async componentDidMount() {
-    const provider = await getProvider()
-
-    this.setState({
-      value: this.props.address
-    }, async () => {
-      const result = await this.resolveEnsName(provider)
+    try {
+      let result = await provider.lookupAddress(address)
 
       if (result !== null) {
         this.setState({
           value: result
         })
       }
-    })
+    } catch (error) {
+      console.warn(error)
+    }
+  }
+
+  async componentDidMount() {
+    const provider = await getProvider()
+
+    this.resolveEnsName(provider)
   }
 
   render () {
     return (
       <React.Fragment>
-        {this.state.value}
+        <span
+          name={this.props.shorten ? shortenAddress(this.props.address) : this.props.address}
+          className={classnames(
+            'animate-content', {
+              'animate-content-enter': this.state.value
+            }
+          )}
+          title={this.state.value}
+        />
       </React.Fragment>
     )
   }
