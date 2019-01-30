@@ -63,6 +63,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
   render () {
     const { loading, error } = this.props.data || {}
+    var content
 
     const packageListLoader =
       <React.Fragment>
@@ -71,25 +72,71 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
         <PackageListItemLoader key='2' />
       </React.Fragment>
 
-    if (loading) {
-      return packageListLoader
-    }
-
     if (error) {
       return <ErrorMessage errorMessage={error} />
     }
 
-    const events = this.eventsFromProps(this.props)
+    if (loading) {
+      content = packageListLoader
+    } else {
+      const events = this.eventsFromProps(this.props)
 
-    if (Object.keys(this.state.totalVouches).length !== events.length) {
-      return packageListLoader
+      if (Object.keys(this.state.totalVouches).length !== events.length) {
+        content = packageListLoader
+      }
+
+      const sortedEvents = events.sort((a, b) => {
+        const idA = a.parsedLog.values.id
+        const idB = b.parsedLog.values.id
+        return this.totalVouched(idA).cmp(this.totalVouched(idB))
+      })
+
+      content = (
+        <>
+          {
+            sortedEvents.map((event, index) => {
+              const packageValues = event.parsedLog.values
+
+              return (
+                <Query
+                  key={`package-item-query-${index}`}
+                  query={vouchingQueries.packageQuery}
+                  variables={{
+                    uri: packageValues.metadataURI,
+                    id: packageValues.id.toString()
+                  }}
+                >
+                  {
+                    ({ loading, error, data }) => {
+                      // using the PackageListItemLoader here can cause packages to not load
+                      // if (loading) return <PackageListItemLoader />
+                      if (error) return <ErrorMessage errorMessage={error} />
+
+                      const { Vouching } = data
+
+                      if (displayWeiToEther(get(Vouching, 'totalVouched')) === '0') {
+                        console.log('skipping package with 0 vouched ZEP')
+                        return null
+                      }
+
+                      return (
+                        <PackageListItem
+                          index={index}
+                          location={this.props.location}
+                          data={data}
+                          package={packageValues}
+                          key={`package-item-${index}`}
+                        />
+                      )
+                    }
+                  }
+                </Query>
+              )
+            })
+          }
+        </>
+      )
     }
-
-    const sortedEvents = events.sort((a, b) => {
-      const idA = a.parsedLog.values.id
-      const idB = b.parsedLog.values.id
-      return this.totalVouched(idA).cmp(this.totalVouched(idB))
-    })
 
     return (
       <>
@@ -108,48 +155,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             </div>
           </div>
         </div>
-
-        {
-          sortedEvents.map((event, index) => {
-            const packageValues = event.parsedLog.values
-
-            return (
-              <Query
-                key={`package-item-query-${index}`}
-                query={vouchingQueries.packageQuery}
-                variables={{
-                  uri: packageValues.metadataURI,
-                  id: packageValues.id.toString()
-                }}
-              >
-                {
-                  ({ loading, error, data }) => {
-                    // using the PackageListItemLoader here can cause packages to not load
-                    // if (loading) return <PackageListItemLoader />
-                    if (error) return <ErrorMessage errorMessage={error} />
-
-                    const { Vouching } = data
-
-                    if (displayWeiToEther(get(Vouching, 'totalVouched')) === '0') {
-                      console.log('skipping package with 0 vouched ZEP')
-                      return null
-                    }
-
-                    return (
-                      <PackageListItem
-                        index={index}
-                        location={this.props.location}
-                        data={data}
-                        package={packageValues}
-                        key={`package-item-${index}`}
-                      />
-                    )
-                  }
-                }
-              </Query>
-            )
-          })
-        }
+        {content}
       </>
     )
   }
