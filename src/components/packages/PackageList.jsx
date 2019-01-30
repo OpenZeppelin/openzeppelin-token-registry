@@ -26,7 +26,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
       events.map(event => {
         const id = event.parsedLog.values.id
         return (
-          client.query({ query: vouchingQueries.totalVouchesQuery, variables: { id } })
+          client.query({ query: vouchingQueries.vouchQuery, variables: { id } })
             .then(result => {
               return {
                 id,

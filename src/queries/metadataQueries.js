@@ -12,6 +12,7 @@ export const metadataQueries = {
     query webpageImageQuery($uri: String!) {
       metadata(uri: $uri) @client {
         id
+        __typename
         avatar_url
       }
     }

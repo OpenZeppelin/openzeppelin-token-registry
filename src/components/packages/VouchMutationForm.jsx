@@ -4,7 +4,6 @@ import { Mutation, withApollo } from 'react-apollo'
 import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { toWei } from '~/utils/toWei'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
-import { vouchingQueries } from '~/queries/vouchingQueries'
 
 export const VouchMutationForm = withApollo(
   class _VouchMutationForm extends Component {
@@ -41,7 +40,7 @@ export const VouchMutationForm = withApollo(
     }
 
     render() {
-      const { hasUncompletedTransaction, packageId } = this.props
+      const { hasUncompletedTransaction } = this.props
       return (
         <Mutation
           mutation={Web3Mutations.sendTransaction}

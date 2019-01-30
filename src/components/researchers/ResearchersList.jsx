@@ -8,7 +8,7 @@ import { sortBigNumbers } from '~/utils/sortBigNumbers'
 export class ResearchersList extends PureComponent {
   render () {
     return (
-      <Query query={vouchingQueries.vouchesQuery}>
+      <Query query={vouchingQueries.vouchQuery}>
         {({ loading, error, data }) => {
           if (loading) return null
           if (error) return `${error}`

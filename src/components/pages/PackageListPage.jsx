@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import yn from 'yn'
 import { Link } from 'react-router-dom'
-import { Query, Subscription } from 'react-apollo'
+import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -72,27 +72,21 @@ export class PackageListPage extends PureComponent {
           <div className='container'>
             <div className='columns'>
               <div className='column main-content--column is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
-                <Subscription subscription={web3Queries.blockSubscription}>
+                <Query query={web3Queries.networkIdQuery}>
                   {({ data }) => {
-                    return (
-                      <Query query={web3Queries.networkIdQuery}>
-                        {({ data }) => {
-                          const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
+                    const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
 
-                          if (wrongNetwork) {
-                            return <ErrorMessage errorMessage={
-                              `No packages available on the currently selected Ethereum network.`
-                            } />
-                          } else {
-                            return showResearchersList
-                              ? <ResearchersList location={this.props.location} />
-                              : <PackageList location={this.props.location} />
-                          }
-                        }}
-                      </Query>
-                    )
+                    if (wrongNetwork) {
+                      return <ErrorMessage errorMessage={
+                        `No packages available on the currently selected Ethereum network.`
+                      } />
+                    } else {
+                      return showResearchersList
+                        ? <ResearchersList location={this.props.location} />
+                        : <PackageList location={this.props.location} />
+                    }
                   }}
-                </Subscription>
+                </Query>
               </div>
             </div>
           </div>

@@ -16,6 +16,7 @@ import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { shortenAddress } from '~/utils/shortenAddress'
 import { mixpanel } from '~/mixpanel'
+import { challengeProjection } from '~/projections/challengeProjection'
 
 export class PackageDetails extends Component {
   state = { voted: false }
@@ -43,7 +44,8 @@ export class PackageDetails extends Component {
     const githubDetails = gh(values.metadataURI || '')
     const { owner, repo } = githubDetails
     const { id } = values || {}
-    const noChallenges = (vouching.Challenged.length === 0)
+    const challenges = challengeProjection(vouching.allEvents)
+    const noChallenges = challenges.length === 0
 
     return (
       <>
@@ -143,7 +145,7 @@ export class PackageDetails extends Component {
 
           <div className='columns'>
             <div className='column is-10-tablet'>
-              <Query query={vouchingQueries.vouchesQuery} variables={{ id }}>
+              <Query query={vouchingQueries.vouchQuery} variables={{ id }}>
                 {({ data }) => {
                   const { Vouching } = data || {}
                   const { allEvents } = Vouching || {}
@@ -223,7 +225,7 @@ export class PackageDetails extends Component {
                     <span className="list--cell list--cell__head" />
                   </li>
                   {
-                    vouching.Challenged.map(challenged =>
+                    challenges.map(challenged =>
                       <ChallengeRow
                         packageTotalVouched={vouching.totalVouched}
                         challenged={challenged}

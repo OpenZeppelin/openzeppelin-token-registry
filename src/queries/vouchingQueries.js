@@ -1,58 +1,53 @@
 import gql from 'graphql-tag'
 
 export const vouchingFragments = {
-  challengedEventsFragment: gql`
-    fragment ChallengedEvents on Vouching {
-      Challenged @pastEvents(filter: {id: $id}, fromBlock: 0, toBlock: "latest")
-    }
-  `,
   metadataFragment: gql`
     fragment md on Metadata {
       metadata(uri: $uri) @client {
+        id
+        __typename
         name
         version
         description
       }
     }
   `,
-  totalVouchedFragment: gql`
-    fragment totalVouchedFragment on Vouching {
-      totalVouched(id: $id) @client
+  packageFragment: gql`
+    fragment packageFragment on Package {
+      id
+      __typename
+      totalVouched(id: $id)
+      allEvents @pastEvents(filter: { id: $id }, fromBlock: 0, toBlock: "latest")
     }
   `
 }
 
 export const vouchingQueries = {
-  vouchesQuery: gql`
-    query vouchesQuery($id: String!) {
-      Vouching @contract {
-        allEvents @pastEvents(filter: { id: $id }, fromBlock: 0, toBlock: "latest")
+  vouchQuery: gql`
+    query vouchQuery($id: String!) {
+      Vouching @contract(type: "Package", id: $id) {
+        ...packageFragment
       }
     }
+    ${vouchingFragments.packageFragment}
   `,
   eventsQuery: gql`
     query eventsQuery {
-      Vouching @contract {
+      Vouching @contract(type: "GlobalInfo", id: "1") {
+        id
+        __typename
         registeredEvents: Registered @pastEvents(fromBlock: 0, toBlock: "latest")
-      }
-    }
-  `,
-  totalVouchesQuery: gql`
-    query totalVouchesQuery($id: String!) {
-      Vouching @contract {
-        totalVouched(id: $id)
       }
     }
   `,
   packageQuery: gql`
     query packageQuery($uri: String!, $id: String!) {
       ...md
-      Vouching @contract {
-        totalVouched(id: $id)
-        ...ChallengedEvents
+      Vouching @contract(type: "Package", id: $id) {
+        ...packageFragment
       }
     }
     ${vouchingFragments.metadataFragment}
-    ${vouchingFragments.challengedEventsFragment}
+    ${vouchingFragments.packageFragment}
   `
 }

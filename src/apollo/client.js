@@ -37,7 +37,7 @@ const stateLink = withClientState({
       name: String
       description: String
       version: String
-      metadata(id: String!): Metadata
+      metadata(uri: String!): Metadata
     }
 
     type Transaction {
@@ -51,6 +51,12 @@ const stateLink = withClientState({
     }
 
     type Event {
+    }
+
+    type Package {
+      id: ID
+      totalVouched: String
+      allEvents: [Event]
     }
 
     type Vouching {
