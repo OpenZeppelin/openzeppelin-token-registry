@@ -24,8 +24,8 @@ function displayPriority (packageTotalVouched, amount) {
 
 export const ChallengeRow = ({ packageTotalVouched, challenged }) => {
   const amount = ethers.utils.bigNumberify(challenged.parsedLog.values.amount.toString())
-  const { challengeURI } = challenged.parsedLog.values
-  const { repo } = gh(challengeURI)
+  const { metadataURI } = challenged.parsedLog.values
+  const { repo } = gh(metadataURI)
 
   const status = (Math.random() > 0.5)
     ? constants.CHALLENGE_STATUS_OPEN
@@ -41,7 +41,7 @@ export const ChallengeRow = ({ packageTotalVouched, challenged }) => {
   }
 
   return (
-    <Query query={metadataQueries.challengeMetadataQuery} variables={{ uri: challengeURI }}>
+    <Query query={metadataQueries.challengeMetadataQuery} variables={{ uri: metadataURI }}>
       {({ data }) => {
         const { metadata } = data || {}
         return (

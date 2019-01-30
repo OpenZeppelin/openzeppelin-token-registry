@@ -16,7 +16,7 @@ export const vouchingFragments = {
     fragment packageFragment on Package {
       id
       __typename
-      totalVouched(id: $id)
+      entry: getEntry(id: $id)
       allEvents @pastEvents(fromBlock: 0, toBlock: "latest", extraTopics: { types: ["uint256"], values: [$id] })
     }
   `

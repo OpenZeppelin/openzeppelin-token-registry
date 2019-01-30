@@ -14,21 +14,8 @@ export function projectPackageEvents (events) {
     let { id, amount, owner, sender } = values || {}
 
     switch (name) {
-      case 'Registered':
-        let addr = normalizeAddr(owner)
-
-        // Ensure an object exists
-        result.packages[id] =
-          result.packages[id] ||
-            {
-              vouchTotals: {}
-            }
-
-        result.packages[id].vouchTotals[addr] = ethers.utils.bigNumberify(amount.toString())
-
-        break
       case 'Vouched':
-        addr = normalizeAddr(sender)
+        let addr = normalizeAddr(sender)
         // Ensure an object exists
         result.packages[id] =
           result.packages[id] ||

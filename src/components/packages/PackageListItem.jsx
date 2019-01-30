@@ -213,15 +213,15 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
                         VOUCHED
                       </h6>
- 
+
                       <span className='is-inline-block'>
                         <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
                       </span>
- 
+
                       <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                        {displayWeiToEther(get(Vouching, 'totalVouched'))}
+                        {displayWeiToEther(get(Vouching, 'entry[5]'))}
                       </h3>
- 
+
                       <span
                         to={link}
                         className='is-block list-item--challenges-link'

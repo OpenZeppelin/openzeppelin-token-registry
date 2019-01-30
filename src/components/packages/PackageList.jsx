@@ -32,7 +32,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             .then(result => {
               return {
                 id,
-                totalVouched: result.data.Vouching.totalVouched
+                totalVouched: result.data.Vouching.entry[5]
               }
             })
         )
@@ -116,7 +116,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
               }
 
               item = (
-                <>
+                <React.Fragment key={index}>
                   {item}
                   <Query
                     key={`package-item-query-${index}`}
@@ -134,7 +134,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
                         const { Vouching } = data
 
-                        if (displayWeiToEther(get(Vouching, 'totalVouched')) === '0') {
+                        if (displayWeiToEther(get(Vouching, 'entry[5]')) === '0') {
                           console.log('skipping package with 0 vouched ZEP')
                           return null
                         }
@@ -150,11 +150,11 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
                         )
                       }
                     }
-                  </Query>    
-                </>
+                  </Query>
+                </React.Fragment>
               )
-                
-                
+
+
               return item
             })
           }
@@ -181,7 +181,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             </div>
           </div>
         */}
-        
+
         {content}
       </>
     )

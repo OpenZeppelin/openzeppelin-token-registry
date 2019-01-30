@@ -159,7 +159,7 @@ export class PackageDetails extends Component {
                   return (
                     <>
                       <h5 className='is-size-5 has-text-weight-semibold'>
-                        {vouches.length} {vouches.length === 1 ? 'address' : 'addresses'} vouched {displayWeiToEther(vouching.totalVouched)} ZEP
+                        {vouches.length} {vouches.length === 1 ? 'address' : 'addresses'} vouched {displayWeiToEther(vouching.entry[5])} ZEP
                       </h5>
 
                       <div className='list--wrapper'>
@@ -226,9 +226,9 @@ export class PackageDetails extends Component {
                   {
                     challenges.map(challenged =>
                       <ChallengeRow
-                        packageTotalVouched={vouching.totalVouched}
+                        packageTotalVouched={vouching.entry[5]}
                         challenged={challenged}
-                        key={challenged.parsedLog.values._challengeID}
+                        key={challenged.parsedLog.values.challengeID.toString()}
                       />
                     )
                   }
