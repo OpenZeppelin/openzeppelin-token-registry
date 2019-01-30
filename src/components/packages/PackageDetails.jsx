@@ -144,7 +144,7 @@ export class PackageDetails extends Component {
 
           <div className='columns'>
             <div className='column is-10-tablet'>
-              <Query query={vouchingQueries.vouchQuery} variables={{ id }}>
+              <Query query={vouchingQueries.vouchQuery} variables={{ id: id.toString() }}>
                 {({ data }) => {
                   const { Vouching } = data || {}
                   const { allEvents } = Vouching || {}

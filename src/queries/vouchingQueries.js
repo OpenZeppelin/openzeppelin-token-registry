@@ -17,7 +17,7 @@ export const vouchingFragments = {
       id
       __typename
       totalVouched(id: $id)
-      allEvents @pastEvents(filter: { id: $id }, fromBlock: 0, toBlock: "latest")
+      allEvents @pastEvents(fromBlock: 0, toBlock: "latest", extraTopics: { types: ["uint256"], values: [$id] })
     }
   `
 }

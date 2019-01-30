@@ -57,7 +57,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
         query={vouchingQueries.packageQuery}
         variables={{
           uri: this.props.package.metadataURI,
-          id: this.props.package.id
+          id: this.props.package.id.toString()
         }}>
         {
           ({ loading, error, data }) => {

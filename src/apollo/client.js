@@ -12,11 +12,13 @@ import { metadataResolvers } from './client-state/metadataResolvers'
 import { transactionResolvers } from './client-state/transactionResolvers'
 import { web3Resolvers } from './client-state/web3Resolvers'
 import { mutations } from './client-state/mutations'
+import { ethers } from 'ethers'
 
-let ethers = getProvider()
+let provider = getProvider()
+window.provider = provider
 window.ethers = ethers
 
-const ethersResolver = new EthersResolver(abiMapping, ethers)
+const ethersResolver = new EthersResolver(abiMapping, provider)
 const ethereumLink = new EthereumLink(ethersResolver)
 
 const cache = new InMemoryCache({
