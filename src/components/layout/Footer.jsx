@@ -18,7 +18,11 @@ export const Footer = class _Footer extends Component {
                     <br />
 
                     <h6 className='is-size-6'>
-                      <a href="https://zeppelin.solutions/">
+                      <a
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        href="https://zeppelin.solutions/"
+                      >
                         <ZeppelinLogo />
                       </a>
                     </h6>
@@ -33,6 +37,8 @@ export const Footer = class _Footer extends Component {
               <div className='column is-12-mobile is-6-tablet is-offset-3-tablet is-6-desktop is-offset-3-desktop is-4-widescreen is-offset-4-widescreen'>
                 <div className='footer-menu'>
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://docs.zeppelinos.org/'
                     className='footer-item'
                   >
@@ -40,6 +46,8 @@ export const Footer = class _Footer extends Component {
                   </a>
 
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://github.com/zeppelinos'
                     className='footer-item'
                   >
@@ -47,12 +55,14 @@ export const Footer = class _Footer extends Component {
                   </a>
 
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://zeppelinos.org/'
                     className='footer-item'
                   >
                     Site
                   </a>
-                  
+
                   <span
                     className='footer-item footer-item--copyright'
                   >

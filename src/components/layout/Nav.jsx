@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-import ZeppelinOSRegistryLogo from '~/assets/images/logo_zos_navbar_registry.svg'
+import ZeppelinOSRegistryLogo from '~/assets/images/zeppelin-os-registry--logo.svg'
 import ZeppelinLogo from '~/assets/images/zeppelin_white.svg'
 import * as routes from '~/../config/routes'
 
@@ -64,6 +64,8 @@ export const Nav = class _Nav extends Component {
               <div className='navbar-end'>
                 <div className='navbar-item'>
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://docs.zeppelinos.org/'
                     className='navbar-item'
                   >
@@ -73,6 +75,8 @@ export const Nav = class _Nav extends Component {
 
                 <div className='navbar-item'>
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://github.com/zeppelinos'
                     className='navbar-item'
                   >
@@ -82,6 +86,8 @@ export const Nav = class _Nav extends Component {
 
                 <div className='navbar-item'>
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://zeppelinos.org/'
                     className='navbar-item'
                   >
