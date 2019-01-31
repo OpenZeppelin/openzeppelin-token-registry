@@ -21,6 +21,11 @@
   position: relative;
   padding: 0;
   top: 0.25rem;
+
+  @media screen and (max-width: $desktop) {
+    margin-left: 0rem; // upping this causes the entire page layout to change?
+    margin-top: 0.5rem;
+  }
 }
 
 .package-item--github-icon:hover {

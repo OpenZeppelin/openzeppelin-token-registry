@@ -30,7 +30,7 @@ export const Footer = class _Footer extends Component {
 
           <div className='container-fluid footer--secondary'>
             <div className='columns'>
-              <div className='column is-8-mobile is-offset-2-mobile is-6-tablet is-offset-3-tablet is-6-desktop is-offset-3-desktop is-4-widescreen is-offset-4-widescreen'>
+              <div className='column is-12-mobile is-6-tablet is-offset-3-tablet is-6-desktop is-offset-3-desktop is-4-widescreen is-offset-4-widescreen'>
                 <div className='footer-menu'>
                   <a
                     href='https://docs.zeppelinos.org/'

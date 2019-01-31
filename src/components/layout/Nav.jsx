@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-// import ZeppelinOSLogo from '~/assets/images/zeppelin-os-logo.svg'
 import ZeppelinOSLogo from '~/assets/images/logo_zos_navbar.svg'
 import ZeppelinLogo from '~/assets/images/zeppelin_white.svg'
 import * as routes from '~/../config/routes'
@@ -38,10 +37,15 @@ export const Nav = class _Nav extends Component {
               <div className='navbar-item'>
                 <Link to={routes.HOME} className='navbar-item'>
                   <ZeppelinOSLogo />
-                  <ZeppelinLogo className='secondary-logo' />
-                  {/*<ZeppelinOSLogo />
-                  <span className='navbar-brand__subtitle'>Registry</span>*/}
                 </Link>
+
+                <Link to={routes.HOME} className='navbar-item'>
+                  <span className='navbar-brand__secondary-logo'>Registry</span>
+                </Link>
+
+                <a href="https://zeppelin.solutions/" className='navbar-item'>
+                  <ZeppelinLogo className='navbar-brand__tertiary-logo' />
+                </a>
               </div>
 
               <button

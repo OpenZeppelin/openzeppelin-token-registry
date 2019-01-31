@@ -48,18 +48,6 @@
   border-bottom: 2px solid black;
 }
 
-.navbar-brand svg {
-  // margin-top: 4px;
-  // stroke: black;
-  // stroke-width: 0.01rem;
-  width: 100px;
-}
-
-.navbar-brand .secondary-logo {
-  margin-left: 1rem;
-  margin-top: -0.25rem;
-}
-
 .navbar-brand {
   @media screen and (max-width: $desktop - 1px) {
     // background-color: $navbar-background-color;
@@ -68,25 +56,57 @@
   }
 }
 
-.navbar-brand svg path {
-  // fill: black;
+.navbar-brand svg {
+  width: 100px;
 }
 
-.navbar-brand__subtitle {
-  color: $cyan;
-  margin-left: 0.625rem;
+.navbar-brand__secondary-logo {
+  color: #75e5ea;
   font-family: $family-sans-serif;
-  font-weight: 400;
-  font-size: 1.32rem;
+  font-weight: 300;
+  font-size: 1.25rem;
   letter-spacing: 0;
   position: relative;
   text-transform: capitalize;
-  top: -1px;
+  transition: color 150ms ease-in;
+  top: -3px;
 }
 
-.navbar-item:hover .navbar-brand__subtitle {
+.navbar-brand__secondary-logo:hover {
+  color: white;
+}
+
+.navbar-brand svg path {
+  transition: fill 150ms ease-in;
+}
+
+.navbar-brand svg:hover path {
+  fill: white;
+}
+
+.navbar-brand__tertiary-logo {
+  margin-left: 0.5rem;
+  margin-top: -0.125rem;
+  opacity: 0.35;
+
+  @media screen and (max-width: 460px) {
+    display: none;
+  }
+}
+
+.navbar-brand__tertiary-logo:hover {
+  opacity: 1;
+  transition: opacity 150ms ease-in-out;
+}
+
+.navbar-item svg:hover {
   transition: transform 150ms ease-in;
-  transform: scale3d(1.04, 1.04, 1.04);
+  // transform: scale3d(1, 1, 1);
+}
+
+.navbar-item:hover .navbar-brand__secondary-logo {
+  // transition: transform 150ms ease-in;
+  // transform: scale3d(1.04, 1.04, 1.04);
 }
 
 a.navbar-item,
