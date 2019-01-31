@@ -21,16 +21,14 @@ export const PhaseOneHero = ({ heroColor }) => {
               </p>
             </div>
             <div className='column is-5-tablet is-4-desktop is-offset-1-desktop is-3-widescreen is-3-fullhd is-offset-1-fullhd'>
-              <div className=''>
-                {/* <h5 className='title hero--title is-size-5'>
-                  How to use:
-                </h5>
-                */}
-                <CodeBox />
-                <p>
-                  <a href='https://docs.zeppelinos.org'>See EVM Package Docs &gt;</a>
-                </p>
-              </div>
+              {/* <h5 className='title hero--title is-size-5'>
+                How to use:
+              </h5>
+              */}
+              <CodeBox />
+              <p>
+                <a href='https://docs.zeppelinos.org' target='_blank' rel='noopener noreferrer'>See EVM Package Docs &gt;</a>
+              </p>
             </div>
           </div>
         </div>

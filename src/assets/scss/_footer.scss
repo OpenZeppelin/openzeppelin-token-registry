@@ -36,3 +36,12 @@
   display: block;
   margin-top: 0.5rem;
 }
+
+.footer--secondary a {
+  border-bottom: 1px solid transparent;
+  transition: border 300ms ease-in-out;
+}
+
+.footer--secondary a:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}

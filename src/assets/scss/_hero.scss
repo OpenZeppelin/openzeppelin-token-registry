@@ -23,11 +23,12 @@
 }
 
 .hero a {
+  border-bottom: 1px solid transparent;
   transition: border 300ms ease-in-out;
 }
 
 .hero a:hover {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
 .hero p {

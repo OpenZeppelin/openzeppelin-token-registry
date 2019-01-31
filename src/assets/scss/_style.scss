@@ -49,14 +49,13 @@ a.has-text-primary:focus {
 a.button,
 button,
 a svg {
-  transition: transform 100ms ease-out;
+  transition: all 150ms ease-out;
   transform: scale3d(1, 1, 1);
 }
 
 a.button:hover,
 button:hover,
 a:hover svg {
-  transition: transform 150ms ease-in;
   transform: scale3d(1.04, 1.04, 1.04);
 }
 
@@ -94,6 +93,25 @@ a.is-dark {
   margin-left: auto !important;
   margin-right: auto !important;
   margin-bottom: 100px;
+}
+
+.button-has-icon .has-text-link {
+  margin-left: 0.5rem;
+}
+
+.main-content--column a,
+.main-content--column .has-text-link  {
+  border-bottom: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+}
+
+.main-content--column a:hover,
+.main-content--column .has-text-link:hover {
+  border-bottom-color: rgba(5, 110, 220, 0.5);
+}
+
+.main-content--column .button-has-icon {
+  border: 0;
 }
 
 @media screen and (max-width: 769px) {

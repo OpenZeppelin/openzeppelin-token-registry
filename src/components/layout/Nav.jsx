@@ -64,6 +64,8 @@ export const Nav = class _Nav extends Component {
               <div className='navbar-end'>
                 <div className='navbar-item'>
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://docs.zeppelinos.org/'
                     className='navbar-item'
                   >
@@ -73,6 +75,8 @@ export const Nav = class _Nav extends Component {
 
                 <div className='navbar-item'>
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://github.com/zeppelinos'
                     className='navbar-item'
                   >
@@ -82,6 +86,8 @@ export const Nav = class _Nav extends Component {
 
                 <div className='navbar-item'>
                   <a
+                    target='_blank'
+                    rel='noopener noreferrer'
                     href='https://zeppelinos.org/'
                     className='navbar-item'
                   >

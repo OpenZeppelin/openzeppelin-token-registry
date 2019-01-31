@@ -9,7 +9,12 @@ export function EtherscanAddressLink ({ address, children, className }) {
       {({ data }) => {
         const url = formatEtherscanAddressUrl(address, data.networkId)
         return (
-          <a href={url} className={className}>
+          <a
+            href={url}
+            className={className}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             {children}
           </a>
         )
