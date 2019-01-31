@@ -144,7 +144,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
     return (
       <>
-        <h5 className='is-size-5'>
+        <h5 className='is-size-5 has-text-grey-dark is-uppercase is-monospaced has-text-centered'>
           Top Trusted Packages
         </h5>
         <br />
