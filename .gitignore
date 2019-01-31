@@ -8,3 +8,4 @@ zos.dev*.json
 .zos.session
 .zos.lock
 networks/1234.json
+.nvmrc
