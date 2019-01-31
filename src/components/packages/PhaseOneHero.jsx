@@ -16,7 +16,7 @@ export const PhaseOneHero = ({ heroColor }) => {
               <p className='is-size-5'>
                 Introducing the list of most trusted on-chain EVM packages.
               </p>
-              <p className='is-size-5'>
+              <p className='is-size-6'>
                 EVM packages are reusable on-chain smart contract libraries, vetted by the open source community.
               </p>
             </div>
