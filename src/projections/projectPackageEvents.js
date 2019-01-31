@@ -11,7 +11,8 @@ export function projectPackageEvents (events) {
   for (let i in events) {
     const event = events[i]
     let { name, values } = event.parsedLog || {}
-    let { id, amount, owner, sender } = values || {}
+    // let { id, amount, owner, sender } = values || {}
+    let { id, amount, sender } = values || {}
 
     switch (name) {
       case 'Vouched':

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-import ZeppelinOSLogo from '~/assets/images/zeppelin-os-logo.svg'
+// import ZeppelinOSLogo from '~/assets/images/zeppelin-os-logo.svg'
+import ZeppelinOSLogo from '~/assets/images/logo_zos_navbar.svg'
+import ZeppelinLogo from '~/assets/images/zeppelin_white.svg'
 import * as routes from '~/../config/routes'
 
 export const Nav = class _Nav extends Component {
@@ -21,36 +23,37 @@ export const Nav = class _Nav extends Component {
   }
 
   render () {
-    const heroColor = ''
-    // const heroColor = 'is-dark'
+    const navColor = 'is-dark'
 
     return (
       <>
         <div
           className={classnames('nav-background no-select', { 'is-active': this.state.mobileNavActive })}
-          onClick={this.closeMobileNav} />
-        <nav className={`navbar ${heroColor}`}>
+          onClick={this.closeMobileNav}
+        />
+
+        <nav className={`navbar ${navColor}`}>
           <div className='container'>
             <div className='navbar-brand'>
               <div className='navbar-item'>
                 <Link to={routes.HOME} className='navbar-item'>
                   <ZeppelinOSLogo />
-                  <span className='navbar-brand__subtitle'>Registry</span>
+                  <ZeppelinLogo className='secondary-logo' />
+                  {/*<ZeppelinOSLogo />
+                  <span className='navbar-brand__subtitle'>Registry</span>*/}
                 </Link>
               </div>
 
               <button
                 className={classnames(
-                  'navbar-burger',
                   'burger',
-                  { 'is-active': this.state.mobileNavActive }
+                  'burger-slip',
+                  { 'open': this.state.mobileNavActive }
                 )}
                 data-target='navbar-menu'
                 onClick={this.handleToggleMobileNav}
               >
-                <span />
-                <span />
-                <span />
+                <div class="burger-lines"></div>
               </button>
             </div>
 

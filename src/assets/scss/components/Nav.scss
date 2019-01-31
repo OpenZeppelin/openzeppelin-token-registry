@@ -14,7 +14,15 @@
     max-width: 800px;
   }
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
+    max-width: 100%;
+  }
+}
+
+.navbar .navbar-brand,
+.navbar .navbar-end {
+  @media screen and (max-width: $desktop - 1px) {
+    margin: 0 auto;
     max-width: 80%;
   }
 
@@ -35,26 +43,33 @@
 }
 
 .navbar.is-dark {
-  background-color: $navbar-grey;
-  border-bottom: 1px solid lighten($text, 20%);
+  background-color: darken($navbar-grey, 4%);
+  background-image: linear-gradient(to bottom, darken($navbar-grey, 6%) 0%, #161616 70%, #121212 100%);
+  border-bottom: 2px solid black;
 }
 
 .navbar-brand svg {
-  margin-top: 4px;
-  stroke: black;
-  stroke-width: 0.01rem;
+  // margin-top: 4px;
+  // stroke: black;
+  // stroke-width: 0.01rem;
+  width: 100px;
+}
+
+.navbar-brand .secondary-logo {
+  margin-left: 1rem;
+  margin-top: -0.25rem;
 }
 
 .navbar-brand {
-  @media screen and (max-width: $desktop) {
-    background-color: $navbar-background-color;
+  @media screen and (max-width: $desktop - 1px) {
+    // background-color: $navbar-background-color;
     z-index: 2000;
     position: relative;
   }
 }
 
 .navbar-brand svg path {
-  fill: black;
+  // fill: black;
 }
 
 .navbar-brand__subtitle {
@@ -104,7 +119,7 @@ a.navbar-item,
 }
 
 .navbar-menu {
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     text-align: right;
     display: block;
     position: absolute;
@@ -115,45 +130,27 @@ a.navbar-item,
 }
 
 .navbar.is-dark .navbar-menu {
-  background-color: $navbar-dark-background-color;
+  background-color: transparent;
+
+  @media screen and (max-width: 2000px) {
+    background-color: darken($navbar-dark-background-color, 8%);
+  }
+}
+
+.navbar.is-dark .navbar-menu.is-active {
+  // @media screen and (max-width: 2000px) {
+    // background-color: $navbar-dark-background-color;
+  // }
 }
 
 .navbar-menu.is-active {
   transform: translateZ(0);
-  @media screen and (max-width: $desktop) {
+
+  @media screen and (max-width: $desktop - 1px) {
     box-shadow: 0 8px 16px rgba(10,10,10,.1);
     position: absolute;
     width: 100%;
   }
-}
-
-.navbar .navbar-burger {
-  border: 0;
-  outline: none;
-  background-color: transparent;
-}
-
-.navbar .navbar-burger:hover {
-  transform: scale3d(1, 1, 1);
-}
-
-.navbar.is-dark .navbar-burger:hover {
-}
-
-.navbar.is-dark .navbar-brand svg path {
-  fill: white;
-}
-
-.navbar.is-dark .navbar-brand svg {
-  stroke: white;
-}
-
-.navbar.is-dark .navbar-burger {
-  transition: all 500ms ease-in-out;
-}
-
-.navbar.is-dark .navbar-burger:hover,
-.navbar.is-dark .navbar-burger:active {
 }
 
 .navbar .navbar-brand > .navbar-item,
@@ -173,9 +170,10 @@ a.navbar-item,
 }
 
 .nav-background.is-active {
+  cursor: pointer;
   pointer-events: auto;
   z-index: 999;
-  opacity: .2;
+  opacity: .6;
 }
 
 .nav-background {
@@ -189,4 +187,156 @@ a.navbar-item,
   opacity: 0;
   z-index: 1;
   background: black;
+}
+
+
+.burger {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 9px;
+  height: 3em;
+  margin-right: 1.5rem;
+  margin-top: 1.25rem;
+  margin-left: auto;
+  position: relative;
+  transition: 0.1s all ease-in-out;
+  user-select: none;
+  outline: none;
+  width: 3em;
+
+  @media screen and (min-width: $desktop) {
+    display: none;
+  }
+}
+
+.burger:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 150%;
+  width: 150%;
+  top: -25%;
+  left: -25%;
+}
+
+.burger .burger-lines {
+  top: 50%;
+  margin-top: -0.125em;
+}
+
+.burger .burger-lines,
+.burger .burger-lines:after,
+.burger .burger-lines:before {
+  pointer-events: none;
+  display: block;
+  content: "";
+  width: 100%;
+  border-radius: 0.25em;
+  background-color: rgba(150, 150, 150, 0.8);
+  height: 0.25em;
+  position: absolute;
+  transform: rotate(0);
+}
+
+.burger .burger-lines .burger-lines:after {
+  left: 0;
+  top: -1em;
+}
+
+.burger .burger-lines .burger-lines:before {
+  left: 1em;
+  top: 1em;
+}
+
+// .burger.burger-squeeze .burger-lines,
+// .burger.burger-squeeze .burger-lines:after,
+// .burger.burger-squeeze .burger-lines:before {
+//   transition: 0.2s top 0.2s, 0.1s left, 0.2s transform, 0.4s background-color 0.05s;
+// }
+//
+// .burger.burger-squeeze .burger-lines:after,
+// .burger.burger-squeeze .burger-lines:before {
+//   width: 2em;
+// }
+//
+// .burger.burger-squeeze .burger-lines:after {
+//   left: 0;
+//   top: -1em;
+// }
+//
+// .burger.burger-squeeze .burger-lines:before {
+//   left: 1em;
+//   top: 1em;
+// }
+//
+// .burger.burger-squeeze.open .burger-lines,
+// .burger.burger-squeeze.open .burger-lines:after,
+// .burger.burger-squeeze.open .burger-lines:before {
+//   transition: 0.2s background-color, 0.2s top, 0.2s left, 0.2s transform 0.05s;
+// }
+//
+// .burger.burger-squeeze.open .burger-lines {
+//   background-color: transparent;
+// }
+//
+// .burger.burger-squeeze.open .burger-lines:before,
+// .burger.burger-squeeze.open .burger-lines:after {
+//   left: 0.5em;
+//   top: 0px;
+// }
+//
+// .burger.burger-squeeze.open .burger-lines:before {
+//   transform: rotate(-45deg);
+// }
+//
+// .burger.burger-squeeze.open .burger-lines:after {
+//   transform: rotate(45deg);
+// }
+
+.burger:hover {
+  transform: scale3d(1, 1, 1);
+}
+
+.burger:hover .burger-lines,
+.burger:hover .burger-lines:after,
+.burger:hover .burger-lines:before {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.burger.burger-slip .burger-lines:after, .burger.burger-slip .burger-lines:before {
+  width: 2em;
+}
+
+.burger.burger-slip .burger-lines, .burger.burger-slip .burger-lines:after, .burger.burger-slip .burger-lines:before {
+  transition: all 0.2s;
+}
+
+.burger.burger-slip .burger-lines:after {
+  left: 0;
+  top: -1em;
+}
+
+.burger.burger-slip .burger-lines:before {
+  left: 1em;
+  top: 1em;
+}
+
+.burger.burger-slip.open .burger-lines {
+  transform: translateX(-2em);
+  background-color: transparent;
+}
+
+.burger.burger-slip.open .burger-lines:before, .burger.burger-slip.open .burger-lines:after {
+  left: 0.5em;
+  top: 0px;
+}
+
+.burger.burger-slip.open .burger-lines:before {
+  transform: translateX(2em) rotate(135deg);
+}
+
+.burger.burger-slip.open .burger-lines:after {
+  transform: translateX(2em) rotate(-135deg);
 }

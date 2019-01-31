@@ -12,7 +12,7 @@
   transition-duration: 100ms;
   transition-timing-function: ease-out;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     grid-template-columns: 100px 2fr;
     grid-template-rows: minmax(130px, max-content) 60px;
     grid-template-areas: 'image title title' 'blank blank more';
@@ -29,7 +29,7 @@
   height: 120px;
   padding: 1rem;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     height: 180px;
   }
 }
@@ -47,7 +47,7 @@
   height: 100%;
   width: 100%;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     justify-content: space-between;
   }
 }
@@ -55,7 +55,7 @@
 .list-item__cell .is-inline-grid-top {
   margin-top: 1.25rem;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     margin-top: 0.25rem;
   }
 }
@@ -71,7 +71,7 @@
 .list-item__cell--id a {
   padding-left: 2.25rem;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     display: none;
   }
 }
@@ -83,7 +83,7 @@
 .list-item__cell--title a {
   padding: 0 1rem;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     padding: 1rem;
   }
 }
@@ -99,7 +99,7 @@
 .list-item__cell--image {
   align-self: baseline;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
   }
 }
 
@@ -108,7 +108,7 @@
   grid-area: image;
   padding: 1rem 1rem 1rem;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     padding: 1.5rem 0 0 1.5rem;
   }
 }
@@ -117,7 +117,7 @@
   display: none;
   grid-area: blank;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     display: block;
   }
 }
@@ -125,7 +125,7 @@
 .list-item__cell--view-more {
   grid-area: more;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     margin-left: 0;
   }
 }
@@ -134,7 +134,7 @@
   padding-right: 1.5rem;
   text-transform: uppercase;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $desktop - 1px) {
     align-items: baseline;
     padding: 0.25rem 1rem;
   }
