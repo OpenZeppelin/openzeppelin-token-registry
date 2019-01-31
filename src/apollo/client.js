@@ -1,6 +1,5 @@
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
-import { RestLink } from 'apollo-link-rest'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { withClientState } from 'apollo-link-state'
 import { EthereumLink } from 'apollo-link-ethereum'
@@ -37,14 +36,9 @@ const stateLink = withClientState({
   cache
 })
 
-if (!process.env.REACT_APP_METADATA_URI) {
-  throw new Error('The "REACT_APP_METADATA_URI" env var is not set (need to direnv allow?)')
-}
-const restLink = new RestLink({ uri: process.env.REACT_APP_METADATA_URI })
-
 export const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([restLink, stateLink, ethereumLink])
+  link: ApolloLink.from([stateLink, ethereumLink])
 })
 
 subscribeAndRefetch(client)

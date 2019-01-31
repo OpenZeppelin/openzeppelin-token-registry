@@ -1321,11 +1321,6 @@ apollo-link-ethereum@^0.0.17:
     debug "^4.1.1"
     graphql-anywhere "^4.1.24"
 
-apollo-link-rest@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/apollo-link-rest/-/apollo-link-rest-0.7.0.tgz#1742dfe435870dfdbbf9325bed77d83a89c5f1e6"
-  integrity sha512-GhFizBpEBed/6lVKYcROweXhtQobcsg2UMorzHHZtwhSxqVKq2db2PcddbnFwEEk5MmTyY1tm7t5kDh6cB3LwA==
-
 apollo-link-state@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/apollo-link-state/-/apollo-link-state-0.4.2.tgz#ac00e9be9b0ca89eae0be6ba31fe904b80bbe2e8"
