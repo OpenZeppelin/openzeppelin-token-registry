@@ -147,7 +147,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       </span>
                     </h4>
 
-                    <p className='is-size-6 description is-inline-grid-bottom'>
+                    <p className='is-size-6 description is-inline-grid-bottom has-text-grey'>
                       {description}
                     </p>
                   </Link>

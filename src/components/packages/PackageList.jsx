@@ -158,7 +158,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
               className='button is-purple is-pill'
               href='http://zpl.in/betaregistration'
               target="_blank"
-              rel="noopener">
+              rel="noopener noreferrer">
               Join the Beta
             </a>
           </div>
