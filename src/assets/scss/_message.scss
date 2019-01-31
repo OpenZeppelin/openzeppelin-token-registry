@@ -1,33 +1,62 @@
 .message {
-  background: transparent;
-  background-color: #fafafa;
-  min-height: 12rem;
   padding-left: 0;
   padding-right: 0;
   position: relative;
+}
 
-  @media screen and (max-width: 340px) {
-    min-height: 15rem;
+.message-endorse {
+  height: 10rem;
+  overflow: hidden;
+
+  @media screen and (max-width: 390px) {
+    height: 16rem;
+  }
+}
+
+.message-endorse.has-voted {
+  @media screen and (max-width: 867px) {
+    height: 12rem;
+  }
+
+  @media screen and (max-width: 767px) {
+    height: 8rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 10rem;
+  }
+
+  @media screen and (max-width: 490px) {
+    height: 15rem;
+  }
+
+  @media screen and (max-width: 350px) {
+    height: 19rem;
+  }
+
+  @media screen and (max-width: 300px) {
+    height: 24rem;
   }
 }
 
 .message--cta {
   border-left: 0;
-  min-height: 10rem;
-  margin-top: 1rem;
+}
+
+.message-body.message-endorse--question {
   padding-top: 2rem;
-  padding-bottom: 1.5rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  margin-bottom: 1.5rem;
+}
+
+.message-body.message-endorse--positive-answer {
+  padding-top: 2rem;
+}
+
+.message-body.message-endorse--negative-answer {
+  padding-top: 3rem;
 }
 
 .message--cta .button {
   margin-top: 1rem;
-}
-
-.message--cta.slide-exit {
-  padding-top: 1rem;
 }
 
 .message-body--text {
@@ -60,4 +89,8 @@
 
 .message a:not(.button):not(.tag) {
   text-decoration: none;
+}
+
+.message-question {
+  height: 5rem;
 }

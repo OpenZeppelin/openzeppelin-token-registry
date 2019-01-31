@@ -70,6 +70,10 @@ button[disabled]:active {
   color: $dark;
 }
 
+.button.is-pill.is-dark:hover {
+  color: white;
+}
+
 .button.is-size-5 {
   font-size: 1rem !important;
   min-height: 3rem;
@@ -115,8 +119,16 @@ button[disabled]:active {
 
 .button-left {
   margin-right: 0.5rem;
+
+  @media screen and (max-width: 390px) {
+    margin-right: 0;
+  }
 }
 
 .button-right {
   margin-left: 0.5rem;
+
+  @media screen and (max-width: 390px) {
+    margin-left: 0;
+  }
 }
