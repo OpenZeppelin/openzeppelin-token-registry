@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-import ZeppelinOSRegistryLogo from '~/assets/images/logo_zos_navbar_registry.svg'
+import ZeppelinOSRegistryLogo from '~/assets/images/zeppelin-os-registry--logo.svg'
 import ZeppelinLogo from '~/assets/images/zeppelin_white.svg'
 import * as routes from '~/../config/routes'
 
