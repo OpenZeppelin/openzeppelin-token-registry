@@ -24,66 +24,68 @@ export class PackageItemPage extends PureComponent {
 
         <ScrollToTop />
 
-        <div className='container'>
-          <div className='columns'>
-            <div className='column main-content--column is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
-              <Link
-                to={routes.HOME}
-                className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
-              >
-                {'<'} Back to Packages
-              </Link>
+        <section className='section'>
 
-              <Query query={vouchingQueries.eventsQuery}>
-                {({ loading, error, data }) => {
-                  if (loading) return null
-                  if (error) return <ErrorMessage errorMessage={error} />
+          <div className='container'>
+            <div className='columns'>
+              <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+                <Link
+                  to={routes.HOME}
+                  className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
+                >
+                  {'<'} Back to Packages
+                </Link>
 
-                  const events = data.Vouching ? data.Vouching.Registered : []
-                  const id = this.props.match.params.id
-                  const event = events.find((event) => event.parsedLog.values.id.eq(id))
+                <Query query={vouchingQueries.eventsQuery}>
+                  {({ loading, error, data }) => {
+                    if (loading) return null
+                    if (error) return <ErrorMessage errorMessage={error} />
 
-                  if (!event) {
-                    console.warn('event not found')
-                    return null
-                  }
+                    const events = data.Vouching ? data.Vouching.Registered : []
+                    const id = this.props.match.params.id
+                    const event = events.find((event) => event.parsedLog.values.id.eq(id))
 
-                  const packageItem = event.parsedLog.values
+                    if (!event) {
+                      console.warn('event not found')
+                      return null
+                    }
 
-                  return (
-                    <Query
-                      query={vouchingQueries.packageQuery}
-                      variables={{ uri: packageItem.metadataURI, id: packageItem.id.toString() }}
-                    >
-                      {
-                        ({ loading, error, data }) => {
-                          if (loading) return null
-                          if (error) return <ErrorMessage errorMessage={error} />
+                    const packageItem = event.parsedLog.values
 
-                          const { metadata, Vouching } = data
+                    return (
+                      <Query
+                        query={vouchingQueries.packageQuery}
+                        variables={{ uri: packageItem.metadataURI, id: packageItem.id.toString() }}
+                      >
+                        {
+                          ({ loading, error, data }) => {
+                            if (loading) return null
+                            if (error) return <ErrorMessage errorMessage={error} />
 
-                          return (
-                            <>
-                              <Helmet
-                                title={`${metadata.name}`}
-                              />
-                              <PackageDetails
-                                metadata={metadata}
-                                vouching={Vouching}
-                                registeredEvent={event}
-                              />
-                            </>
-                          )
+                            const { metadata, Vouching } = data
+
+                            return (
+                              <>
+                                <Helmet
+                                  title={`${metadata.name}`}
+                                />
+                                <PackageDetails
+                                  metadata={metadata}
+                                  vouching={Vouching}
+                                  registeredEvent={event}
+                                />
+                              </>
+                            )
+                          }
                         }
-                      }
-                    </Query>
-                  )
-                }}
-              </Query>
+                      </Query>
+                    )
+                  }}
+                </Query>
+              </div>
             </div>
           </div>
-        </div>
-
+        </section>
         <FooterContainer />
       </div>
     )
