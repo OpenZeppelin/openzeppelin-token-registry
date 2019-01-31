@@ -71,14 +71,6 @@ export class PackageDetails extends Component {
               {metadata.description}
             </p>
 
-            <h5 className='is-size-5'>
-              Link this package:
-            </h5>
-            <br />
-
-            <CodeSnippet metadata={metadata} />
-
-            <GitHubLink url={`https://github.com/${repo}`} viewLink />
           </div>
 
           <div className='column is-4-desktop has-text-right--desktop'>
@@ -89,6 +81,18 @@ export class PackageDetails extends Component {
             {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
               <VouchButton packageId={id} />
             )}
+          </div>
+        </div>
+
+        <div className='columns'>
+          <div className='column'>
+            <h5 className='is-size-5'>
+              Link this package:
+            </h5>
+            <br />
+            <CodeSnippet metadata={metadata} />
+
+            <GitHubLink url={`https://github.com/${repo}`} viewLink />
           </div>
         </div>
 
