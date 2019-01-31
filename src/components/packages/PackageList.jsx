@@ -154,9 +154,13 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             <p className='message-body--text has-text-grey'>
               Want to see your package here?
             </p>
-            <button className='button is-purple is-pill'>
+            <a
+              className='button is-purple is-pill'
+              href='http://zpl.in/betaregistration'
+              target="_blank"
+              rel="noopener">
               Join the Beta
-            </button>
+            </a>
           </div>
         </div>
 
