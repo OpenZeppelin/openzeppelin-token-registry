@@ -28,7 +28,7 @@ export const CodeBox = ReactTimeout(class _CodeBox extends PureComponent {
         <br />
         <span className='has-text-grey'># Example:</span>
         <br />
-        <span className='has-text-grey'>$</span> <span className='has-text-success'>zos</span> <span className='has-text-info'>link</span> openzeppelin-eth
+        <span className='has-text-grey'>$</span> <span className='has-text-warning'>zos</span> <span className='has-text-info'>link</span> openzeppelin-eth
 
         <span className='has-text-right is-inline-block is-copy-button'>
           <div ref='foo' data-tip='Copied to Clipboard' />

@@ -110,7 +110,13 @@ export class PackageDetails extends Component {
                   <div className='message-body message--cta has-text-centered slide-enter'>
                     <br />
                     <p className='message-body--text has-text-grey'>
-                      Thanks for your input!
+                      Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages. 
+                      &nbsp;<a
+                        href="https://docs.zeppelinos.org/docs/vouching.html" 
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className="has-text-link"
+                      >Click here to learn more about our vouching mechanics and private beta.</a>
                     </p>
                   </div>
                 )}

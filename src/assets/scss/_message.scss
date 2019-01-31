@@ -1,8 +1,9 @@
 .message {
+  background: transparent;
   background-color: #fafafa;
-  min-height: 10rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  min-height: 12rem;
+  padding-left: 0;
+  padding-right: 0;
   position: relative;
 
   @media screen and (max-width: 340px) {
@@ -10,19 +11,14 @@
   }
 }
 
-.message-body--text {
-  font-size: 1.25rem;
-
-  @media screen and (max-width: $tablet) {
-    font-size: 1rem;
-  }
-}
-
 .message--cta {
   border-left: 0;
+  min-height: 10rem;
   margin-top: 1rem;
   padding-top: 2rem;
   padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -34,6 +30,13 @@
   padding-top: 1rem;
 }
 
+.message-body--text {
+  font-size: 1.25rem;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 1rem;
+  }
+}
 
 
 .message-white {
@@ -53,4 +56,8 @@
 
 .message-white--body .button {
   margin-top: 1rem;
+}
+
+.message a:not(.button):not(.tag) {
+  text-decoration: none;
 }

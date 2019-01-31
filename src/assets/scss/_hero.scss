@@ -1,11 +1,36 @@
+.hero.is-medium .hero-body {
+  // background-color: #29d4ff;
+  background-color: #0095e4;
+  background-image: linear-gradient(217deg, darken(#29d4ff, 5%) 0%, darken(#29d4ff, 10%) 40%, #0095e4 100%);
+  line-height: 2;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 5.5rem;
+  padding-top: 5rem;
+
+  @media screen and (max-width: $desktop) {
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+  }
+}
+
+.hero.is-medium p {
+  color: white !important;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
 .hero.is-dark.is-bold {
   background-color: $hero-dark;
   background-image: none;
 }
 
 .hero.is-link {
+  // background-color: #0095e4;
+  // background-image: linear-gradient(lighten(#0095e4, 2%), #0095e4, #0083d0);
+
   background-color: #0095e4;
-  background-image: linear-gradient(lighten(#0095e4, 2%), #0095e4, #0083d0);
+  background-image: linear-gradient(130deg, #0095e4 0%, darken(#29d4ff, 7%) 80%, darken(#29d4ff, 1%) 100%);
 }
 
 .hero--title {

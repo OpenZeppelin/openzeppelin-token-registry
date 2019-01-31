@@ -42,6 +42,7 @@ button[disabled]:active {
 }
 
 .button.is-pill {
+  border: 0;
   border-radius: 30px;
   box-shadow: 0px 2px 10px rgba(121, 132, 153, 0.2);
   font-family: $family-code;
@@ -61,6 +62,17 @@ button[disabled]:active {
 
 .button.is-pill:hover {
   box-shadow: 0px 4px 20px rgba(121, 132, 153, 0.3);
+  color: $dark;
+}
+
+.button.is-size-5 {
+  font-size: 1rem !important;
+  min-height: 3rem;
+  padding: 1.25rem 3rem 1.325rem;
+
+  @media screen and (max-width: $desktop) {
+    font-size: 1rem !important;
+  }
 }
 
 .button.is-purple {
@@ -73,6 +85,7 @@ button[disabled]:active {
   background-color: lighten($purple, 10%);
   box-shadow: 0px 4px 20px rgba(255, 132, 153, 0.3);
   border: none;
+  color: white;
 }
 
 .button.is-primary:hover,
