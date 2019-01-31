@@ -16,11 +16,6 @@
   min-width: 310px;
 
   @media screen and (max-width: $tablet - 1px) {
-    max-width: 60%;
-    min-width: 60%;
-  }
-
-  @media screen and (max-width: 460px) {
     max-width: 100%;
     min-width: 100%;
   }
