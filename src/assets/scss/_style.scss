@@ -52,8 +52,8 @@ button {
   transform: scale3d(1, 1, 1);
 }
 
-a.button:hover,
-button:hover {
+a.button:hover:not(.is-text),
+button:hover:not(.is-text) {
   transition: transform 150ms ease-in;
   transform: scale3d(1.04, 1.04, 1.04);
 }
@@ -107,6 +107,10 @@ a.is-dark {
 .main-content--column a:hover,
 .main-content--column .has-text-link:hover {
   border-bottom-color: rgba(5, 110, 220, 0.5);
+}
+
+.main-content--column a.button.is-text:hover {
+  border-bottom-color: $button-text-hover-color;
 }
 
 .main-content--column .button-has-icon {

@@ -22,7 +22,12 @@ button[disabled]:active {
 }
 
 .button.is-text {
+  border-radius: 0;
   text-decoration: none;
+  margin-bottom: calc(0.375em - 1px);
+  margin-left: 0.75em;
+  margin-right: 0.75em;
+  padding: 0;
 
   @media screen and (min-width: $desktop) {
     padding-left: 0;
