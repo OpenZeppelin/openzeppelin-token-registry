@@ -8,33 +8,10 @@ export const Footer = class _Footer extends Component {
     return (
       <>
         <footer className='footer has-text-centered'>
-          <div className='container'>
+          <div className='container-fluid footer--primary'>
             <div className='columns'>
               <div className='column is-12-mobile is-6-tablet is-offset-3-tablet is-6-desktop is-offset-3-desktop is-4-widescreen is-offset-4-widescreen'>
-                <div className='footer-brand'>
-                  <div className='footer-item'>
-                    ZeppelinOS was started and is sponsored by
-                    <br />
-                    <br />
 
-                    <h6 className='is-size-6'>
-                      <a
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        href="https://zeppelin.solutions/"
-                      >
-                        <ZeppelinLogo />
-                      </a>
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className='container-fluid footer--secondary'>
-            <div className='columns'>
-              <div className='column is-12-mobile is-6-tablet is-offset-3-tablet is-6-desktop is-offset-3-desktop is-4-widescreen is-offset-4-widescreen'>
                 <div className='footer-menu'>
                   <a
                     target='_blank'
@@ -62,6 +39,35 @@ export const Footer = class _Footer extends Component {
                   >
                     Site
                   </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div className='container-fluid footer--secondary'>
+            <div className='columns'>
+              <div className='column is-12-mobile is-6-tablet is-offset-3-tablet is-6-desktop is-offset-3-desktop is-4-widescreen is-offset-4-widescreen'>
+
+                  <div className='footer-brand'>
+                    <div className='footer-item'>
+                      ZeppelinOS Registry was started and is sponsored by
+                      <br />
+                      <br />
+
+                      <h6 className='is-size-6'>
+                        <a
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          href="https://zeppelin.solutions/"
+                        >
+                          <ZeppelinLogo />
+                        </a>
+                      </h6>
+                    </div>
+                  </div>
+
+                  <br />
 
                   <span
                     className='footer-item footer-item--copyright'
@@ -71,7 +77,6 @@ export const Footer = class _Footer extends Component {
                 </div>
               </div>
             </div>
-          </div>
         </footer>
       </>
     )

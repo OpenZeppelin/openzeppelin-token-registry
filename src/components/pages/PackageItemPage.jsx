@@ -25,7 +25,6 @@ export class PackageItemPage extends PureComponent {
         <ScrollToTop />
 
         <section className='section'>
-
           <div className='container'>
             <div className='columns'>
               <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
@@ -86,6 +85,24 @@ export class PackageItemPage extends PureComponent {
             </div>
           </div>
         </section>
+
+        <div className='hero is-light is-medium has-text-centered'>
+          <div className='hero-body'>
+            <div className='container-fluid'>
+              <p className='is-size-5 is-monospaced is-uppercase has-text-grey-dark'>
+                Help us build the Zeppelin Registry
+              </p>
+              <a
+                className='button is-pill is-size-5'
+                href='http://zpl.in/betaregistration'
+                target="_blank"
+                rel="noopener noreferrer">
+                Join the Beta
+              </a>
+            </div>
+          </div>
+        </div>
+
         <FooterContainer />
       </div>
     )
