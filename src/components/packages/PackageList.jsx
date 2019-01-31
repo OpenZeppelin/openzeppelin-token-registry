@@ -102,11 +102,11 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
               if (index === 0) {
                 item = (
-                  <div className='beta-message has-text-centered'>
-                    <div className='beta-message-body'>
-                      <h5 className='is-size-5 has-text-grey'>
+                  <div className='message-white has-text-centered'>
+                    <div className='message-white--body'>
+                      <p className='message-body--text has-text-grey'>
                         Want to see your package here?
-                      </h5>
+                      </p>
                       <button className='button is-purple is-pill'>
                         Join the Beta
                       </button>
@@ -170,8 +170,8 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
         <br />
 
         {/*
-          <div className='beta-message has-text-centered'>
-            <div className='beta-message-body'>
+          <div className='message-white has-text-centered'>
+            <div className='message-white-body'>
               <h5 className='is-size-5 has-text-grey'>
                 Want to see your package here?
               </h5>

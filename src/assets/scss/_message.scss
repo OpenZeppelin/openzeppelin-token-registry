@@ -1,7 +1,21 @@
 .message {
   background-color: #fafafa;
   min-height: 10rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   position: relative;
+
+  @media screen and (max-width: 340px) {
+    min-height: 15rem;
+  }
+}
+
+.message-body--text {
+  font-size: 1.25rem;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 1rem;
+  }
 }
 
 .message--cta {
@@ -18,4 +32,25 @@
 
 .message--cta.slide-exit {
   padding-top: 1rem;
+}
+
+
+
+.message-white {
+  box-shadow: 0px 1px 10px rgba(120, 120, 180, 0.15);
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+}
+
+.message-white--body {
+  border-left: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.message-white--body .button {
+  margin-top: 1rem;
 }

@@ -105,9 +105,9 @@ export class PackageDetails extends Component {
                 {state => (
                   <div className='message-body message--cta has-text-centered slide-enter'>
                     <br />
-                    <h5 className='is-size-5 has-text-grey'>
-                        Thanks for your input!
-                    </h5>
+                    <p className='message-body--text has-text-grey'>
+                      Thanks for your input!
+                    </p>
                   </div>
                 )}
               </CSSTransition>
@@ -119,19 +119,18 @@ export class PackageDetails extends Component {
               >
                 {state => (
                   <div className='message-body message--cta has-text-centered slide-exit'>
-                    <h5 className='is-size-5 has-text-grey'>
-                        Would you endorse this package?
-                    </h5>
+                    <p className='message-body--text has-text-grey'>
+                      Would you endorse this package?
+                    </p>
                     <button
-                      className='button is-purple is-pill'
+                      className='button is-purple is-pill button-left'
                       onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
                     >
                         Yes
                     </button>
-                      &nbsp;
-                      &nbsp;
+
                     <button
-                      className='button is-dark is-pill'
+                      className='button is-dark is-pill button-right'
                       onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
                     >
                         No

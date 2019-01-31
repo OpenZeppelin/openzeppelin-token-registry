@@ -51,6 +51,12 @@ button[disabled]:active {
   min-height: 2.375rem;
   min-width: 110px;
   transition: all 150ms ease-in-out;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 0.75rem;
+    min-height: 2rem;
+    padding: 0.1rem 1.125rem 0.2rem;
+  }
 }
 
 .button.is-pill:hover {
@@ -87,4 +93,12 @@ button[disabled]:active {
 
 .is-copy-button:hover {
   color: $text;
+}
+
+.button-left {
+  margin-right: 0.5rem;
+}
+
+.button-right {
+  margin-left: 0.5rem;
 }

@@ -84,10 +84,11 @@
   fill: white;
 }
 
-.navbar-brand__tertiary-logo {
+.navbar-brand svg.navbar-brand__tertiary-logo {
   margin-left: 0.5rem;
   margin-top: -0.125rem;
-  opacity: 0.35;
+  opacity: 0.75;
+  width: 90px;
 
   @media screen and (max-width: 460px) {
     display: none;
