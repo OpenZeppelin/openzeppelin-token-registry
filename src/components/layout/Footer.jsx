@@ -49,34 +49,34 @@ export const Footer = class _Footer extends Component {
             <div className='columns'>
               <div className='column is-12-mobile is-6-tablet is-offset-3-tablet is-6-desktop is-offset-3-desktop is-4-widescreen is-offset-4-widescreen'>
 
-                  <div className='footer-brand'>
-                    <div className='footer-item'>
+                <div className='footer-brand'>
+                  <div className='footer-item'>
                       ZeppelinOS Registry was started and is sponsored by
-                      <br />
-                      <br />
+                    <br />
+                    <br />
 
-                      <h6 className='is-size-6'>
-                        <a
-                          target='_blank'
-                          rel='noopener noreferrer'
-                          href="https://zeppelin.solutions/"
-                        >
-                          <ZeppelinLogo />
-                        </a>
-                      </h6>
-                    </div>
+                    <h6 className='is-size-6'>
+                      <a
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        href='https://zeppelin.solutions/'
+                      >
+                        <ZeppelinLogo />
+                      </a>
+                    </h6>
                   </div>
-
-                  <br />
-
-                  <span
-                    className='footer-item footer-item--copyright'
-                  >
-                    &copy; {year} Zeppelin
-                  </span>
                 </div>
+
+                <br />
+
+                <span
+                  className='footer-item footer-item--copyright'
+                >
+                    &copy; {year} Zeppelin
+                </span>
               </div>
             </div>
+          </div>
         </footer>
       </>
     )

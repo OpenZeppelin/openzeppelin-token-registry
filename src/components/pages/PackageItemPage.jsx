@@ -97,8 +97,8 @@ export class PackageItemPage extends PureComponent {
               <a
                 className='button is-pill is-size-5'
                 href='http://zpl.in/betaregistration'
-                target="_blank"
-                rel="noopener noreferrer">
+                target='_blank'
+                rel='noopener noreferrer'>
                 Join the Beta
               </a>
             </div>

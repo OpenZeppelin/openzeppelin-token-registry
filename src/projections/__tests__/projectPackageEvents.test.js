@@ -27,14 +27,13 @@ function Unvouched (id, sender, amount) {
   }
 }
 
-function Registered (id, owner, amount) {
+function Registered (id, owner) {
   return {
     parsedLog: {
       name: 'Registered',
       values: {
         id,
-        owner,
-        amount: ethers.utils.bigNumberify(amount)
+        owner
       }
     }
   }
@@ -43,7 +42,7 @@ function Registered (id, owner, amount) {
 describe('projectPackageEvents', () => {
   it('should sum the vouches for a user', () => {
     let events = [
-      Registered('0', '0x9999', '4000'),
+      Registered('0', '0x9999'),
       Vouched('0', '0xAbCd', '1000'),
       Vouched('1', '0x1234', '2000'),
       Unvouched('0', '0xabcd', '500')
@@ -53,7 +52,6 @@ describe('projectPackageEvents', () => {
       packages: {
         '0': {
           vouchTotals: {
-            '0x9999': ethers.utils.bigNumberify(4000),
             '0xabcd': ethers.utils.bigNumberify(500)
           }
         },
@@ -68,7 +66,7 @@ describe('projectPackageEvents', () => {
 
   it('should remove a user once the unvouch everything', () => {
     let events = [
-      Registered('1', '0x2222', '8000'),
+      Registered('1', '0x2222'),
       Vouched('0', '0xAbCd', '1000'),
       Vouched('1', '0x2222', '1000'),
       Unvouched('0', '0xabcd', '1000')
@@ -81,7 +79,7 @@ describe('projectPackageEvents', () => {
         },
         '1': {
           vouchTotals: {
-            '0x2222': ethers.utils.bigNumberify(9000)
+            '0x2222': ethers.utils.bigNumberify(1000)
           }
         }
       }

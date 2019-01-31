@@ -36,7 +36,7 @@ export function subscribeAndRefetch (apolloClient) {
           Registered @events
         }
       }`
-  }).subscribe(function ({ data: { Vouching: { Registered: { result, error }}}}) {
+  }).subscribe(function ({ data: { Vouching: { Registered: { result, error } } } }) {
     if (error) {
       console.error(error)
     } else {
@@ -55,7 +55,7 @@ export function subscribeAndRefetch (apolloClient) {
       }
     `,
     pollInterval: 2000,
-    fetchPolicy: "network-only"
+    fetchPolicy: 'network-only'
   }).subscribe((data) => {
     if (firstLoad) {
       firstLoad = false

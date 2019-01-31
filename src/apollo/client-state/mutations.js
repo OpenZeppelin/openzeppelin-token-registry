@@ -63,17 +63,17 @@ export const mutations = {
             const receipt = await provider.getTransactionReceipt(event.hash)
             const error = receipt.status === 0
             const id = `Transaction:${txId}`
-            const transaction = cache.readFragment({fragment: transactionQueries.transactionFragment, id})
-            const data = {...transaction, hash: event.hash, completed: true, error}
-            cache.writeData({id, data})
+            const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
+            const data = { ...transaction, hash: event.hash, completed: true, error }
+            cache.writeData({ id, data })
 
             return data
           })
           .catch(error => {
             const id = `Transaction:${txId}`
-            const transaction = cache.readFragment({fragment: transactionQueries.transactionFragment, id})
-            const data = {...transaction, completed: true, error}
-            cache.writeData({id, data})
+            const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
+            const data = { ...transaction, completed: true, error }
+            cache.writeData({ id, data })
 
             return data
           })

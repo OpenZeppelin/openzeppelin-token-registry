@@ -5,7 +5,7 @@ export function challengeProjection (events) {
     const event = events[i]
     let { name } = event.parsedLog || {}
 
-    switch(name) {
+    switch (name) {
       case 'Challenged':
         challenges.push(events[i])
         break

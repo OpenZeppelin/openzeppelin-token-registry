@@ -146,10 +146,10 @@ export class PackageDetails extends Component {
                     <p className='message-body--text has-text-grey'>
                       Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages.
                       &nbsp;<a
-                        href="https://docs.zeppelinos.org/docs/vouching.html"
+                        href='https://docs.zeppelinos.org/docs/vouching.html'
                         target='_blank'
                         rel='noopener noreferrer'
-                        className="has-text-link"
+                        className='has-text-link'
                       >Click here to learn more about our vouching mechanics and private beta.</a>
                     </p>
                   </div>

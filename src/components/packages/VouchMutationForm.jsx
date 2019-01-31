@@ -39,7 +39,7 @@ export const VouchMutationForm = withApollo(
       this.textInputRef.current.focus()
     }
 
-    render() {
+    render () {
       const { hasUncompletedTransaction } = this.props
       return (
         <Mutation

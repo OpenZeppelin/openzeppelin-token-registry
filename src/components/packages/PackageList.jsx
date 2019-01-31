@@ -94,7 +94,6 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
               let item
               const packageValues = event.parsedLog.values
 
-
               item = (
                 <React.Fragment key={`package-item-fragment-${index}`}>
                   {item}
@@ -134,7 +133,6 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
                 </React.Fragment>
               )
 
-
               return item
             })
           }
@@ -157,8 +155,8 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             <a
               className='button is-purple is-pill'
               href='http://zpl.in/betaregistration'
-              target="_blank"
-              rel="noopener noreferrer">
+              target='_blank'
+              rel='noopener noreferrer'>
               Join the Beta
             </a>
           </div>

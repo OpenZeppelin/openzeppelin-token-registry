@@ -207,7 +207,6 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                     </span>
                   </Link>
 
-
                   {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
                     <>
                       <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>

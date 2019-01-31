@@ -39,7 +39,7 @@ export const Nav = class _Nav extends Component {
                   <ZeppelinOSRegistryLogo />
                 </Link>
 
-                <a href="https://zeppelin.solutions/" className='navbar-item'>
+                <a href='https://zeppelin.solutions/' className='navbar-item'>
                   <ZeppelinLogo className='navbar-brand__tertiary-logo' />
                 </a>
               </div>
@@ -53,7 +53,7 @@ export const Nav = class _Nav extends Component {
                 data-target='navbar-menu'
                 onClick={this.handleToggleMobileNav}
               >
-                <div className="burger-lines"></div>
+                <div className='burger-lines' />
               </button>
             </div>
 

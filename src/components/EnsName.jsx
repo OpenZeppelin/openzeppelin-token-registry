@@ -25,7 +25,7 @@ export const EnsName = class _EnsName extends Component {
     }
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     const provider = await getProvider()
 
     this.resolveEnsName(provider)
