@@ -38,6 +38,28 @@
   }
 }
 
+.package-list-item--loader {
+  @media screen and (max-width: $desktop - 1px) {
+    display: none;
+  }
+}
+
+.package-list-item--loader_tablet {
+  display: none;
+
+  @media screen and (min-width: 520px) and (max-width: $desktop - 1px) {
+    display: block;
+  }
+}
+
+.package-list-item--loader_mobile {
+  display: none;
+
+  @media screen and (max-width: 520px) {
+    display: block;
+  }
+}
+
 .list-item__cell {
   align-items: center;
   align-self: center;

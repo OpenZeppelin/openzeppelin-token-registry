@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
 import yn from 'yn'
+import classnames from 'classnames'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { CodeSnippet } from '~/components/CodeSnippet'
@@ -34,7 +35,7 @@ export class PackageDetails extends Component {
       packageId: packageId.toString()
     })
 
-    this.setState({ voted: true })
+    this.setState({ voted: { answer } })
   }
 
   render () {
@@ -100,27 +101,13 @@ export class PackageDetails extends Component {
 
         <div className='columns'>
           <div className='column'>
-            <div className='message'>
-              <CSSTransition
-                timeout={1000}
-                classNames='slide'
-                in={this.state.voted}
-              >
-                {state => (
-                  <div className='message-body message--cta has-text-centered slide-enter'>
-                    <br />
-                    <p className='message-body--text has-text-grey'>
-                      Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages. 
-                      &nbsp;<a
-                        href="https://docs.zeppelinos.org/docs/vouching.html" 
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className="has-text-link"
-                      >Click here to learn more about our vouching mechanics and private beta.</a>
-                    </p>
-                  </div>
-                )}
-              </CSSTransition>
+            <div className={classnames(
+              'message',
+              'message-endorse',
+              {
+                'has-voted': this.state.voted
+              }
+            )}>
 
               <CSSTransition
                 timeout={1000}
@@ -128,7 +115,7 @@ export class PackageDetails extends Component {
                 in={!this.state.voted}
               >
                 {state => (
-                  <div className='message-body message--cta has-text-centered slide-exit'>
+                  <div className='message-body message--cta has-text-centered slide-exit message-endorse--question'>
                     <p className='message-body--text has-text-grey'>
                       Would you endorse this package?
                     </p>
@@ -145,6 +132,40 @@ export class PackageDetails extends Component {
                     >
                         No
                     </button>
+                  </div>
+                )}
+              </CSSTransition>
+
+              <CSSTransition
+                timeout={1000}
+                classNames='slide'
+                in={this.state.voted && this.state.voted.answer === 'yes'}
+              >
+                {state => (
+                  <div className='message-body message--cta has-text-centered slide-enter message-endorse--positive-answer'>
+                    <p className='message-body--text has-text-grey'>
+                      Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages.
+                      &nbsp;<a
+                        href="https://docs.zeppelinos.org/docs/vouching.html"
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className="has-text-link"
+                      >Click here to learn more about our vouching mechanics and private beta.</a>
+                    </p>
+                  </div>
+                )}
+              </CSSTransition>
+
+              <CSSTransition
+                timeout={1000}
+                classNames='slide'
+                in={this.state.voted && this.state.voted.answer === 'no'}
+              >
+                {state => (
+                  <div className='message-body message--cta has-text-centered slide-enter message-endorse--negative-answer'>
+                    <p className='message-body--text has-text-grey'>
+                      Thank you for your feedback. Your feedback will be used to inform the rankings of EVM packages.
+                    </p>
                   </div>
                 )}
               </CSSTransition>
