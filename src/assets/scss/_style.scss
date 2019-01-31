@@ -47,15 +47,13 @@ a.has-text-primary:focus {
 // END Bulma mobile fixes
 
 a.button,
-button,
-a svg {
+button {
   transition: transform 100ms ease-out;
   transform: scale3d(1, 1, 1);
 }
 
 a.button:hover,
-button:hover,
-a:hover svg {
+button:hover {
   transition: transform 150ms ease-in;
   transform: scale3d(1.04, 1.04, 1.04);
 }
