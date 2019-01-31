@@ -67,53 +67,32 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
     const packageListLoader =
       <>
-        <PackageListItemLoader key='0' />
-        <PackageListItemLoader key='1' />
-        <PackageListItemLoader key='2' />
+        <PackageListItemLoader key='package-item-fragment-0' />
+        <PackageListItemLoader key='package-item-fragment-1' />
+        <PackageListItemLoader key='package-item-fragment-2' />
       </>
 
     if (error) {
       return <ErrorMessage errorMessage={error} />
     }
 
-    if (loading) {
+    const events = this.eventsFromProps(this.props)
+
+    if (loading || Object.keys(this.state.totalVouches).length !== events.length) {
       content = packageListLoader
     } else {
-      const events = this.eventsFromProps(this.props)
-
-      if (Object.keys(this.state.totalVouches).length !== events.length) {
-        content = packageListLoader
-      }
-
       const sortedEvents = events.sort((a, b) => {
         const idA = a.parsedLog.values.id
         const idB = b.parsedLog.values.id
         return this.totalVouched(idA).cmp(this.totalVouched(idB))
       })
-      // const sortedEventsDuplicated = sortedEvents.concat(sortedEvents)
-
-
+      
       content = (
         <>
           {
             sortedEvents.map((event, index) => {
               let item
               const packageValues = event.parsedLog.values
-
-              if (index === 0) {
-                item = (
-                  <div className='beta-message has-text-centered'>
-                    <div className='beta-message-body'>
-                      <h5 className='is-size-5 has-text-grey'>
-                        Want to see your package here?
-                      </h5>
-                      <button className='button is-purple is-pill'>
-                        Join the Beta
-                      </button>
-                    </div>
-                  </div>
-                )
-              }
 
               item = (
                 <React.Fragment key={`package-item-fragment-${index}`}>
@@ -169,18 +148,16 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
         </h5>
         <br />
 
-        {/*
-          <div className='beta-message has-text-centered'>
-            <div className='beta-message-body'>
-              <h5 className='is-size-5 has-text-grey'>
-                Want to see your package here?
-              </h5>
-              <button className='button is-purple is-pill'>
-                Join the Beta
-              </button>
-            </div>
+        <div className='beta-message has-text-centered'>
+          <div className='beta-message-body'>
+            <h5 className='is-size-5 has-text-grey'>
+              Want to see your package here?
+            </h5>
+            <button className='button is-purple is-pill'>
+              Join the Beta
+            </button>
           </div>
-        */}
+        </div>
 
         {content}
       </>

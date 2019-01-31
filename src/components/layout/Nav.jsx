@@ -57,7 +57,7 @@ export const Nav = class _Nav extends Component {
                 data-target='navbar-menu'
                 onClick={this.handleToggleMobileNav}
               >
-                <div class="burger-lines"></div>
+                <div className="burger-lines"></div>
               </button>
             </div>
 
