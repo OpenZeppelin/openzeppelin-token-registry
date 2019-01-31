@@ -86,13 +86,14 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
         const idB = b.parsedLog.values.id
         return this.totalVouched(idA).cmp(this.totalVouched(idB))
       })
-      
+
       content = (
         <>
           {
             sortedEvents.map((event, index) => {
               let item
               const packageValues = event.parsedLog.values
+
 
               item = (
                 <React.Fragment key={`package-item-fragment-${index}`}>
@@ -148,11 +149,11 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
         </h5>
         <br />
 
-        <div className='beta-message has-text-centered'>
-          <div className='beta-message-body'>
-            <h5 className='is-size-5 has-text-grey'>
+        <div className='message-white has-text-centered'>
+          <div className='message-white--body'>
+            <p className='message-body--text has-text-grey'>
               Want to see your package here?
-            </h5>
+            </p>
             <button className='button is-purple is-pill'>
               Join the Beta
             </button>

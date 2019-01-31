@@ -199,22 +199,3 @@ a.is-dark {
 .has-half-margin {
   margin-bottom: 0.5rem !important;
 }
-
-.beta-message {
-  box-shadow: 0px 1px 10px rgba(120, 120, 180, 0.15);
-  border-radius: 10px;
-  min-height: 10rem;
-  position: relative;
-}
-
-.beta-message-body {
-  border-left: 0;
-  margin-top: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.beta-message-body .button {
-  margin-top: 1rem;
-}
