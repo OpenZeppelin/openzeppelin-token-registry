@@ -35,7 +35,7 @@ export const Nav = class _Nav extends Component {
           <div className='container'>
             <div className='navbar-brand'>
               <div className='navbar-item'>
-                <Link to={routes.HOME} className='navbar-item'>
+                <Link to={routes.HOME} className='navbar-item no-margin-right'>
                   <ZeppelinOSRegistryLogo />
                 </Link>
 
