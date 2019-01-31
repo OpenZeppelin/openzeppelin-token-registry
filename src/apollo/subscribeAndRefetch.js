@@ -46,4 +46,21 @@ export function subscribeAndRefetch (apolloClient) {
       })
     }
   })
+
+  let firstLoad = true
+  apolloClient.watchQuery({
+    query: gql`
+      query {
+        networkId @client
+      }
+    `,
+    pollInterval: 2000,
+    fetchPolicy: "network-only"
+  }).subscribe((data) => {
+    if (firstLoad) {
+      firstLoad = false
+    } else {
+      window.location.reload()
+    }
+  })
 }
