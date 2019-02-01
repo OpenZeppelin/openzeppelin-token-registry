@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import AntdIcon from '@ant-design/icons-react'
+import { ExclamationCircleOutline } from '@ant-design/icons'
 import { Mutation, withApollo } from 'react-apollo'
 import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { toWei } from '~/utils/toWei'
@@ -9,14 +11,16 @@ export const VouchMutationForm = withApollo(
   class _VouchMutationForm extends Component {
     state = {
       txData: {
-        method: 'vouch',
-        args: [0, 0]
+        method: 'vouch'
       },
-      ongoingTx: null
+      txCompleted: false,
+      txError: false
     }
 
     constructor (props) {
       super(props)
+
+      this.stateDefaults = this.state
 
       this.textInputRef = React.createRef()
     }
@@ -36,11 +40,80 @@ export const VouchMutationForm = withApollo(
     }
 
     componentDidMount () {
+      this.focusOnInput()
+    }
+
+    componentDidUpdate(prevProps) {
+      if (this.props.hasUncompletedTransaction !== prevProps.hasUncompletedTransaction) {
+        if (!this.props.hasUncompletedTransaction) {
+          this.setState({ txCompleted: true })
+        }
+      }
+
+      if (this.props.mostRecentTxHasError !== prevProps.mostRecentTxHasError) {
+        if (this.props.mostRecentTxHasError) {
+          this.setState({ txError: true })
+        }
+      }
+    }
+
+    focusOnInput = () => {
       this.textInputRef.current.focus()
     }
 
+    helpText = () => {
+      let text = ''
+
+      if (this.state.txError) {
+        text = 'Vouching was not completed'
+      } else if (this.state.txCompleted) {
+        text = 'Vouching completed'
+      } else if (this.props.hasUncompletedTransaction) {
+        text = 'Waiting for confirmation...'
+      }
+
+      return text
+    }
+
+    buttonText = () => {
+      let text = 'Vouch'
+
+      if (this.state.txError) {
+        text = 'Retry'
+      } else if (this.state.txCompleted) {
+        text = 'Done'
+      } else if (this.props.hasUncompletedTransaction) {
+        text = ''
+      }
+
+      return text
+    }
+
+    resetForm = () => {
+      this.setState(this.stateDefaults)
+      this.textInputRef.current.value = ''
+    }
+
+    handleSubmit = (sendTransaction) => {
+      if (this.state.txError) {
+        this.resetForm()
+        this.focusOnInput()
+      } else if (this.state.txCompleted) {
+        this.resetForm()
+      } else if (
+        this.state.txData.amount
+        && this.state.txData.packageId
+        && this.state.txData.args
+      ) {
+        sendTransaction()
+      } else {
+        console.error('tell user to enter an amount!')
+      }
+    }
+
     render () {
-      const { hasUncompletedTransaction } = this.props
+      const { hasUncompletedTransaction, mostRecentTxHasError } = this.props
+
       return (
         <Mutation
           mutation={Web3Mutations.sendTransaction}
@@ -53,29 +126,47 @@ export const VouchMutationForm = withApollo(
               className={classnames(
                 'form',
                 {
-                  'tx-in-progress': hasUncompletedTransaction
+                  'tx-in-progress': hasUncompletedTransaction,
+                  'is-danger': this.state.txError,
+                  'is-success': this.state.txCompleted && !this.state.txError
                 }
               )}
               onSubmit={(e) => {
                 e.preventDefault()
-                sendTransaction()
+
+                this.handleSubmit(sendTransaction)
               }}
             >
               <div className='field has-addons is-right'>
                 <div className='control is-addons-form-height'>
-                  <ZepTokenLogo
-                    width='40'
-                    height='40'
-                    className='field-addon--zep-token-logo'
-                  />
+                  {this.state.txError
+                    ? (
+                      <AntdIcon
+                        type={ExclamationCircleOutline}
+                        className='field-addon--error-exclamation field-addon--icon'
+                      />
+                    )
+                    : (
+                      <ZepTokenLogo
+                        width='40'
+                        height='40'
+                        className='field-addon--zep-token-logo field-addon--icon'
+                      />
+                    )
+                  }
                 </div>
                 <div className='control is-addons-form-height'>
                   <input
-                    disabled={hasUncompletedTransaction}
+                    disabled={hasUncompletedTransaction || this.state.txCompleted || this.state.txError}
                     ref={this.textInputRef}
                     type='number'
                     placeholder='0'
-                    className='input is-large'
+                    className={
+                      classnames(
+                        'input',
+                        'is-large'
+                      )
+                    }
                     onChange={this.handleAmountChange}
                   />
                 </div>
@@ -83,7 +174,7 @@ export const VouchMutationForm = withApollo(
                   <button
                     className='button is-text no-scale'
                   >
-                    {!hasUncompletedTransaction ? 'Vouch' : ''}
+                    {this.buttonText()}
                   </button>
                 </div>
               </div>
@@ -91,11 +182,13 @@ export const VouchMutationForm = withApollo(
                 classnames(
                   'help',
                   {
-                    'has-text-link': hasUncompletedTransaction
+                    'has-text-success': this.state.txCompleted && !this.state.txError,
+                    'has-text-link': hasUncompletedTransaction,
+                    'has-text-danger': mostRecentTxHasError
                   }
                 )
               }>
-                {hasUncompletedTransaction ? 'Waiting for confirmation...' : <span>&nbsp;</span>}
+                {this.helpText()}
               </p>
             </form>
           )}

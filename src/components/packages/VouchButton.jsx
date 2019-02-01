@@ -14,20 +14,32 @@ export const VouchButton = class _VouchButton extends Component {
 
     return (
       <Query
-        query={transactionQueries.getUncompletedTransactionsByPackageId}
+        query={transactionQueries.getAllTransactionsByPackageId}
         variables={{ packageId: this.props.packageId }}
       >
         {({ data, refetch, loading, errors }) => {
+          let mostRecentTxHasError
+
           if (errors) { console.warn(errors) }
 
-          const hasUncompletedTransaction = get(data, 'getUncompletedTransactionsByPackageId', []).length > 0
-          // console.log('getUncompletedTransactionsByPackageId', get(data, 'getUncompletedTransactionsByPackageId', []).length)
+          const txs = get(data, 'getAllTransactionsByPackageId', [])
 
-          const showVouchMutationForm = (this.state.isVouching || hasUncompletedTransaction)
+          const hasUncompletedTransaction = txs.filter(tx => !tx.completed).length > 0
+
+          // iterate through the array of tx's for this package and set the 
+          // variable mostRecentTxHasError to the last tx
+          txs.forEach(tx => { mostRecentTxHasError = tx.error })
+
+          const showVouchMutationForm = (
+            this.state.isVouching
+            || mostRecentTxHasError
+            || hasUncompletedTransaction
+          )
 
           return (
             showVouchMutationForm ? (
               <VouchMutationForm
+                mostRecentTxHasError={mostRecentTxHasError}
                 hasUncompletedTransaction={hasUncompletedTransaction}
                 packageId={packageId}
               />

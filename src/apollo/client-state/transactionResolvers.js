@@ -6,7 +6,7 @@ export const transactionResolvers = {
   },
   resolvers: {
     Query: {
-      getUncompletedTransactionsByPackageId: async function (object, args, context, info) {
+      getAllTransactionsByPackageId: async function (object, args, context, info) {
         let txs = []
         let allTransactions
 
@@ -20,11 +20,7 @@ export const transactionResolvers = {
           console.warn(error)
         }
 
-        txs = allTransactions.transactions.filter(tx => {
-          return (
-            tx.packageId._hex === packageId._hex && !tx.completed
-          )
-        })
+        txs = allTransactions.transactions.filter(tx => (tx.packageId._hex === packageId._hex))
 
         return txs
       }

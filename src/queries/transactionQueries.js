@@ -14,6 +14,7 @@ const transactionFragment = gql`
     amount {
       _hex
     }
+    error
     completed
   }
 `
@@ -28,9 +29,9 @@ export const transactionQueries = {
     }
     ${transactionFragment}
   `,
-  getUncompletedTransactionsByPackageId: gql`
-    query getUncompletedTransactionsByPackageId($packageId: String!) {
-      getUncompletedTransactionsByPackageId(packageId: $packageId) @client {
+  getAllTransactionsByPackageId: gql`
+    query getAllTransactionsByPackageId($packageId: String!) {
+      getAllTransactionsByPackageId(packageId: $packageId) @client {
         ...transaction
       }
     }

@@ -74,7 +74,7 @@ export function subscribeAndRefetch (apolloClient) {
     result.data.transactions.forEach((tx) => {
       // console.log('Running Apollo subscription queries for transactions with packageId: ', tx.packageId._hex)
       apolloClient.query({
-        query: transactionQueries.getUncompletedTransactionsByPackageId,
+        query: transactionQueries.getAllTransactionsByPackageId,
         variables: { packageId: tx.packageId },
         fetchPolicy: 'network-only'
       })
