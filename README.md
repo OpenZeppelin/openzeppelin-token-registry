@@ -83,3 +83,5 @@ $ yarn apply-registry
 ```
 
 This will generate Truffle-compatible artifacts in the `build/contracts` directory.
+
+Made with :heart: by Delta Camp
