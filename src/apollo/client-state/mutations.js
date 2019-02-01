@@ -56,7 +56,7 @@ export const mutations = {
 
         const gasLimit = await contract.estimate[method](...args)
         // Hack to ensure it works!
-        const newGasLimit = gasLimit.add(2000)
+        const newGasLimit = gasLimit.add(2000000)
 
         return methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
           .then(async function (event) {

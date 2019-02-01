@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { transactionQueries } from '~/queries/transactionQueries'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 
 export function subscribeAndRefetch (apolloClient) {
@@ -63,4 +64,12 @@ export function subscribeAndRefetch (apolloClient) {
       window.location.reload()
     }
   })
+
+  // apolloClient.watchQuery({
+  //   query: transactionQueries.allTransactionsQuery,
+  //   pollInterval: 2000,
+  //   fetchPolicy: 'cache-only'
+  // }).subscribe((data) => {
+  //
+  // })
 }

@@ -105,7 +105,7 @@ a.is-dark {
 }
 
 .main-content--column a:hover,
-.main-content--column .has-text-link:hover {
+.main-content--column .has-hover-border:hover {
   border-bottom-color: rgba(5, 110, 220, 0.5);
 }
 
@@ -206,7 +206,7 @@ a.is-dark {
   border-radius: 40px;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 10px solid $blue;
+  border-right: 10px solid $info;
   width: 10px;
   height: 100%;
   position: absolute;
@@ -219,4 +219,8 @@ a.is-dark {
 
 .has-half-margin {
   margin-bottom: 0.5rem !important;
+}
+
+.help {
+  font-size: 1rem;
 }

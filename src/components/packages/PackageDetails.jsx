@@ -149,7 +149,7 @@ export class PackageDetails extends Component {
                         href='https://docs.zeppelinos.org/docs/vouching.html'
                         target='_blank'
                         rel='noopener noreferrer'
-                        className='has-text-link'
+                        className='has-text-link has-hover-border'
                       >Click here to learn more about our vouching mechanics and private beta.</a>
                     </p>
                   </div>

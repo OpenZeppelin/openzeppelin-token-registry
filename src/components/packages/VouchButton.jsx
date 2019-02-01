@@ -19,7 +19,10 @@ export const VouchButton = class _VouchButton extends Component {
         pollInterval={2000}
       >
         {({ data, refetch, loading, errors }) => {
+          if (errors) { console.warn(errors) }
+          
           const hasUncompletedTransaction = get(data, 'getUncompletedTransactionsByPackageId', []).length > 0
+          console.log(get(data, 'getUncompletedTransactionsByPackageId', []).length)
 
           const showVouchMutationForm = (this.state.isVouching || hasUncompletedTransaction)
 

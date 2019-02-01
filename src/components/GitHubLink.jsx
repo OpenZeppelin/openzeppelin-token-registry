@@ -28,7 +28,7 @@ export const GitHubLink = class _GitHubLink extends PureComponent {
         href={this.props.url}
       >
         <AntdIcon type={GithubFill} className='antd-icon' />
-        {this.props.viewLink && <span className='is-monospaced is-size-7 has-text-link'>View on GitHub</span>}
+        {this.props.viewLink && <span className='is-monospaced is-size-7 has-text-link has-hover-border'>View on GitHub</span>}
       </a>
     )
   }

@@ -7,18 +7,29 @@ export const transactionResolvers = {
   resolvers: {
     Query: {
       getUncompletedTransactionsByPackageId: async function (object, args, context, info) {
+        console.log('running resolver')
         let txs = []
+        let allTransactions
 
         const { packageId } = args
+        console.log(txs, packageId)
 
-        const allTransactions = context.cache.readQuery({
-          query: transactionQueries.allTransactionsQuery
-        })
+        try {
+          console.log(context)
+          allTransactions = context.cache.readQuery({
+            query: transactionQueries.allTransactionsQuery
+          })
+        } catch (error) {
+          console.warn(error)
+        }
+
+        console.log('allTransactions', allTransactions)
 
         // tx = allTransactions.transactions.find(transaction => transaction.packageId === packageId)
-        txs = allTransactions.transactions.filter(transaction => {
+        txs = allTransactions.transactions.filter(tx => {
+          console.log(tx)
           return (
-            transaction.packageId === packageId && !transaction.completed
+            tx.packageId === packageId && !tx.completed
           )
         })
 
