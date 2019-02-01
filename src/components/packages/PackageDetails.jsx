@@ -90,10 +90,10 @@ export class PackageDetails extends Component {
             <h5 className='is-size-5'>
               Link this package:
             </h5>
-            <br />
-            <CodeSnippet metadata={metadata} />
-
-            <GitHubLink url={`https://github.com/${repo}`} viewLink />
+            <div className='code-wrapper'>
+              <CodeSnippet metadata={metadata} />
+              <GitHubLink url={`https://github.com/${repo}`} viewLink />
+            </div>
           </div>
         </div>
 
