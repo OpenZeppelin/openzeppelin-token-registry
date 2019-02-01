@@ -14,7 +14,8 @@ export const VouchMutationForm = withApollo(
         method: 'vouch'
       },
       txCompleted: false,
-      txError: false
+      txError: false,
+      amountError: false
     }
 
     constructor (props) {
@@ -36,7 +37,10 @@ export const VouchMutationForm = withApollo(
         amount
       ]
 
-      this.setState({ txData: { ...this.state.txData, args, packageId, amount } })
+      this.setState({ 
+        txData: { ...this.state.txData, args, packageId, amount },
+        amountError: false
+      })
     }
 
     componentDidMount () {
@@ -64,7 +68,9 @@ export const VouchMutationForm = withApollo(
     helpText = () => {
       let text = ''
 
-      if (this.state.txError) {
+      if (this.state.amountError) {
+        text = 'Please enter an amount'
+      } else if (this.state.txError) {
         text = 'Vouching was not completed'
       } else if (this.state.txCompleted) {
         text = 'Vouching completed'
@@ -107,7 +113,7 @@ export const VouchMutationForm = withApollo(
       ) {
         sendTransaction()
       } else {
-        console.error('tell user to enter an amount!')
+        this.setState({ amountError: true })
       }
     }
 
@@ -127,7 +133,7 @@ export const VouchMutationForm = withApollo(
                 'form',
                 {
                   'tx-in-progress': hasUncompletedTransaction,
-                  'is-danger': this.state.txError,
+                  'is-danger': this.state.amountError || this.state.txError,
                   'is-success': this.state.txCompleted && !this.state.txError
                 }
               )}
@@ -184,7 +190,7 @@ export const VouchMutationForm = withApollo(
                   {
                     'has-text-success': this.state.txCompleted && !this.state.txError,
                     'has-text-link': hasUncompletedTransaction,
-                    'has-text-danger': mostRecentTxHasError
+                    'has-text-danger': this.state.amountError || this.state.txError
                   }
                 )
               }>

@@ -64,7 +64,7 @@ export const mutations = {
           .then(async function (event) {
             const receipt = await provider.getTransactionReceipt(event.hash)
             const error = receipt.status === 0
-            // const error = (Math.random() > 0.5)
+            // const error = (Math.random() > 0.2)
             const id = `Transaction:${txId}`
             const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
             const data = { ...transaction, hash: event.hash, completed: true, error }
