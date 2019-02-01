@@ -21,13 +21,13 @@ $ cp .envrc.example .envrc
 $ direnv allow
 ```
 
-Now you may configure the [ZOS Vouching](https://github.com/zeppelinos/zos-vouching) contract addresses.  The project is already configured with [mock zOS Vouching](https://github.com/DeltaCamp/zos-vouching-mock) Ropsten contract addresses.  You'll notice a file called `networks/3.json`.  If you just want to get up and running, you can generate the Truffle artifacts like so:
+Now you may configure the [ZOS Vouching](https://github.com/zeppelinos/zos-vouching) contract addresses.  The project is already configured with [mock zOS Vouching](https://github.com/DeltaCamp/zos-vouching-mock) Ropsten contract addresses in the file called `networks/3.json`.  To get up and running right away run:
 
 ```
 $ yarn apply-registry
 ```
 
-This will generate files that match the Truffle artifact shape for contract network configs.  These files are pulled into the app.  If you want to setup a local test environment then you can use [zos-vouching-mock](https://github.com/DeltaCamp/zos-vouching-mock).  Otherwise, follow the custom contract configuration instructions below.
+This will generate files that match the Truffle artifact shape for contract network configs.  These files are pulled into the app.  If you want to setup a custom test environment then you follow the custom contract configuration instructions below.
 
 To run the local server, run:
 
