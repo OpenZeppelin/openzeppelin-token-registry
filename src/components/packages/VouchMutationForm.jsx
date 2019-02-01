@@ -118,7 +118,7 @@ export const VouchMutationForm = withApollo(
     }
 
     render () {
-      const { hasUncompletedTransaction, mostRecentTxHasError } = this.props
+      const { hasUncompletedTransaction } = this.props
 
       return (
         <Mutation

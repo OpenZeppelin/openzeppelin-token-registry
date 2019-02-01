@@ -18,8 +18,6 @@ export const mutations = {
         const abi = abiMapping.getAbi('Vouching')
         const contract = new ethers.Contract(address, abi, signer)
 
-        window.contract = contract
-
         const methodFxn = contract[method]
 
         if (!methodFxn) {
@@ -58,7 +56,7 @@ export const mutations = {
 
         const gasLimit = await contract.estimate[method](...args)
         // Hack to ensure it works!
-        const newGasLimit = gasLimit.add(2000000)
+        const newGasLimit = gasLimit.add(3000)
 
         return methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
           .then(async function (event) {
@@ -73,6 +71,8 @@ export const mutations = {
             return data
           })
           .catch(error => {
+            if (error.message === 'Error: MetaMask Tx Signature: User denied transaction signature.') { return }
+
             const id = `Transaction:${txId}`
             const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
             const data = { ...transaction, completed: true, error }
