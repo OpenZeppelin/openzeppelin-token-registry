@@ -33,6 +33,7 @@ export const mutations = {
 
         try {
           data = cache.readQuery({ query })
+          console.log('existing data', data)
         } catch (error) {
           console.error(error)
         }

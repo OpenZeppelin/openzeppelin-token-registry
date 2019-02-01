@@ -16,13 +16,12 @@ export const VouchButton = class _VouchButton extends Component {
       <Query
         query={transactionQueries.getUncompletedTransactionsByPackageId}
         variables={{ packageId: this.props.packageId }}
-        pollInterval={2000}
       >
         {({ data, refetch, loading, errors }) => {
           if (errors) { console.warn(errors) }
-          
+
           const hasUncompletedTransaction = get(data, 'getUncompletedTransactionsByPackageId', []).length > 0
-          console.log(get(data, 'getUncompletedTransactionsByPackageId', []).length)
+          // console.log('getUncompletedTransactionsByPackageId', get(data, 'getUncompletedTransactionsByPackageId', []).length)
 
           const showVouchMutationForm = (this.state.isVouching || hasUncompletedTransaction)
 
@@ -48,3 +47,6 @@ export const VouchButton = class _VouchButton extends Component {
     )
   }
 }
+
+// pollInterval={2000}
+// fetchPolicy='network-only'

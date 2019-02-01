@@ -65,11 +65,19 @@ export function subscribeAndRefetch (apolloClient) {
     }
   })
 
-  // apolloClient.watchQuery({
-  //   query: transactionQueries.allTransactionsQuery,
-  //   pollInterval: 2000,
-  //   fetchPolicy: 'cache-only'
-  // }).subscribe((data) => {
-  //
-  // })
+  apolloClient.watchQuery({
+    query: transactionQueries.allTransactionsQuery,
+    fetchPolicy: 'cache-only'
+  }).subscribe((result, error) => {
+    if (error) { console.warn('error!', error) }
+
+    result.data.transactions.forEach((tx) => {
+      // console.log('Running Apollo subscription queries for transactions with packageId: ', tx.packageId._hex)
+      apolloClient.query({
+        query: transactionQueries.getUncompletedTransactionsByPackageId,
+        variables: { packageId: tx.packageId },
+        fetchPolicy: 'network-only'
+      })
+    })
+  })
 }
