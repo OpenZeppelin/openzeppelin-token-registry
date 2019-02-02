@@ -1,4 +1,6 @@
 import gql from 'graphql-tag'
+import { ethers } from 'ethers'
+import { tokenQueries } from '~/queries/tokenQueries'
 import { transactionQueries } from '~/queries/transactionQueries'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 
@@ -47,7 +49,53 @@ export function subscribeAndRefetch (apolloClient) {
       })
     }
   })
+  // query getAllTransactionsByPackageId($packageId: String!) {
+  //   getAllTransactionsByPackageId(packageId: $packageId) @client {
+  // This listens for Transfer (and mint) events for ZEP token balances
+  const te = apolloClient.subscribe({
+    query: gql`
+      subscription($id: String!) {
+        ZepToken @contract(id: $id) {
+          ...token
+        }
+      }`
+  }).subscribe(function ({ data: { ZepToken: { Transfer: { result, error } } }, err }) {
+    if (error || err) {
+      console.error(err)
+      console.error(error)
+    } else {
+      console.log(result)
+      const from = result.args[0]
+      const to = result.args[1]
+      const value = result.args[2]
 
+      console.log(from, to, value.toString())
+
+      // apolloClient.query({
+      //   query: vouchingQueries.eventsQuery,
+      //   fetchPolicy: 'network-only'
+      // })
+    }
+  })
+  console.log(te)
+
+  // // This listens for the ZEP token balance for the current viewers Eth address
+  // apolloClient.subscribe({
+  //   query: tokenQueries.tokenQuery,
+  //   fetchPolicy: 'network-only'
+  // }).subscribe(function ({ data: { ZepToken: { myBalance: { _hex } } }, error }) {
+  //   if (error) {
+  //     console.error(error)
+  //   } else {
+  //     console.log(ethers.utils.bigNumberify(_hex).toString())
+  //     // apolloClient.query({
+  //     //   query: vouchingQueries.eventsQuery,
+  //     //   fetchPolicy: 'network-only'
+  //     // })
+  //   }
+  // })
+
+  // This subscription listens for changes to a web3 browser (ie metamask's) network
   let firstLoad = true
   apolloClient.watchQuery({
     query: gql`
@@ -65,6 +113,7 @@ export function subscribeAndRefetch (apolloClient) {
     }
   })
 
+  // This subscription watches for new and updated transactions for all packages
   apolloClient.watchQuery({
     query: transactionQueries.allTransactionsQuery,
     fetchPolicy: 'cache-only'

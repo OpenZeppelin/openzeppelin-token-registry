@@ -8,6 +8,7 @@ import { abiMapping } from './abiMapping'
 import { getProvider } from '~/web3/getProvider'
 import { merge } from 'lodash'
 import { metadataResolvers } from './client-state/metadataResolvers'
+import { tokenResolvers } from './client-state/tokenResolvers'
 import { transactionResolvers } from './client-state/transactionResolvers'
 import { web3Resolvers } from './client-state/web3Resolvers'
 import { mutations } from './client-state/mutations'
@@ -30,6 +31,7 @@ const stateLink = withClientState({
     {},
     metadataResolvers,
     transactionResolvers,
+    tokenResolvers,
     web3Resolvers,
     mutations
   ),

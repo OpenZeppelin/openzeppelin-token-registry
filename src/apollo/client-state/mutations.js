@@ -53,14 +53,18 @@ export const mutations = {
         }
 
         cache.writeQuery({ query, data })
+        console.log('form sent')
 
         const gasLimit = await contract.estimate[method](...args)
         // Hack to ensure it works!
         const newGasLimit = gasLimit.add(3000)
 
-        return methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
+        const sendTx = methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
           .then(async function (event) {
+            console.log('complete!')
             const receipt = await provider.getTransactionReceipt(event.hash)
+            console.log('event', event)
+            console.log('receipt', receipt)
             const error = receipt.status === 0
             // const error = (Math.random() > 0.2)
             const id = `Transaction:${txId}`
@@ -80,6 +84,9 @@ export const mutations = {
 
             return data
           })
+        console.log('sendTx', sendTx)
+
+        return null
       }
     }
   }
