@@ -59,6 +59,3 @@ export const VouchButton = class _VouchButton extends Component {
     )
   }
 }
-
-// pollInterval={2000}
-// fetchPolicy='network-only'

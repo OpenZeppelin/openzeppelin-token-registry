@@ -93,10 +93,6 @@ export function subscribeAndRefetch (apolloClient) {
       return
     }
 
-    // (extraTopics: { types: ["uint256"], values: [$address] })
-    console.log('event listener triggered!')
-
-    // const address = '0x7A8cda94b311F58291d6F9E681599c915E31c338'
     const accountResult = apolloClient.readQuery({ query: web3Queries.accountQuery })
 
     if (accountResult) {
@@ -116,7 +112,6 @@ export function subscribeAndRefetch (apolloClient) {
     if (error) { console.warn('error!', error) }
 
     result.data.transactions.forEach((tx) => {
-      // console.log('Running Apollo subscription queries for transactions with packageId: ', tx.packageId._hex)
       apolloClient.query({
         query: transactionQueries.getAllTransactionsByPackageId,
         variables: { packageId: tx.packageId },

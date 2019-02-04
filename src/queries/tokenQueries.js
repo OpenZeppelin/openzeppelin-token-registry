@@ -25,7 +25,3 @@ export const tokenQueries = {
     ${tokenFragments.tokenFragment}
   `
 }
-// allEvents @pastEvents(fromBlock: 0, toBlock: "latest", extraTopics: { types: ["uint256"], values: [$address] })
-// Transfer @events(extraTopics: { types: ["uint256"], values: [$address] })
-
-// (type: "ERC20Token", id: "1")
