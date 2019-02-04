@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 const transactionFragment = gql`
   fragment transaction on Transaction {
     id
+    __typename
     hash
     method
     args {

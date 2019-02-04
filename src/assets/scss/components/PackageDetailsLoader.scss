@@ -1,0 +1,22 @@
+
+.package-details--loader {
+  @media screen and (max-width: $tablet - 1px) {
+    display: none;
+  }
+}
+
+.package-details--loader_tablet {
+  display: none;
+
+  @media screen and (min-width: 520px) and (max-width: $tablet - 1px) {
+    display: block;
+  }
+}
+
+.package-details--loader_mobile {
+  display: none;
+
+  @media screen and (max-width: 520px) {
+    display: block;
+  }
+}

@@ -22,9 +22,7 @@ window.ethers = ethers
 const ethersResolver = new EthersResolver(abiMapping, provider)
 const ethereumLink = new EthereumLink(ethersResolver)
 
-const cache = new InMemoryCache({
-  addTypename: false
-})
+const cache = new InMemoryCache()
 
 const stateLink = withClientState({
   ...merge(

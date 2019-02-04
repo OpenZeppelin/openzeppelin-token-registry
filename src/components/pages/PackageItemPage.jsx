@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { FooterContainer } from '~/components/layout/Footer'
+import { PackageDetailsLoader } from '~/components/packages/PackageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/packages/PackageDetails'
@@ -39,7 +40,7 @@ export class PackageItemPage extends PureComponent {
 
                 <Query query={vouchingQueries.eventsQuery}>
                   {({ loading, error, data }) => {
-                    if (loading) return null
+                    if (loading) return <PackageDetailsLoader />
                     if (error) return <ErrorMessage errorMessage={error} />
 
                     const events = data.Vouching ? data.Vouching.Registered : []
@@ -60,7 +61,11 @@ export class PackageItemPage extends PureComponent {
                       >
                         {
                           ({ loading, error, data }) => {
-                            if (loading) return null
+
+                            if (loading) return <PackageDetailsLoader />
+
+
+
                             if (error) return <ErrorMessage errorMessage={error} />
 
                             const { metadata, Vouching } = data

@@ -40,7 +40,6 @@ export const mutations = {
           error: false,
           completed: false,
           hash: '',
-          ...variables.txData,
           id: txId,
           __typename: 'Transaction',
           type: 'Transaction'
