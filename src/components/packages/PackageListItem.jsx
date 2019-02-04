@@ -218,7 +218,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       </span>
 
                       <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                        {displayWeiToEther(get(Vouching, 'entry[5]'))}
+                        {displayWeiToEther(get(Vouching, 'entry.totalVouched'))}
                       </h3>
 
                       <span
