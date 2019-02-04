@@ -3,13 +3,11 @@ import gql from 'graphql-tag'
 export const vouchingFragments = {
   metadataFragment: gql`
     fragment md on Metadata {
-      metadata(uri: $uri) @client {
-        id
-        __typename
-        name
-        version
-        description
-      }
+      id
+      __typename
+      name
+      version
+      description
     }
   `,
   packageFragment: gql`
@@ -42,7 +40,9 @@ export const vouchingQueries = {
   `,
   packageQuery: gql`
     query packageQuery($uri: String!, $id: String!) {
-      ...md
+      metadata(uri: $uri) @client {
+        ...md
+      }
       Vouching @contract(type: "Package", id: $id) {
         ...packageFragment
       }

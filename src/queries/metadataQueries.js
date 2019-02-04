@@ -4,7 +4,9 @@ import { vouchingFragments } from '~/queries/vouchingQueries'
 export const metadataQueries = {
   challengeMetadataQuery: gql`
     query ChallengeMetadata($uri: String!) {
-      ...md
+      metadata(uri: $uri) @client {
+        ...md
+      }
     }
     ${vouchingFragments.metadataFragment}
   `,
