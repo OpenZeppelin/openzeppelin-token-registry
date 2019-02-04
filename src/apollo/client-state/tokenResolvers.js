@@ -1,13 +1,16 @@
-import { getProvider } from '~/web3/getProvider'
+import { web3Resolvers } from '~/apollo/client-state/web3Resolvers'
+import { tokenQueries } from '~/queries/tokenQueries'
 
 export const tokenResolvers = {
   resolvers: {
     Query: {
-      tokenQuery: async function (object, args, context, info) {
-        console.log('run')
-        console.log(args)
+      zepTokenBalance: async function (object, args, context, info) {
+        const address = await web3Resolvers.resolvers.Query.account()
 
-        return null
+        return context.cache.readQuery({
+          query: tokenQueries.tokenQuery,
+          variables: { address }
+        })
       }
     }
   }

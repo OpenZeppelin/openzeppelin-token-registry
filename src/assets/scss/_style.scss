@@ -88,10 +88,11 @@ a.is-dark {
 }
 
 .main-content--column {
-  max-width: 1000px;
   margin-left: auto !important;
   margin-right: auto !important;
   margin-bottom: 100px;
+  max-width: 1000px;
+  min-height: 600px;
 }
 
 .button-has-icon .has-text-link {

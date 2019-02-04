@@ -9,10 +9,15 @@ export const web3Resolvers = {
       },
       account: async function () {
         const signer = getProvider().getSigner()
+
         if (signer) {
-          return signer.getAddress()
+          try {
+            const address = await signer.getAddress()
+            return address
+          } catch (err) {
+            return null
+          }
         }
-        return null
       }
     }
   }

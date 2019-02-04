@@ -5,20 +5,27 @@ export const tokenFragments = {
     fragment tokenFragment on Token {
       id
       __typename
-      myBalance: balanceOf(address: $id)
-      allEvents @pastEvents(fromBlock: 0, toBlock: "latest", extraTopics: { types: ["uint256"], values: [$id] })
+      myBalance: balanceOf(address: $address)
     }
   `
 }
 
 export const tokenQueries = {
+  zepTokenBalanceQuery: gql`
+    query zepTokenBalanceQuery {
+      zepTokenBalance @client
+    }
+  `,
   tokenQuery: gql`
-    query tokenQuery($id: String!) {
-      ZepToken @contract(type: "ERC20Token", id: "1") {
-        ...token
-
+    query tokenQuery($address: String!) {
+      ZepToken @contract {
+        ...tokenFragment
       }
     }
     ${tokenFragments.tokenFragment}
   `
 }
+// allEvents @pastEvents(fromBlock: 0, toBlock: "latest", extraTopics: { types: ["uint256"], values: [$address] })
+// Transfer @events(extraTopics: { types: ["uint256"], values: [$address] })
+
+// (type: "ERC20Token", id: "1")
