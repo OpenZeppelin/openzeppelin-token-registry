@@ -84,7 +84,7 @@
 }
 
 .list--row_vouch {
-  grid-template-columns: 600px minmax(50px, 66px) minmax(50px, 50px);
+  grid-template-columns: 528px minmax(50px, 66px) minmax(50px, 50px);
 
   @media screen and (max-width: $desktop - 1px) {
     grid-template-columns: 20fr minmax(50px, 66px) minmax(50px, 50px);
