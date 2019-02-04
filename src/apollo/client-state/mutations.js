@@ -59,14 +59,10 @@ export const mutations = {
         // Hack to ensure it works!
         const newGasLimit = gasLimit.add(3000)
 
-        const sendTx = methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
+        methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
           .then(async function (event) {
-            console.log('complete!')
             const receipt = await provider.getTransactionReceipt(event.hash)
-            console.log('event', event)
-            console.log('receipt', receipt)
             const error = receipt.status === 0
-            // const error = (Math.random() > 0.2)
             const id = `Transaction:${txId}`
             const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
             const data = { ...transaction, hash: event.hash, completed: true, error }
@@ -75,16 +71,17 @@ export const mutations = {
             return data
           })
           .catch(error => {
-            if (error.message === 'Error: MetaMask Tx Signature: User denied transaction signature.') { return }
+            // if (error.message === 'Error: MetaMask Tx Signature: User denied transaction signature.') { return }
+            const errorMessage = error.message
 
             const id = `Transaction:${txId}`
             const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
-            const data = { ...transaction, completed: true, error }
+            const data = { ...transaction, completed: true, error: errorMessage }
+            console.log('newdata', data)
             cache.writeData({ id, data })
 
             return data
           })
-        console.log('sendTx', sendTx)
 
         return null
       }

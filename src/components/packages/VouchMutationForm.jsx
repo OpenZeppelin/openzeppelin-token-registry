@@ -6,7 +6,6 @@ import { Mutation, Query, graphql, withApollo } from 'react-apollo'
 import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { tokenQueries } from '~/queries/tokenQueries'
 import { web3Queries } from '~/queries/web3Queries'
-import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { toWei } from '~/utils/toWei'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 
@@ -69,10 +68,12 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
         this.textInputRef.current.focus()
       }
 
-      helpText = () => {
+      helpText = (notEnoughZepError) => {
         let text = ''
 
-        if (this.state.amountError) {
+        if (notEnoughZepError) {
+          text = `You don't have enough ZEP tokens`
+        } else if (this.state.amountError) {
           text = 'Please enter an amount'
         } else if (this.state.txError) {
           text = 'Vouching was not completed'
@@ -127,8 +128,10 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
         return (
           <Query query={tokenQueries.tokenQuery} variables={{ address: this.props.data.account }}>
             {({ data }) => {
+              let notEnoughZepError
+
               if (data && data.ZepToken) {
-                console.log('displayWeiToEther', displayWeiToEther(data.ZepToken.myBalance))
+                notEnoughZepError = parseInt(this.state.txData.amount, 10) > parseInt(data.ZepToken.myBalance)
               }
 
               return <Mutation
@@ -143,7 +146,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                       'form',
                       {
                         'tx-in-progress': hasUncompletedTransaction,
-                        'is-danger': this.state.amountError || this.state.txError,
+                        'is-danger': this.state.amountError || this.state.txError || notEnoughZepError,
                         'is-success': this.state.txCompleted && !this.state.txError
                       }
                     )}
@@ -155,7 +158,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                   >
                     <div className='field has-addons is-right'>
                       <div className='control is-addons-form-height'>
-                        {this.state.txError
+                        {this.state.txError || notEnoughZepError
                           ? (
                             <AntdIcon
                               type={ExclamationCircleOutline}
@@ -188,6 +191,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                       </div>
                       <div className='control is-addons-form-height'>
                         <button
+                          disabled={notEnoughZepError}
                           className='button is-text no-scale'
                         >
                           {this.buttonText()}
@@ -200,11 +204,11 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                         {
                           'has-text-success': this.state.txCompleted && !this.state.txError,
                           'has-text-link': hasUncompletedTransaction,
-                          'has-text-danger': this.state.amountError || this.state.txError
+                          'has-text-danger': this.state.amountError || this.state.txError || notEnoughZepError
                         }
                       )
                     }>
-                      {this.helpText()}
+                      {this.helpText(notEnoughZepError)}
                     </p>
                   </form>
                 )}
