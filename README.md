@@ -84,4 +84,10 @@ $ yarn apply-registry
 
 This will generate Truffle-compatible artifacts in the `build/contracts` directory.
 
-Made with :heart: by Delta Camp
+# Updating the Contract ABIs
+
+The Contract ABIs are currently hard-coded into the app.  Only the Vouching contract is used.  Soon we'll be able to reference the official ABIs in the [zos-vouching](https://github.com/zeppelinos/zos-vouching) repository once the project is deployed.
+
+To update the ABI compile the contracts locally then update the file `src/abi/VouchingAbi.js`.
+
+##### Made with :heart: by Delta Camp
