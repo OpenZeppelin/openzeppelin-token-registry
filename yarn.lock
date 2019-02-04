@@ -1299,22 +1299,22 @@ apollo-link-dedup@^1.0.0:
   dependencies:
     apollo-link "^1.2.6"
 
-apollo-link-ethereum-resolver-ethersjs@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/apollo-link-ethereum-resolver-ethersjs/-/apollo-link-ethereum-resolver-ethersjs-0.0.17.tgz#138b2f5deecb95c085aaba046955817bc3c07671"
-  integrity sha512-H8uxluawr0dfmHjrHuWwhZdFFFjIe9aqSe0KzoHbxQJVclWl6a4wLli1itkzUiDeqW1mrR4JbA0s8d/gxLtq2A==
+apollo-link-ethereum-resolver-ethersjs@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/apollo-link-ethereum-resolver-ethersjs/-/apollo-link-ethereum-resolver-ethersjs-0.0.18.tgz#d226caa8fdb2083711d30d22efce04cb444b383d"
+  integrity sha512-ro+eVaHWJqfk7IsfjMIyOP3kycZYqy2qoJtlvwZLSI0X2qjmbxMyQx69nqzNc8YQp3vKwoHGkK/ehGkNhyRJ0w==
   dependencies:
     apollo-link "^1.2.6"
-    apollo-link-ethereum "^0.0.17"
+    apollo-link-ethereum "^0.0.18"
     apollo-utilities "^1.1.2"
     ethers "^4.0.23"
     graphql "^14.1.1"
     graphql-anywhere "^4.1.27"
 
-apollo-link-ethereum@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/apollo-link-ethereum/-/apollo-link-ethereum-0.0.17.tgz#e0c86f24bf3cc0dd29a1ce133302aebd51de3fab"
-  integrity sha512-3CWTfT20Iu/D1cwCIcsWGdijRAo+jAA1RaaXakbfN29s73UBdbBjw6fQuARwoKiKtraAq48Q4+5dVu6T3y7k9g==
+apollo-link-ethereum@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/apollo-link-ethereum/-/apollo-link-ethereum-0.0.18.tgz#25a398d563ff4075e5b26439f69463f7bfe61600"
+  integrity sha512-IlWzY+e7uT1rHfFkYlvX6xBy9uF7svz00w7spU2yyssm2VnSOJI2lb2kZvZnRFqoxyhLUqS1AfxICD9P+G6OKw==
   dependencies:
     apollo-link "^1.2.6"
     apollo-utilities "^1.0.27"

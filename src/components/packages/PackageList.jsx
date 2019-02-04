@@ -32,7 +32,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             .then(result => {
               return {
                 id,
-                totalVouched: result.data.Vouching.entry[5]
+                totalVouched: result.data.Vouching.entry.totalVouched
               }
             })
         )
@@ -113,7 +113,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
                         const { Vouching } = data
 
-                        if (displayWeiToEther(get(Vouching, 'entry[5]')) === '0') {
+                        if (displayWeiToEther(get(Vouching, 'entry.totalVouched')) === '0') {
                           console.log('skipping package with 0 vouched ZEP')
                           return null
                         }
