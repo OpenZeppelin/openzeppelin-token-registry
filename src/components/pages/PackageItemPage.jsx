@@ -61,10 +61,7 @@ export class PackageItemPage extends PureComponent {
                       >
                         {
                           ({ loading, error, data }) => {
-
                             if (loading) return <PackageDetailsLoader />
-
-
 
                             if (error) return <ErrorMessage errorMessage={error} />
 

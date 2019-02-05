@@ -34,9 +34,9 @@ export const VouchButton = class _VouchButton extends Component {
           // This sets the proper state when the voucher navigates away
           // then comes back
           const showVouchMutationForm = (
-            this.state.isVouching
-            || mostRecentTxHasError
-            || hasSentTransaction
+            this.state.isVouching ||
+            mostRecentTxHasError ||
+            hasSentTransaction
           )
 
           return (

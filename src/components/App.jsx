@@ -28,7 +28,7 @@ const App = class _App extends PureComponent {
     return getPurePathname(pathname)
   }
 
-  componentWillMount() {
+  componentWillMount () {
     mixpanel().track('render', {
       path: this.currentPage()
     })
