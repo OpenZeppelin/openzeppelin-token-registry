@@ -91,26 +91,26 @@ export const mutations = {
             const receipt = await poll(() => {
               return provider.getTransactionReceipt(hash).then(receipt => {
                 if (receipt === null) { return undefined }
+
                 return receipt
               })
             }, { onceBlock: provider }).catch(error => {
-              console.warn(`Unable to get transaction receipt for tx with hash: ${hash}`, error)
-              console.error(error)
+              console.error(`Unable to get transaction receipt for tx with hash: ${hash} - `, error)
               throw error
             })
 
             if (receipt.status === 0) {
-              throw new Error(`Ethereum Transaction Receipt had a 0 status: ${receipt}`)
+              throw new Error(`Ethereum tx had a 0 status. Tx hash: ${hash}`)
             }
 
             data = { ...transaction, blockNumber: receipt.blockNumber, completed: true }
             cache.writeData({ id, data })
           })
           .catch(error => {
-            console.error(`Unknown error occured while sending transaction`, error)
+            console.error(`Error occured while sending transaction`, error)
 
             const transaction = readTx()
-            const data = { ...transaction, args: newArgs, sent: true, completed: true, error: error.message }
+            const data = { ...transaction, sent: true, completed: true, error: error.message }
             cache.writeData({ id, data })
           })
 

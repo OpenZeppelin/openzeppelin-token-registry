@@ -79,8 +79,10 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
           text = 'Vouching was not completed'
         } else if (this.state.txCompleted) {
           text = 'Vouching completed'
+        } else if (this.props.hasSentTransaction) {
+          text = 'Waiting for confirmations...'
         } else if (this.props.hasUncompletedTransaction) {
-          text = 'Waiting for confirmation...'
+          text = 'Waiting to receive transaction...'
         }
 
         return text
