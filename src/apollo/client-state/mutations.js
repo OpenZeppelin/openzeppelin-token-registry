@@ -1,6 +1,7 @@
 import { abiMapping } from '~/apollo/abiMapping'
 import { getMetamaskPermissions } from '~/web3/getMetamaskPermissions'
 import { ethers } from 'ethers'
+import { poll } from 'ethers/utils/web'
 import { transactionQueries } from '~/queries/transactionQueries'
 
 let nextTxId = 1
@@ -45,14 +46,15 @@ export const mutations = {
         }
 
         const newTx = {
-          error: '',
-          completed: false,
-          method,
-          args: newArgs,
-          hash: '',
-          id: txId,
           __typename: 'Transaction',
-          type: 'Transaction'
+          id: txId,
+          method,
+          completed: false,
+          sent: false,
+          hash: '',
+          error: '',
+          blockNumber: null,
+          args: newArgs
         }
 
         if (data.transactions) {
@@ -62,35 +64,54 @@ export const mutations = {
         }
 
         cache.writeQuery({ query, data })
-        console.log('form sent')
 
         const gasLimit = await contract.estimate[method](...args)
         // Hack to ensure it works!
         const newGasLimit = gasLimit.add(3000)
 
-        methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
-          .then(async function (event) {
-            const receipt = await provider.getTransactionReceipt(event.hash)
-            const error = receipt.status === 0
-            const id = `Transaction:${txId}`
-            const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
-            const data = { ...transaction, hash: event.hash, completed: true, error }
-            cache.writeData({ id, data })
+        const id = `Transaction:${txId}`
+        const readTx = () => {
+          return cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
+        }
 
-            return data
+        const transactionData = contract.interface.functions[method].encode(args)
+        const unsignedTransaction = {
+          data: transactionData,
+          to: contract.address,
+          gasLimit: newGasLimit
+        }
+
+        signer.sendUncheckedTransaction(unsignedTransaction)
+          .then(async function (hash) {
+            let transaction = readTx()
+            let data = { ...transaction, hash, sent: true }
+            cache.writeData({ id, data })
+            transaction = readTx()
+
+            const receipt = await poll(() => {
+              return provider.getTransactionReceipt(hash).then(receipt => {
+                if (receipt === null) { return undefined }
+                return receipt
+              })
+            }, { onceBlock: provider }).catch(error => {
+              console.warn(`Unable to get transaction receipt for tx with hash: ${hash}`, error)
+              console.error(error)
+              throw error
+            })
+
+            if (receipt.status === 0) {
+              throw new Error(`Ethereum Transaction Receipt had a 0 status: ${receipt}`)
+            }
+
+            data = { ...transaction, blockNumber: receipt.blockNumber, completed: true }
+            cache.writeData({ id, data })
           })
           .catch(error => {
-            console.error(error)
-            // // if (error.message === 'Error: MetaMask Tx Signature: User denied transaction signature.') { return }
-            // const errorMessage = error.message
-            //
-            // const id = `Transaction:${txId}`
-            // const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
-            // const data = { ...transaction, args: newArgs, completed: true, error: errorMessage }
-            // console.log('newdata', data)
-            // cache.writeData({ id, data })
-            //
-            // return data
+            console.error(`Unknown error occured while sending transaction`, error)
+
+            const transaction = readTx()
+            const data = { ...transaction, args: newArgs, sent: true, completed: true, error: error.message }
+            cache.writeData({ id, data })
           })
 
         return null

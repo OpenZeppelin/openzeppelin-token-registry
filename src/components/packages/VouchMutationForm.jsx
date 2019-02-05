@@ -128,7 +128,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
         return (
           <Query query={tokenQueries.tokenQuery} variables={{ address: this.props.data.account }} skip={!this.props.data.account}>
             {({ data }) => {
-              let notEnoughZepError = true
+              let notEnoughZepError = false
 
               if (data && data.ZepToken) {
                 notEnoughZepError = parseInt(this.state.txData.amount, 10) > parseInt(data.ZepToken.myBalance)
