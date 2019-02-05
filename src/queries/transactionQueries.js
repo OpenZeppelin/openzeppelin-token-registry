@@ -4,13 +4,15 @@ const transactionFragment = gql`
   fragment transaction on Transaction {
     id
     __typename
-    hash
-    method
-    error
-    completed
     args {
       values
     }
+    blockNumber
+    completed
+    error
+    hash
+    method
+    sent
   }
 `
 
