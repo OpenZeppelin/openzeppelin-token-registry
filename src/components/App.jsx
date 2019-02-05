@@ -11,6 +11,7 @@ import { OtherPageContainer } from '~/components/pages/OtherPage'
 import { PackageItemPage } from '~/components/pages/PackageItemPage'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import { getPurePathname } from '~/utils/getPurePathname'
+import { mixpanel } from '~/mixpanel'
 import * as routes from '~/../config/routes'
 
 const App = class _App extends PureComponent {
@@ -25,6 +26,12 @@ const App = class _App extends PureComponent {
   currentPage = () => {
     const pathname = this.props.location.pathname
     return getPurePathname(pathname)
+  }
+
+  componentWillMount() {
+    mixpanel().track('render', {
+      path: this.currentPage()
+    })
   }
 
   render () {
