@@ -15,7 +15,9 @@ export const web3Resolvers = {
             const address = await signer.getAddress()
             return address
           } catch (err) {
-            console.error(`Error in web3Resolvers#account: ${err}`)
+            if (err.message.indexOf('unknown account') === -1) {
+              console.error(`Error in web3Resolvers#account: ${err}`)
+            }
             return null
           }
         } else {
