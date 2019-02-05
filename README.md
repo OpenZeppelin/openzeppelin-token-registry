@@ -90,4 +90,4 @@ The Contract ABIs are currently hard-coded into the app.  Only the Vouching cont
 
 To update the ABI compile the contracts locally then update the file `src/abi/VouchingAbi.js`.
 
-##### Made with :heart: by Delta Camp
+##### Made with :heart: by [Delta Camp](https://delta.camp)
