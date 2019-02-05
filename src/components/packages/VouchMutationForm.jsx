@@ -50,7 +50,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
         this.focusOnInput()
       }
 
-      componentDidUpdate(prevProps) {
+      componentDidUpdate (prevProps) {
         if (this.props.hasUncompletedTransaction !== prevProps.hasUncompletedTransaction) {
           if (!this.props.hasUncompletedTransaction) {
             this.setState({ txCompleted: true })
@@ -79,8 +79,10 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
           text = 'Vouching was not completed'
         } else if (this.state.txCompleted) {
           text = 'Vouching completed'
+        } else if (this.props.hasSentTransaction) {
+          text = 'Waiting for confirmations...'
         } else if (this.props.hasUncompletedTransaction) {
-          text = 'Waiting for confirmation...'
+          text = 'Waiting to receive transaction...'
         }
 
         return text
@@ -112,9 +114,9 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
         } else if (this.state.txCompleted) {
           this.resetForm()
         } else if (
-          this.state.txData.amount
-          && this.state.txData.packageId
-          && this.state.txData.args
+          this.state.txData.amount &&
+          this.state.txData.packageId &&
+          this.state.txData.args
         ) {
           sendTransaction()
         } else {
