@@ -20,7 +20,7 @@ export const transactionResolvers = {
           console.warn(error)
         }
 
-        txs = allTransactions.transactions.filter(tx => (tx.packageId._hex === packageId._hex))
+        txs = allTransactions.transactions.filter(tx => (tx.packageId === packageId.toString()))
 
         return txs
       }

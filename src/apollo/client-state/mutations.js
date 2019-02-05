@@ -37,10 +37,11 @@ export const mutations = {
         }
 
         const newTx = {
-          error: false,
+          error: '',
           completed: false,
           hash: '',
           id: txId,
+          packageId: args[0].toString(),
           __typename: 'Transaction',
           type: 'Transaction'
         }
@@ -52,31 +53,62 @@ export const mutations = {
         }
 
         cache.writeQuery({ query, data })
-        console.log('form sent')
 
-        const gasLimit = await contract.estimate[method](...args)
         // Hack to ensure it works!
+        const gasLimit = await contract.estimate[method](...args)
         const newGasLimit = gasLimit.add(3000)
 
+        // const transactionData = contract.interface.functions[method].encode(args)
+        // const unsignedTransaction = {
+        //   data: transactionData,
+        //   to: contract.address,
+        //   gasLimit: newGasLimit
+        // }
+        //
+        // let signedTransaction
+        // try {
+        //   const populatedTransaction = await ethers.utils.populateTransaction(unsignedTransaction, provider, '0x7A8cda94b311F58291d6F9E681599c915E31c338')
+        //   // console.log('populatedTransaction', populatedTransaction)
+        //   const serializedTransaction = await ethers.utils.serializeTransaction(populatedTransaction)
+        //   // console.log('serializedTransaction', serializedTransaction)
+        //   // signedTransaction = await provider.send(serializedTransaction)
+        //
+        //   const id = `Transaction:${txId}`
+        //   const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
+        //   const data = { ...transaction, completed: true }
+        //
+        //   cache.writeData({ id, data })
+        // } catch (error) {
+        //   console.error(`Mutation sendTransaction error: ${error}`)
+        //   const id = `Transaction:${txId}`
+        //   const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
+        //   const data = { ...transaction, completed: true, error: error.message }
+        //   cache.writeData({ id, data })
+        //
+        //   return
+        // }
+
         methodFxn(...args.concat([{ gasLimit: newGasLimit }]))
+        // provider.sendTransaction(signedTransaction)
           .then(async function (event) {
             const receipt = await provider.getTransactionReceipt(event.hash)
-            const error = receipt.status === 0
+            console.log('receipt', receipt)
+            const error = (receipt.status === 0)
             const id = `Transaction:${txId}`
             const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
-            const data = { ...transaction, hash: event.hash, completed: true, error }
+            // const data = { ...transaction, hash: event.hash, error }
+            const data = { ...transaction, hash: event.hash, error, completed: true }
             cache.writeData({ id, data })
 
             return data
           })
           .catch(error => {
             // if (error.message === 'Error: MetaMask Tx Signature: User denied transaction signature.') { return }
-            const errorMessage = error.message
-
             const id = `Transaction:${txId}`
             const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
-            const data = { ...transaction, completed: true, error: errorMessage }
-            console.log('newdata', data)
+            // const data = { ...transaction, error: error.message }
+            const data = { ...transaction, error: error.message, completed: true }
+            // console.log('newdata', data)
             cache.writeData({ id, data })
 
             return data

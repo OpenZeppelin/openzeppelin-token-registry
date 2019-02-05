@@ -23,12 +23,13 @@ export const VouchButton = class _VouchButton extends Component {
           if (errors) { console.warn(errors) }
 
           const txs = get(data, 'getAllTransactionsByPackageId', [])
+          debugger
 
           const hasUncompletedTransaction = txs.filter(tx => !tx.completed).length > 0
 
-          // iterate through the array of tx's for this package and set the 
+          // iterate through the array of tx's for this package and set the
           // variable mostRecentTxHasError to the last tx
-          txs.forEach(tx => { mostRecentTxHasError = tx.error })
+          txs.forEach(tx => { mostRecentTxHasError = (tx.error && tx.error.length > 0) })
 
           const showVouchMutationForm = (
             this.state.isVouching

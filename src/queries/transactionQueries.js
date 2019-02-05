@@ -5,16 +5,7 @@ const transactionFragment = gql`
     id
     __typename
     hash
-    method
-    args {
-      _hex
-    }
-    packageId {
-      _hex
-    }
-    amount {
-      _hex
-    }
+    packageId
     error
     completed
   }
