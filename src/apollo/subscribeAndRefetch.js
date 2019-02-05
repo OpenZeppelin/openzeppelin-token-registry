@@ -95,7 +95,7 @@ export function subscribeAndRefetch (apolloClient) {
 
     const accountResult = apolloClient.readQuery({ query: web3Queries.accountQuery })
 
-    if (accountResult) {
+    if (accountResult && accountResult.account) {
       apolloClient.query({
         query: tokenQueries.tokenQuery,
         variables: { address: accountResult.account },

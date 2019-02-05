@@ -11,11 +11,6 @@ export const tokenFragments = {
 }
 
 export const tokenQueries = {
-  zepTokenBalanceQuery: gql`
-    query zepTokenBalanceQuery {
-      zepTokenBalance @client
-    }
-  `,
   tokenQuery: gql`
     query tokenQuery($address: String!) {
       ZepToken @contract {
