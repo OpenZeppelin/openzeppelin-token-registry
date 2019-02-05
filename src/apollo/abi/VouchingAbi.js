@@ -277,7 +277,7 @@ export default [
         },
         {
           "indexed": true,
-          "name": "overseer",
+          "name": "appealsResolver",
           "type": "address"
         }
       ],
@@ -294,7 +294,7 @@ export default [
         },
         {
           "indexed": true,
-          "name": "overseer",
+          "name": "appealsResolver",
           "type": "address"
         }
       ],
@@ -317,7 +317,7 @@ export default [
           "type": "uint256"
         },
         {
-          "name": "_overseer",
+          "name": "_appealsResolver",
           "type": "address"
         }
       ],
@@ -372,7 +372,7 @@ export default [
     {
       "constant": true,
       "inputs": [],
-      "name": "overseer",
+      "name": "appealsResolver",
       "outputs": [
         {
           "name": "",
