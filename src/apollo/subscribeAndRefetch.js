@@ -114,7 +114,7 @@ export function subscribeAndRefetch (apolloClient) {
     result.data.transactions.forEach((tx) => {
       apolloClient.query({
         query: transactionQueries.getAllTransactionsByPackageId,
-        variables: { packageId: tx.packageId },
+        variables: { packageId: tx.args.values[0] },
         fetchPolicy: 'network-only'
       })
     })

@@ -15,7 +15,7 @@ export const VouchButton = class _VouchButton extends Component {
     return (
       <Query
         query={transactionQueries.getAllTransactionsByPackageId}
-        variables={{ packageId: this.props.packageId }}
+        variables={{ packageId: this.props.packageId.toString() }}
       >
         {({ data, refetch, loading, errors }) => {
           let mostRecentTxHasError

@@ -36,9 +36,19 @@ export const mutations = {
           console.error(error)
         }
 
+        // const newArgs = Array.from(args)
+        // newArgs.__typename = 'JSON'
+
+        const newArgs = {
+          values: Array.from(args).map(arg => arg.toString()),
+          __typename: 'JSON'
+        }
+
         const newTx = {
-          error: false,
+          error: '',
           completed: false,
+          method,
+          args: newArgs,
           hash: '',
           id: txId,
           __typename: 'Transaction',
@@ -70,16 +80,17 @@ export const mutations = {
             return data
           })
           .catch(error => {
-            // if (error.message === 'Error: MetaMask Tx Signature: User denied transaction signature.') { return }
-            const errorMessage = error.message
-
-            const id = `Transaction:${txId}`
-            const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
-            const data = { ...transaction, completed: true, error: errorMessage }
-            console.log('newdata', data)
-            cache.writeData({ id, data })
-
-            return data
+            console.error(error)
+            // // if (error.message === 'Error: MetaMask Tx Signature: User denied transaction signature.') { return }
+            // const errorMessage = error.message
+            //
+            // const id = `Transaction:${txId}`
+            // const transaction = cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
+            // const data = { ...transaction, args: newArgs, completed: true, error: errorMessage }
+            // console.log('newdata', data)
+            // cache.writeData({ id, data })
+            //
+            // return data
           })
 
         return null
