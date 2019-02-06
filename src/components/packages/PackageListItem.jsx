@@ -66,7 +66,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
 
             const { metadata, Vouching } = this.props.data
             const { description, version } = metadata || {}
-            const { Challenged } = Vouching || {}
+            // const { Challenged } = Vouching || {}
 
             const id = parseInt(this.props.package.id, 10)
             const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
@@ -78,17 +78,17 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
               return <Redirect to={link} />
             }
 
-            let challengeCount = 0
-            if (Challenged) {
-              challengeCount = Challenged.length
-            }
-
-            let challenges
-            if (challengeCount === 1) {
-              challenges = <span>1 challenge</span>
-            } else if (challengeCount > 1) {
-              challenges = <span>{challengeCount} challenges</span>
-            }
+            // let challengeCount = 0
+            // if (Challenged) {
+            //   challengeCount = Challenged.length
+            // }
+            //
+            // let challenges
+            // if (challengeCount === 1) {
+            //   challenges = <span>1 challenge</span>
+            // } else if (challengeCount > 1) {
+            //   challenges = <span>{challengeCount} challenges</span>
+            // }
 
             const animatingCssClassNames = classnames(
               'fade-in',

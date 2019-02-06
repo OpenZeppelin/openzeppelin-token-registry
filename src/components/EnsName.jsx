@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import { shortenAddress } from '~/utils/shortenAddress'
-import { getProvider } from '~/web3/getProvider'
+import { getReadProvider } from '~/web3/getReadProvider'
 
 export const EnsName = class _EnsName extends Component {
   state = {}
@@ -26,7 +26,7 @@ export const EnsName = class _EnsName extends Component {
   }
 
   async componentDidMount () {
-    const provider = await getProvider()
+    const provider = await getReadProvider()
 
     this.resolveEnsName(provider)
   }

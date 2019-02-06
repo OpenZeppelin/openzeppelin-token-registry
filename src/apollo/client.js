@@ -5,7 +5,7 @@ import { withClientState } from 'apollo-link-state'
 import { EthereumLink } from 'apollo-link-ethereum'
 import { EthersResolver } from 'apollo-link-ethereum-resolver-ethersjs'
 import { abiMapping } from './abiMapping'
-import { getProvider } from '~/web3/getProvider'
+import { getReadProvider } from '~/web3/getReadProvider'
 import { merge } from 'lodash'
 import { metadataResolvers } from './client-state/metadataResolvers'
 import { transactionResolvers } from './client-state/transactionResolvers'
@@ -14,7 +14,7 @@ import { mutations } from './client-state/mutations'
 import { ethers } from 'ethers'
 import { subscribeAndRefetch } from './subscribeAndRefetch'
 
-let provider = getProvider()
+const provider = getReadProvider()
 window.provider = provider
 window.ethers = ethers
 

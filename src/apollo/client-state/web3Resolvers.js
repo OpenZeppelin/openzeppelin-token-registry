@@ -1,17 +1,25 @@
-import { getProvider } from '~/web3/getProvider'
+import { getReadProvider } from '~/web3/getReadProvider'
+import { getWriteProvider } from '~/web3/getWriteProvider'
 
 export const web3Resolvers = {
   resolvers: {
     Query: {
       networkId: async function () {
-        const network = await getProvider().getNetwork()
+        const network = await getReadProvider().getNetwork()
         return network.chainId
       },
       account: async function () {
-        const signer = getProvider().getSigner()
+        let provider
+        try {
+          provider = getWriteProvider()
+        } catch (error) {
+          // console.error(error)
+          console.warn('Browser is not an Ethereum-powered browser')
+        }
 
-        if (signer) {
+        if (provider) {
           try {
+            const signer = provider.getSigner()
             const address = await signer.getAddress()
             return address
           } catch (err) {

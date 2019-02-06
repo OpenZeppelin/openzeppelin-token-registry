@@ -231,7 +231,12 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                       </div>
                       <div className='control is-addons-form-height'>
                         <input
-                          disabled={hasUncompletedTransaction || this.state.txCompleted || this.state.txError}
+                          disabled={
+                            this.needsWeb3() ||
+                            hasUncompletedTransaction ||
+                            this.state.txCompleted ||
+                            this.state.txError
+                          }
                           ref={this.textInputRef}
                           type='number'
                           {...extraInputProps}
@@ -242,7 +247,11 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                       </div>
                       <div className='control is-addons-form-height'>
                         <button
-                          disabled={notEnoughZepError || hasUncompletedTransaction}
+                          disabled={
+                            this.needsWeb3() ||
+                            notEnoughZepError ||
+                            hasUncompletedTransaction
+                          }
                           className='button is-text no-scale'
                         >
                           {this.buttonText()}

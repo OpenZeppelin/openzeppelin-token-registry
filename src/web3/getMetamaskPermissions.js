@@ -8,6 +8,6 @@ export async function getMetamaskPermissions () {
       }
     }
   } else {
-    console.error('Could not find `window` or `window.ethereum`')
+    console.warn('Could not find `window` or `window.ethereum` (Browser is not an Ethereum-powered browser?)')
   }
 }
