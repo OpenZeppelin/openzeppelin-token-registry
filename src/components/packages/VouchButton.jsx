@@ -19,25 +19,28 @@ export const VouchButton = class _VouchButton extends Component {
         variables={{ packageId: this.props.packageId.toString() }}
       >
         {({ data, refetch, loading, errors }) => {
-          let mostRecentTxHasError
-
           if (errors) { console.warn(errors) }
 
           const txs = get(data, 'getAllTransactionsByPackageId', [])
 
-          const hasUncompletedTransaction = txs.filter(tx => !tx.completed).length > 0
-          const hasSentTransaction = txs.filter(tx => (tx.sent && !tx.completed)).length > 0
+          let hasUncompletedTransaction = false
+          let hasSentTransaction = false
+          let mostRecentTxHasError = false
+          let vouchAmount = null
 
-          // iterate through the array of tx's for this package and set the
-          // variable mostRecentTxHasError to the last tx
-          txs.forEach(tx => { mostRecentTxHasError = tx.error })
+          if (txs.length) {
+            const tx = txs[txs.length - 1]
+            hasUncompletedTransaction = !tx.completed
+            hasSentTransaction = tx.sent && !tx.completed
+            mostRecentTxHasError = !!tx.error
+            vouchAmount = tx.args.values[1].toString()
+          }
 
           // This sets the proper state when the voucher navigates away
           // then comes back
           const showVouchMutationForm = (
             this.state.isVouching ||
-            mostRecentTxHasError ||
-            hasSentTransaction
+            (txs.length > 0)
           )
 
           return (
@@ -46,6 +49,7 @@ export const VouchButton = class _VouchButton extends Component {
                 mostRecentTxHasError={mostRecentTxHasError}
                 hasSentTransaction={hasSentTransaction}
                 hasUncompletedTransaction={hasUncompletedTransaction}
+                vouchAmount={vouchAmount}
                 packageId={packageId}
                 systemInfo={getSystemInfo()}
               />

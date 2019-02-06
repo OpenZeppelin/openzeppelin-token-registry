@@ -7,6 +7,7 @@ import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { tokenQueries } from '~/queries/tokenQueries'
 import { web3Queries } from '~/queries/web3Queries'
 import { toWei } from '~/utils/toWei'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 
 export const VouchMutationForm = graphql(web3Queries.accountQuery)(
@@ -97,8 +98,6 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
           text = 'Retry'
         } else if (this.state.txCompleted) {
           text = 'Done'
-        } else if (this.props.hasUncompletedTransaction) {
-          text = ''
         }
 
         return text
@@ -184,6 +183,11 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                 notEnoughZepError = parseInt(this.state.txData.amount, 10) > parseInt(data.ZepToken.myBalance)
               }
 
+              let extraInputProps = {}
+              if (this.props.vouchAmount && this.props.hasUncompletedTransaction) {
+                extraInputProps = { defaultValue: displayWeiToEther(this.props.vouchAmount) }
+              }
+
               return <Mutation
                 mutation={Web3Mutations.sendTransaction}
                 variables={{
@@ -230,6 +234,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                           disabled={hasUncompletedTransaction || this.state.txCompleted || this.state.txError}
                           ref={this.textInputRef}
                           type='number'
+                          {...extraInputProps}
                           placeholder='0'
                           className='input is-large'
                           onChange={this.handleAmountChange}
