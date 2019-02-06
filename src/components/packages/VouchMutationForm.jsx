@@ -236,7 +236,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                       </div>
                       <div className='control is-addons-form-height'>
                         <button
-                          disabled={notEnoughZepError}
+                          disabled={notEnoughZepError || hasUncompletedTransaction}
                           className='button is-text no-scale'
                         >
                           {this.buttonText()}
@@ -245,7 +245,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                     </div>
                     <p className={
                       classnames(
-                        'help',
+                        'help is-size-6',
                         {
                           'has-text-success': this.state.txCompleted && !this.state.txError,
                           'has-text-link': hasUncompletedTransaction,
@@ -254,7 +254,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                         }
                       )
                     }>
-                      {this.helpText(notEnoughZepError)} {this.downloadLink()}
+                      {this.helpText(notEnoughZepError) || '\u00A0'} {this.downloadLink()}
                     </p>
                   </form>
                 )}

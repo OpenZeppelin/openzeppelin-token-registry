@@ -51,7 +51,7 @@ export class PackageDetails extends Component {
     return (
       <>
         <div className='columns reverse-column-order'>
-          <div className='column is-8-tablet'>
+          <div className='column is-7-tablet is-8-desktop'>
             <h1 className='title is-size-1 has-text-weight-normal'>
               {metadata.name}
 
@@ -74,7 +74,7 @@ export class PackageDetails extends Component {
 
           </div>
 
-          <div className='column is-4-desktop has-text-right--desktop'>
+          <div className='column is-5-tablet is-4-desktop has-text-right--desktop'>
             <div className='package-item--image'>
               <GithubProfileImage user={owner} />
             </div>
