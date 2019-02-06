@@ -13,8 +13,12 @@
   transition-timing-function: ease-out;
 
   @media screen and (max-width: $desktop - 1px) {
+    grid-template-columns: 80px 140px 2fr 1fr;
+  }
+
+  @media screen and (max-width: $tablet - 1px) {
     grid-template-columns: 100px 2fr;
-    grid-template-rows: minmax(130px, max-content) 60px;
+    grid-template-rows: minmax(130px, max-content) 97px;
     grid-template-areas: 'image title title' 'blank blank more';
   }
 }
@@ -73,7 +77,7 @@
   height: 100%;
   width: 100%;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     justify-content: space-between;
   }
 }
@@ -81,7 +85,7 @@
 .list-item__cell .is-inline-grid-top {
   margin-top: 1.25rem;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     margin-top: 0.25rem;
   }
 }
@@ -97,7 +101,7 @@
 .list-item__cell--id a {
   padding-left: 2.25rem;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     display: none;
   }
 }
@@ -109,24 +113,17 @@
 .list-item__cell--title a {
   padding: 0 1rem;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     padding: 1rem;
   }
 }
 
 .list-item__cell--title .description {
   align-self: baseline;
-
-  @media screen and (min-width: $desktop) {
-    // width: 260px;
-  }
 }
 
 .list-item__cell--image {
   align-self: baseline;
-
-  @media screen and (max-width: $desktop - 1px) {
-  }
 }
 
 .list-item__cell--image a {
@@ -134,7 +131,7 @@
   grid-area: image;
   padding: 1rem 1rem 1rem;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     padding: 1.5rem 0 0 1.5rem;
   }
 }
@@ -143,7 +140,7 @@
   display: none;
   grid-area: blank;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     display: block;
   }
 }
@@ -151,7 +148,7 @@
 .list-item__cell--view-more {
   grid-area: more;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     margin-left: 0;
   }
 }
@@ -160,22 +157,9 @@
   padding-right: 1.5rem;
   text-transform: uppercase;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $tablet - 1px) {
     align-items: baseline;
-    padding: 0.25rem 1rem;
   }
-}
-
-.list-item .list-item__cell--view-more span {
-  border-bottom: 1px solid transparent;
-  margin-left: auto;
-  transition: border 300ms ease-in-out;
-  width: 104px;
-}
-
-.list-item:hover .list-item__cell--view-more span {
-  border-bottom-color: $link;
-  transition: border 300ms ease-in-out;
 }
 
 .list-item code {
@@ -200,18 +184,61 @@
   margin-bottom: 0;
 }
 
-.list-item--zep-token-logo {
-  margin-right: 5px;
-  position: relative;
-  top: -3px;
-  height: 14px;
-  width: 14px;
-}
-
 .list-item--challenges-link {
   margin-top: -5px;
 }
 
 .list-item--subtitle__with-margin {
   margin-bottom: 0.25rem;
+}
+
+.list-item--view-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'vouched vouched'
+    'icon tokens'
+    'view view';
+  height: 75px;
+  width: 100%;
+}
+
+.list-item--subtitle {
+  grid-area: vouched;
+}
+
+.list-item--subtitle {
+  grid-area: vouched;
+}
+
+.list-item--zep-token-logo {
+  grid-area: icon;
+  margin-right: 5px;
+  position: relative;
+  margin-left: auto;
+  top: 10px;
+  height: 14px;
+  width: 14px;
+}
+
+.list-item--num-tokens {
+  color: $grey-darker;
+  grid-area: tokens;
+}
+
+.list-item--view-more-link {
+  grid-area: view;
+}
+
+.list-item .list-item--view-more-link {
+  border-bottom: 1px solid transparent;
+  margin-top: 0.25rem;
+  margin-left: auto;
+  transition: border 300ms ease-in-out;
+  width: 98px;
+}
+
+.list-item:hover .list-item--view-more-link {
+  border-bottom-color: $link;
+  transition: border 300ms ease-in-out;
 }
