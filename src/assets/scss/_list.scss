@@ -75,7 +75,7 @@
 }
 
 .list--row_challenge {
-  grid-template-columns: 600px minmax(50px, 120px) minmax(50px, 120px) minmax(50px, 120px) minmax(30px, 30px);
+  grid-template-columns: 528px minmax(50px, 120px) minmax(50px, 120px) minmax(50px, 120px) minmax(30px, 30px);
 
   @media screen and (max-width: $desktop - 1px) {
     grid-template-columns: 20fr minmax(50px, 63px) minmax(50px, 70px) minmax(50px, 50px) minmax(30px, 30px);
