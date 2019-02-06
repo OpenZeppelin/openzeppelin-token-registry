@@ -120,6 +120,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
           this.state.txData.packageId &&
           this.state.txData.args
         ) {
+          // run the mutation resolver
           sendTransaction()
         } else {
           this.setState({ amountError: true })
