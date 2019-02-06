@@ -17,6 +17,14 @@ export const vouchingFragments = {
       entry: getEntry(id: $id)
       allEvents @pastEvents(fromBlock: 0, toBlock: "latest", extraTopics: { types: ["uint256"], values: [$id] })
     }
+  `,
+  challengeFragment: gql`
+    fragment challengeFragment on Challenge {
+      id
+      __typename
+      challenge: getChallenge(id: $challengeId)
+      appeal: getAppeal(id: $challengeId)
+    }
   `
 }
 

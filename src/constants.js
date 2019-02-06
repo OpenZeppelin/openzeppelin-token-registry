@@ -11,10 +11,15 @@ export const INFO = 'info'
 export const WARNING = 'warning'
 export const DANGER = 'danger'
 
-export const CHALLENGE_STATUS_COLORS = {
-  [CHALLENGE_STATUS_OPEN]: SUCCESS,
-  [CHALLENGE_STATUS_CLOSED]: GREY
-}
+export const CHALLENGE_STATUS_LABEL = [
+  { label: 'Open', colour: GREY },
+  { label: 'Acceptance Pending', colour: GREY },
+  { label: 'Rejection Pending', colour: GREY },
+  { label: 'Challenge Accepted', colour: SUCCESS },
+  { label: 'Challenge Rejected', colour: DANGER },
+  { label: 'Acceptance Appealed', colour: GREY },
+  { label: 'Rejection Appealed', colour: GREY }
+]
 
 export const CHALLENGE_PRIORITY_COLORS = {
   [CHALLENGE_PRIORITY_LOW]: INFO,
