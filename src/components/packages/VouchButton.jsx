@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { transactionQueries } from '~/queries/transactionQueries'
 import { VouchMutationForm } from '~/components/packages/VouchMutationForm'
+import { getSystemInfo } from '~/utils/getSystemInfo'
 import { get } from 'lodash'
 
 export const VouchButton = class _VouchButton extends Component {
@@ -46,6 +47,7 @@ export const VouchButton = class _VouchButton extends Component {
                 hasSentTransaction={hasSentTransaction}
                 hasUncompletedTransaction={hasUncompletedTransaction}
                 packageId={packageId}
+                systemInfo={getSystemInfo()}
               />
             ) : (
               <div className='is-addons-form-toggler-height'>

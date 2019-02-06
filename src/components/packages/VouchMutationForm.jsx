@@ -71,7 +71,9 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
       helpText = (notEnoughZepError) => {
         let text = ''
 
-        if (notEnoughZepError) {
+        if (this.needsWeb3()) {
+          text = `You will need to`
+        } else if (notEnoughZepError) {
           text = `You don't have enough ZEP tokens`
         } else if (this.state.amountError) {
           text = 'Please enter an amount'
@@ -124,6 +126,51 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
         }
       }
 
+      needsWeb3 = () => {
+        const { systemInfo } = this.props
+        return systemInfo && !systemInfo.hasWeb3Available
+      }
+
+      needsIOSWeb3 = () => {
+        const { systemInfo } = this.props
+        return systemInfo && systemInfo.mobileOS === 'iOS'
+      }
+
+      needsAndroidWeb3 = () => {
+        const { systemInfo } = this.props
+        return systemInfo && systemInfo.mobileOS === 'Android'
+      }
+
+      downloadText = () => {
+        if (this.needsIOSWeb3()) {
+          return 'Download Coinbase Wallet'
+        } else if (this.needsAndroidWeb3()) {
+          return 'Download Opera'
+        } else {
+          return 'Download MetaMask'
+        }
+      }
+
+      downloadUrl = () => {
+        if (this.needsIOSWeb3()) {
+          return 'https://itunes.apple.com/us/app/coinbase-wallet/id1278383455'
+        } else if (this.needsAndroidWeb3()) {
+          return 'https://play.google.com/store/apps/details?id=com.opera.browser'
+        } else {
+          return 'https://metamask.io/'
+        }
+      }
+
+      downloadLink = () => {
+        return this.needsWeb3() &&
+          <a
+            href={this.downloadUrl()}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='has-text-link'
+          >{this.downloadText()}</a>
+      }
+
       render () {
         const { hasUncompletedTransaction } = this.props
 
@@ -148,6 +195,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                       'form',
                       {
                         'tx-in-progress': hasUncompletedTransaction,
+                        'is-warning': this.needsWeb3(),
                         'is-danger': this.state.amountError || this.state.txError || notEnoughZepError,
                         'is-success': this.state.txCompleted && !this.state.txError
                       }
@@ -182,12 +230,7 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                           ref={this.textInputRef}
                           type='number'
                           placeholder='0'
-                          className={
-                            classnames(
-                              'input',
-                              'is-large'
-                            )
-                          }
+                          className='input is-large'
                           onChange={this.handleAmountChange}
                         />
                       </div>
@@ -206,11 +249,12 @@ export const VouchMutationForm = graphql(web3Queries.accountQuery)(
                         {
                           'has-text-success': this.state.txCompleted && !this.state.txError,
                           'has-text-link': hasUncompletedTransaction,
+                          'has-text-warning': this.needsWeb3(),
                           'has-text-danger': this.state.amountError || this.state.txError || notEnoughZepError
                         }
                       )
                     }>
-                      {this.helpText(notEnoughZepError)}
+                      {this.helpText(notEnoughZepError)} {this.downloadLink()}
                     </p>
                   </form>
                 )}

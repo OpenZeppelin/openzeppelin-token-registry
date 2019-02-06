@@ -100,6 +100,10 @@ $addonsFormHeight: 57px;
   border-bottom-color: $red;
 }
 
+.form.is-warning .field.has-addons {
+  border-bottom-color: $yellow;
+}
+
 .field-addon--icon {
   height: 1.375rem;
   margin: 1rem 1rem 0.5rem;
@@ -112,4 +116,8 @@ $addonsFormHeight: 57px;
 
 .field-addon--error-exclamation path {
   fill: $red;
+}
+
+.form.is-warning .field-addon--icon path {
+  fill: $yellow;
 }
