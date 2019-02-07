@@ -53,7 +53,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
   eventsFromProps (props) {
     const { data } = props
     const { Vouching } = data || {}
-    
+
     return (Vouching ? Vouching.Registered : []) || []
   }
 

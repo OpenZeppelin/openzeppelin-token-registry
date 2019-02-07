@@ -97,7 +97,6 @@ export class PackageDetails extends Component {
           </div>
         </div>
 
-
         <div className='columns'>
           <div className='column'>
             <div className={classnames(

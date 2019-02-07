@@ -207,14 +207,14 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                         View More &gt;
                       </span>
                     )}
-                    
+
                     {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
-                      <span className="list-item--view-grid">
+                      <span className='list-item--view-grid'>
                         <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
                           VOUCHED
                         </h6>
 
-                          <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+                        <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
 
                         <h3 className='is-inline-block is-size-3 has-text-weight-light list-item--num-tokens'>
                           {displayWeiToEther(get(Vouching, 'entry.totalVouched'))}
