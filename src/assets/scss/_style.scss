@@ -18,9 +18,13 @@ a.has-text-primary:focus {
 
 // This fixes issues with Bulma and columns on mobile
 .column {
+  // padding-left: 1rem;
+  // padding-right: 1rem;
   @media screen and (max-width: $desktop - 1px) {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+    // padding-left: 1rem;
+    // padding-right: 1rem;
   }
 }
 
