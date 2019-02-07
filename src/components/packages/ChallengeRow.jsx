@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import gh from 'parse-github-url'
 import gql from 'graphql-tag'
+import AntdIcon from '@ant-design/icons-react'
+import { MinusCircleOutline, PlusCircleOutline } from '@ant-design/icons'
 import { ethers } from 'ethers'
 import { get } from 'lodash'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
+import { EnsName } from '~/components/EnsName'
+import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { vouchingFragments } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
@@ -41,6 +46,21 @@ export const ChallengeRow = class extends Component {
     }
   }
 
+  handleChallengeRowMouseOver = (e) => {
+    e.preventDefault()
+    this.setState({ challengeRowHovered: true })
+  }
+
+  handleChallengeRowMouseOut = (e) => {
+    e.preventDefault()
+    this.setState({ challengeRowHovered: false })
+  }
+
+  handleChallengeRowClick = (e) => {
+    e.preventDefault()
+    this.setState({ challengeDetailsActive: !this.state.challengeDetailsActive })
+  }
+
   render() {
     const { challenged } = this.props
     const challengeId = challenged.parsedLog.values.challengeID
@@ -49,11 +69,6 @@ export const ChallengeRow = class extends Component {
     const { repo } = gh(metadataURI)
 
     const priority = this.displayPriority(amount)
-
-    const handleChallengeRowClick = (e) => {
-      e.preventDefault()
-      this.setState({ challengeDetailsActive: !this.state.challengeDetailsActive })
-    }
 
     return (
       <Query query={challengeRowQuery} variables={{ uri: metadataURI, challengeId }}>
@@ -68,12 +83,24 @@ export const ChallengeRow = class extends Component {
           const priorityColor = constants.CHALLENGE_PRIORITY_COLORS[priority]
 
           const { metadata } = data || {}
+
+          // console.log(challenge, appeal, status, statusLabel, priorityColor, data)
+
           return (
             <>
-              <li className='list--row list--row_challenge'>
+              <li className={classnames(
+                'list--row',
+                'list--row_challenge',
+                {
+                  'list--row__hovered': this.state.challengeRowHovered,
+                  'is-active': this.state.challengeDetailsActive
+                }
+              )}>
                 <span className='list--cell'>
                   <button
-                    onClick={handleChallengeRowClick}
+                    onMouseOver={this.handleChallengeRowMouseOver}
+                    onMouseOut={this.handleChallengeRowMouseOut}
+                    onClick={this.handleChallengeRowClick}
                     className='list__wrapping-anchor list__has-padding no-scale'
                   >
                     {get(metadata, 'description')}
@@ -81,7 +108,9 @@ export const ChallengeRow = class extends Component {
                 </span>
                 <span className={`list--cell has-text-${statusLabel.colour}`}>
                   <button
-                    onClick={handleChallengeRowClick}
+                    onMouseOver={this.handleChallengeRowMouseOver}
+                    onMouseOut={this.handleChallengeRowMouseOut}
+                    onClick={this.handleChallengeRowClick}
                     className='list__wrapping-anchor list__has-padding no-scale'
                   >
                     {statusLabel.label}
@@ -89,7 +118,9 @@ export const ChallengeRow = class extends Component {
                 </span>
                 <span className={`list--cell has-text-${priorityColor}`}>
                   <button
-                    onClick={handleChallengeRowClick}
+                    onMouseOver={this.handleChallengeRowMouseOver}
+                    onMouseOut={this.handleChallengeRowMouseOut}
+                    onClick={this.handleChallengeRowClick}
                     className='list__wrapping-anchor list__has-padding no-scale'
                   >
                     {priority}
@@ -97,19 +128,33 @@ export const ChallengeRow = class extends Component {
                 </span>
                 <span className='list--cell'>
                   <button
-                    onClick={handleChallengeRowClick}
+                    onMouseOver={this.handleChallengeRowMouseOver}
+                    onMouseOut={this.handleChallengeRowMouseOut}
+                    onClick={this.handleChallengeRowClick}
                     className='list__wrapping-anchor list__has-padding no-scale'
                   >
                     {displayWeiToEther(amount)} Z
                   </button>
                 </span>
-                <span className='list--cell has-text-right'>
+                <span className='list--cell'>
                   <GitHubLink
                     url={`https://github.com/${repo}`}
-                    cssClassNames='list__wrapping-anchor no-scale'
+                    cssClassNames='list__wrapping-anchor list__has-padding no-scale'
                   />
                 </span>
-
+                <span className='list--cell'>
+                  <button
+                    onMouseOver={this.handleChallengeRowMouseOver}
+                    onMouseOut={this.handleChallengeRowMouseOut}
+                    onClick={this.handleChallengeRowClick}
+                    className='list__wrapping-anchor list__has-padding no-scale has-text-centered list--accordion-icon'
+                  >
+                    <AntdIcon
+                      type={this.state.challengeDetailsActive ? MinusCircleOutline : PlusCircleOutline}
+                      className='antd-icon'
+                    />
+                  </button>
+                </span>
               </li>
               <CSSTransition
                 timeout={600}
@@ -117,8 +162,35 @@ export const ChallengeRow = class extends Component {
                 in={this.state.challengeDetailsActive}
               >
                 {state => (
-                  <li className="accordion">
-                    <span>Hello</span>
+                  <li className='accordion accordion--panel'>
+                    <span className='accordion--column'>
+                      <h5 className='is-size-5'>
+                        Challenge #{challenge.entryID.toString()}
+                      </h5>
+                      <h6 className='is-size-6 has-text-weight-semibold'>
+                        Challenged by <EtherscanAddressLink address={challenge.challenger.toString()}>
+                            <EnsName address={challenge.challenger.toString()} shorten />
+                          </EtherscanAddressLink>
+                      </h6>
+                      <br />
+                      <span><strong>Created on:</strong> {challenge.createdAt.toString()}</span>
+                      <br />
+                      <span><strong>Answer:</strong> {challenge.answer.toString()}</span>
+                      <br />
+                      <span><strong>Answered on:</strong> {challenge.answeredAt.toString()}</span>
+                      <br />
+                      <span><strong>Metadata Hash:</strong> {challenge.metadataHash.toString()}</span>
+                      <br />
+                      <span><strong>Resolution:</strong> {challenge.resolution.toString()}</span>
+                    </span>
+
+                    <span className='accordion--column'>
+                      <span><strong>Amount:</strong> {appeal.amount.toString()}</span>
+                      <br />
+                      <span><strong>Appealer:</strong> {appeal.appealer.toString()}</span>
+                      <br />
+                      <span><strong>Created on:</strong> {appeal.createdAt.toString()}</span>
+                    </span>
                   </li>
                 )}
               </CSSTransition>

@@ -92,7 +92,11 @@ export class PackageDetails extends Component {
             </h5>
             <div className='code-wrapper'>
               <CodeSnippet metadata={metadata} />
-              <GitHubLink url={`https://github.com/${repo}`} viewLink />
+              <GitHubLink
+                url={`https://github.com/${repo}`}
+                viewLink
+                cssClassNames='is-text'
+              />
             </div>
           </div>
         </div>
@@ -238,8 +242,7 @@ export class PackageDetails extends Component {
 
               <br />
 
-              <div className='list--wrapper'>
-                <ul className='list is-fullwidth'>
+                <ul className='list'>
                   <li className='list--row list--row__head list--row_challenge'>
                     <span className='list--cell list--cell__head'>
                       Name
@@ -253,6 +256,7 @@ export class PackageDetails extends Component {
                     <span className='list--cell list--cell__head'>
                       Bounty
                     </span>
+                    <span className='list--cell list--cell__head' />
                     <span className='list--cell list--cell__head' />
                   </li>
                   {
@@ -276,7 +280,6 @@ export class PackageDetails extends Component {
                   }
                 </ul>
               </div>
-            </div>
           </div>
         )
         }

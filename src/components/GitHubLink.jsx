@@ -18,7 +18,6 @@ export const GitHubLink = class _GitHubLink extends PureComponent {
     return (
       <a
         className={classnames(
-          'is-text',
           'button',
           'button-has-icon',
           this.props.cssClassNames
