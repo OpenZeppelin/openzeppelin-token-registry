@@ -4,10 +4,12 @@ import gh from 'parse-github-url'
 import gql from 'graphql-tag'
 import AntdIcon from '@ant-design/icons-react'
 import { MinusCircleOutline, PlusCircleOutline } from '@ant-design/icons'
+import { format, formatRelative } from 'date-fns'
 import { ethers } from 'ethers'
 import { get } from 'lodash'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
+import { CodeSnippet } from '~/components/CodeSnippet'
 import { EnsName } from '~/components/EnsName'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { GitHubLink } from '~/components/GitHubLink'
@@ -70,6 +72,7 @@ export const ChallengeRow = class extends Component {
 
     const priority = this.displayPriority(amount)
 
+
     return (
       <Query query={challengeRowQuery} variables={{ uri: metadataURI, challengeId }}>
         {({ data, loading, error }) => {
@@ -84,7 +87,16 @@ export const ChallengeRow = class extends Component {
 
           const { metadata } = data || {}
 
+          const timestampDate = new Date(0)
+          timestampDate.setUTCSeconds(challenge.createdAt.toString())
+          // const date = format(timestampDate, 'MMM Do, YYYY')
+          // const time = format(timestampDate, 'H:mm:ss')
+          const dateRelative = formatRelative(timestampDate, new Date())
+
           // console.log(challenge, appeal, status, statusLabel, priorityColor, data)
+
+          const hasAnswer = parseInt(challenge.answeredAt, 10) > 0
+          const hasAppeal = parseInt(appeal.createdAt, 10) > 0
 
           return (
             <>
@@ -163,34 +175,68 @@ export const ChallengeRow = class extends Component {
               >
                 {state => (
                   <li className='accordion accordion--panel'>
-                    <span className='accordion--column'>
+                    <span className='accordion--header'>
                       <h5 className='is-size-5'>
                         Challenge #{challenge.entryID.toString()}
                       </h5>
                       <h6 className='is-size-6 has-text-weight-semibold'>
-                        Challenged by <EtherscanAddressLink address={challenge.challenger.toString()}>
-                            <EnsName address={challenge.challenger.toString()} shorten />
-                          </EtherscanAddressLink>
+                        Challenger <EtherscanAddressLink address={challenge.challenger.toString()}>
+                          <EnsName address={challenge.challenger.toString()} shorten />
+                        </EtherscanAddressLink>
                       </h6>
-                      <br />
-                      <span><strong>Created on:</strong> {challenge.createdAt.toString()}</span>
-                      <br />
-                      <span><strong>Answer:</strong> {challenge.answer.toString()}</span>
-                      <br />
-                      <span><strong>Answered on:</strong> {challenge.answeredAt.toString()}</span>
-                      <br />
-                      <span><strong>Metadata Hash:</strong> {challenge.metadataHash.toString()}</span>
-                      <br />
-                      <span><strong>Resolution:</strong> {challenge.resolution.toString()}</span>
+                      <h6 className='is-size-6 has-text-weight-semibold'>
+                        Challenged <span className='has-text-grey'>{dateRelative}</span>
+                      </h6>
                     </span>
 
-                    <span className='accordion--column'>
-                      <span><strong>Amount:</strong> {appeal.amount.toString()}</span>
-                      <br />
-                      <span><strong>Appealer:</strong> {appeal.appealer.toString()}</span>
-                      <br />
-                      <span><strong>Created on:</strong> {appeal.createdAt.toString()}</span>
+                    <span className='accordion--column accordion--column__1'>
+                      {hasAnswer ? (
+                        <>
+                          <span><strong>Answer:</strong> {challenge.answer.toString()}</span>
+                          <br />
+                          <span><strong>Answered on:</strong> {challenge.answeredAt.toString()}</span>
+                          <br />
+                          <span><strong>Resolution:</strong> {challenge.resolution.toString()}</span>
+                        </>
+                      ) : (
+                        <span className='accordion--column__blank-state is-size-6'>
+                          Currently no responses. Respond with:
+                          <br />
+                          <CodeSnippet metadata={metadata} action='answer' id={challenge.entryID.toString()} />
+                        </span>
+                      )}
                     </span>
+
+                    <span className='accordion--column accordion--column__2'>
+                      {hasAppeal ? (
+                        <>
+                          <span><strong>Appeal Amount:</strong> {appeal.amount.toString()} Z</span>
+                          <br />
+                          <span><strong>Appealed on:</strong> {appeal.createdAt.toString()}</span>
+                          <br />
+                          <span>
+                            <strong>Appealed by:</strong> <EtherscanAddressLink address={challenge.challenger.toString()}>
+                              <EnsName address={appeal.appealer.toString()} shorten />
+                            </EtherscanAddressLink>
+                          </span>
+                        </>
+                      ) : (
+                        <span className='accordion--column__blank-state is-size-6'>
+                          Currently no appeals. Appeal with:
+                          <br />
+                          <CodeSnippet metadata={metadata} action='appeal' id={challenge.entryID.toString()} />
+                        </span>
+                      )}
+                    </span>
+
+                    <span className='accordion--footer'>
+                      <GitHubLink
+                        url={`https://github.com/${repo}/issues`}
+                        viewLink
+                        cssClassNames='is-text'
+                      />
+                    </span>
+
                   </li>
                 )}
               </CSSTransition>

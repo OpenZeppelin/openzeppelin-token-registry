@@ -95,7 +95,7 @@ export class PackageDetails extends Component {
               <GitHubLink
                 url={`https://github.com/${repo}`}
                 viewLink
-                cssClassNames='is-text'
+                cssClassNames='is-text has-extra-margin'
               />
             </div>
           </div>
@@ -176,6 +176,8 @@ export class PackageDetails extends Component {
           </div>
         </div>
 
+        <br />
+
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
 
           <div className='columns'>
@@ -222,6 +224,8 @@ export class PackageDetails extends Component {
           </div>
         )}
 
+        <br />
+        
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
           <div className='columns'>
             <div className='column is-12-tablet'>

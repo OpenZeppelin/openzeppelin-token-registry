@@ -111,6 +111,7 @@
 
   @media screen and (max-width: $desktop - 1px) {
     grid-template-columns: 20fr minmax(50px, 63px) minmax(50px, 70px) minmax(50px, 50px) 40px 40px;
+    grid-template-rows: minmax(130px, max-content) 97px;
   }
 }
 
