@@ -41,13 +41,6 @@ a.has-text-primary:focus {
     margin-right: 0;
   }
 }
-
-// .section,
-// .hero-body {
-//   @media screen and (max-width: $desktop - 1px) {
-//     padding: 3rem 0.5rem;
-//   }
-// }
 // END Bulma mobile fixes
 
 a.button,
@@ -160,7 +153,7 @@ a.is-dark {
 }
 
 .no-scale:hover {
-  transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1) !important;
 }
 
 .has-text-white a,
