@@ -5,7 +5,8 @@ export const web3Resolvers = {
   resolvers: {
     Query: {
       networkId: async function () {
-        const network = await getReadProvider().getNetwork()
+        const provider = await getReadProvider()
+        const network = await provider.getNetwork()
         return network.chainId
       },
       account: async function () {
