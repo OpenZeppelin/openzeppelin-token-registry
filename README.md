@@ -86,8 +86,6 @@ This will generate Truffle-compatible artifacts in the `build/contracts` directo
 
 # Updating the Contract ABIs
 
-The Contract ABIs are currently hard-coded into the app.  Only the Vouching contract is used.  Soon we'll be able to reference the official ABIs in the [zos-vouching](https://github.com/zeppelinos/zos-vouching) repository once the project is deployed.
-
-To update the ABI compile the contracts locally then update the file `src/abi/VouchingAbi.js`.
+The ABIs live in `src/apollo/abi`.  They are currently hard-coded in the app, so any changes to the contracts will require these files to be updated.
 
 ##### Made with :heart: by [Delta Camp](https://delta.camp)
