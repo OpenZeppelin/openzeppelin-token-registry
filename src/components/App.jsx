@@ -13,6 +13,7 @@ import { FourOhFour } from '~/components/pages/FourOhFour'
 import { getPurePathname } from '~/utils/getPurePathname'
 import { mixpanel } from '~/mixpanel'
 import * as routes from '~/../config/routes'
+import { withSentryBoundary } from '~/components/withSentryBoundary'
 
 const App = class _App extends PureComponent {
   static propTypes = {
@@ -48,10 +49,10 @@ const App = class _App extends PureComponent {
             appear
           >
             <Switch location={this.props.location}>
-              <Route path={routes.PACKAGE_ITEM} component={PackageItemPage} />
-              <Route path={routes.OTHER_PAGE} component={OtherPageContainer} />
-              <Route exact path={routes.HOME} component={PackageListPage} />
-              <Route exact path={routes.HOME_RESEARCHERS_LIST} component={PackageListPage} />
+              <Route path={routes.PACKAGE_ITEM} component={withSentryBoundary(PackageItemPage)} />
+              <Route path={routes.OTHER_PAGE} component={withSentryBoundary(OtherPageContainer)} />
+              <Route exact path={routes.HOME} component={withSentryBoundary(PackageListPage)} />
+              <Route exact path={routes.HOME_RESEARCHERS_LIST} component={withSentryBoundary(PackageListPage)} />
 
               <Route component={FourOhFour} />
             </Switch>

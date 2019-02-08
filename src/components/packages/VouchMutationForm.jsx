@@ -223,7 +223,6 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         }
 
         approveTransaction () {
-          console.log('approving: ', this.vouchAmount().toString())
           const txData = {
             contractName: 'ZepToken',
             method: 'approve',
