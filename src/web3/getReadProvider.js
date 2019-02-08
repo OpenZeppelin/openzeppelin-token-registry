@@ -1,14 +1,29 @@
 import { ethers } from 'ethers'
 
-async function createProviderFromWeb3 (injectedWeb3) {
-  let provider = new ethers.providers.Web3Provider(injectedWeb3)
-  const network = await provider.getNetwork()
-  if (network.name !== 'unknown') {
-    provider = ethers.getDefaultProvider(network.name)
+let provider
+
+async function getNetworkName () {
+  let tempProvider, network, networkName
+  if (window && window.ethereum) {
+    tempProvider = new ethers.providers.Web3Provider(window.ethereum)
+    network = await tempProvider.getNetwork()
+    networkName = network.name
+  } else if (window && window.web3) {
+    if (window.web3.currentProvider.isToshi) {
+      network = ethers.utils.getNetwork(parseInt(window.web3.version.network, 10))
+    } else {
+      tempProvider = new ethers.providers.Web3Provider(window.web3.currentProvider)
+      network = await tempProvider.getNetwork()
+    }
+    networkName = network.name
   } else {
-    provider = new ethers.providers.JsonRpcProvider(provider.connection.url)
+    if (!process.env.REACT_APP_DEFAULT_NETWORK_NAME) {
+      throw new Error('You must define the enviroment variable REACT_APP_DEFAULT_NETWORK_NAME')
+    }
+    networkName = process.env.REACT_APP_DEFAULT_NETWORK_NAME
   }
-  return provider
+
+  return networkName
 }
 
 /**
@@ -21,16 +36,15 @@ async function createProviderFromWeb3 (injectedWeb3) {
   getDefaultProvider function is used to create a provider pointing to the same network using an Infura node.
 */
 export async function getReadProvider () {
-  let provider
-  if (window && window.web3) {
-    provider = await createProviderFromWeb3(window.web3.currentProvider)
-  } else if (window && window.ethereum) {
-    provider = await createProviderFromWeb3(window.ethereum)
+  if (provider) { return provider }
+
+  const networkName = await getNetworkName()
+
+  if (networkName !== 'unknown') {
+    provider = ethers.getDefaultProvider(networkName)
   } else {
-    if (!process.env.REACT_APP_DEFAULT_NETWORK_NAME) {
-      throw new Error('You must define the enviroment variable REACT_APP_DEFAULT_NETWORK_NAME')
-    }
-    provider = ethers.getDefaultProvider(process.env.REACT_APP_DEFAULT_NETWORK_NAME)
+    provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
   }
+
   return provider
 }
