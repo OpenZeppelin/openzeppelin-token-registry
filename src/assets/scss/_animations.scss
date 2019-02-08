@@ -68,7 +68,6 @@
   opacity: 1;
 }
 
-
 .slide-enter {
   left: 0;
   top: 0;
@@ -128,4 +127,33 @@
 
 .animate-content-enter::after {
   animation: changeLetter 1s normal forwards ease-in-out;
+}
+
+.accordion,
+.accordion-enter,
+.accordion-exit,
+.accordion-exit-active {
+  height: 1px;
+  opacity: 0.01;
+  transition: all 600ms ease-in-out;
+}
+
+// Important! Set the height custom for your specific accordion in another class:
+//   ie:
+// .my-accordion.accordion-enter-active,
+// .my-accordion.accordion-enter-done {
+//   height: 200px;
+// }
+.accordion-enter-active,
+.accordion-enter-done {
+  opacity: 1;
+}
+
+.accordion-exit {
+  opacity: 1;
+}
+
+.accordion-exit-active,
+.accordion-exit-done {
+  opacity: 0.01;
 }

@@ -25,14 +25,19 @@ button[disabled]:active {
   border-radius: 0;
   text-decoration: none;
   margin-bottom: calc(0.375em - 1px);
-  margin-left: 0.75em;
-  margin-right: 0.75em;
+  margin-left: 0;
+  margin-right: 0;
   padding: 0;
 
   @media screen and (min-width: $desktop) {
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+.button.is-text.has-extra-margin {
+  margin-left: 0.75em;
+  margin-right: 0.75em;
 }
 
 .button.is-text:hover,

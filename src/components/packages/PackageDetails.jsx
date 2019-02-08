@@ -92,7 +92,11 @@ export class PackageDetails extends Component {
             </h5>
             <div className='code-wrapper'>
               <CodeSnippet metadata={metadata} />
-              <GitHubLink url={`https://github.com/${repo}`} viewLink />
+              <GitHubLink
+                url={`https://github.com/${repo}`}
+                viewLink
+                cssClassNames='is-text has-extra-margin'
+              />
             </div>
           </div>
         </div>
@@ -172,6 +176,8 @@ export class PackageDetails extends Component {
           </div>
         </div>
 
+        <br />
+
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
 
           <div className='columns'>
@@ -218,6 +224,8 @@ export class PackageDetails extends Component {
           </div>
         )}
 
+        <br />
+
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
           <div className='columns'>
             <div className='column is-12-tablet'>
@@ -238,44 +246,43 @@ export class PackageDetails extends Component {
 
               <br />
 
-              <div className='list--wrapper'>
-                <ul className='list is-fullwidth'>
-                  <li className='list--row list--row__head list--row_challenge'>
-                    <span className='list--cell list--cell__head'>
+              <ul className='list'>
+                <li className='list--row list--row__head list--row_challenge'>
+                  <span className='list--cell list--cell__head'>
                       Name
-                    </span>
-                    <span className='list--cell list--cell__head'>
+                  </span>
+                  <span className='list--cell list--cell__head'>
                       Status
-                    </span>
-                    <span className='list--cell list--cell__head'>
+                  </span>
+                  <span className='list--cell list--cell__head'>
                       Severity
-                    </span>
-                    <span className='list--cell list--cell__head'>
+                  </span>
+                  <span className='list--cell list--cell__head'>
                       Bounty
-                    </span>
-                    <span className='list--cell list--cell__head' />
-                  </li>
-                  {
-                    challenges.map(challenged =>
-                      <ChallengeRow
-                        packageTotalVouched={vouching.entry.totalVouched}
-                        challenged={challenged}
-                        key={challenged.parsedLog.values.challengeID.toString()}
-                      />
-                    )
-                  }
-                  {noChallenges &&
-                    <li className='list--row list--row__blank-state'>
-                      <span className='list--cell list--cell__blank-state'>
+                  </span>
+                  <span className='list--cell list--cell__head' />
+                  <span className='list--cell list--cell__head' />
+                </li>
+                {
+                  challenges.map(challenged =>
+                    <ChallengeRow
+                      packageTotalVouched={vouching.entry.totalVouched}
+                      challenged={challenged}
+                      key={challenged.parsedLog.values.challengeID.toString()}
+                    />
+                  )
+                }
+                {noChallenges &&
+                <li className='list--row list--row__blank-state'>
+                  <span className='list--cell list--cell__blank-state'>
                         There are currently no challenges. Create a challenge by running: &nbsp;
-                        <br />
-                        <br />
-                        <CodeSnippet metadata={metadata} action='challenge' />
-                      </span>
-                    </li>
-                  }
-                </ul>
-              </div>
+                    <br />
+                    <br />
+                    <CodeSnippet metadata={metadata} action='challenge' />
+                  </span>
+                </li>
+                }
+              </ul>
             </div>
           </div>
         )
