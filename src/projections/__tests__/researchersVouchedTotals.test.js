@@ -1,140 +1,13 @@
+import { ethers } from 'ethers'
 import { researchersVouchedTotals } from '../researchersVouchedTotals'
+import * as eventFactory from './eventFactory'
 
 const EVENTS = [
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '88000000000000000000',
-        'owner': '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e',
-        'vouched': '0xB8c77482e45F1F44dE1745F52C74426C631bDD52'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '90000000000000000000',
-        'challenger': '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '100000000000000000000',
-        'owner': '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e',
-        'vouched': '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '42000000000000000000',
-        'challenger': '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '17000000000000000000',
-        'challenger': '0x7A8cda94b311F58291d6F9E681599c915E31c338'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '20000000000000000000',
-        'owner': '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e',
-        'vouched': '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '16000000000000000000',
-        'sender': '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '308000000000000000000',
-        'sender': '0x7A8cda94b311F58291d6F9E681599c915E31c338'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '88000000000000000000',
-        'owner': '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e',
-        'vouched': '0xB8c77482e45F1F44dE1745F52C74426C631bDD52'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '90000000000000000000',
-        'challenger': '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '100000000000000000000',
-        'owner': '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e',
-        'vouched': '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '42000000000000000000',
-        'challenger': '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '17000000000000000000',
-        'challenger': '0x7A8cda94b311F58291d6F9E681599c915E31c338'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '20000000000000000000',
-        'owner': '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e',
-        'vouched': '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '16000000000000000000',
-        'sender': '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7'
-      }
-    }
-  },
-  {
-    'parsedLog': {
-      'values': {
-        'amount': '440000000000000000000',
-        'sender': '0x7A8cda94b311F58291d6F9E681599c915E31c338'
-      }
-    }
-  }
+  eventFactory.Registered('0', '0x9999'),
+  eventFactory.Vouched('0', '0x7A8cda94b311F58291d6F9E681599c915E31c338', '748000000000000000000'),
+  eventFactory.Vouched('1', '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7', '32000000000000000000'),
+  eventFactory.Vouched('0', '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e', '416000000000000000000'),
+  eventFactory.Unvouched('0', '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e', '416000000000000000000')
 ]
 
 describe('researchersVouchedTotals', () => {
@@ -143,17 +16,17 @@ describe('researchersVouchedTotals', () => {
       researchersVouchedTotals(EVENTS)
     ).toEqual(
       {
-        '0x7A8cda94b311F58291d6F9E681599c915E31c338': {
-          'address': '0x7A8cda94b311F58291d6F9E681599c915E31c338',
-          'amount': '748000000000000000000'
+        '0x7a8cda94b311f58291d6f9e681599c915e31c338': {
+          address: '0x7a8cda94b311f58291d6f9e681599c915e31c338',
+          amount: ethers.utils.bigNumberify('748000000000000000000')
         },
-        '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7': {
-          'address': '0x883E6B4C10520E2bc2D5dEB78d8AE4C1f7752ce7',
-          'amount': '32000000000000000000'
+        '0x883e6b4c10520e2bc2d5deb78d8ae4c1f7752ce7': {
+          address: '0x883e6b4c10520e2bc2d5deb78d8ae4c1f7752ce7',
+          amount: ethers.utils.bigNumberify('32000000000000000000')
         },
-        '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e': {
-          'address': '0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e',
-          'amount': '416000000000000000000'
+        '0x8f7f92e0660dd92eca1fad5f285c4dca556e433e': {
+          address: '0x8f7f92e0660dd92eca1fad5f285c4dca556e433e',
+          amount: ethers.utils.bigNumberify('0')
         }
       }
     )

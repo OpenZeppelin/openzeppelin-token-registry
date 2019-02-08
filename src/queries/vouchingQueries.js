@@ -29,6 +29,13 @@ export const vouchingFragments = {
 }
 
 export const vouchingQueries = {
+  vouchesQuery: gql`
+    query vouchesQuery {
+      Vouching @contract {
+        allEvents @pastEvents(fromBlock: 0, toBlock: "latest")
+      }
+    }
+  `,
   vouchQuery: gql`
     query vouchQuery($id: String!) {
       Vouching @contract(type: "Package", id: $id) {
