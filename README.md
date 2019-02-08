@@ -53,6 +53,7 @@ You can configure the app using environment variables:
 | REACT_APP_NEXT_RELEASE_FEATURE_FLAG | Feature flag to show features that are hidden | true |
 | REACT_APP_SENTRY_DSN | Optionally configure Sentry (error reporting) | Empty |
 | REACT_APP_MIXPANEL_ID | Mixpanel app id | e5f3a0b990d694b84981f493169f47c4 |
+| REACT_APP_GA_TRACKING_ID | Optional Google Analytics Tracking ID | No default |
 
 ## Custom Contract Addresses
 
