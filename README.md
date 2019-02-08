@@ -1,6 +1,6 @@
 # zOS Vouching App
 
-The official front end for the Zeppelin OS vouching contracts.  The latest version [is deployed on Netlify](https://zeppelin-vouching-app.netlify.com/)
+The official front end for the Zeppelin OS vouching contracts.  The app is live [here](https://gifted-wescoff-7f0d95.netlify.com/)
 
 To run the project against a local node you can use the [zos-vouching-mock](https://github.com/DeltaCamp/zos-vouching-mock).  The mock project allows you to easily bootstrap a local Ganache instance with test data so that you can develop the app locally.
 
