@@ -15,7 +15,7 @@ export const vouchingFragments = {
       id
       __typename
       entry: getEntry(id: $id)
-      allEvents @pastEvents(fromBlock: 0, toBlock: "latest", extraTopics: { types: ["uint256"], values: [$id] })
+      allEvents @pastEvents(extraTopics: { types: ["uint256"], values: [$id] })
     }
   `,
   challengeFragment: gql`
@@ -49,7 +49,7 @@ export const vouchingQueries = {
       Vouching @contract(type: "GlobalInfo", id: "1") {
         id
         __typename
-        Registered @pastEvents(fromBlock: 0, toBlock: "latest")
+        Registered @pastEvents
       }
     }
   `,

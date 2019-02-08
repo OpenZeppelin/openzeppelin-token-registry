@@ -13,7 +13,12 @@ require('./ethers.extension')
 
 window.addEventListener('load', async () => {
   const provider = await getReadProvider()
-  const client = await createClient(provider)
+  const network = await provider.getNetwork()
+  let defaultFromBlock = 0
+  if (network.chainId === 1) {
+    defaultFromBlock = parseInt(process.env.REACT_APP_MAINNET_STARTING_BLOCK, 10)
+  }
+  const client = await createClient(provider, defaultFromBlock)
   window.client = client
   subscribeAndRefetch(client)
 

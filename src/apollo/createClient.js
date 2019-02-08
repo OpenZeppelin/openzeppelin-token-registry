@@ -12,11 +12,15 @@ import { web3Resolvers } from './client-state/web3Resolvers'
 import { mutations } from './client-state/mutations'
 import { ethers } from 'ethers'
 
-export const createClient = function (provider) {
+export const createClient = function (provider, defaultFromBlock) {
   window.provider = provider
   window.ethers = ethers
 
-  const ethersResolver = new EthersResolver(abiMapping, provider)
+  const ethersResolver = new EthersResolver({
+    abiMapping,
+    provider,
+    defaultFromBlock
+  })
   const ethereumLink = new EthereumLink(ethersResolver)
 
   const cache = new InMemoryCache()
