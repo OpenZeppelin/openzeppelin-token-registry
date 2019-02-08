@@ -1,7 +1,5 @@
 # zOS Vouching App
 
-[![CircleCI](https://circleci.com/gh/DeltaCamp/zeppelin-vouching-app.svg?style=svg&circle-token=f48686f5e1d41bf6eab3434461c3da6579bf63ca)](https://circleci.com/gh/DeltaCamp/zeppelin-vouching-app)
-
 The official front end for the Zeppelin OS vouching contracts.  The latest version [is deployed on Netlify](https://zeppelin-vouching-app.netlify.com/)
 
 To run the project against a local node you can use the [zos-vouching-mock](https://github.com/DeltaCamp/zos-vouching-mock).  The mock project allows you to easily bootstrap a local Ganache instance with test data so that you can develop the app locally.
