@@ -7,6 +7,13 @@ export const tokenFragments = {
       __typename
       myBalance: balanceOf(address: $address)
     }
+  `,
+  allowanceFragment: gql`
+    fragment allowanceFragment on Token {
+      id
+      __typename
+      allowance(from: $address, to: $spender)
+    }
   `
 }
 
@@ -18,5 +25,13 @@ export const tokenQueries = {
       }
     }
     ${tokenFragments.tokenFragment}
+  `,
+  allowanceQuery: gql`
+    query allowanceQuery($address: String!, $spender: String!) {
+      ZepToken @contract {
+        ...allowanceFragment
+      }
+    }
+    ${tokenFragments.allowanceFragment}
   `
 }

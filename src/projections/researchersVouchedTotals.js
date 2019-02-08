@@ -1,27 +1,51 @@
 import { ethers } from 'ethers'
+import { normalizeAddr } from '~/utils/normalizeAddr'
+
+function getResearcher (result, address) {
+  let researcher = result[address]
+  if (!researcher) {
+    researcher = {
+      address,
+      amount: ethers.utils.bigNumberify(0)
+    }
+    result[address] = researcher
+  }
+  return researcher
+}
+
+function getAmount (result, address) {
+  return getResearcher(result, address).amount
+}
+
+function setAmount (result, address, amount) {
+  getResearcher(result, address).amount = amount
+}
 
 // Iterates through all events in the Vouching contract and
 // pull out amounts only for vouches (RegisteredEvent owners and
 // VouchedEvent senders)
 export const researchersVouchedTotals = function (events) {
-  const researchers = {}
+  const result = {}
 
-  events.forEach((event, index) => {
-    let address
-    const { amount, owner, sender } = event.parsedLog.values
+  for (let i in events) {
+    const event = events[i]
+    let { name, values } = event.parsedLog || {}
+    let { amount, sender } = values || {}
+    sender = normalizeAddr(sender)
 
-    address = sender || owner
-    if (!address) { return null }
-
-    const researcherAlreadyPresent = (typeof researchers[address] !== 'undefined')
-
-    researchers[address] = {
-      address: address,
-      amount: researcherAlreadyPresent
-        ? ethers.utils.bigNumberify(researchers[address].amount).add(ethers.utils.bigNumberify(amount)).toString()
-        : amount
+    let currentTotal
+    switch (name) {
+      case 'Vouched':
+        currentTotal = getAmount(result, sender)
+        setAmount(result, sender, currentTotal.add(amount))
+        break
+      case 'Unvouched':
+        currentTotal = getAmount(result, sender)
+        setAmount(result, sender, currentTotal.sub(amount))
+        break
+      // no default
     }
-  })
+  }
 
-  return researchers
+  return result
 }

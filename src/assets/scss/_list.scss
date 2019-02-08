@@ -10,6 +10,7 @@
 .list--row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  transition: all 600ms ease-out;
 }
 
 .list--cell {
@@ -18,6 +19,11 @@
   display: inline-flex;
   font-size: 0.9rem;
   text-align: left;
+  transition: all 600ms ease-out;
+}
+
+.list--row.is-active .list--cell {
+  border-color: #ececec;
 }
 
 .list--cell__head {
@@ -42,6 +48,14 @@
   padding: 1rem 3px;
 }
 
+.list--row__head .list--cell__head:first-child {
+  padding-left: 9px;
+}
+
+.list--cell:first-child > * {
+  margin-left: 6px;
+}
+
 .list__wrapping-anchor {
   background-color: inherit;
   border: none;
@@ -61,24 +75,32 @@
   transform: scale3d(1, 1, 1);
 }
 
-.list--row.is-active,
+.list--row:hover {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.list--row.is-active {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list--row.is-active *,
 .list--row:hover,
 .list--row:hover .list__wrapping-anchor {
-  background-color: $white-bis;
-  font-weight: 500;
+  background-color: darken($white-bis, 1%);
+  transition: all 600ms ease-out;
 }
 
 .list--row.list--row__blank-state:hover,
 .list--row.list--row__head:hover {
-  font-weight: 400;
   background-color: transparent;
 }
 
 .list--row_challenge {
-  grid-template-columns: 528px minmax(50px, 120px) minmax(50px, 120px) minmax(50px, 120px) minmax(30px, 30px);
+  grid-template-columns: 528px minmax(50px, 120px) minmax(66px, 140px) minmax(50px, 120px) 40px 40px;
 
   @media screen and (max-width: $desktop - 1px) {
-    grid-template-columns: 20fr minmax(50px, 63px) minmax(50px, 70px) minmax(50px, 50px) minmax(30px, 30px);
+    grid-template-columns: 20fr minmax(50px, 63px) minmax(50px, 70px) minmax(50px, 50px) 40px 40px;
+    grid-template-rows: minmax(130px, max-content) 97px;
   }
 }
 

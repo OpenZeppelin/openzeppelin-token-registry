@@ -11,6 +11,12 @@ export const web3Queries = {
       account @client
     }
   `,
+  networkAccountQuery: gql`
+    query networkAccountQuery {
+      networkId @client
+      account @client
+    }
+  `,
   blockSubscription: gql`
     subscription blockSubscription {
       block @block

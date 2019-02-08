@@ -100,6 +100,10 @@ $addonsFormHeight: 57px;
   border-bottom-color: $red;
 }
 
+.form.is-warning .field {
+  opacity: 0.4;
+}
+
 .form.is-warning .field.has-addons {
   border-bottom-color: $yellow;
 }

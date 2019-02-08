@@ -34,7 +34,7 @@ const getMobileOperatingSystem = function (userAgent) {
   if (/android/i.test(userAgent)) {
     os = 'Android'
   } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-     // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
     os = 'iOS'
   }
 

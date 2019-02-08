@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { tokenQueries } from '~/queries/tokenQueries'
-import { transactionQueries } from '~/queries/transactionQueries'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { web3Queries } from '~/queries/web3Queries'
+import { abiMapping } from '~/apollo/abiMapping'
 
 export function subscribeAndRefetch (apolloClient) {
   // If the user signs in to MetaMask or logs out, we should ... (refresh the page?)
@@ -81,7 +81,7 @@ export function subscribeAndRefetch (apolloClient) {
   // This listens for the ZEP token balance for the current viewers Eth address
   apolloClient.subscribe({
     query: gql`
-      subscription tokenQuery {
+      subscription transferSubscription {
         ZepToken @contract {
           Transfer @events
         }
@@ -104,19 +104,31 @@ export function subscribeAndRefetch (apolloClient) {
     }
   })
 
-  // This subscription watches for new and updated transactions for all packages
-  apolloClient.watchQuery({
-    query: transactionQueries.allTransactionsQuery,
-    fetchPolicy: 'cache-only'
-  }).subscribe((result, error) => {
-    if (error) { console.warn('error!', error) }
+  apolloClient.subscribe({
+    query: gql`
+      subscription allowanceSubscription {
+        ZepToken @contract {
+          Approval @events
+        }
+      }
+    `
+  }).subscribe((data, error) => {
+    if (error) {
+      console.error(error)
+      return
+    }
 
-    result.data.transactions.forEach((tx) => {
+    const accountResult = apolloClient.readQuery({ query: web3Queries.networkAccountQuery })
+
+    if (accountResult && accountResult.account && accountResult.networkId) {
       apolloClient.query({
-        query: transactionQueries.getAllTransactionsByPackageId,
-        variables: { packageId: tx.args.values[0] },
+        query: tokenQueries.allowanceQuery,
+        variables: {
+          address: accountResult.account,
+          spender: abiMapping.getAddress('Vouching', accountResult.networkId)
+        },
         fetchPolicy: 'network-only'
       })
-    })
+    }
   })
 }

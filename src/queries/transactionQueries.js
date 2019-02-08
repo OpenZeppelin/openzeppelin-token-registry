@@ -1,12 +1,13 @@
 import gql from 'graphql-tag'
 
-const transactionFragment = gql`
+export const transactionFragment = gql`
   fragment transaction on Transaction {
     id
     __typename
     args {
       values
     }
+    contractName
     blockNumber
     completed
     error
@@ -25,15 +26,5 @@ export const transactionQueries = {
       }
     }
     ${transactionFragment}
-  `,
-  getAllTransactionsByPackageId: gql`
-    query getAllTransactionsByPackageId($packageId: String!) {
-      getAllTransactionsByPackageId(packageId: $packageId) @client {
-        ...transaction
-      }
-    }
-    ${transactionFragment}
   `
 }
-
-window.gql = gql

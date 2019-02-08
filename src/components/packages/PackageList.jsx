@@ -18,6 +18,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
   componentDidUpdate (prevProps, prevState, snapshot) {
     const events = this.eventsFromProps(this.props)
+
     if (Object.keys(this.state.totalVouches).length === events.length) {
       return
     }
@@ -52,6 +53,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
   eventsFromProps (props) {
     const { data } = props
     const { Vouching } = data || {}
+
     return (Vouching ? Vouching.Registered : []) || []
   }
 

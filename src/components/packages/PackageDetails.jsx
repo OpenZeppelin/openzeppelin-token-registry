@@ -51,7 +51,7 @@ export class PackageDetails extends Component {
     return (
       <>
         <div className='columns reverse-column-order'>
-          <div className='column is-8-tablet'>
+          <div className='column is-7-tablet is-8-desktop'>
             <h1 className='title is-size-1 has-text-weight-normal'>
               {metadata.name}
 
@@ -74,7 +74,7 @@ export class PackageDetails extends Component {
 
           </div>
 
-          <div className='column is-4-desktop has-text-right--desktop'>
+          <div className='column is-5-tablet is-4-desktop has-text-right--desktop'>
             <div className='package-item--image'>
               <GithubProfileImage user={owner} />
             </div>
@@ -92,12 +92,14 @@ export class PackageDetails extends Component {
             </h5>
             <div className='code-wrapper'>
               <CodeSnippet metadata={metadata} />
-              <GitHubLink url={`https://github.com/${repo}`} viewLink />
+              <GitHubLink
+                url={`https://github.com/${repo}`}
+                viewLink
+                cssClassNames='is-text has-extra-margin'
+              />
             </div>
           </div>
         </div>
-
-        <hr />
 
         <div className='columns'>
           <div className='column'>
@@ -116,7 +118,7 @@ export class PackageDetails extends Component {
               >
                 {state => (
                   <div className='message-body message--cta has-text-centered slide-exit message-endorse--question'>
-                    <p className='message-body--text has-text-grey'>
+                    <p className='message-body--text'>
                       Would you endorse this package?
                     </p>
                     <button
@@ -127,7 +129,7 @@ export class PackageDetails extends Component {
                     </button>
 
                     <button
-                      className='button is-dark is-pill button-right'
+                      className='button is-pill button-right'
                       onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
                     >
                         No
@@ -173,6 +175,8 @@ export class PackageDetails extends Component {
             </div>
           </div>
         </div>
+
+        <br />
 
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
 
@@ -220,6 +224,8 @@ export class PackageDetails extends Component {
           </div>
         )}
 
+        <br />
+
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
           <div className='columns'>
             <div className='column is-12-tablet'>
@@ -240,44 +246,43 @@ export class PackageDetails extends Component {
 
               <br />
 
-              <div className='list--wrapper'>
-                <ul className='list is-fullwidth'>
-                  <li className='list--row list--row__head list--row_challenge'>
-                    <span className='list--cell list--cell__head'>
+              <ul className='list'>
+                <li className='list--row list--row__head list--row_challenge'>
+                  <span className='list--cell list--cell__head'>
                       Name
-                    </span>
-                    <span className='list--cell list--cell__head'>
+                  </span>
+                  <span className='list--cell list--cell__head'>
                       Status
-                    </span>
-                    <span className='list--cell list--cell__head'>
+                  </span>
+                  <span className='list--cell list--cell__head'>
                       Severity
-                    </span>
-                    <span className='list--cell list--cell__head'>
+                  </span>
+                  <span className='list--cell list--cell__head'>
                       Bounty
-                    </span>
-                    <span className='list--cell list--cell__head' />
-                  </li>
-                  {
-                    challenges.map(challenged =>
-                      <ChallengeRow
-                        packageTotalVouched={vouching.entry.totalVouched}
-                        challenged={challenged}
-                        key={challenged.parsedLog.values.challengeID.toString()}
-                      />
-                    )
-                  }
-                  {noChallenges &&
-                    <li className='list--row list--row__blank-state'>
-                      <span className='list--cell list--cell__blank-state'>
+                  </span>
+                  <span className='list--cell list--cell__head' />
+                  <span className='list--cell list--cell__head' />
+                </li>
+                {
+                  challenges.map(challenged =>
+                    <ChallengeRow
+                      packageTotalVouched={vouching.entry.totalVouched}
+                      challenged={challenged}
+                      key={challenged.parsedLog.values.challengeID.toString()}
+                    />
+                  )
+                }
+                {noChallenges &&
+                <li className='list--row list--row__blank-state'>
+                  <span className='list--cell list--cell__blank-state'>
                         There are currently no challenges. Create a challenge by running: &nbsp;
-                        <br />
-                        <br />
-                        <CodeSnippet metadata={metadata} action='challenge' />
-                      </span>
-                    </li>
-                  }
-                </ul>
-              </div>
+                    <br />
+                    <br />
+                    <CodeSnippet metadata={metadata} action='challenge' />
+                  </span>
+                </li>
+                }
+              </ul>
             </div>
           </div>
         )

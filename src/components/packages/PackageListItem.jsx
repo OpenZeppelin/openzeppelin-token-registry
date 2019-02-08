@@ -66,7 +66,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
 
             const { metadata, Vouching } = this.props.data
             const { description, version } = metadata || {}
-            const { Challenged } = Vouching || {}
+            // const { Challenged } = Vouching || {}
 
             const id = parseInt(this.props.package.id, 10)
             const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
@@ -78,17 +78,17 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
               return <Redirect to={link} />
             }
 
-            let challengeCount = 0
-            if (Challenged) {
-              challengeCount = Challenged.length
-            }
-
-            let challenges
-            if (challengeCount === 1) {
-              challenges = <span>1 challenge</span>
-            } else if (challengeCount > 1) {
-              challenges = <span>{challengeCount} challenges</span>
-            }
+            // let challengeCount = 0
+            // if (Challenged) {
+            //   challengeCount = Challenged.length
+            // }
+            //
+            // let challenges
+            // if (challengeCount === 1) {
+            //   challenges = <span>1 challenge</span>
+            // } else if (challengeCount > 1) {
+            //   challenges = <span>{challengeCount} challenges</span>
+            // }
 
             const animatingCssClassNames = classnames(
               'fade-in',
@@ -200,36 +200,41 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                 `}>
                   <Link
                     to={link}
-                    className='no-select'
+                    className='no-select list-item--view-grid'
                   >
-                    <span className='has-text-info is-size-6 is-monospaced'>
-                      View More &gt;
-                    </span>
-                  </Link>
+                    {!yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                      <span className='has-text-info is-size-6 is-monospaced'>
+                        View More &gt;
+                      </span>
+                    )}
 
-                  {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
-                    <>
-                      <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
-                        VOUCHED
-                      </h6>
+                    {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                      <span className='list-item--view-grid'>
+                        <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
+                          VOUCHED
+                        </h6>
 
-                      <span className='is-inline-block'>
                         <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+
+                        <h3 className='is-inline-block is-size-3 has-text-weight-light list-item--num-tokens'>
+                          {displayWeiToEther(get(Vouching, 'entry.totalVouched'))}
+                        </h3>
+
+                        {/*
+                          <span
+                            to={link}
+                            className='is-block list-item--challenges-link'
+                          >
+                            {challenges}
+                          </span>
+                        */}
+
+                        <span className='has-text-info is-size-6 is-monospaced list-item--view-more-link'>
+                          View More&gt;
+                        </span>
                       </span>
-
-                      <h3 className='is-inline-block is-size-3 has-text-weight-light'>
-                        {displayWeiToEther(get(Vouching, 'entry.totalVouched'))}
-                      </h3>
-
-                      <span
-                        to={link}
-                        className='is-block list-item--challenges-link'
-                      >
-                        {challenges}
-                      </span>
-                    </>
-                  )}
-
+                    )}
+                  </Link>
                 </span>
 
               </div>

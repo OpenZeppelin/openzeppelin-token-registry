@@ -5,12 +5,12 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { FooterContainer } from '~/components/layout/Footer'
 import * as routes from '~/../config/routes'
 
-export const FourOhFour = class _FourOhFour extends PureComponent {
+export const AppErrorPage = class _AppErrorPage extends PureComponent {
   render () {
     return (
       <div className='is-positioned-absolutely is-full-width'>
         <Helmet
-          title='404 Page Not Found'
+          title='Page Error'
         />
 
         <ScrollToTop />
@@ -29,11 +29,11 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
                 </p>
 
                 <h1 className='is-size-1'>
-                  We couldn't find that!
+                  There's been an error!
                 </h1>
                 <br />
                 <h4 className='is-size-4'>
-                  Nothing lives at {this.props.location.pathname}
+                  {"We're sorry.  You'll have to go back."}
                 </h4>
 
                 <br />

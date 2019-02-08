@@ -8,10 +8,13 @@ import { sortBigNumbers } from '~/utils/sortBigNumbers'
 export class ResearchersList extends PureComponent {
   render () {
     return (
-      <Query query={vouchingQueries.vouchQuery}>
+      <Query query={vouchingQueries.vouchesQuery}>
         {({ loading, error, data }) => {
           if (loading) return null
-          if (error) return `${error}`
+          if (error) {
+            console.error(error)
+            return `${error}`
+          }
 
           const events = (data.Vouching ? data.Vouching.allEvents : []) || []
           const researchers = researchersVouchedTotals(events)
