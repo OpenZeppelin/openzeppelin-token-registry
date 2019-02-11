@@ -1,5 +1,6 @@
 import { getReadProvider } from '~/web3/getReadProvider'
 import { getWriteProvider } from '~/web3/getWriteProvider'
+import { isToshi } from '~/web3/isToshi'
 
 export const web3Resolvers = {
   resolvers: {
@@ -10,27 +11,26 @@ export const web3Resolvers = {
         return network.chainId
       },
       account: async function () {
-        let provider
-        try {
-          provider = getWriteProvider()
-        } catch (error) {
-          // console.error(error)
-          console.warn('Browser is not an Ethereum-powered browser')
-        }
-
-        if (provider) {
+        if (isToshi()) {
+          let accounts = window.web3.eth.accounts
+          if (accounts.length) {
+            return accounts[0]
+          }
+        } else {
+          let provider
           try {
+            provider = await getWriteProvider()
             const signer = provider.getSigner()
             const address = await signer.getAddress()
             return address
           } catch (err) {
             if (err.message.indexOf('unknown account') === -1) {
               console.error(`Error in web3Resolvers#account: ${err}`)
+            } else {
+              console.error(err)
             }
             return null
           }
-        } else {
-          return null
         }
       }
     }
