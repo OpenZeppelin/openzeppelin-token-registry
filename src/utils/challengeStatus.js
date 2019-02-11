@@ -2,9 +2,11 @@
 
 # Challenge Status:
 
-- Pending: Open
-- Accepted: Acceptance Pending
-- Rejected: Rejection Pending
+<answer> (<resolution>)
+
+- Pending (open): Open
+- Accepted (open): Acceptance Pending
+- Rejected (open): Rejection Pending
 - Accepted (confirmed): Challenge Accepted
 - Rejected (confirmed): Challenge Rejected
 - Accepted (appealed): Acceptance Appealed

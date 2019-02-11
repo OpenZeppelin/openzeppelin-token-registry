@@ -320,7 +320,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
 
         downloadText = () => {
           if (this.needsIOSWeb3()) {
-            return 'Download Coinbase Wallet'
+            return 'Download Cipher Browser'
           } else if (this.needsAndroidWeb3()) {
             return 'Download Opera'
           } else {
@@ -330,7 +330,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
 
         downloadUrl = () => {
           if (this.needsIOSWeb3()) {
-            return 'https://itunes.apple.com/us/app/coinbase-wallet/id1278383455'
+            return 'https://itunes.apple.com/us/app/cipher-browser-ethereum/id1294572970'
           } else if (this.needsAndroidWeb3()) {
             return 'https://play.google.com/store/apps/details?id=com.opera.browser'
           } else {
