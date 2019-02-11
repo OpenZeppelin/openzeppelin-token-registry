@@ -65,7 +65,7 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
 
   render () {
     const { loading, error } = this.props.data || {}
-    var content
+    let content
 
     const packageListLoader =
       <>

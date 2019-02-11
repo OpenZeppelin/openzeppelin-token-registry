@@ -3,15 +3,12 @@ import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 // import { get } from 'lodash'
-// Can we map a reasearcher to a github (or gitlab, etc) profile?
-// import AntdIcon from '@ant-design/icons-react'
-// import { GithubFill } from '@ant-design/icons'
-// import { formatRoute } from 'react-router-named-routes'
-// import { Redirect, Link } from 'react-router-dom'
-import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
+import { formatRoute } from 'react-router-named-routes'
+import { Redirect, Link } from 'react-router-dom'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import { shortenAddress } from '~/utils/shortenAddress'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
-// import * as routes from '~/../config/routes'
+import * as routes from '~/../config/routes'
 
 export const ResearchersListItem = ReactTimeout(class _ResearchersListItem extends PureComponent {
   state = {}
@@ -20,82 +17,98 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
     researcher: PropTypes.object.isRequired
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.setTimeout(() => {
       this.setState({ startAnimating: true })
     }, 20)
   }
-  //
-  // handleGitHubLinkClick = (url) => {
-  //   if (window) {
-  //     window.location.href = url
-  //   }
-  // }
 
-  render () {
-    // const { metadata, Vouching } = data
-    // const { version } = metadata || {}
-    // const { Challenged } = Vouching || {}
+  render() {
+    const address = this.props.researcher.address
+    const link = formatRoute(routes.RESEARCHER, { address })
 
-    // const id = parseInt(this.props.researcher.id, 10)
-    // const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
+    if (this.state.toResearcher) {
+      return <Redirect to={link} />
+    }
 
-    // const { repo } = gh(this.props.researcher.metadataURI)
-
-    // if (this.state.toResearcher) {
-    //   return <Redirect to={link} />
-    // }
-
-    // var challengeCount = 0
-    // if (Challenged) {
-    //   challengeCount = Challenged.length
-    // }
-    //
-    // var challenges
-    // if (challengeCount === 0) {
-    //   challenges = <span>No challenges</span>
-    // } else if (challengeCount === 1) {
-    //   challenges = <span>1 challenge</span>
-    // } else {
-    //   challenges = <span>{challengeCount} challenges</span>
-    // }
+    const animatingCssClassNames = classnames(
+      'fade-in',
+      'slide-up',
+      'medium',
+      {
+        'slide-up-enter': this.state.startAnimating,
+        'fade-in-enter': this.state.startAnimating
+      }
+    )
 
     return (
-      <div
-        className={
-          classnames(
-            'list-item',
-            'panel',
-            'slide-up',
-            'fade-in',
-            'slow',
-            {
-              'slide-up-enter': this.state.startAnimating,
-              'fade-in-enter': this.state.startAnimating
-            }
-          )
-        }
-        style={{ 'transitionDelay': `${this.props.index * 100}ms` }}
-      >
-        <div className='panel-block'>
-          <h6 className='is-size-6 has-text-weight-bold is-monospaced has-text-grey list-item--subtitle__with-margin'>
-            RESEARCHER ADDRESS
-          </h6>
-          <h5 className='title is-size-5 is-monospaced'>
-            <EtherscanAddressLink address={this.props.researcher.address}>{this.props.researcher.address}</EtherscanAddressLink>
-          </h5>
+      <div className='list-item'>
+        <span
+          className={`${animatingCssClassNames}
+          list-item__cell
+          list-item__cell--id
+          has-text-grey
+          has-text-weight-light
+        `}>
+          <Link
+            to={link}
+            className='no-select title is-size-4 has-text-weight-normal'
+          >
+            #{this.props.index + 1} &nbsp;
+          </Link>
+        </span>
 
-          <br />
+        <span className={`
+          ${animatingCssClassNames}
+          list-item__cell
+          list-item__cell--total-vouched
+        `}>
+          <Link
+            to={link}
+            className='no-select'
+          >
+            <h6 className='list-item__cell--total-vouched__title is-size-6 has-text-weight-bold is-monospaced has-text-grey'>
+              TOTAL VOUCHED
+            </h6>
+            <h3 className='list-item__cell--total-vouched__value is-size-3 is-monospaced'>
+              <span className='item--version has-text-black has-text-weight-light'>
+                <ZepTokenLogo width='22' height='22' className='researcher--zep-token-icon' />{displayWeiToEther(this.props.researcher.amount)}
+              </span>
+            </h3>
+          </Link>
+        </span>
 
-          <h6 className='is-size-6 has-text-weight-bold is-monospaced has-text-grey'>
-            TOTAL VOUCHED
-          </h6>
-          <h3 className='is-size-3 is-monospaced'>
-            <span className='item--version has-text-black has-text-weight-light'>
-              <ZepTokenLogo width='22' height='22' className='researcher--zep-token-icon' />{displayWeiToEther(this.props.researcher.amount)}
+        <span className={`
+          ${animatingCssClassNames}
+          list-item__cell
+          list-item__cell--title
+        `}>
+          <Link
+            to={link}
+            className='no-select'
+          >
+            <h5 className='title is-size-5 is-monospaced has-text-link'>
+              {shortenAddress(this.props.researcher.address)}
+            </h5>
+          </Link>
+        </span>
+
+        <span className={`
+          ${animatingCssClassNames}
+          list-item__cell
+          list-item__cell--view-more
+          has-text-right
+        `}>
+          <Link
+            to={link}
+            className='no-select list-item--view-grid'
+          >
+            <span className='has-text-info is-size-6 is-monospaced list-item--view-more-link list-item--view-more-link__researcher'>
+              View More &gt;
             </span>
-          </h3>
-        </div>
+          </Link>
+        </span>
+
       </div>
     )
   }

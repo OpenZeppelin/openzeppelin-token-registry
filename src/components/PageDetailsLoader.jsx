@@ -1,10 +1,9 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-export function PackageDetailsLoader () {
+export function PageDetailsLoader () {
   return (
     <div>
-
       <ContentLoader
         width={278}
         height={525}

@@ -12,16 +12,23 @@ import { PackageDetails } from '~/components/packages/PackageDetails'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import * as routes from '~/../config/routes'
 
-export class PackageItemPage extends PureComponent {
+export class ResearcherPage extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired
   }
 
   render () {
+    const address = this.props.match.params.address
+
+    const researcher = {
+      metadataURI: 'fake',
+      id: 'fake'
+    }
+
     return (
       <div className='is-positioned-absolutely is-full-width'>
         <Helmet
-          title='EVM Package'
+          title='Researcher'
         />
 
         <ScrollToTop />
@@ -32,38 +39,41 @@ export class PackageItemPage extends PureComponent {
               <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
                 <p className='content'>
                   <Link
-                    to={routes.HOME}
+                    to={routes.HOME_RESEARCHERS_LIST}
                     className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
                   >
-                    {'<'} Back to Packages
+                    {'<'} Back to Researchers
                   </Link>
                 </p>
+
+                <h1 className='is-size-1'>
+                  {address}
+                </h1>
 
                 <Query query={vouchingQueries.eventsQuery}>
                   {({ loading, error, data }) => {
                     if (loading) return <PageDetailsLoader />
                     if (error) return <ErrorMessage errorMessage={error} />
 
-                    const events = data.Vouching ? data.Vouching.Registered : []
-                    const id = this.props.match.params.id
-                    const event = events.find((event) => event.parsedLog.values.id.eq(id))
+                    // const events = data.Vouching ? data.Vouching.Registered : []
+                    // const id = this.props.match.params.id
+                    // const event = events.find((event) => event.parsedLog.values.id.eq(id))
 
-                    if (!event) {
-                      console.warn('event not found')
-                      return null
-                    }
+                    // if (!event) {
+                    //   console.warn('event not found')
+                    //   return null
+                    // }
 
-                    const packageItem = event.parsedLog.values
-
+                    // const researcher = event.parsedLog.values
+                    
                     return (
                       <Query
                         query={vouchingQueries.packageQuery}
-                        variables={{ uri: packageItem.metadataURI, id: packageItem.id.toString() }}
+                        variables={{ uri: researcher.metadataURI, id: researcher.id.toString() }}
                       >
                         {
                           ({ loading, error, data }) => {
                             if (loading) return <PageDetailsLoader />
-
                             if (error) return <ErrorMessage errorMessage={error} />
 
                             const { metadata, Vouching } = data
@@ -73,11 +83,12 @@ export class PackageItemPage extends PureComponent {
                                 <Helmet
                                   title={`${metadata.name}`}
                                 />
-                                <PackageDetails
+                                Details
+                                {/* <PackageDetails
                                   metadata={metadata}
                                   vouching={Vouching}
                                   registeredEvent={event}
-                                />
+                                /> */}
                               </>
                             )
                           }

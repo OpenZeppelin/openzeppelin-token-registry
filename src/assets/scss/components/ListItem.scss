@@ -136,6 +136,22 @@
   }
 }
 
+.list-item__cell--total-vouched {
+  align-self: baseline;
+}
+
+.list-item__cell--total-vouched a {
+  padding: 1.5rem 0 1.25rem;
+}
+
+.list-item__cell--total-vouched__title {
+  align-self: end;
+}
+
+.list-item__cell--total-vouched__value {
+  align-self: start;
+}
+
 .list-item__cell--blank {
   display: none;
   grid-area: blank;
@@ -241,4 +257,9 @@
 .list-item:hover .list-item--view-more-link {
   border-bottom-color: $link;
   transition: border 300ms ease-in-out;
+}
+
+.list-item .list-item--view-more-link__researcher {
+  grid-area: unset;
+  width: 109px;
 }
