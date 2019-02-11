@@ -1,18 +1,37 @@
+.list-item__loader,
 .list-item {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 80px 140px minmax(100px, 400px) 1fr;
-  grid-template-areas: 'id image title more';
   margin-bottom: 1.5rem;
   min-height: 140px;
   transition-property: all;
   transform: scale3d(1, 1, 1);
   transition-duration: 100ms;
   transition-timing-function: ease-out;
+}
+
+.list-item:not(.has-next-release-features) {
+  grid-template-columns: 140px minmax(100px, 400px) 1fr;
+  grid-template-areas: 'image title more';
 
   @media screen and (max-width: $desktop - 1px) {
+    grid-template-columns: 140px 2fr 1fr;
+  }
+
+  @media screen and (max-width: $tablet - 1px) {
+    grid-template-columns: 100px 2fr;
+    grid-template-rows: minmax(130px, max-content) 97px;
+    grid-template-areas: 'image title title' 'blank blank more';
+  }
+}
+
+.list-item.has-next-release-features {
+  grid-template-columns: 80px 140px minmax(100px, 400px) 1fr;
+  grid-template-areas: 'id image title more';
+
+  @media screen and (min-width: $tablet) {
     grid-template-columns: 80px 140px 2fr 1fr;
   }
 

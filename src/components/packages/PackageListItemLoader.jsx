@@ -3,7 +3,7 @@ import ContentLoader from 'react-content-loader'
 
 export function PackageListItemLoader () {
   return (
-    <div className='list-item list-item__loader'>
+    <div className='list-item__loader'>
       <ContentLoader
         width={400}
         height={200}

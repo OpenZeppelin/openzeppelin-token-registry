@@ -101,22 +101,24 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             )
 
             return (
-              <div className='list-item'>
-                <span
-                  className={`
-                    ${animatingCssClassNames}
-                    list-item__cell
-                    list-item__cell--id
-                    has-text-grey
-                    has-text-weight-light
-                  `}>
-                  <Link
-                    to={link}
-                    className='no-select title is-size-4 has-text-weight-normal'
-                  >
-                    #{this.props.index + 1} &nbsp;
-                  </Link>
-                </span>
+              <div className={classnames('list-item', { 'has-next-release-features': yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) })}>
+                {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                  <span
+                    className={`
+                      ${animatingCssClassNames}
+                      list-item__cell
+                      list-item__cell--id
+                      has-text-grey
+                      has-text-weight-light
+                    `}>
+                    <Link
+                      to={link}
+                      className='no-select title is-size-4 has-text-weight-normal'
+                    >
+                      #{this.props.index + 1} &nbsp;
+                    </Link>
+                  </span>
+                )}
 
                 <span className={`
                   ${animatingCssClassNames}
