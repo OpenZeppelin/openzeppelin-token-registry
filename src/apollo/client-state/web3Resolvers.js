@@ -13,10 +13,7 @@ export const web3Resolvers = {
         let provider
         try {
           provider = getWriteProvider()
-        } catch (error) {
-          // console.error(error)
-          console.warn('Browser is not an Ethereum-powered browser')
-        }
+        } catch (error) {}
 
         if (provider) {
           try {
