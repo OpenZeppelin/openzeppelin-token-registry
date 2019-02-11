@@ -16,9 +16,11 @@ export async function getNetworkName () {
     networkName = network.name
   } else {
     if (!process.env.REACT_APP_DEFAULT_NETWORK_NAME) {
-      throw new Error('You must define the enviroment variable REACT_APP_DEFAULT_NETWORK_NAME')
+      networkName = 'homestead'
+      console.warn('Environment variable `REACT_APP_DEFAULT_NETWORK_NAME` not defined; defaulting to homestead')
+    } else {
+      networkName = process.env.REACT_APP_DEFAULT_NETWORK_NAME
     }
-    networkName = process.env.REACT_APP_DEFAULT_NETWORK_NAME
   }
 
   return networkName

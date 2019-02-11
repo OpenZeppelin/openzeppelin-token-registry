@@ -20,14 +20,15 @@ export const web3Resolvers = {
           let provider
           try {
             provider = await getWriteProvider()
+          } catch (e) {}
+          if (!provider) { return null }
+          try {
             const signer = provider.getSigner()
             const address = await signer.getAddress()
             return address
           } catch (err) {
             if (err.message.indexOf('unknown account') === -1) {
               console.error(`Error in web3Resolvers#account: ${err}`)
-            } else {
-              console.error(err)
             }
             return null
           }
