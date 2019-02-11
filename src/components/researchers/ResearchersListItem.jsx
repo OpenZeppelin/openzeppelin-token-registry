@@ -2,11 +2,9 @@ import React, { PureComponent } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-// import { get } from 'lodash'
 import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { shortenAddress } from '~/utils/shortenAddress'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import * as routes from '~/../config/routes'
 
@@ -17,13 +15,13 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
     researcher: PropTypes.object.isRequired
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.setTimeout(() => {
       this.setState({ startAnimating: true })
     }, 20)
   }
 
-  render() {
+  render () {
     const address = this.props.researcher.address
     const link = formatRoute(routes.RESEARCHER, { address })
 
@@ -42,7 +40,7 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
     )
 
     return (
-      <div className='list-item'>
+      <div className='list-item list-item__researcher'>
         <span
           className={`${animatingCssClassNames}
           list-item__cell
@@ -88,7 +86,7 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
             className='no-select'
           >
             <h5 className='title is-size-5 is-monospaced has-text-link'>
-              {shortenAddress(this.props.researcher.address)}
+              {this.props.researcher.address}
             </h5>
           </Link>
         </span>

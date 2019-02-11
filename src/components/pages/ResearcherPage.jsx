@@ -1,15 +1,21 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { ethers } from 'ethers'
 import { Link } from 'react-router-dom'
+import { createCanvas } from 'canvas'
+import { renderIcon } from '@download/blockies'
 import { Query } from 'react-apollo'
+import { ResearcherNameAndAddress } from '~/components/researchers/ResearcherNameAndAddress'
 import { HeroBetaCallout } from '~/components/HeroBetaCallout'
 import { FooterContainer } from '~/components/layout/Footer'
-import { PageDetailsLoader } from '~/components/PageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
+import { PageDetailsLoader } from '~/components/PageDetailsLoader'
+import { PackageItemListRow } from '~/components/PackageItemListRow'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { PackageDetails } from '~/components/packages/PackageDetails'
+import { projectResearcherVouchedPackages } from '~/projections/projectResearcherVouchedPackages'
 import { vouchingQueries } from '~/queries/vouchingQueries'
+import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import * as routes from '~/../config/routes'
 
 export class ResearcherPage extends PureComponent {
@@ -19,11 +25,17 @@ export class ResearcherPage extends PureComponent {
 
   render () {
     const address = this.props.match.params.address
-
-    const researcher = {
-      metadataURI: 'fake',
-      id: 'fake'
-    }
+    const canvas = createCanvas(50, 50)
+    const icon = renderIcon(
+      {
+        seed: address,
+        color: '#dfe',
+        bgcolor: '#fff',
+        size: 10, // width/height of the icon in blocks, default: 10
+        scale: 5 // width/height of each block in pixels, default: 5
+      },
+      canvas
+    )
 
     return (
       <div className='is-positioned-absolutely is-full-width'>
@@ -46,57 +58,72 @@ export class ResearcherPage extends PureComponent {
                   </Link>
                 </p>
 
-                <h1 className='is-size-1'>
-                  {address}
-                </h1>
+                <div className='columns reverse-column-order'>
+                  <div className='column is-7-tablet is-8-desktop'>
+                    <ResearcherNameAndAddress address={address} />
 
-                <Query query={vouchingQueries.eventsQuery}>
-                  {({ loading, error, data }) => {
-                    if (loading) return <PageDetailsLoader />
-                    if (error) return <ErrorMessage errorMessage={error} />
+                    <br />
+                    <br />
+                    <br />
 
-                    // const events = data.Vouching ? data.Vouching.Registered : []
-                    // const id = this.props.match.params.id
-                    // const event = events.find((event) => event.parsedLog.values.id.eq(id))
+                    <Query query={vouchingQueries.vouchesQuery}>
+                      {({ loading, error, data }) => {
+                        let content
 
-                    // if (!event) {
-                    //   console.warn('event not found')
-                    //   return null
-                    // }
+                        if (error) return <ErrorMessage errorMessage={error} />
 
-                    // const researcher = event.parsedLog.values
-                    
-                    return (
-                      <Query
-                        query={vouchingQueries.packageQuery}
-                        variables={{ uri: researcher.metadataURI, id: researcher.id.toString() }}
-                      >
-                        {
-                          ({ loading, error, data }) => {
-                            if (loading) return <PageDetailsLoader />
-                            if (error) return <ErrorMessage errorMessage={error} />
+                        const events = (data.Vouching ? data.Vouching.allEvents : []) || []
 
-                            const { metadata, Vouching } = data
+                        if (loading) {
+                          content = <PageDetailsLoader />
+                        } else {
+                          const result = projectResearcherVouchedPackages(address, events)
+                          const packageItems = Object.values(result.packages)
 
-                            return (
-                              <>
-                                <Helmet
-                                  title={`${metadata.name}`}
-                                />
-                                Details
-                                {/* <PackageDetails
-                                  metadata={metadata}
-                                  vouching={Vouching}
-                                  registeredEvent={event}
-                                /> */}
-                              </>
-                            )
-                          }
+                          let totalVouched = ethers.utils.bigNumberify(0)
+                          packageItems.forEach(item => {
+                            totalVouched = totalVouched.add(item.vouchTotals[address])
+                          })
+
+                          content = (
+                            <>
+                              <h5 className='is-size-5 has-text-weight-semibold'>
+                                Has vouched {displayWeiToEther(totalVouched)} ZEP against {packageItems.length} {packageItems.length === 1 ? 'package' : 'packages'}
+                              </h5>
+
+                              <br />
+
+                              <ul className='list'>
+                                {packageItems.map(packageItem =>
+                                  <PackageItemListRow
+                                    key={`packageItem-row-${packageItem.id}`}
+                                    packageItem={packageItem}
+                                    address={address}
+                                  />
+                                )}
+                              </ul>
+                            </>
+                          )
                         }
-                      </Query>
-                    )
-                  }}
-                </Query>
+
+                        return (
+                          <>
+                            <Helmet
+                              title={`Security Resercher ${address}`}
+                            />
+
+                            {content}
+                          </>
+                        )
+                      }}
+                    </Query>
+                  </div>
+
+                  <div className='column is-5-tablet is-4-desktop has-text-right--desktop'>
+                    <img src={icon.toDataURL()} alt='blockies icon of ethereum address' />
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

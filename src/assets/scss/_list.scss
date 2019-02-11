@@ -104,20 +104,20 @@
   }
 }
 
-.list--row_vouch {
-  grid-template-columns: 528px minmax(50px, 66px) minmax(50px, 50px);
+.list--row__two-column {
+  grid-template-columns: 528px 70px 50px;
 
   @media screen and (max-width: $desktop - 1px) {
-    grid-template-columns: 20fr minmax(50px, 66px) minmax(50px, 50px);
+    grid-template-columns: 1fr 70px 50px;
   }
 }
 
-.list--row_vouch .list__has-padding {
+.list--row__two-column .list__has-padding {
   padding-bottom: 0.625rem;
   padding-top: 0.625rem;
 }
 
-.list--row_vouch svg {
+.list--row__two-column svg {
   height: 21px;
 }
 

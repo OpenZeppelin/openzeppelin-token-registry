@@ -23,6 +23,18 @@
   }
 }
 
+.list-item__researcher {
+  grid-template-columns: 80px 1fr 150px 130px;
+  grid-template-areas: 'id title total more';
+
+  @media screen and (max-width: $tablet - 1px) {
+    grid-template-columns: minmax(80px, max-content) 97px 1fr 1fr;
+    grid-template-rows: 1fr 40px;
+    grid-template-areas: 'title title title total'
+                         '.     .     .     more';
+  }
+}
+
 .list-item:hover {
   box-shadow: 0px 5px 20px 2px rgba(121, 132, 153, 0.25);
   transform: scale3d(1.01, 1.01, 1.01);
@@ -112,6 +124,7 @@
 
 .list-item__cell--title a {
   padding: 0 1rem;
+  word-break: break-all;
 
   @media screen and (max-width: $tablet - 1px) {
     padding: 1rem;
@@ -138,10 +151,11 @@
 
 .list-item__cell--total-vouched {
   align-self: baseline;
+  grid-area: total;
 }
 
 .list-item__cell--total-vouched a {
-  padding: 1.5rem 0 1.25rem;
+  padding: 1.5rem 1rem 1.25rem 0;
 }
 
 .list-item__cell--total-vouched__title {

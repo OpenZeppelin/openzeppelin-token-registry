@@ -58,4 +58,3 @@ export class ResearchersList extends PureComponent {
     )
   }
 }
-
