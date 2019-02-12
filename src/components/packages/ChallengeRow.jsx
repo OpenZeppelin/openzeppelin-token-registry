@@ -4,18 +4,18 @@ import gh from 'parse-github-url'
 import gql from 'graphql-tag'
 import AntdIcon from '@ant-design/icons-react'
 import { MinusCircleOutline, PlusCircleOutline } from '@ant-design/icons'
-import { formatRelative } from 'date-fns'
 import { ethers } from 'ethers'
-import { get } from 'lodash'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { CodeSnippet } from '~/components/CodeSnippet'
 import { EnsName } from '~/components/EnsName'
 import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
 import { GitHubLink } from '~/components/GitHubLink'
+import { ShortText } from '~/components/ShortText'
 import { vouchingFragments } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { challengeStatus } from '~/utils/challengeStatus'
+import { dateRelative } from '~/utils/dateRelative'
 import * as constants from '~/constants'
 
 export const challengeRowQuery = gql`
@@ -86,10 +86,6 @@ export const ChallengeRow = class extends Component {
 
           const { metadata } = data || {}
 
-          const timestampDate = new Date(0)
-          timestampDate.setUTCSeconds(challenge.createdAt.toString())
-          const dateRelative = formatRelative(timestampDate, new Date())
-
           const hasAnswer = parseInt(challenge.answeredAt, 10) > 0
           const hasAppeal = parseInt(appeal.createdAt, 10) > 0
 
@@ -110,7 +106,8 @@ export const ChallengeRow = class extends Component {
                     onClick={this.handleChallengeRowClick}
                     className='list__wrapping-anchor list__has-padding no-scale'
                   >
-                    {get(metadata, 'description')}
+                    {/* TODO: this is completely incorrect, it should be the challenge description */}
+                    <ShortText text={metadata.description} />
                   </button>
                 </span>
                 <span className={`list--cell has-text-${statusLabel.colour}`}>
@@ -172,26 +169,30 @@ export const ChallengeRow = class extends Component {
                   <li className='accordion accordion--panel'>
                     <span className='accordion--header'>
                       <h5 className='is-size-5'>
-                        Challenge #{challenge.entryID.toString()}
+                        Challenged <span className='has-text-weight-semibold'>{dateRelative(challenge.createdAt)}</span>
+                        {/* TODO: Could be nice to have a unique challengeId Challenge #{challenge.entryID.toString()} */}
                       </h5>
                       <h6 className='is-size-6 has-text-weight-semibold'>
                         Challenger <EtherscanAddressLink address={challenge.challenger.toString()}>
                           <EnsName address={challenge.challenger.toString()} shorten />
                         </EtherscanAddressLink>
                       </h6>
-                      <h6 className='is-size-6 has-text-weight-semibold'>
-                        Challenged <span className='has-text-grey'>{dateRelative}</span>
-                      </h6>
+
                     </span>
 
                     <span className='accordion--column accordion--column__1'>
                       {hasAnswer ? (
                         <>
-                          <span><strong>Answer:</strong> {challenge.answer.toString()}</span>
+                          <h6 className='is-size-6 has-text-weight-semibold'>
+                            <strong>Answer:</strong> {challenge.answer.toString()}
+                          </h6>
+                          <h6 className='is-size-6 has-text-weight-semibold'>
+                            <strong>Answered:</strong> <span className='has-text-grey'>{dateRelative(challenge.answeredAt)}</span>
+                          </h6>
                           <br />
-                          <span><strong>Answered on:</strong> {challenge.answeredAt.toString()}</span>
-                          <br />
-                          <span><strong>Resolution:</strong> {challenge.resolution.toString()}</span>
+                          <h6 className='is-size-6 has-text-weight-semibold'>
+                            <strong>Resolution:</strong> {challenge.resolution.toString()}
+                          </h6>
                         </>
                       ) : (
                         <span className='accordion--column__blank-state is-size-6'>
@@ -205,15 +206,17 @@ export const ChallengeRow = class extends Component {
                     <span className='accordion--column accordion--column__2'>
                       {hasAppeal ? (
                         <>
-                          <span><strong>Appeal Amount:</strong> {appeal.amount.toString()} Z</span>
-                          <br />
-                          <span><strong>Appealed on:</strong> {appeal.createdAt.toString()}</span>
-                          <br />
-                          <span>
-                            <strong>Appealed by:</strong> <EtherscanAddressLink address={challenge.challenger.toString()}>
+                          <h6 className='is-size-6 has-text-weight-semibold'>
+                            <strong>Appealer:</strong> <EtherscanAddressLink address={challenge.challenger.toString()}>
                               <EnsName address={appeal.appealer.toString()} shorten />
                             </EtherscanAddressLink>
-                          </span>
+                          </h6>
+                          <h6 className='is-size-6 has-text-weight-semibold'>
+                            <strong>Appealed:</strong> <span className='has-text-grey'>{dateRelative(appeal.createdAt)}</span>
+                          </h6>
+                          <h6 className='is-size-6 has-text-weight-semibold'>
+                            <strong>Appeal Amount:</strong> <span className='has-text-grey'>{displayWeiToEther(appeal.amount.toString())} Z</span>
+                          </h6>
                         </>
                       ) : (
                         <span className='accordion--column__blank-state is-size-6'>

@@ -96,7 +96,7 @@
 }
 
 .list--row_challenge {
-  grid-template-columns: 528px minmax(50px, 120px) minmax(66px, 140px) minmax(50px, 120px) 40px 40px;
+  grid-template-columns: 500px minmax(50px, 120px) minmax(66px, 140px) minmax(50px, 120px) 40px 40px;
 
   @media screen and (max-width: $desktop - 1px) {
     grid-template-columns: 20fr minmax(50px, 63px) minmax(50px, 70px) minmax(50px, 50px) 40px 40px;
@@ -105,7 +105,7 @@
 }
 
 .list--row__two-column {
-  grid-template-columns: 528px 70px 50px;
+  grid-template-columns: 500px 70px 50px;
 
   @media screen and (max-width: $desktop - 1px) {
     grid-template-columns: 1fr 70px 50px;

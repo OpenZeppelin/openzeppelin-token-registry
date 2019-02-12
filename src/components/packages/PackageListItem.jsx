@@ -13,10 +13,10 @@ import { Query } from 'react-apollo'
 // import { CodeSnippet } from '~/components/CodeSnippet'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
+import { ShortText } from '~/components/ShortText'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { shortText } from '~/utils/shortText'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import * as routes from '~/../config/routes'
 
@@ -123,10 +123,10 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                   )}
 
                   <span className={`
-                  ${animatingCssClassNames}
-                  list-item__cell
-                  list-item__cell--image
-                `}>
+                    ${animatingCssClassNames}
+                    list-item__cell
+                    list-item__cell--image
+                  `}>
                     <Link
                       to={link}
                       className='no-select'
@@ -136,10 +136,10 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                   </span>
 
                   <span className={`
-                  ${animatingCssClassNames}
-                  list-item__cell
-                  list-item__cell--title
-                `}>
+                    ${animatingCssClassNames}
+                    list-item__cell
+                    list-item__cell--title
+                  `}>
                     <Link
                       to={link}
                       className='no-select'
@@ -152,7 +152,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       </h4>
 
                       <p className='is-size-6 description is-inline-grid-bottom has-text-grey'>
-                        {shortText(description, { maxLength: 140 })}
+                        <ShortText text={description} maxLength={140} />
                       </p>
                     </Link>
                   </span>
