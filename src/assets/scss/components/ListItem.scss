@@ -6,10 +6,6 @@
   display: grid;
   margin-bottom: 1.5rem;
   min-height: 140px;
-  transition-property: all;
-  transform: scale3d(1, 1, 1);
-  transition-duration: 100ms;
-  transition-timing-function: ease-out;
 }
 
 .list-item:not(.has-next-release-features) {
@@ -54,9 +50,23 @@
   }
 }
 
-.list-item:hover {
-  box-shadow: 0px 5px 20px 2px rgba(121, 132, 153, 0.25);
+.list-item-container {
+  transition-property: transform;
+  transform: scale3d(1, 1, 1);
+  transition-duration: 100ms;
+  transition-timing-function: ease-out;
+}
+
+.list-item-container:hover {
   transform: scale3d(1.01, 1.01, 1.01);
+}
+
+.list-item-container:hover .list-item {
+  box-shadow: 0px 5px 20px 2px rgba(121, 132, 153, 0.25);
+}
+
+.list-item-container .list-item {
+  transform: scale3d(0.999, 0.999, 0.999);
 }
 
 .list-item a {

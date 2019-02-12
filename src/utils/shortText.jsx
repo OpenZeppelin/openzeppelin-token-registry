@@ -1,4 +1,4 @@
-export function shortText(text, { maxLength = 200 }) {
+export function shortText (text, { maxLength = 200 }) {
   text = text || ''
 
   if (text.length > maxLength) {
