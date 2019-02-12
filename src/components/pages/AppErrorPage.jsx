@@ -43,7 +43,7 @@ export const AppErrorPage = class _AppErrorPage extends PureComponent {
                   to={routes.HOME}
                   className='button is-pill is-purple'
                 >
-                  {'<'} Take me back to the packages
+                  {'<'} Take me back
                 </Link>
               </div>
             </div>

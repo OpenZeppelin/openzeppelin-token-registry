@@ -32,7 +32,7 @@ export const vouchingQueries = {
   vouchesQuery: gql`
     query vouchesQuery {
       Vouching @contract {
-        allEvents @pastEvents(fromBlock: 0, toBlock: "latest")
+        allEvents @pastEvents
       }
     }
   `,
