@@ -66,7 +66,7 @@ export class ResearcherPage extends PureComponent {
                     <br />
                     <br />
 
-                    <Query query={vouchingQueries.vouchesQuery}>
+                    <Query query={vouchingQueries.researcherVouchesQuery} variables={{ address }}>
                       {({ loading, error, data }) => {
                         let content
 

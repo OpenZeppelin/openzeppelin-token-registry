@@ -29,6 +29,13 @@ export const vouchingFragments = {
 }
 
 export const vouchingQueries = {
+  researcherVouchesQuery: gql`
+    query researcherVouchesQuery($address: String!) {
+      Vouching @contract(type: "ResearcherEvents", id: $address) {
+        allEvents @pastEvents(extraTopics: { types: ["uint256", "address"], values: [null, $address] })
+      }
+    }
+  `,
   vouchesQuery: gql`
     query vouchesQuery {
       Vouching @contract {
