@@ -11,6 +11,19 @@ export const INFO = 'info'
 export const WARNING = 'warning'
 export const DANGER = 'danger'
 
+export const CHALLENGE_ANSWER_LABEL = [
+  'Pending',
+  'Accepted',
+  'Rejected'
+]
+
+export const CHALLENGE_RESOLUTION_LABEL = [
+  'Pending',
+  'Appeal Affirmed',
+  'Appeal Dismissed',
+  'Confirmed'
+]
+
 export const CHALLENGE_STATUS_LABEL = [
   { label: 'Open', colour: GREY },
   { label: 'Acceptance Pending', colour: GREY },

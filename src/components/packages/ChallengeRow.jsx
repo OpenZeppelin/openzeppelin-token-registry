@@ -184,14 +184,14 @@ export const ChallengeRow = class extends Component {
                       {hasAnswer ? (
                         <>
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Answer:</strong> {challenge.answer.toString()}
+                            <strong>Answer:</strong> {constants.CHALLENGE_ANSWER_LABEL[challenge.answer]}
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Answered:</strong> <span className='has-text-grey'>{dateRelative(challenge.answeredAt)}</span>
                           </h6>
                           <br />
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Resolution:</strong> {challenge.resolution.toString()}
+                            <strong>Resolution:</strong> {constants.CHALLENGE_RESOLUTION_LABEL[challenge.resolution]}
                           </h6>
                         </>
                       ) : (
