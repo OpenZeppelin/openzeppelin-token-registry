@@ -42,7 +42,7 @@
   }
 }
 
-.list-item__researcher {
+.list-item.list-item__researcher {
   grid-template-columns: 80px 1fr 150px 130px;
   grid-template-areas: 'id title total more';
 
