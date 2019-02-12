@@ -81,6 +81,7 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
           ${animatingCssClassNames}
           list-item__cell
           list-item__cell--title
+          list-item__cell--researcher-address
         `}>
           <Link
             to={link}

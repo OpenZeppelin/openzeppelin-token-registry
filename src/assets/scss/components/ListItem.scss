@@ -143,11 +143,14 @@
 
 .list-item__cell--title a {
   padding: 0 1rem;
-  word-break: break-all;
 
   @media screen and (max-width: $tablet - 1px) {
     padding: 1rem;
   }
+}
+
+.list-item__cell--researcher-address a {
+  word-break: break-all;
 }
 
 .list-item__cell--title .description {
