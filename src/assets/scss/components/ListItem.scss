@@ -18,7 +18,7 @@
 
   @media screen and (max-width: $tablet) {
     grid-template-columns: 100px 2fr;
-    grid-template-rows: minmax(130px, max-content) 97px;
+    grid-template-rows: minmax(130px, max-content) 40px;
     grid-template-areas: 'image title title' 'blank blank more';
   }
 }
