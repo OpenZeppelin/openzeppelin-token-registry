@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { HeroBetaCallout } from '~/components/HeroBetaCallout'
 import { FooterContainer } from '~/components/layout/Footer'
@@ -10,11 +9,14 @@ import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/packages/PackageDetails'
 import { vouchingQueries } from '~/queries/vouchingQueries'
-import * as routes from '~/../config/routes'
 
 export class PackageItemPage extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired
+  }
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
   }
 
   render () {
@@ -31,12 +33,12 @@ export class PackageItemPage extends PureComponent {
             <div className='row'>
               <div className='col-xs-12'>
                 <p className='content'>
-                  <Link
-                    to={routes.HOME}
+                  <button
+                    onClick={this.context.router.history.goBack}
                     className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                   >
-                    {'<'} Back to Packages
-                  </Link>
+                    {'<'} Back
+                  </button>
                 </p>
 
                 <Query query={vouchingQueries.eventsQuery}>

@@ -148,6 +148,6 @@ button:hover:not(.is-text) {
   transform: scale3d(1.04, 1.04, 1.04);
 }
 
-a.button.is-text.has-underline-border:hover {
+.button.is-text.has-underline-border:hover {
   border-bottom-color: $button-text-hover-color;
 }

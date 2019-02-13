@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -6,6 +7,10 @@ import { FooterContainer } from '~/components/layout/Footer'
 import * as routes from '~/../config/routes'
 
 export const AppErrorPage = class _AppErrorPage extends PureComponent {
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+  
   render () {
     return (
       <div className='is-positioned-absolutely is-full-width'>
@@ -20,12 +25,12 @@ export const AppErrorPage = class _AppErrorPage extends PureComponent {
             <div className='row'>
               <div className='col-xs-12'>
                 <p className='content'>
-                  <Link
-                    to={routes.HOME}
+                  <button
+                    onClick={this.context.router.history.goBack}
                     className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                   >
-                    {'<'} Back to Home
-                  </Link>
+                    {'<'} Back
+                  </button>
                 </p>
 
                 <h1 className='is-size-1'>

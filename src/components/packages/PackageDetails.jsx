@@ -6,8 +6,7 @@ import classnames from 'classnames'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { CodeSnippet } from '~/components/CodeSnippet'
-import { EnsName } from '~/components/EnsName'
-import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
+import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
 import { ChallengeRow } from '~/components/packages/ChallengeRow'
@@ -61,12 +60,7 @@ export class PackageDetails extends Component {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <EtherscanAddressLink
-                address={values.owner}
-                className='has-hover-border'
-              >
-                <EnsName address={values.owner} shorten />
-              </EtherscanAddressLink>
+              Maintained by <ResearcherLink address={values.owner} shorten />
             </h6>
 
             <p className='is-size-6 package-item--description'>

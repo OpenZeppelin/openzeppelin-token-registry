@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { ethers } from 'ethers'
-import { Link } from 'react-router-dom'
 import { createCanvas } from 'canvas'
 import { renderIcon } from '@download/blockies'
 import { Query } from 'react-apollo'
@@ -16,15 +15,19 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { projectResearcherVouchedPackages } from '~/projections/projectResearcherVouchedPackages'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import * as routes from '~/../config/routes'
+import { normalizeAddr } from '~/utils/normalizeAddr'
 
 export class ResearcherPage extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired
   }
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+
   render () {
-    const address = this.props.match.params.address
+    const address = normalizeAddr(this.props.match.params.address)
     const canvas = createCanvas(50, 50)
     const icon = renderIcon(
       {
@@ -50,12 +53,12 @@ export class ResearcherPage extends PureComponent {
             <div className='row'>
               <div className='col-xs-12'>
                 <p className='content'>
-                  <Link
-                    to={routes.HOME_RESEARCHERS_LIST}
+                  <button
+                    onClick={this.context.router.history.goBack}
                     className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                   >
-                    {'<'} Back to Researchers
-                  </Link>
+                    {'<'} Back
+                  </button>
                 </p>
 
                 <div className='row reverse-column-order'>
@@ -66,7 +69,7 @@ export class ResearcherPage extends PureComponent {
                     <br />
                     <br />
 
-                    <Query query={vouchingQueries.researcherVouchesQuery} variables={{ address }}>
+                    <Query query={vouchingQueries.researcherVouchesQuery} variables={{ address: address.toString() }}>
                       {({ loading, error, data }) => {
                         let content
 

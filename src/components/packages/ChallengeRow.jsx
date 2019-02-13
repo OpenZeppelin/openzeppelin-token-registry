@@ -8,8 +8,7 @@ import { ethers } from 'ethers'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { CodeSnippet } from '~/components/CodeSnippet'
-import { EnsName } from '~/components/EnsName'
-import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
+import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { ShortText } from '~/components/ShortText'
 import { vouchingFragments } from '~/queries/vouchingQueries'
@@ -173,12 +172,7 @@ export const ChallengeRow = class extends Component {
                         {/* TODO: Could be nice to have a unique challengeId Challenge #{challenge.entryID.toString()} */}
                       </h5>
                       <h6 className='is-size-6 has-text-weight-semibold'>
-                        Challenger <EtherscanAddressLink
-                          address={challenge.challenger.toString()}
-                          className='has-hover-border'
-                        >
-                          <EnsName address={challenge.challenger.toString()} shorten />
-                        </EtherscanAddressLink>
+                        Challenger <ResearcherLink address={challenge.challenger.toString()} />
                       </h6>
 
                     </span>
@@ -210,9 +204,7 @@ export const ChallengeRow = class extends Component {
                       {hasAppeal ? (
                         <>
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Appealer:</strong> <EtherscanAddressLink address={challenge.challenger.toString()}>
-                              <EnsName address={appeal.appealer.toString()} shorten />
-                            </EtherscanAddressLink>
+                            <strong>Appealer:</strong> <ResearcherLink address={challenge.challenger.toString()} />
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Appealed:</strong> <span className='has-text-grey'>{dateRelative(appeal.createdAt)}</span>

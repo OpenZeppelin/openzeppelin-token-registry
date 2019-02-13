@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -6,6 +7,10 @@ import { FooterContainer } from '~/components/layout/Footer'
 import * as routes from '~/../config/routes'
 
 export const FourOhFour = class _FourOhFour extends PureComponent {
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+  
   render () {
     return (
       <div className='is-positioned-absolutely'>
@@ -19,12 +24,12 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
           <div className='container'>
             <div className='row'>
               <div className='col-xs-12'>
-                <Link
-                  to={routes.HOME}
+                <button
+                  onClick={this.context.router.history.goBack}
                   className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                 >
-                  {'<'} Back to Home
-                </Link>
+                  {'<'} Back
+                </button>
 
                 <br />
                 <br />
@@ -43,7 +48,7 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
                   to={routes.HOME}
                   className='button is-pill is-purple'
                 >
-                  {'<'} Take me back
+                  {'<'} Take me home
                 </Link>
               </div>
             </div>
