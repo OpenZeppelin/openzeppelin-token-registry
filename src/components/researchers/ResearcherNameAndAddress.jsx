@@ -12,7 +12,7 @@ export const ResearcherNameAndAddress = class _ResearcherNameAndAddress extends 
 
         <EtherscanAddressLink
           address={this.props.address}
-          className='has-hover-border'
+          className='has-hover-border has-break-word'
         >
           {this.props.address}
         </EtherscanAddressLink>

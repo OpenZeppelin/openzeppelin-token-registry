@@ -23,8 +23,6 @@ export class PackageListPage extends PureComponent {
 
     return (
       <div className='is-positioned-absolutely'>
-        <ScrollToTop />
-
         {/* <PreviousHero heroColor={heroColor} /> */}
         <PhaseOneHero heroColor={heroColor} />
 
