@@ -14,6 +14,7 @@ import { mixpanel } from '~/mixpanel'
 import * as routes from '~/../config/routes'
 import { withSentryBoundary } from '~/components/withSentryBoundary'
 import { withTracker } from '~/components/withTracker'
+import { getSystemInfo } from '~/utils/getSystemInfo'
 
 const App = class _App extends PureComponent {
   static propTypes = {
@@ -36,8 +37,10 @@ const App = class _App extends PureComponent {
   }
 
   render () {
+    const { browser } = getSystemInfo()
+
     return (
-      <>
+      <div className={browser}>
         <MetaTags {...this.props} cssClass={this.currentPage()} />
 
         <NavContainer />
@@ -60,7 +63,7 @@ const App = class _App extends PureComponent {
             </Switch>
           </CSSTransition>
         </TransitionGroup>
-      </>
+      </div>
     )
   }
 }

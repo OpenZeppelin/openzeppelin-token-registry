@@ -10,7 +10,7 @@ export const AppErrorPage = class _AppErrorPage extends PureComponent {
   static contextTypes = {
     router: PropTypes.object.isRequired
   }
-  
+
   render () {
     return (
       <div className='is-positioned-absolutely is-full-width'>

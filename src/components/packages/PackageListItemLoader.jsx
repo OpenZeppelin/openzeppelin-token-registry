@@ -18,7 +18,7 @@ export function PackageListItemLoader () {
         <rect id='Rectangle' x='75' y='10' width='148' height='16' rx='4' />
         <rect id='Rectangle' x='75' y='32' width='300' height='16' rx='4' />
 
-        <rect id='Rectangle' x='320' y='120' width='90' height='16' rx='4' />
+        <rect id='Rectangle' x='320' y='100' width='90' height='16' rx='4' />
       </ContentLoader>
 
       <ContentLoader

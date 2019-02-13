@@ -10,7 +10,7 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
   static contextTypes = {
     router: PropTypes.object.isRequired
   }
-  
+
   render () {
     return (
       <div className='is-positioned-absolutely'>

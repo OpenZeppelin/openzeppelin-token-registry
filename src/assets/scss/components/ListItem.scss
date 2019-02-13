@@ -46,14 +46,14 @@
   }
 }
 
-.list-item-container {
+#root > div:not(.Safari) .list-item-container {
   transition-property: transform;
   transform: scale3d(1, 1, 1);
   transition-duration: 100ms;
   transition-timing-function: ease-out;
 }
 
-.list-item-container:hover {
+#root > div:not(.Safari) .list-item-container:hover {
   transform: scale3d(1.01, 1.01, 1.01);
 }
 
@@ -96,7 +96,7 @@
 .package-list-item--loader_mobile {
   display: none;
 
-  @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $mobile) {
     display: block;
   }
 }
