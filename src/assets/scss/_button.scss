@@ -33,6 +33,10 @@ button[disabled]:active {
 .button.is-text.has-extra-margin {
   margin-left: 0.75em;
   margin-right: 0.75em;
+
+  @media screen and (max-width: $tablet) {
+    margin-top: 0.75em;
+  }
 }
 
 .button.is-text:hover,
