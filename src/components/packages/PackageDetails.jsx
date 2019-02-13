@@ -105,7 +105,7 @@ export class PackageDetails extends Component {
               <div className='col-xs-12'>
                 <div className={classnames(
                   'message',
-                  'message-endorse',
+                  'message-vouch',
                   {
                     'has-voted': this.state.voted
                   }
@@ -117,9 +117,9 @@ export class PackageDetails extends Component {
                     in={!this.state.voted}
                   >
                     {state => (
-                      <div className='message-body message--cta has-text-centered slide-exit message-endorse--question'>
+                      <div className='message-body message--cta has-text-centered slide-exit message-vouch--question'>
                         <p className='message-body--text'>
-                          Would you endorse this package?
+                          Would you vouch for this package?
                         </p>
                         <button
                           className='button is-purple is-pill button-left'
@@ -144,7 +144,7 @@ export class PackageDetails extends Component {
                     in={this.state.voted && this.state.voted.answer === 'yes'}
                   >
                     {state => (
-                      <div className='message-body message--cta has-text-centered slide-enter message-endorse--positive-answer'>
+                      <div className='message-body message--cta has-text-centered slide-enter message-vouch--positive-answer'>
                         <p className='message-body--text has-text-grey'>
                           Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages.
                           &nbsp;<a
@@ -164,7 +164,7 @@ export class PackageDetails extends Component {
                     in={this.state.voted && this.state.voted.answer === 'no'}
                   >
                     {state => (
-                      <div className='message-body message--cta has-text-centered slide-enter message-endorse--negative-answer'>
+                      <div className='message-body message--cta has-text-centered slide-enter message-vouch--negative-answer'>
                         <p className='message-body--text has-text-grey'>
                           Thank you for your feedback. Your feedback will be used to inform the rankings of EVM packages.
                         </p>

@@ -4,7 +4,7 @@
   position: relative;
 }
 
-.message-endorse {
+.message-vouch {
   background-color: transparent;
   border: 1px solid rgba(100, 100, 100, 0.15);
   margin-top: 0;
@@ -16,7 +16,7 @@
   }
 }
 
-.message-endorse.has-voted {
+.message-vouch.has-voted {
   @media screen and (max-width: 867px) {
     height: 12rem;
   }
@@ -46,15 +46,15 @@
   border-left: 0;
 }
 
-.message-body.message-endorse--question {
+.message-body.message-vouch--question {
   padding-top: 2rem;
 }
 
-.message-body.message-endorse--positive-answer {
+.message-body.message-vouch--positive-answer {
   padding-top: 2rem;
 }
 
-.message-body.message-endorse--negative-answer {
+.message-body.message-vouch--negative-answer {
   padding-top: 3rem;
 }
 
