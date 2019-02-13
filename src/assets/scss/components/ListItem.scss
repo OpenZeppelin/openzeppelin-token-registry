@@ -43,10 +43,10 @@
   grid-template-areas: 'id title total more';
 
   @media screen and (max-width: $tablet - 1px) {
-    grid-template-columns: minmax(80px, max-content) 97px 1fr 1fr;
-    grid-template-rows: 1fr 40px;
-    grid-template-areas: 'title title title total'
-                         '.     .     .     more';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 97px;
+    grid-template-areas: 'title title'
+                         'more  more';
   }
 }
 
