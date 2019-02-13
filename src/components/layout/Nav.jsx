@@ -33,7 +33,7 @@ export const Nav = class _Nav extends Component {
 
         <nav className={`navbar ${navColor}`}>
           <div className='container'>
-            <div className='row'>
+            <div className='row navbar-menu-container'>
               <div className='navbar-brand col-xs-8 col-md-8'>
                 <Link to={routes.HOME} className='navbar-item'>
                   <ZeppelinOSRegistryLogo />
