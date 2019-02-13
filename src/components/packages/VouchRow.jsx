@@ -30,7 +30,7 @@ export const VouchRow = graphql(web3Queries.accountQuery)(class _VouchRow extend
       )}>
         <span className='list--cell list__has-padding is-borderless is-monospaced break-words'>
           <EtherscanAddressLink address={this.props.address} className={classnames(
-            'has-text-grey',
+            'has-hover-border',
             {
               'has-text-primary': isUser
             }

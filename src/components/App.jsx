@@ -39,6 +39,7 @@ const App = class _App extends PureComponent {
     return (
       <>
         <MetaTags {...this.props} cssClass={this.currentPage()} />
+
         <NavContainer />
 
         <TransitionGroup>
@@ -49,9 +50,9 @@ const App = class _App extends PureComponent {
             appear
           >
             <Switch location={this.props.location}>
-
               <Route path={routes.RESEARCHER} component={withSentryBoundary(withTracker(ResearcherPage))} />
               <Route path={routes.PACKAGE_ITEM} component={withSentryBoundary(withTracker(PackageItemPage))} />
+
               <Route exact path={routes.HOME} component={withSentryBoundary(withTracker(PackageListPage))} />
               <Route exact path={routes.HOME_RESEARCHERS_LIST} component={withSentryBoundary(withTracker(PackageListPage))} />
 

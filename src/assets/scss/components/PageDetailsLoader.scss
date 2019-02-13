@@ -1,21 +1,21 @@
-.package-details--loader {
-  @media screen and (max-width: $tablet - 1px) {
+.page-details--loader {
+  @media screen and (max-width: $tablet) {
     display: none;
   }
 }
 
-.package-details--loader_tablet {
+.page-details--loader_tablet {
   display: none;
 
-  @media screen and (min-width: 520px) and (max-width: $tablet - 1px) {
+  @media screen and (min-width: $tabletMin) and (max-width: $tablet) {
     display: block;
   }
 }
 
-.package-details--loader_mobile {
+.page-details--loader_mobile {
   display: none;
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: $mobile) {
     display: block;
   }
 }

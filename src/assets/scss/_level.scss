@@ -25,7 +25,7 @@
   max-width: 600px;
   text-transform: uppercase;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     width: 100%;
   }
 }
@@ -59,9 +59,7 @@
 }
 
 .is-secondary-nav > .level-item:not(.is-narrow) {
-  @media screen and (min-width: $tablet) {
-    flex-grow: 0;
-  }
+  flex-grow: 0;
 }
 
 .level--wrapper {

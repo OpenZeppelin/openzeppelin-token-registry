@@ -8,35 +8,35 @@ import * as routes from '~/../config/routes'
 export const FourOhFour = class _FourOhFour extends PureComponent {
   render () {
     return (
-      <div className='is-positioned-absolutely is-full-width'>
+      <div className='is-positioned-absolutely'>
         <Helmet
           title='404 Page Not Found'
         />
 
         <ScrollToTop />
 
-        <section className='section'>
+        <section className='section section--main-content'>
           <div className='container'>
-            <div className='columns'>
-              <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
-                <p className='content'>
-                  <Link
-                    to={routes.HOME}
-                    className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
-                  >
-                    {'<'} Back to Home
-                  </Link>
-                </p>
+            <div className='row'>
+              <div className='col-xs-12'>
+                <Link
+                  to={routes.HOME}
+                  className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
+                >
+                  {'<'} Back to Home
+                </Link>
 
-                <h1 className='is-size-1'>
-                  We couldn't find that!
-                </h1>
+                <br />
+                <br />
+
+                <h2 className='is-size-2'>
+                  Couldn't find that ...
+                </h2>
                 <br />
                 <h4 className='is-size-4'>
                   Nothing lives at {this.props.location.pathname}
                 </h4>
 
-                <br />
                 <br />
 
                 <Link

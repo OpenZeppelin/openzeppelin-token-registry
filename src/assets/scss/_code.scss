@@ -5,7 +5,7 @@
   padding: 0.5rem 1rem;
   position: relative;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     max-width: 100%;
     min-width: 100%;
     padding-right: 1.25rem;
@@ -19,7 +19,7 @@
 .code.code--quick-install {
   min-width: 310px;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     max-width: 100%;
     min-width: 100%;
   }

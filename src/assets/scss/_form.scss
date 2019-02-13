@@ -62,7 +62,7 @@ $addonsFormHeight: 57px;
   font-size: 2rem;
   padding: 1.5rem 1rem 1rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     max-width: 100%;
     min-width: 100%;
   }

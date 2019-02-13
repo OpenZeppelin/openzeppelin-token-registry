@@ -12,11 +12,11 @@
   grid-template-columns: 140px minmax(100px, 400px) 1fr;
   grid-template-areas: 'image title more';
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $desktop) {
     grid-template-columns: 140px 2fr 1fr;
   }
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     grid-template-columns: 100px 2fr;
     grid-template-rows: minmax(130px, max-content) 97px;
     grid-template-areas: 'image title title' 'blank blank more';
@@ -24,14 +24,10 @@
 }
 
 .list-item.has-next-release-features {
-  grid-template-columns: 80px 140px minmax(100px, 400px) 1fr;
+  grid-template-columns: 80px 140px 2fr 1fr;
   grid-template-areas: 'id image title more';
 
-  @media screen and (min-width: $tablet) {
-    grid-template-columns: 80px 140px 2fr 1fr;
-  }
-
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     grid-template-columns: 100px 2fr;
     grid-template-rows: minmax(130px, max-content) 97px;
     grid-template-areas: 'image title title' 'blank blank more';
@@ -78,13 +74,13 @@
   height: 120px;
   padding: 1rem;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $desktop) {
     height: 180px;
   }
 }
 
 .package-list-item--loader {
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $desktop) {
     display: none;
   }
 }
@@ -92,7 +88,7 @@
 .package-list-item--loader_tablet {
   display: none;
 
-  @media screen and (min-width: 520px) and (max-width: $desktop - 1px) {
+  @media screen and (min-width: $tabletMin) and (max-width: $desktop) {
     display: block;
   }
 }
@@ -100,7 +96,7 @@
 .package-list-item--loader_mobile {
   display: none;
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: $tablet) {
     display: block;
   }
 }
@@ -118,7 +114,7 @@
   height: 100%;
   width: 100%;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     justify-content: space-between;
   }
 }
@@ -126,7 +122,7 @@
 .list-item__cell .is-inline-grid-top {
   margin-top: 1.25rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     margin-top: 0.25rem;
   }
 }
@@ -142,7 +138,7 @@
 .list-item__cell--id a {
   padding-left: 2.25rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     display: none;
   }
 }
@@ -154,7 +150,7 @@
 .list-item__cell--title a {
   padding: 0 1rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     padding: 1rem;
   }
 }
@@ -176,7 +172,7 @@
   grid-area: image;
   padding: 1rem 1rem 1rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     padding: 1.5rem 0 0 1.5rem;
   }
 }
@@ -202,7 +198,7 @@
   display: none;
   grid-area: blank;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     display: block;
   }
 }
@@ -210,7 +206,7 @@
 .list-item__cell--view-more {
   grid-area: more;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     margin-left: 0;
   }
 }
@@ -219,7 +215,7 @@
   padding-right: 1.5rem;
   text-transform: uppercase;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     align-items: baseline;
   }
 }
