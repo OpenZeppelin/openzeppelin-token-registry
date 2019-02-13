@@ -15,6 +15,10 @@
   font-size: 0.9rem;
   text-align: left;
   transition: all 600ms ease-out;
+
+  @media screen and (max-width: $mobile) {
+    border: 0;
+  }
 }
 
 .list--row.is-active .list--cell {
@@ -41,6 +45,10 @@
 
 .list__has-padding {
   padding: 1rem 3px;
+
+  @media screen and (max-width: $mobile) {
+    padding: 1rem;
+  }
 }
 
 .list--row__head .list--cell__head:first-child {
@@ -49,6 +57,10 @@
 
 .list--cell:first-child > * {
   margin-left: 6px;
+
+  @media screen and (max-width: $mobile) {
+    margin-left: 0;
+  }
 }
 
 .list__wrapping-anchor {
@@ -91,10 +103,83 @@
 }
 
 .list--row_challenge {
-  grid-template-columns: 500px minmax(50px, 120px) minmax(66px, 140px) minmax(50px, 120px) 40px 40px;
+  grid-template-columns: 500px 120px minmax(66px, 140px) minmax(50px, 120px) 40px 40px;
 
   @media screen and (max-width: $desktop) {
-    grid-template-columns: 20fr minmax(50px, 63px) minmax(50px, 70px) minmax(50px, 50px) 40px 40px;
+    grid-template-columns: 1fr 120px minmax(60px, 80px) 50px 40px 40px;
+  }
+
+  @media screen and (max-width: $mobile) {
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+    grid-template: 'desc desc desc desc desc'
+      'status severity bounty github more';
+    margin-top: 3rem;
+
+    &:nth-child(2) {
+      margin-top: 0;
+    }
+  }
+}
+
+.list--row_challenge .desc {
+  @media screen and (max-width: $mobile) {
+    grid-area: desc;
+  }
+}
+
+.list--row_challenge .desc .list__has-padding {
+  @media screen and (max-width: $mobile) {
+    padding-bottom: 0;
+  }
+}
+
+.list--row_challenge .status {
+  @media screen and (max-width: $mobile) {
+    grid-area: status;
+  }
+}
+
+.list--row_challenge severity {
+  @media screen and (max-width: $mobile) {
+    grid-area: severity;
+  }
+}
+
+.list--row_challenge .bounty {
+  @media screen and (max-width: $mobile) {
+    grid-area: bounty;
+  }
+}
+
+.list--row_challenge .github {
+  @media screen and (max-width: $mobile) {
+    grid-area: github;
+  }
+}
+
+.list--row_challenge .more {
+  @media screen and (max-width: $mobile) {
+    grid-area: more;
+  }
+}
+
+.list--row_challenge .bounty .list__has-padding,
+.list--row_challenge .github .list__has-padding {
+  @media screen and (max-width: $mobile) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+
+.list--row__head.list--row_challenge {
+  @media screen and (max-width: $mobile) {
+    display: none;
+    // border: 1px solid #ececec;
+    // height: 1px;
+    // overflow: hidden;
+    // margin-bottom: 0;
   }
 }
 

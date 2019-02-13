@@ -62,7 +62,7 @@ export class ResearcherPage extends PureComponent {
                 </p>
 
                 <div className='row reverse-column-order'>
-                  <div className='col-xs-12 col-md-7'>
+                  <div className='col-xs-12 col-md-8'>
                     <ResearcherNameAndAddress address={address} />
 
                     <br />
@@ -122,7 +122,7 @@ export class ResearcherPage extends PureComponent {
                     </Query>
                   </div>
 
-                  <div className='col-xs-12 col-start-md-8 col-md-5 has-text-right--desktop'>
+                  <div className='col-xs-12 col-start-md-10 col-md-3 has-text-right--desktop'>
                     <br />
                     <img src={icon.toDataURL()} alt='blockies icon of ethereum address' />
                   </div>

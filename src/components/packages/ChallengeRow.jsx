@@ -98,7 +98,7 @@ export const ChallengeRow = class extends Component {
                   'is-active': this.state.challengeDetailsActive
                 }
               )}>
-                <span className='list--cell'>
+                <span className='list--cell desc'>
                   <button
                     onMouseOver={this.handleChallengeRowMouseOver}
                     onMouseOut={this.handleChallengeRowMouseOut}
@@ -109,7 +109,7 @@ export const ChallengeRow = class extends Component {
                     <ShortText text={metadata.description} />
                   </button>
                 </span>
-                <span className={`list--cell has-text-${statusLabel.colour}`}>
+                <span className={`list--cell status has-text-${statusLabel.colour}`}>
                   <button
                     onMouseOver={this.handleChallengeRowMouseOver}
                     onMouseOut={this.handleChallengeRowMouseOut}
@@ -119,7 +119,7 @@ export const ChallengeRow = class extends Component {
                     {statusLabel.label}
                   </button>
                 </span>
-                <span className={`list--cell has-text-${priorityColor}`}>
+                <span className={`list--cell severity has-text-${priorityColor}`}>
                   <button
                     onMouseOver={this.handleChallengeRowMouseOver}
                     onMouseOut={this.handleChallengeRowMouseOut}
@@ -129,7 +129,7 @@ export const ChallengeRow = class extends Component {
                     {priority}
                   </button>
                 </span>
-                <span className='list--cell'>
+                <span className='list--cell bounty'>
                   <button
                     onMouseOver={this.handleChallengeRowMouseOver}
                     onMouseOut={this.handleChallengeRowMouseOut}
@@ -139,13 +139,13 @@ export const ChallengeRow = class extends Component {
                     {displayWeiToEther(amount)} Z
                   </button>
                 </span>
-                <span className='list--cell'>
+                <span className='list--cell github'>
                   <GitHubLink
                     url={`https://github.com/${repo}`}
                     cssClassNames='list__wrapping-anchor list__has-padding no-scale'
                   />
                 </span>
-                <span className='list--cell'>
+                <span className='list--cell more'>
                   <button
                     onMouseOver={this.handleChallengeRowMouseOver}
                     onMouseOut={this.handleChallengeRowMouseOut}
@@ -172,7 +172,7 @@ export const ChallengeRow = class extends Component {
                         {/* TODO: Could be nice to have a unique challengeId Challenge #{challenge.entryID.toString()} */}
                       </h5>
                       <h6 className='is-size-6 has-text-weight-semibold'>
-                        Challenger <ResearcherLink address={challenge.challenger.toString()} />
+                        Challenger <ResearcherLink address={challenge.challenger.toString()} shorten />
                       </h6>
 
                     </span>
@@ -204,7 +204,7 @@ export const ChallengeRow = class extends Component {
                       {hasAppeal ? (
                         <>
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Appealer:</strong> <ResearcherLink address={challenge.challenger.toString()} />
+                            <strong>Appealer:</strong> <ResearcherLink address={challenge.challenger.toString()} shorten />
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Appealed:</strong> <span className='has-text-grey'>{dateRelative(appeal.createdAt)}</span>
