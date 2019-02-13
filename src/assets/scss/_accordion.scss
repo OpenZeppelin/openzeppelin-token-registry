@@ -20,7 +20,7 @@
   background-color: white;
   height: 320px;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $desktop) {
     height: 370px;
   }
 

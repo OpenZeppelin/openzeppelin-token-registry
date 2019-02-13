@@ -11,7 +11,7 @@ export function PageDetailsLoader () {
         speed={1}
         primaryColor='#efefef'
         secondaryColor='#f5f5f5'
-        className='package-details--loader_mobile'>
+        className='page-details--loader_mobile'>
         <rect id='Rectangle' x='1.5' y='0.5' width='107' height='108' rx='8' />
         <rect id='Rectangle' x='0.5' y='137.5' width='109' height='29' rx='14.5' />
         <rect id='Rectangle' x='1.5' y='239.5' width='204' height='34' />
@@ -32,7 +32,7 @@ export function PageDetailsLoader () {
         speed={1}
         primaryColor='#efefef'
         secondaryColor='#f5f5f5'
-        className='package-details--loader_tablet'
+        className='page-details--loader_tablet'
       >
         <rect id='Rectangle' x='0.5' y='0.5' width='107' height='108' rx='8' />
         <rect id='Rectangle' x='0.5' y='134.5' width='109' height='29' rx='14.5' />
@@ -54,7 +54,7 @@ export function PageDetailsLoader () {
         speed={1}
         primaryColor='#efefef'
         secondaryColor='#f5f5f5'
-        className='package-details--loader'
+        className='page-details--loader'
       >
         <rect id='Rectangle' x='696.5' y='0.5' width='107' height='108' rx='8' />
         <rect id='Rectangle' x='694.5' y='142.5' width='109' height='29' rx='14.5' />

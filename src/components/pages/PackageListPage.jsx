@@ -22,7 +22,7 @@ export class PackageListPage extends PureComponent {
     const showResearchersList = this.props.location.pathname === '/researchers-list'
 
     return (
-      <div className='is-positioned-absolutely is-full-width'>
+      <div className='is-positioned-absolutely'>
         <ScrollToTop />
 
         {/* <PreviousHero heroColor={heroColor} /> */}
@@ -69,10 +69,11 @@ export class PackageListPage extends PureComponent {
           )
         }
 
-        <section className='section'>
+        <section className='section section--main-content'>
           <div className='container'>
-            <div className='columns'>
-              <div className='column main-content--column is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+            <div className='row'>
+              {/* is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd */}
+              <div className='col-xs-12'>
                 <Query query={web3Queries.networkIdQuery}>
                   {({ data }) => {
                     const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1

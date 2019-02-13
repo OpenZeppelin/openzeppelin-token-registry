@@ -10,7 +10,10 @@ export const ResearcherNameAndAddress = class _ResearcherNameAndAddress extends 
           <EnsName address={this.props.address} shorten />
         </h1>
 
-        <EtherscanAddressLink address={this.props.address}>
+        <EtherscanAddressLink
+          address={this.props.address}
+          className='has-hover-border'
+        >
           {this.props.address}
         </EtherscanAddressLink>
       </>

@@ -33,9 +33,9 @@ export const Nav = class _Nav extends Component {
 
         <nav className={`navbar ${navColor}`}>
           <div className='container'>
-            <div className='navbar-brand'>
-              <div className='navbar-item'>
-                <Link to={routes.HOME} className='navbar-item no-margin-right'>
+            <div className='row'>
+              <div className='navbar-brand col-xs-8 col-md-8'>
+                <Link to={routes.HOME} className='navbar-item'>
                   <ZeppelinOSRegistryLogo />
                 </Link>
 
@@ -44,54 +44,52 @@ export const Nav = class _Nav extends Component {
                 </a>
               </div>
 
-              <button
-                className={classnames(
-                  'burger',
-                  'burger-slip',
-                  { 'open': this.state.mobileNavActive }
-                )}
-                data-target='navbar-menu'
-                onClick={this.handleToggleMobileNav}
-              >
-                <div className='burger-lines' />
-              </button>
-            </div>
+              <div className='col-xs-4 is-hidden-tablet has-text-right'>
+                <button
+                  className={classnames(
+                    'burger',
+                    'burger-slip',
+                    { 'open': this.state.mobileNavActive }
+                  )}
+                  data-target='navbar-menu'
+                  onClick={this.handleToggleMobileNav}
+                >
+                  <div className='burger-lines' />
+                </button>
+              </div>
 
-            <div id='navbar-menu' className={classnames(
-              'navbar-menu',
-              { 'is-active': this.state.mobileNavActive }
-            )}>
-              <div className='navbar-end'>
-                <div className='navbar-item'>
+              <div id='navbar-menu' className={classnames(
+                'navbar-menu',
+                'col-xs-4',
+                'col-md-4',
+                { 'is-active': this.state.mobileNavActive }
+              )}>
+                <div className='navbar-end'>
                   <a
                     target='_blank'
                     rel='noopener noreferrer'
                     href='https://docs.zeppelinos.org/'
                     className='navbar-item'
                   >
-                    Docs
+                      Docs
                   </a>
-                </div>
 
-                <div className='navbar-item'>
                   <a
                     target='_blank'
                     rel='noopener noreferrer'
                     href='https://github.com/zeppelinos'
                     className='navbar-item'
                   >
-                    GitHub
+                      GitHub
                   </a>
-                </div>
 
-                <div className='navbar-item'>
                   <a
                     target='_blank'
                     rel='noopener noreferrer'
                     href='https://zeppelinos.org/'
                     className='navbar-item'
                   >
-                    Site
+                      Site
                   </a>
                 </div>
               </div>

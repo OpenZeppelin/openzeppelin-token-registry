@@ -45,21 +45,21 @@ export class ResearcherPage extends PureComponent {
 
         <ScrollToTop />
 
-        <section className='section'>
+        <section className='section section--main-content'>
           <div className='container'>
-            <div className='columns'>
-              <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+            <div className='row'>
+              <div className='col-xs-12'>
                 <p className='content'>
                   <Link
                     to={routes.HOME_RESEARCHERS_LIST}
-                    className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
+                    className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                   >
                     {'<'} Back to Researchers
                   </Link>
                 </p>
 
-                <div className='columns reverse-column-order'>
-                  <div className='column is-7-tablet is-8-desktop'>
+                <div className='row reverse-column-order'>
+                  <div className='col-xs-12 col-md-7'>
                     <ResearcherNameAndAddress address={address} />
 
                     <br />
@@ -119,7 +119,8 @@ export class ResearcherPage extends PureComponent {
                     </Query>
                   </div>
 
-                  <div className='column is-5-tablet is-4-desktop has-text-right--desktop'>
+                  <div className='col-xs-12 col-start-md-8 col-md-5 has-text-right--desktop'>
+                    <br />
                     <img src={icon.toDataURL()} alt='blockies icon of ethereum address' />
                   </div>
                 </div>

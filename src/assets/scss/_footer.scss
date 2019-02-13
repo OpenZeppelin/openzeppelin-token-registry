@@ -10,11 +10,13 @@
 
 .footer--primary {
   background-color: darken($navbar-grey, 0%);
+  padding: 2.5rem 2rem;
 }
 
 .footer--secondary {
   background-color: darken($navbar-grey, 4%);
   background-image: linear-gradient(to bottom, darken($navbar-grey, 6%) 0%, #161616 70%, #121212 100%);
+  padding: 3.5rem 2rem 4rem;
 }
 
 .footer-brand .footer-item svg {
@@ -31,14 +33,6 @@
 
 .footer-menu .footer-item:hover {
   border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.footer--primary {
-  padding: 2.5rem 0;
-}
-
-.footer--secondary {
-  padding: 3.5rem 0 4rem;
 }
 
 .footer--secondary .footer-item--copyright {

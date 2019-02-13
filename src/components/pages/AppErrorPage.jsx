@@ -15,14 +15,14 @@ export const AppErrorPage = class _AppErrorPage extends PureComponent {
 
         <ScrollToTop />
 
-        <section className='section'>
+        <section className='section section--main-content'>
           <div className='container'>
-            <div className='columns'>
-              <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+            <div className='row'>
+              <div className='col-xs-12'>
                 <p className='content'>
                   <Link
                     to={routes.HOME}
-                    className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
+                    className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                   >
                     {'<'} Back to Home
                   </Link>

@@ -66,7 +66,7 @@ export class PackageItemListRow extends PureComponent {
                         <span className='list--cell list__has-padding is-borderless is-monospaced break-words'>
                           <Link
                             to={formatRoute(routes.PACKAGE_ITEM, { id, version })}
-                            className='no-margin-right has-text-link is-uppercase'
+                            className='no-margin-right has-text-link is-uppercase has-hover-border'
                           >
                             {name} v{version}
                           </Link>

@@ -279,9 +279,11 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
           return vouchAmount
         }
 
-        zepAllowance () {
-          const { token } = this.props
+        zepAllowance = () => {
           let allowance
+
+          const { token } = this.props
+
           if (token && token.ZepToken) {
             allowance = token.ZepToken.allowance
           }
@@ -291,7 +293,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
           return allowance
         }
 
-        notEnoughAllowance () {
+        notEnoughAllowance = () => {
           return this.zepAllowance().lt(this.vouchAmount())
         }
 

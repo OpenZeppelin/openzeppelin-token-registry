@@ -173,7 +173,10 @@ export const ChallengeRow = class extends Component {
                         {/* TODO: Could be nice to have a unique challengeId Challenge #{challenge.entryID.toString()} */}
                       </h5>
                       <h6 className='is-size-6 has-text-weight-semibold'>
-                        Challenger <EtherscanAddressLink address={challenge.challenger.toString()}>
+                        Challenger <EtherscanAddressLink
+                          address={challenge.challenger.toString()}
+                          className='has-hover-border'
+                        >
                           <EnsName address={challenge.challenger.toString()} shorten />
                         </EtherscanAddressLink>
                       </h6>
