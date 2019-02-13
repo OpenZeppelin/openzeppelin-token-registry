@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import gh from 'parse-github-url'
 import gql from 'graphql-tag'
 import AntdIcon from '@ant-design/icons-react'
 import { MinusCircleOutline, PlusCircleOutline } from '@ant-design/icons'
@@ -20,7 +19,11 @@ import * as constants from '~/constants'
 export const challengeRowQuery = gql`
   query challengeRowQuery($challengeId: String!, $uri: String!) {
     metadata(uri: $uri) @client {
-      ...md
+      id
+      title
+      body
+      htmlUrl: html_url
+      url
     }
     Vouching @contract(type: "Challenge", id: $challengeId) {
       ...challengeFragment
@@ -67,7 +70,6 @@ export const ChallengeRow = class extends Component {
     const challengeId = challenged.parsedLog.values.challengeID
     const amount = ethers.utils.bigNumberify(challenged.parsedLog.values.amount.toString())
     const { metadataURI } = challenged.parsedLog.values
-    const { repo } = gh(metadataURI)
 
     const priority = this.displayPriority(amount)
 
@@ -84,7 +86,7 @@ export const ChallengeRow = class extends Component {
           const priorityColor = constants.CHALLENGE_PRIORITY_COLORS[priority]
 
           const { metadata } = data || {}
-
+          const { title, htmlUrl } = metadata
           const hasAnswer = parseInt(challenge.answeredAt, 10) > 0
           const hasAppeal = parseInt(appeal.createdAt, 10) > 0
 
@@ -106,7 +108,7 @@ export const ChallengeRow = class extends Component {
                     className='list__wrapping-anchor list__has-padding no-scale'
                   >
                     {/* TODO: this is completely incorrect, it should be the challenge description */}
-                    <ShortText text={metadata.description} />
+                    <ShortText text={title} />
                   </button>
                 </span>
                 <span className={`list--cell status has-text-${statusLabel.colour}`}>
@@ -141,7 +143,7 @@ export const ChallengeRow = class extends Component {
                 </span>
                 <span className='list--cell github'>
                   <GitHubLink
-                    url={`https://github.com/${repo}`}
+                    url={htmlUrl}
                     cssClassNames='list__wrapping-anchor list__has-padding no-scale'
                   />
                 </span>
@@ -195,7 +197,7 @@ export const ChallengeRow = class extends Component {
                         <span className='accordion--column__blank-state is-size-6'>
                           Currently no responses. Respond with:
                           <br />
-                          <CodeSnippet metadata={metadata} action='answer' id={challenge.entryID.toString()} />
+                          <CodeSnippet snippet='zos challenge fail' />
                         </span>
                       )}
                     </span>
@@ -217,14 +219,14 @@ export const ChallengeRow = class extends Component {
                         <span className='accordion--column__blank-state is-size-6'>
                           Currently no appeals. Appeal with:
                           <br />
-                          <CodeSnippet metadata={metadata} action='appeal' id={challenge.entryID.toString()} />
+                          <CodeSnippet snippet='zos challenge appeal' />
                         </span>
                       )}
                     </span>
 
                     <span className='accordion--footer'>
                       <GitHubLink
-                        url={`https://github.com/${repo}/issues`}
+                        url={htmlUrl}
                         viewLink
                         cssClassNames='is-text'
                       />

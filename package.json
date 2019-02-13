@@ -8,7 +8,7 @@
   "scripts": {
     "test": "eslint src && standard --verbose | snazzy && node scripts/test.js",
     "build": "$(npm bin)/apply-registry -o artifacts && node --max-old-space-size=4096 scripts/build.js",
-    "start": "node --max-old-space-size=4096 scripts/start.js",
+    "start": "$(npm bin)/apply-registry -o artifacts && node --max-old-space-size=4096 scripts/start.js",
     "apply-registry": "$(npm bin)/apply-registry -o artifacts",
     "reset-local": "rm -rf networks/1234.json && rm -rf build/contracts"
   },

@@ -5,7 +5,7 @@ import yn from 'yn'
 import classnames from 'classnames'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
-import { CodeSnippet } from '~/components/CodeSnippet'
+import { ZosCodeSnippet } from '~/components/ZosCodeSnippet'
 import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
@@ -47,12 +47,14 @@ export class PackageDetails extends Component {
     const challenges = challengeProjection(vouching.allEvents)
     const noChallenges = challenges.length === 0
 
+    const { name } = metadata || {}
+
     return (
       <>
         <div className='row reverse-column-order'>
           <div className='col-xs-12 col-md-7'>
             <h1 className='title is-size-1 has-text-weight-normal'>
-              {metadata.name}
+              {name}
 
               <span className='package-item--version has-text-grey has-text-weight-light'>
                 v{metadata.version}
@@ -85,7 +87,7 @@ export class PackageDetails extends Component {
               Link this package:
             </h5>
             <div className='code-wrapper'>
-              <CodeSnippet metadata={metadata} />
+              <ZosCodeSnippet packageName={name} />
               <GitHubLink
                 url={`https://github.com/${repo}`}
                 viewLink
@@ -121,14 +123,14 @@ export class PackageDetails extends Component {
                         </p>
                         <button
                           className='button is-purple is-pill button-left'
-                          onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
+                          onClick={(e) => { this.handleVoteClick('yes', name, id) }}
                         >
                             Yes
                         </button>
 
                         <button
                           className='button is-pill button-right'
-                          onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
+                          onClick={(e) => { this.handleVoteClick('no', name, id) }}
                         >
                             No
                         </button>
@@ -238,7 +240,7 @@ export class PackageDetails extends Component {
                   Create a challenge by running: &nbsp;
                   <br className='is-hidden-desktop' />
                   <br className='is-hidden-desktop' />
-                  <CodeSnippet metadata={metadata} action='challenge' />
+                  <ZosCodeSnippet packageName={name} action='challenge' />
                   <br className='is-hidden-desktop' />
                   <br className='is-hidden-desktop' />
                 </>
@@ -279,7 +281,7 @@ export class PackageDetails extends Component {
                         There are currently no challenges. Create a challenge by running: &nbsp;
                     <br />
                     <br />
-                    <CodeSnippet metadata={metadata} action='challenge' />
+                    <ZosCodeSnippet packageName={name} action='challenge' />
                   </span>
                 </li>
                 }

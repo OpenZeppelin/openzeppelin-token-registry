@@ -10,7 +10,7 @@ import { get } from 'lodash'
 import { formatRoute } from 'react-router-named-routes'
 import { Redirect, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
-// import { CodeSnippet } from '~/components/CodeSnippet'
+// import { ZosCodeSnippet } from '~/components/ZosCodeSnippet'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
 import { ShortText } from '~/components/ShortText'
@@ -158,7 +158,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                   </span>
 
                   {/*
-                <CodeSnippet metadata={metadata || {}} />
+                <ZosCodeSnippet packageName={get(metadata, 'name')} />
 
                 <button
                   className={classnames(
