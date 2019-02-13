@@ -97,82 +97,86 @@ export class PackageDetails extends Component {
 
         <br />
 
-        <div className='row'>
-          <div className='col-xs-12'>
-            <div className={classnames(
-              'message',
-              'message-endorse',
-              {
-                'has-voted': this.state.voted
-              }
-            )}>
+        {!yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+          <>
+            <div className='row'>
+              <div className='col-xs-12'>
+                <div className={classnames(
+                  'message',
+                  'message-endorse',
+                  {
+                    'has-voted': this.state.voted
+                  }
+                )}>
 
-              <CSSTransition
-                timeout={1000}
-                classNames='slide'
-                in={!this.state.voted}
-              >
-                {state => (
-                  <div className='message-body message--cta has-text-centered slide-exit message-endorse--question'>
-                    <p className='message-body--text'>
-                      Would you endorse this package?
-                    </p>
-                    <button
-                      className='button is-purple is-pill button-left'
-                      onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
-                    >
-                        Yes
-                    </button>
+                  <CSSTransition
+                    timeout={1000}
+                    classNames='slide'
+                    in={!this.state.voted}
+                  >
+                    {state => (
+                      <div className='message-body message--cta has-text-centered slide-exit message-endorse--question'>
+                        <p className='message-body--text'>
+                          Would you endorse this package?
+                        </p>
+                        <button
+                          className='button is-purple is-pill button-left'
+                          onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
+                        >
+                            Yes
+                        </button>
 
-                    <button
-                      className='button is-pill button-right'
-                      onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
-                    >
-                        No
-                    </button>
-                  </div>
-                )}
-              </CSSTransition>
+                        <button
+                          className='button is-pill button-right'
+                          onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
+                        >
+                            No
+                        </button>
+                      </div>
+                    )}
+                  </CSSTransition>
 
-              <CSSTransition
-                timeout={1000}
-                classNames='slide'
-                in={this.state.voted && this.state.voted.answer === 'yes'}
-              >
-                {state => (
-                  <div className='message-body message--cta has-text-centered slide-enter message-endorse--positive-answer'>
-                    <p className='message-body--text has-text-grey'>
-                      Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages.
-                      &nbsp;<a
-                        href='https://docs.zeppelinos.org/docs/vouching.html'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='has-text-link has-hover-border'
-                      >Click here to learn more about our vouching mechanics and private beta.</a>
-                    </p>
-                  </div>
-                )}
-              </CSSTransition>
+                  <CSSTransition
+                    timeout={1000}
+                    classNames='slide'
+                    in={this.state.voted && this.state.voted.answer === 'yes'}
+                  >
+                    {state => (
+                      <div className='message-body message--cta has-text-centered slide-enter message-endorse--positive-answer'>
+                        <p className='message-body--text has-text-grey'>
+                          Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages.
+                          &nbsp;<a
+                            href='https://docs.zeppelinos.org/docs/vouching.html'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className='has-text-link has-hover-border'
+                          >Click here to learn more about our vouching mechanics and private beta.</a>
+                        </p>
+                      </div>
+                    )}
+                  </CSSTransition>
 
-              <CSSTransition
-                timeout={1000}
-                classNames='slide'
-                in={this.state.voted && this.state.voted.answer === 'no'}
-              >
-                {state => (
-                  <div className='message-body message--cta has-text-centered slide-enter message-endorse--negative-answer'>
-                    <p className='message-body--text has-text-grey'>
-                      Thank you for your feedback. Your feedback will be used to inform the rankings of EVM packages.
-                    </p>
-                  </div>
-                )}
-              </CSSTransition>
+                  <CSSTransition
+                    timeout={1000}
+                    classNames='slide'
+                    in={this.state.voted && this.state.voted.answer === 'no'}
+                  >
+                    {state => (
+                      <div className='message-body message--cta has-text-centered slide-enter message-endorse--negative-answer'>
+                        <p className='message-body--text has-text-grey'>
+                          Thank you for your feedback. Your feedback will be used to inform the rankings of EVM packages.
+                        </p>
+                      </div>
+                    )}
+                  </CSSTransition>
 
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <br />
+            <br />
+          </>
+        )}
 
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
 
