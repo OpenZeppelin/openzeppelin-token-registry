@@ -1,3 +1,8 @@
+.hero .hero-body {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .hero.is-medium .hero-body {
   background-color: #0095e4;
   background-image: linear-gradient(217deg, darken(#29d4ff, 5%) 0%, darken(#29d4ff, 10%) 40%, #0095e4 100%);

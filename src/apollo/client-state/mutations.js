@@ -1,6 +1,7 @@
 import { abiMapping } from '~/apollo/abiMapping'
 import { getMetamaskPermissions } from '~/web3/getMetamaskPermissions'
 import { ethers } from 'ethers'
+import { getNetworkId } from '~/web3/getNetworkId'
 import { poll } from 'ethers/utils/web'
 import { transactionQueries } from '~/queries/transactionQueries'
 import { getWriteProvider } from '~/web3/getWriteProvider'
@@ -14,10 +15,10 @@ export const mutations = {
         try {
           const { contractName, method, args } = variables.txData
           await getMetamaskPermissions()
-          const provider = getWriteProvider()
-          const network = await provider.getNetwork()
+          const provider = await getWriteProvider()
+          const networkId = await getNetworkId()
           const signer = provider.getSigner()
-          const address = abiMapping.getAddress(contractName, network.chainId)
+          const address = abiMapping.getAddress(contractName, networkId)
           const abi = abiMapping.getAbi(contractName)
           const contract = new ethers.Contract(address, abi, signer)
 
@@ -89,6 +90,7 @@ export const mutations = {
             to: contract.address,
             gasLimit: newGasLimit
           }
+
           signer.sendUncheckedTransaction(unsignedTransaction)
             .then(async function (hash) {
               let transaction = readTx()

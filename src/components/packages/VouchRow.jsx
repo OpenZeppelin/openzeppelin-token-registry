@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
+import { ResearcherLink } from '~/components/ResearcherLink'
 import { web3Queries } from '~/queries/web3Queries'
 import { graphql } from 'react-apollo'
 
@@ -22,21 +22,22 @@ export const VouchRow = graphql(web3Queries.accountQuery)(class _VouchRow extend
     return (
       <li className={classnames(
         'list--row',
-        'list--row_vouch',
+        'list--row__two-column',
         'truncate',
         {
           'is-active': isUser
         }
       )}>
         <span className='list--cell list__has-padding is-borderless is-monospaced break-words'>
-          <EtherscanAddressLink address={this.props.address} className={classnames(
-            'has-text-grey',
-            {
-              'has-text-primary': isUser
-            }
-          )}>
-            {this.props.address}
-          </EtherscanAddressLink>
+          <ResearcherLink
+            address={this.props.address}
+            className={classnames(
+              'has-hover-border',
+              'has-text-grey',
+              {
+                'has-text-primary': isUser
+              }
+            )} />
         </span>
 
         <span className='list--cell list__has-padding is-borderless'>

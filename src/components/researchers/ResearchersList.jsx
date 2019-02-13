@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Query } from 'react-apollo'
+import { ErrorMessage } from '~/components/ErrorMessage'
+import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 import { ResearchersListItem } from '~/components/researchers/ResearchersListItem'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { researchersVouchedTotals } from '~/projections/researchersVouchedTotals'
@@ -10,28 +12,45 @@ export class ResearchersList extends PureComponent {
     return (
       <Query query={vouchingQueries.vouchesQuery}>
         {({ loading, error, data }) => {
-          if (loading) return null
+          let content
+
           if (error) {
-            console.error(error)
-            return `${error}`
+            return <ErrorMessage errorMessage={error} />
           }
 
+          const packageListLoader =
+            <>
+              <PackageListItemLoader key='package-item-fragment-0' />
+              <PackageListItemLoader key='package-item-fragment-1' />
+              <PackageListItemLoader key='package-item-fragment-2' />
+            </>
+
           const events = (data.Vouching ? data.Vouching.allEvents : []) || []
-          const researchers = researchersVouchedTotals(events)
-          const researchersArray = Object.values(researchers)
-          const sortedResearchersArray = sortBigNumbers(researchersArray, 'amount')
+
+          if (loading) {
+            content = packageListLoader
+          } else {
+            const researchers = researchersVouchedTotals(events)
+            const researchersArray = Object.values(researchers)
+            const sortedResearchersArray = sortBigNumbers(researchersArray, 'amount')
+
+            content = sortedResearchersArray.reverse().map(
+              (researcher, index) =>
+                <ResearchersListItem
+                  index={index}
+                  researcher={researcher}
+                  key={`researcher-${index}`}
+                />
+            )
+          }
 
           return (
             <>
-              {
-                sortedResearchersArray.reverse().map((researcher, index) =>
-                  <ResearchersListItem
-                    index={index}
-                    researcher={researcher}
-                    key={`researcher-${index}`}
-                  />
-                )
-              }
+              <h5 className='is-size-5 has-text-grey-dark is-uppercase is-monospaced has-text-centered'>
+                Security Researchers
+              </h5>
+              <br />
+              {content}
             </>
           )
         }}
@@ -39,5 +58,3 @@ export class ResearchersList extends PureComponent {
     )
   }
 }
-
-// `${p.name}-${p.version}`

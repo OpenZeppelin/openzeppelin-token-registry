@@ -6,10 +6,8 @@ import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ErrorMessage } from '~/components/ErrorMessage'
-import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageList } from '~/components/packages/PackageList'
 import { PhaseOneHero } from '~/components/packages/PhaseOneHero'
-// import { PreviousHero } from '~/components/packages/PreviousHero'
 import { ResearchersList } from '~/components/researchers/ResearchersList'
 import { web3Queries } from '~/queries/web3Queries'
 import * as routes from '~/../config/routes'
@@ -22,9 +20,7 @@ export class PackageListPage extends PureComponent {
     const showResearchersList = this.props.location.pathname === '/researchers-list'
 
     return (
-      <div className='is-positioned-absolutely is-full-width'>
-        <ScrollToTop />
-
+      <div className='is-positioned-absolutely'>
         {/* <PreviousHero heroColor={heroColor} /> */}
         <PhaseOneHero heroColor={heroColor} />
 
@@ -69,10 +65,11 @@ export class PackageListPage extends PureComponent {
           )
         }
 
-        <section className='section'>
+        <section className='section section--main-content'>
           <div className='container'>
-            <div className='columns'>
-              <div className='column main-content--column is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+            <div className='row'>
+              {/* is-10-tablet is-10-desktop is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd */}
+              <div className='col-xs-12'>
                 <Query query={web3Queries.networkIdQuery}>
                   {({ data }) => {
                     const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1

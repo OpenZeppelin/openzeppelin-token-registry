@@ -1,46 +1,49 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
+import { HeroBetaCallout } from '~/components/HeroBetaCallout'
 import { FooterContainer } from '~/components/layout/Footer'
-import { PackageDetailsLoader } from '~/components/packages/PackageDetailsLoader'
+import { PageDetailsLoader } from '~/components/PageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/packages/PackageDetails'
 import { vouchingQueries } from '~/queries/vouchingQueries'
-import * as routes from '~/../config/routes'
 
 export class PackageItemPage extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired
   }
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+
   render () {
     return (
-      <div className='is-positioned-absolutely is-full-width'>
+      <div className='is-positioned-absolutely'>
         <Helmet
           title='EVM Package'
         />
 
         <ScrollToTop />
 
-        <section className='section'>
+        <section className='section section--main-content'>
           <div className='container'>
-            <div className='columns'>
-              <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+            <div className='row'>
+              <div className='col-xs-12'>
                 <p className='content'>
-                  <Link
-                    to={routes.HOME}
-                    className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
+                  <button
+                    onClick={this.context.router.history.goBack}
+                    className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                   >
-                    {'<'} Back to Packages
-                  </Link>
+                    {'<'} Back
+                  </button>
                 </p>
 
                 <Query query={vouchingQueries.eventsQuery}>
                   {({ loading, error, data }) => {
-                    if (loading) return <PackageDetailsLoader />
+                    if (loading) return <PageDetailsLoader />
                     if (error) return <ErrorMessage errorMessage={error} />
 
                     const events = data.Vouching ? data.Vouching.Registered : []
@@ -61,7 +64,7 @@ export class PackageItemPage extends PureComponent {
                       >
                         {
                           ({ loading, error, data }) => {
-                            if (loading) return <PackageDetailsLoader />
+                            if (loading) return <PageDetailsLoader />
 
                             if (error) return <ErrorMessage errorMessage={error} />
 
@@ -90,22 +93,7 @@ export class PackageItemPage extends PureComponent {
           </div>
         </section>
 
-        <div className='hero is-light is-medium has-text-centered'>
-          <div className='hero-body'>
-            <div className='container-fluid'>
-              <p className='is-size-5 is-monospaced is-uppercase has-text-grey-dark'>
-                Help us build the Zeppelin Registry
-              </p>
-              <a
-                className='button is-pill is-size-5'
-                href='http://zpl.in/betaregistration'
-                target='_blank'
-                rel='noopener noreferrer'>
-                Join the Beta
-              </a>
-            </div>
-          </div>
-        </div>
+        <HeroBetaCallout />
 
         <FooterContainer />
       </div>

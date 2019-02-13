@@ -1,31 +1,68 @@
+.list-item__loader,
 .list-item {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 80px 140px minmax(100px, 400px) 1fr;
-  grid-template-areas: 'id image title more';
   margin-bottom: 1.5rem;
   min-height: 140px;
-  transition-property: all;
-  transform: scale3d(1, 1, 1);
-  transition-duration: 100ms;
-  transition-timing-function: ease-out;
+}
 
-  @media screen and (max-width: $desktop - 1px) {
-    grid-template-columns: 80px 140px 2fr 1fr;
+.list-item:not(.has-next-release-features) {
+  grid-template-columns: 140px minmax(100px, 400px) 1fr;
+  grid-template-areas: 'image title more';
+
+  @media screen and (max-width: $desktop) {
+    grid-template-columns: 140px 2fr 1fr;
   }
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: 100px 2fr;
+    grid-template-rows: minmax(130px, max-content) 40px;
+    grid-template-areas: 'image title title' 'blank blank more';
+  }
+}
+
+.list-item.has-next-release-features {
+  grid-template-columns: 80px 140px 2fr 1fr;
+  grid-template-areas: 'id image title more';
+
+  @media screen and (max-width: $tablet) {
     grid-template-columns: 100px 2fr;
     grid-template-rows: minmax(130px, max-content) 97px;
     grid-template-areas: 'image title title' 'blank blank more';
   }
 }
 
-.list-item:hover {
-  box-shadow: 0px 5px 20px 2px rgba(121, 132, 153, 0.25);
+.list-item.list-item__researcher {
+  grid-template-columns: 80px 1fr 150px 130px;
+  grid-template-areas: 'id title total more';
+
+  @media screen and (max-width: $tablet - 1px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 97px;
+    grid-template-areas: 'title title'
+                         'more  more';
+  }
+}
+
+#root > div:not(.Safari) .list-item-container {
+  transition-property: transform;
+  transform: scale3d(1, 1, 1);
+  transition-duration: 100ms;
+  transition-timing-function: ease-out;
+}
+
+#root > div:not(.Safari) .list-item-container:hover {
   transform: scale3d(1.01, 1.01, 1.01);
+}
+
+.list-item-container:hover .list-item {
+  box-shadow: 0px 5px 20px 2px rgba(121, 132, 153, 0.25);
+}
+
+.list-item-container .list-item {
+  transform: scale3d(0.999, 0.999, 0.999);
 }
 
 .list-item a {
@@ -37,13 +74,13 @@
   height: 120px;
   padding: 1rem;
 
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $desktop) {
     height: 180px;
   }
 }
 
 .package-list-item--loader {
-  @media screen and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $desktop) {
     display: none;
   }
 }
@@ -51,7 +88,7 @@
 .package-list-item--loader_tablet {
   display: none;
 
-  @media screen and (min-width: 520px) and (max-width: $desktop - 1px) {
+  @media screen and (min-width: $tabletMin) and (max-width: $desktop) {
     display: block;
   }
 }
@@ -59,7 +96,7 @@
 .package-list-item--loader_mobile {
   display: none;
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: $mobile) {
     display: block;
   }
 }
@@ -77,7 +114,7 @@
   height: 100%;
   width: 100%;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     justify-content: space-between;
   }
 }
@@ -85,7 +122,7 @@
 .list-item__cell .is-inline-grid-top {
   margin-top: 1.25rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     margin-top: 0.25rem;
   }
 }
@@ -101,7 +138,7 @@
 .list-item__cell--id a {
   padding-left: 2.25rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     display: none;
   }
 }
@@ -113,9 +150,13 @@
 .list-item__cell--title a {
   padding: 0 1rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     padding: 1rem;
   }
+}
+
+.list-item__cell--researcher-address a {
+  word-break: break-all;
 }
 
 .list-item__cell--title .description {
@@ -131,16 +172,33 @@
   grid-area: image;
   padding: 1rem 1rem 1rem;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     padding: 1.5rem 0 0 1.5rem;
   }
+}
+
+.list-item__cell--total-vouched {
+  align-self: baseline;
+  grid-area: total;
+}
+
+.list-item__cell--total-vouched a {
+  padding: 1.5rem 1rem 1.25rem 0;
+}
+
+.list-item__cell--total-vouched__title {
+  align-self: end;
+}
+
+.list-item__cell--total-vouched__value {
+  align-self: start;
 }
 
 .list-item__cell--blank {
   display: none;
   grid-area: blank;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     display: block;
   }
 }
@@ -148,7 +206,7 @@
 .list-item__cell--view-more {
   grid-area: more;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     margin-left: 0;
   }
 }
@@ -157,7 +215,7 @@
   padding-right: 1.5rem;
   text-transform: uppercase;
 
-  @media screen and (max-width: $tablet - 1px) {
+  @media screen and (max-width: $tablet) {
     align-items: baseline;
   }
 }
@@ -241,4 +299,9 @@
 .list-item:hover .list-item--view-more-link {
   border-bottom-color: $link;
   transition: border 300ms ease-in-out;
+}
+
+.list-item .list-item--view-more-link__researcher {
+  grid-area: unset;
+  width: 109px;
 }

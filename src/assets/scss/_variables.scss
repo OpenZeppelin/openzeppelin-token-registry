@@ -1,17 +1,35 @@
+$gridGap: 64px;
+$mobileContainerWidth: 90%;
+
+$mobile: 500px + (2 * $gridGap);
+$tablet: 668px + (2 * $gridGap);
+$desktop: 820px + (2 * $gridGap);
+$widescreen: 910px + (2 * $gridGap);
+$fullhd: 910px + (2 * $gridGap);
+
+// These are good to use with min-width
+$mobileMin: 0px;     
+$tabletMin: $mobile + 1px;
+$desktopMin: $tablet + 1px;
+$widescreenMin: $desktop + 1px;
+$fullhdMin: $widescreen + 1px;
+
 // Static variables
 $body-line-height: 1.5;
 $body-size: 16px;
 
 $navbar-height: 4rem;
+$navbar-breakpoint: $tablet;
+$navbar-breakpointMin: $desktopMin;
 
 $size-1: 2.2rem;
 $size-2: 1.8rem;
 $size-3: 1.6rem;
 $size-6: 0.9rem;
 
-$section-padding: 2rem 0.5rem;
-$section-padding-medium: 9rem 1.5rem;
-$section-padding-large: 18rem 1.5rem;
+$section-padding: 2rem 0;
+$section-padding-medium: 9rem 0;
+$section-padding-large: 18rem 0;
 
 $weight-semibold: 500;
 

@@ -15,7 +15,7 @@ export const MetaTags = class _MetaTags extends PureComponent {
     const location = this.props.location || {}
 
     const logoPath = '/zeppelin-os-logo.svg'
-    const siteTitle = 'ZeppelinOS Vouch'
+    const siteTitle = 'ZeppelinOS EVM Package Registry'
     const siteURL = 'https://zeppelin-vouching-app.netlify.com'
     const siteDescription = 'This is the desc'
     const twitterHandle = 'zeppelinorg'

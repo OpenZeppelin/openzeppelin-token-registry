@@ -2,16 +2,12 @@ import React, { PureComponent } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-// import { get } from 'lodash'
-// Can we map a reasearcher to a github (or gitlab, etc) profile?
-// import AntdIcon from '@ant-design/icons-react'
-// import { GithubFill } from '@ant-design/icons'
-// import { formatRoute } from 'react-router-named-routes'
-// import { Redirect, Link } from 'react-router-dom'
-import { EtherscanAddressLink } from '~/components/EtherscanAddressLink'
+import { formatRoute } from 'react-router-named-routes'
+import { Redirect, Link } from 'react-router-dom'
+import { EnsName } from '~/components/EnsName'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
-// import * as routes from '~/../config/routes'
+import * as routes from '~/../config/routes'
 
 export const ResearchersListItem = ReactTimeout(class _ResearchersListItem extends PureComponent {
   state = {}
@@ -25,76 +21,87 @@ export const ResearchersListItem = ReactTimeout(class _ResearchersListItem exten
       this.setState({ startAnimating: true })
     }, 20)
   }
-  //
-  // handleGitHubLinkClick = (url) => {
-  //   if (window) {
-  //     window.location.href = url
-  //   }
-  // }
 
   render () {
-    // const { metadata, Vouching } = data
-    // const { version } = metadata || {}
-    // const { Challenged } = Vouching || {}
+    const address = this.props.researcher.address
+    const link = formatRoute(routes.RESEARCHER, { address })
 
-    // const id = parseInt(this.props.researcher.id, 10)
-    // const link = formatRoute(routes.PACKAGE_ITEM, { id, version })
+    if (this.state.toResearcher) {
+      return <Redirect to={link} />
+    }
 
-    // const { repo } = gh(this.props.researcher.metadataURI)
-
-    // if (this.state.toResearcher) {
-    //   return <Redirect to={link} />
-    // }
-
-    // var challengeCount = 0
-    // if (Challenged) {
-    //   challengeCount = Challenged.length
-    // }
-    //
-    // var challenges
-    // if (challengeCount === 0) {
-    //   challenges = <span>No challenges</span>
-    // } else if (challengeCount === 1) {
-    //   challenges = <span>1 challenge</span>
-    // } else {
-    //   challenges = <span>{challengeCount} challenges</span>
-    // }
+    const animatingCssClassNames = classnames(
+      'fade-in',
+      'slide-up',
+      'medium',
+      {
+        'slide-up-enter': this.state.startAnimating,
+        'fade-in-enter': this.state.startAnimating
+      }
+    )
 
     return (
-      <div
-        className={
-          classnames(
-            'list-item',
-            'panel',
-            'slide-up',
-            'fade-in',
-            'slow',
-            {
-              'slide-up-enter': this.state.startAnimating,
-              'fade-in-enter': this.state.startAnimating
-            }
-          )
-        }
-        style={{ 'transitionDelay': `${this.props.index * 100}ms` }}
-      >
-        <div className='panel-block'>
-          <h6 className='is-size-6 has-text-weight-bold is-monospaced has-text-grey list-item--subtitle__with-margin'>
-            RESEARCHER ADDRESS
-          </h6>
-          <h5 className='title is-size-5 is-monospaced'>
-            <EtherscanAddressLink address={this.props.researcher.address}>{this.props.researcher.address}</EtherscanAddressLink>
-          </h5>
+      <div className='list-item-container'>
+        <div className='list-item list-item__researcher'>
+          <span
+            className={`${animatingCssClassNames}
+            list-item__cell
+            list-item__cell--id
+            has-text-grey
+            has-text-weight-light
+          `}>
+            <Link
+              to={link}
+              className='no-select title is-size-4 has-text-weight-normal'
+            >
+              #{this.props.index + 1} &nbsp;
+            </Link>
+          </span>
 
-          <br />
+          <span className={`
+            ${animatingCssClassNames}
+            list-item__cell
+            list-item__cell--title
+            list-item__cell--researcher-address
+          `}>
+            <Link
+              to={link}
+              className='no-select'
+            >
+              <h5 className='title is-size-4 is-monospaced has-text-link'>
+                <EnsName address={this.props.researcher.address} shorten />
+              </h5>
+            </Link>
+          </span>
 
-          <h6 className='is-size-6 has-text-weight-bold is-monospaced has-text-grey'>
-            TOTAL VOUCHED
-          </h6>
-          <h3 className='is-size-3 is-monospaced'>
-            <span className='item--version has-text-black has-text-weight-light'>
-              <ZepTokenLogo width='22' height='22' className='researcher--zep-token-icon' />{displayWeiToEther(this.props.researcher.amount)}
-            </span>
-          </h3>
+          <span className={`
+            ${animatingCssClassNames}
+            list-item__cell
+            list-item__cell--view-more
+            has-text-right
+          `}>
+            <Link
+              to={link}
+              className='no-select list-item--view-grid'
+            >
+              <span className='list-item--view-grid'>
+
+                <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
+                VOUCHED
+                </h6>
+
+                <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+
+                <h3 className='is-inline-block is-size-3 has-text-weight-light list-item--num-tokens'>
+                  {displayWeiToEther(this.props.researcher.amount)}
+                </h3>
+
+                <span className='has-text-info is-size-6 is-monospaced list-item--view-more-link'>
+                View More&gt;
+                </span>
+              </span>
+            </Link>
+          </span>
         </div>
       </div>
     )

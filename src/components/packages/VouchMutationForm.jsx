@@ -279,18 +279,21 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
           return vouchAmount
         }
 
-        zepAllowance () {
-          const { token } = this.props
+        zepAllowance = () => {
           let allowance
+
+          const { token } = this.props
+
           if (token && token.ZepToken) {
             allowance = token.ZepToken.allowance
-          } else {
+          }
+          if (!allowance) {
             allowance = ethers.utils.bigNumberify(0)
           }
           return allowance
         }
 
-        notEnoughAllowance () {
+        notEnoughAllowance = () => {
           return this.zepAllowance().lt(this.vouchAmount())
         }
 
@@ -320,7 +323,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
 
         downloadText = () => {
           if (this.needsIOSWeb3()) {
-            return 'Download Coinbase Wallet'
+            return 'Download Cipher Browser'
           } else if (this.needsAndroidWeb3()) {
             return 'Download Opera'
           } else {
@@ -330,7 +333,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
 
         downloadUrl = () => {
           if (this.needsIOSWeb3()) {
-            return 'https://itunes.apple.com/us/app/coinbase-wallet/id1278383455'
+            return 'https://itunes.apple.com/us/app/cipher-browser-ethereum/id1294572970'
           } else if (this.needsAndroidWeb3()) {
             return 'https://play.google.com/store/apps/details?id=com.opera.browser'
           } else {

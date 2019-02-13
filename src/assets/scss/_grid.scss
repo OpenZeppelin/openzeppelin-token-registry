@@ -1,0 +1,64 @@
+// Grid array (used for generating the grid)
+$grid_arr: (
+  (xs, 0px), 
+  (sm, $mobile), 
+  (md, $tablet), 
+  (lg, $desktop), 
+  (xl, $widescreen)
+);
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: $gridGap;
+  width: 100%;
+}
+
+@each $label, $breakpoint in $grid_arr {
+  @media (min-width: #{$breakpoint}) {
+    @for $i from 1 through 12 {
+      @for $y from 1 through 12 {
+        // Differs from bootstrap from the point that it specifies the index of a column to start
+        // example: col-start-6 col-4 (start at col 6 columns and occupy 4 columns
+        .col-start-#{$label}-#{$y}.col-#{$label}-#{$i} {
+          grid-column: #{$y} / span #{$i};
+        }
+      }
+
+      // as in bootstrap
+      .col-#{$label}-#{$i} {
+        grid-column-start: span #{$i};
+        width: 100%;
+      }
+    }
+
+    .container {
+      width: calc(#{$breakpoint} - #{$gridGap});
+    }
+
+    // hack to override Bulma columns & grid system
+    // remove bulma's grid / responsive / columns completely!
+    .navbar > .container {
+      width: calc(#{$breakpoint} - #{$gridGap});
+
+      @media (min-width: 0px) and (max-width: $tablet) {
+        width: $mobileContainerWidth;
+      }
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+
+  @media (max-width: $tablet) {
+    width: $mobileContainerWidth;
+  }
+}
+
+.row {
+  @media (max-width: $tablet) {
+    grid-row-gap: $gridGap / 2;
+    grid-column-gap: 0;
+  }
+}

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -6,6 +7,10 @@ import { FooterContainer } from '~/components/layout/Footer'
 import * as routes from '~/../config/routes'
 
 export const AppErrorPage = class _AppErrorPage extends PureComponent {
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+
   render () {
     return (
       <div className='is-positioned-absolutely is-full-width'>
@@ -15,17 +20,17 @@ export const AppErrorPage = class _AppErrorPage extends PureComponent {
 
         <ScrollToTop />
 
-        <section className='section'>
+        <section className='section section--main-content'>
           <div className='container'>
-            <div className='columns'>
-              <div className='column main-content--column is-10-tablet is-8-widescreen is-offset-2-widescreen is-8-fullhd is-offset-2-fullhd'>
+            <div className='row'>
+              <div className='col-xs-12'>
                 <p className='content'>
-                  <Link
-                    to={routes.HOME}
-                    className='button is-monospaced is-text has-text-weight-bold package-page--back-button'
+                  <button
+                    onClick={this.context.router.history.goBack}
+                    className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
                   >
-                    {'<'} Back to Home
-                  </Link>
+                    {'<'} Back
+                  </button>
                 </p>
 
                 <h1 className='is-size-1'>
@@ -43,7 +48,7 @@ export const AppErrorPage = class _AppErrorPage extends PureComponent {
                   to={routes.HOME}
                   className='button is-pill is-purple'
                 >
-                  {'<'} Take me back to the packages
+                  {'<'} Take me back
                 </Link>
               </div>
             </div>

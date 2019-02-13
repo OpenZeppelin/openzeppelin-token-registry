@@ -13,6 +13,7 @@ import { Query } from 'react-apollo'
 // import { CodeSnippet } from '~/components/CodeSnippet'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
+import { ShortText } from '~/components/ShortText'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
@@ -101,59 +102,62 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             )
 
             return (
-              <div className='list-item'>
-                <span
-                  className={`
+              <div className='list-item-container'>
+                <div className={classnames('list-item', { 'has-next-release-features': yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) })}>
+                  {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                    <span
+                      className={`
+                      ${animatingCssClassNames}
+                      list-item__cell
+                      list-item__cell--id
+                      has-text-grey
+                      has-text-weight-light
+                    `}>
+                      <Link
+                        to={link}
+                        className='no-select title is-size-4 has-text-weight-normal'
+                      >
+                      #{this.props.index + 1} &nbsp;
+                      </Link>
+                    </span>
+                  )}
+
+                  <span className={`
                     ${animatingCssClassNames}
                     list-item__cell
-                    list-item__cell--id
-                    has-text-grey
-                    has-text-weight-light
+                    list-item__cell--image
                   `}>
-                  <Link
-                    to={link}
-                    className='no-select title is-size-4 has-text-weight-normal'
-                  >
-                    #{this.props.index + 1} &nbsp;
-                  </Link>
-                </span>
+                    <Link
+                      to={link}
+                      className='no-select'
+                    >
+                      <GithubProfileImage user={owner} />
+                    </Link>
+                  </span>
 
-                <span className={`
-                  ${animatingCssClassNames}
-                  list-item__cell
-                  list-item__cell--image
-                `}>
-                  <Link
-                    to={link}
-                    className='no-select'
-                  >
-                    <GithubProfileImage user={owner} />
-                  </Link>
-                </span>
-
-                <span className={`
-                  ${animatingCssClassNames}
-                  list-item__cell
-                  list-item__cell--title
-                `}>
-                  <Link
-                    to={link}
-                    className='no-select'
-                  >
-                    <h4 className='is-size-4 has-text-weight-normal is-inline-grid-top'>
-                      {get(metadata, 'name')}
-                      <span className='package-item--version has-text-grey has-text-weight-light is-size-5'>
+                  <span className={`
+                    ${animatingCssClassNames}
+                    list-item__cell
+                    list-item__cell--title
+                  `}>
+                    <Link
+                      to={link}
+                      className='no-select'
+                    >
+                      <h4 className='is-size-4 has-text-weight-normal is-inline-grid-top'>
+                        {get(metadata, 'name')}
+                        <span className='package-item--version has-text-grey has-text-weight-light is-size-5'>
                         v{get(metadata, 'version')}
-                      </span>
-                    </h4>
+                        </span>
+                      </h4>
 
-                    <p className='is-size-6 description is-inline-grid-bottom has-text-grey'>
-                      {description}
-                    </p>
-                  </Link>
-                </span>
+                      <p className='is-size-6 description is-inline-grid-bottom has-text-grey'>
+                        <ShortText text={description} maxLength={140} />
+                      </p>
+                    </Link>
+                  </span>
 
-                {/*
+                  {/*
                 <CodeSnippet metadata={metadata || {}} />
 
                 <button
@@ -183,44 +187,44 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                 </button>
                 */}
 
-                <span className='list-item__cell list-item__cell--blank'>
-                  <Link
-                    to={link}
-                    className='no-select'
-                  >
+                  <span className='list-item__cell list-item__cell--blank'>
+                    <Link
+                      to={link}
+                      className='no-select'
+                    >
                     &nbsp;
-                  </Link>
-                </span>
+                    </Link>
+                  </span>
 
-                <span className={`
+                  <span className={`
                   ${animatingCssClassNames}
                   list-item__cell
                   list-item__cell--view-more
                   has-text-right
                 `}>
-                  <Link
-                    to={link}
-                    className='no-select list-item--view-grid'
-                  >
-                    {!yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
-                      <span className='has-text-info is-size-6 is-monospaced'>
+                    <Link
+                      to={link}
+                      className='no-select list-item--view-grid'
+                    >
+                      {!yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                        <span className='has-text-info is-size-6 is-monospaced'>
                         View More &gt;
-                      </span>
-                    )}
+                        </span>
+                      )}
 
-                    {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
-                      <span className='list-item--view-grid'>
-                        <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
+                      {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+                        <span className='list-item--view-grid'>
+                          <h6 className='subtitle is-size-7 list-item--subtitle is-monospaced'>
                           VOUCHED
-                        </h6>
+                          </h6>
 
-                        <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
+                          <ZepTokenLogo width='20' height='20' className='list-item--zep-token-logo' />
 
-                        <h3 className='is-inline-block is-size-3 has-text-weight-light list-item--num-tokens'>
-                          {displayWeiToEther(get(Vouching, 'entry.totalVouched'))}
-                        </h3>
+                          <h3 className='is-inline-block is-size-3 has-text-weight-light list-item--num-tokens'>
+                            {displayWeiToEther(get(Vouching, 'entry.totalVouched'))}
+                          </h3>
 
-                        {/*
+                          {/*
                           <span
                             to={link}
                             className='is-block list-item--challenges-link'
@@ -229,14 +233,15 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                           </span>
                         */}
 
-                        <span className='has-text-info is-size-6 is-monospaced list-item--view-more-link'>
+                          <span className='has-text-info is-size-6 is-monospaced list-item--view-more-link'>
                           View More&gt;
+                          </span>
                         </span>
-                      </span>
-                    )}
-                  </Link>
-                </span>
+                      )}
+                    </Link>
+                  </span>
 
+                </div>
               </div>
             )
           }
