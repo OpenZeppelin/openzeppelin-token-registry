@@ -199,6 +199,7 @@ a.navbar-item,
   user-select: none;
   outline: none;
   width: 3em;
+  margin-right: 1em;
 
   @media screen and (min-width: $navbar-breakpointMin) {
     display: none;
