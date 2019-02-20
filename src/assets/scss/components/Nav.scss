@@ -36,9 +36,10 @@
 }
 
 .navbar-brand svg.navbar-brand__tertiary-logo {
-  margin-left: 0;
+  margin-left: 6px;
   margin-top: -0.125rem;
   opacity: 0.75;
+  transition: opacity 150ms ease-in-out;
   width: 90px;
 
   @media screen and (max-width: 460px) {
@@ -46,9 +47,8 @@
   }
 }
 
-.navbar-brand__tertiary-logo:hover {
+.navbar-brand .navbar-item:hover svg.navbar-brand__tertiary-logo {
   opacity: 1;
-  transition: opacity 150ms ease-in-out;
 }
 
 .navbar-brand svg {
@@ -96,6 +96,13 @@
   background-color: darken($navbar-grey, 8%);
 }
 
+.navbar.is-dark .navbar-brand > a.navbar-item:hover,
+.navbar.is-dark .navbar-brand > a.navbar-item.is-active,
+.navbar.is-dark .navbar-brand .navbar-link:hover,
+.navbar.is-dark .navbar-brand .navbar-link.is-active {
+  background-color: transparent;
+}
+
 .navbar-item svg:hover {
   transition: transform 150ms ease-in;
 }
@@ -136,8 +143,8 @@ a.navbar-item,
     position: absolute;
     text-align: right;
     top: -250%;
-    transition: top 400ms cubic-bezier(0.35, 0.49, 0, 1);
-
+    transition: all 700ms cubic-bezier(0.35, 0.49, 0, 1);
+    opacity: 0;
     left: -5vw;
     right: -5vw;
     box-sizing: content-box;
@@ -146,6 +153,7 @@ a.navbar-item,
 }
 
 .navbar-menu.is-active {
+  opacity: 1;
   top: 100%;
 }
 
