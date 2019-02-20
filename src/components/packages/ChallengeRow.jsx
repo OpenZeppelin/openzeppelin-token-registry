@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import gql from 'graphql-tag'
+import ReactTimeout from 'react-timeout'
 import AntdIcon from '@ant-design/icons-react'
 import { MinusCircleOutline, PlusCircleOutline } from '@ant-design/icons'
 import { ethers } from 'ethers'
@@ -33,7 +34,7 @@ export const challengeRowQuery = gql`
   ${vouchingFragments.challengeFragment}
 `
 
-export const ChallengeRow = class extends Component {
+export const ChallengeRow = ReactTimeout(class extends Component {
   state = {
     challengeDetailsActive: false,
     challengeRowHovered: false
@@ -74,7 +75,9 @@ export const ChallengeRow = class extends Component {
       challengeRowHovered: !this.state.challengeDetailsActive
     }, () => {
       if (window && this.state.challengeDetailsActive) {
-        this.rowElementRef.current.scrollIntoView()
+        this.props.setTimeout(
+          () => { this.rowElementRef.current.scrollIntoView({ behavior: 'smooth' }) }
+          , 500)
       }
     })
   }
@@ -254,4 +257,4 @@ export const ChallengeRow = class extends Component {
       </Query>
     )
   }
-}
+})
