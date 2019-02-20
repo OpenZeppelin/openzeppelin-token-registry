@@ -22,7 +22,7 @@ export const VouchRow = graphql(web3Queries.accountQuery)(class _VouchRow extend
     return (
       <li className={classnames(
         'list--row',
-        'list--row__two-column',
+        'list--row__three-column',
         'truncate',
         {
           'is-active': isUser

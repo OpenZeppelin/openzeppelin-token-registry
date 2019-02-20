@@ -97,6 +97,14 @@ export class ResearcherPage extends PureComponent {
                               <br />
 
                               <ul className='list'>
+                                <li className='list--row list--row__head list--row__two-column'>
+                                  <span className='list--cell list--cell__head'>
+                                    Package Name
+                                  </span>
+                                  <span className='list--cell list--cell__head'>
+                                    Vouched
+                                  </span>
+                                </li>
                                 {packageItems.map(packageItem =>
                                   <PackageItemListRow
                                     key={`packageItem-row-${packageItem.id}`}

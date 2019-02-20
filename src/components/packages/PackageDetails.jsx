@@ -204,6 +204,16 @@ export class PackageDetails extends Component {
 
                       <div className='list--wrapper'>
                         <ul className='list is-fullwidth'>
+                          <li className='list--row list--row__head list--row__three-column'>
+                            <span className='list--cell list--cell__head'>
+                              Address
+                            </span>
+                            <span className='list--cell list--cell__head'>
+                              Vouched
+                            </span>
+                            <span className='list--cell list--cell__head'>
+                            </span>
+                          </li>
                           {vouches.map(vouch => {
                             return <VouchRow
                               address={vouch.address}

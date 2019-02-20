@@ -15,7 +15,9 @@
   font-size: 0.9rem;
   text-align: left;
   transition: all 600ms ease-out;
+}
 
+.list--row_challenge .list--cell {
   @media screen and (max-width: $mobile) {
     border: 0;
   }
@@ -45,10 +47,6 @@
 
 .list__has-padding {
   padding: 1rem 3px;
-
-  @media screen and (max-width: $mobile) {
-    padding: 1.25rem;
-  }
 }
 
 .list--row__head .list--cell__head:first-child {
@@ -124,6 +122,13 @@
   }
 }
 
+.list--row_challenge .list__has-padding {
+  @media screen and (max-width: $mobile) {
+    padding: 1.25rem;
+  }
+}
+
+
 .list--row_challenge .desc {
   @media screen and (max-width: $mobile) {
     grid-area: desc;
@@ -187,10 +192,10 @@
 }
 
 .list--row__two-column {
-  grid-template-columns: 500px 70px 50px;
+  grid-template-columns: 500px 70px;
 
   @media screen and (max-width: $desktop) {
-    grid-template-columns: 1fr 70px 50px;
+    grid-template-columns: 1fr 70px;
   }
 }
 
@@ -200,6 +205,27 @@
 }
 
 .list--row__two-column svg {
+  height: 21px;
+}
+
+.list--row__three-column {
+  grid-template-columns: 480px 70px 50px;
+
+  @media screen and (max-width: $widescreen) {
+    grid-template-columns: 510px 70px 50px;
+  }
+
+  @media screen and (max-width: $desktop) {
+    grid-template-columns: 1fr 70px 50px;
+  }
+}
+
+.list--row__three-column .list__has-padding {
+  padding-bottom: 0.625rem;
+  padding-top: 0.625rem;
+}
+
+.list--row__three-column svg {
   height: 21px;
 }
 
