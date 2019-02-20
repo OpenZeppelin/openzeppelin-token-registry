@@ -18,10 +18,10 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
   }
 
   handleCopyClick = () => {
-    ReactTooltip.show(ReactDOM.findDOMNode(this.refs.foo))
+    ReactTooltip.show(ReactDOM.findDOMNode(this.refs.copyTooltip))
 
     this.props.setTimeout(() => {
-      ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.foo))
+      ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.copyTooltip))
     }, 3000)
   }
 
@@ -33,13 +33,14 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
         <span className='has-text-grey-light'>$</span> {snippet}
 
         <span className='has-text-right is-inline-block is-copy-button'>
-          <div ref='foo' data-tip='Copied to Clipboard' />
+          <div ref='copyTooltip' data-tip='Copied!' />
 
-          <ReactTooltip />
+          <ReactTooltip type='info' effect='solid' />
 
           <CopyToClipboard
             text={snippet}
             onCopy={this.handleCopyClick}
+            data-tip='Copy to Clipboard'
           >
             <span className='has-text-right'><AntdIcon type={CopyOutline} className='antd-icon' /></span>
           </CopyToClipboard>

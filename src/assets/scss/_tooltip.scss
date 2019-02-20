@@ -1,0 +1,21 @@
+.__react_component_tooltip {
+  background-color: white;
+  font-family: $code-family;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.325rem 1rem 0.5rem;
+  text-transform: uppercase;
+  transition: all 50ms ease-in-out;
+}
+
+.__react_component_tooltip.show {
+  opacity: 0.95;
+}
+
+.__react_component_tooltip.type-info {
+  background-color: $info;
+}
+
+.__react_component_tooltip.type-info.place-top::after {
+  border-top-color: $info;
+}

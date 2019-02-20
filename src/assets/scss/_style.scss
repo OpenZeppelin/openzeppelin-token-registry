@@ -183,3 +183,17 @@ a.is-dark {
 .has-break-word {
   overflow-wrap: break-word;
 }
+
+.export-icon {
+  color: lighten($link, 30%);
+  font-size: 12px;
+  position: relative;
+  top: -2px;
+  transition: all 300ms ease-in-out;
+}
+
+a:hover .export-icon {
+  color: $link-hover;
+  font-size: 16px;
+  top: 0;
+}

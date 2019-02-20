@@ -105,6 +105,13 @@ export class ResearcherPage extends PureComponent {
                                     Vouched
                                   </span>
                                 </li>
+                                {packageItems.length === 0 &&
+                                  <li className='list--row list--row__blank-state'>
+                                    <span className='list--cell list--cell__blank-state'>
+                                      This researchers has not vouched yet.
+                                    </span>
+                                  </li>
+                                }
                                 {packageItems.map(packageItem =>
                                   <PackageItemListRow
                                     key={`packageItem-row-${packageItem.id}`}
