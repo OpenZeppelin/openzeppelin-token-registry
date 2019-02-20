@@ -11,6 +11,14 @@ import './index.scss'
 
 require('./ethers.extension')
 
+if (process.env.REACT_APP_INTERCOM_APP_ID) {
+  require('./intercom')
+
+  window.Intercom('boot', {
+    app_id: process.env.REACT_APP_INTERCOM_APP_ID
+  })
+}
+
 window.addEventListener('load', async () => {
   try {
     const provider = await getReadProvider()

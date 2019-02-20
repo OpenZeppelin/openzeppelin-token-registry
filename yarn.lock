@@ -1988,7 +1988,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.5.1, bluebird@^3.5.3:
+bluebird@^3.3.4, bluebird@^3.5.1, bluebird@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
   integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
@@ -5217,6 +5217,11 @@ html-webpack-plugin@4.0.0-alpha.2:
     tapable "^1.0.0"
     util.promisify "1.0.0"
 
+htmlencode@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/htmlencode/-/htmlencode-0.0.4.tgz#f7e2d6afbe18a87a78e63ba3308e753766740e3f"
+  integrity sha1-9+LWr74YqHp45jujMI51N2Z0Dj8=
+
 htmlparser2@^3.9.1:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.0.tgz#5f5e422dcf6119c0d983ed36260ce9ded0bee464"
@@ -5518,6 +5523,16 @@ inquirer@^6.1.0:
     string-width "^2.1.0"
     strip-ansi "^5.0.0"
     through "^2.3.6"
+
+intercom-client@^2.10.4:
+  version "2.10.4"
+  resolved "https://registry.yarnpkg.com/intercom-client/-/intercom-client-2.10.4.tgz#e0dfd1149e87d7f60433ab8575ca332d47777a1a"
+  integrity sha512-fAfWg10po+wXLuciJ2H2i+b1boR62OzAevl6yx/4k7d0KOvVCFnR/2glQ3av/sOKKubYAToeUQYUhpsmfuiFHw==
+  dependencies:
+    bluebird "^3.3.4"
+    htmlencode "^0.0.4"
+    lodash.merge "^4.6.1"
+    request "^2.83.0"
 
 internal-ip@^3.0.1:
   version "3.0.1"
@@ -9061,6 +9076,11 @@ react-copy-to-clipboard@^5.0.1:
     copy-to-clipboard "^3"
     prop-types "^15.5.8"
 
+react-country-region-selector@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/react-country-region-selector/-/react-country-region-selector-1.4.3.tgz#fda4a50a1a632078c06b9f99c7a4a81ff2f0b40e"
+  integrity sha512-pWNWkPa6vnX4f8tWkaUQLh60JQKtP/TEkMIK4ZsXQYhvlmM6VNQe9qEbSLE80puakZ42KHhxoONjqg1LwEKW2A==
+
 react-css-transition-replace@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/react-css-transition-replace/-/react-css-transition-replace-3.0.3.tgz#23d3ed17f54e41435c0485300adb75d2e6e24aad"
@@ -9502,7 +9522,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.0"
     tough-cookie ">=2.3.3"
 
-request@^2.87.0, request@^2.88.0:
+request@^2.83.0, request@^2.87.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==

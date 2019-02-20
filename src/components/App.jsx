@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { MetaTags } from '~/components/MetaTags'
 import { PackageListPage } from '~/components/pages/PackageListPage'
 import { NavContainer } from '~/components/layout/Nav'
+import { BetaSignupPage } from '~/components/pages/BetaSignupPage'
 import { PackageItemPage } from '~/components/pages/PackageItemPage'
 import { ResearcherPage } from '~/components/pages/ResearcherPage'
 import { FourOhFour } from '~/components/pages/FourOhFour'
@@ -53,6 +54,8 @@ const App = class _App extends PureComponent {
             appear
           >
             <Switch location={this.props.location}>
+              <Route exact path={routes.BETA_SIGNUP} component={withSentryBoundary(withTracker(BetaSignupPage))} />
+
               <Route path={routes.RESEARCHER} component={withSentryBoundary(withTracker(ResearcherPage))} />
               <Route path={routes.PACKAGE_ITEM} component={withSentryBoundary(withTracker(PackageItemPage))} />
 
