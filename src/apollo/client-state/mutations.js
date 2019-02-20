@@ -20,8 +20,16 @@ export const mutations = {
           const signer = provider.getSigner()
           const address = abiMapping.getAddress(contractName, networkId)
           const abi = abiMapping.getAbi(contractName)
-          const contract = new ethers.Contract(address, abi, signer)
 
+          if (!address) {
+            throw new Error(`No address for contract ${contractName} and network ${networkId}`)
+          }
+
+          if (!abi) {
+            throw new Error(`No abi found for contract ${contractName}`)
+          }
+
+          const contract = new ethers.Contract(address, abi, signer)
           const methodFxn = contract[method]
 
           if (!methodFxn) {

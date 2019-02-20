@@ -141,7 +141,9 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
             text = 'Retry'
           } else if (this.vouchingTxCompleted()) {
             text = 'Done'
-          } else if (this.notEnoughAllowance()) {
+          } else if (this.notEnoughZepError()) {
+            text = 'Vouch'
+          } else if (this.notEnoughAllowance() && !this.approveTxCompleted()) {
             text = 'Approve'
           }
 
