@@ -3,20 +3,21 @@ import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
 import yn from 'yn'
 import classnames from 'classnames'
+import { mixpanel } from '~/mixpanel'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { ZosCodeSnippet } from '~/components/ZosCodeSnippet'
 import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
-import { ChallengeRow } from '~/components/packages/ChallengeRow'
+import { ChallengeHeaderRow } from '~/components/challenges/ChallengeHeaderRow'
+import { ChallengeRow } from '~/components/challenges/ChallengeRow'
 import { VouchButton } from '~/components/packages/VouchButton'
 import { VouchRow } from '~/components/packages/VouchRow'
+import { challengeProjection } from '~/projections/challengeProjection'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { mixpanel } from '~/mixpanel'
-import { challengeProjection } from '~/projections/challengeProjection'
 
 export class PackageDetails extends Component {
   state = { voted: false }
@@ -259,22 +260,7 @@ export class PackageDetails extends Component {
               <br />
 
               <ul className='list'>
-                <li className='list--row list--row__head list--row_challenge'>
-                  <span className='list--cell list--cell__head'>
-                      Name
-                  </span>
-                  <span className='list--cell list--cell__head'>
-                      Status
-                  </span>
-                  <span className='list--cell list--cell__head'>
-                      Severity
-                  </span>
-                  <span className='list--cell list--cell__head'>
-                      Bounty
-                  </span>
-                  <span className='list--cell list--cell__head' />
-                  <span className='list--cell list--cell__head' />
-                </li>
+                <ChallengeHeaderRow />
                 {
                   challenges.map(challenged =>
                     <ChallengeRow

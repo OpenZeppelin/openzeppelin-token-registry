@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import gql from 'graphql-tag'
 import ReactTimeout from 'react-timeout'
@@ -38,6 +39,14 @@ export const ChallengeRow = ReactTimeout(class extends Component {
   state = {
     challengeDetailsActive: false,
     challengeRowHovered: false
+  }
+
+  static propTypes = {
+    packageTotalVouched: PropTypes.object.isRequired
+  }
+
+  static defaultProps = {
+    packageTotalVouched: ethers.utils.bigNumberify(0)
   }
 
   constructor (props) {

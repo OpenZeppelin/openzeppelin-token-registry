@@ -29,6 +29,13 @@ export const vouchingFragments = {
 }
 
 export const vouchingQueries = {
+  researcherChallengesQuery: gql`
+    query researcherChallengesQuery($address: String!) {
+      Vouching @contract(type: "ResearcherChallengeEvents", id: $address) {
+        Challenged @pastEvents(extraTopics: { types: ["uint256", "address", "address"], values: [null, null, $address] })
+      }
+    }
+  `,
   researcherVouchesQuery: gql`
     query researcherVouchesQuery($address: String!) {
       Vouching @contract(type: "ResearcherEvents", id: $address) {

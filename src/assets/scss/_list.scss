@@ -192,7 +192,7 @@
 }
 
 .list--row__two-column {
-  grid-template-columns: 500px 70px;
+  grid-template-columns: 495px 70px;
 
   @media screen and (max-width: $desktop) {
     grid-template-columns: 1fr 70px;

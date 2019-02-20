@@ -5,6 +5,7 @@ import { ethers } from 'ethers'
 import { createCanvas } from 'canvas'
 import { renderIcon } from '@download/blockies'
 import { Query } from 'react-apollo'
+import { ResearcherChallengesTable } from '~/components/challenges/ResearcherChallengesTable'
 import { ResearcherNameAndAddress } from '~/components/researchers/ResearcherNameAndAddress'
 import { HeroBetaCallout } from '~/components/HeroBetaCallout'
 import { FooterContainer } from '~/components/layout/Footer'
@@ -120,6 +121,14 @@ export class ResearcherPage extends PureComponent {
                                   />
                                 )}
                               </ul>
+
+                              <br />
+                              <br />
+
+                              <ResearcherChallengesTable address={address} />
+
+                              <br />
+                              <br />
                             </>
                           )
                         }
