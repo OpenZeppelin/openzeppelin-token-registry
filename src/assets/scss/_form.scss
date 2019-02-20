@@ -119,6 +119,10 @@ label.radio,
   }
 }
 
+.tx-in-progress .field.has-addons {
+  border-color: $blue;
+}
+
 .form:not(.tx-in-progress) .field.has-addons:hover path,
 .form:not(.tx-in-progress) .field.has-addons:hover .input,
 .form:not(.tx-in-progress) .field.has-addons:hover .button,
@@ -140,6 +144,7 @@ label.radio,
 }
 
 .field.has-addons .input.is-large {
+  border: 0;
   padding: 0;
   height: 100%;
 }

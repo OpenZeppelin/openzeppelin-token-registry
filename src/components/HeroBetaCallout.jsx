@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import * as routes from '~/../config/routes'
 
 export const HeroBetaCallout = () => {
   return (
@@ -7,13 +9,12 @@ export const HeroBetaCallout = () => {
         <p className='is-size-5 is-monospaced is-uppercase has-text-grey-dark'>
           Help us build the Zeppelin Registry
         </p>
-        <a
+        <Link
           className='button is-pill is-size-5'
-          href='http://zpl.in/betaregistration'
-          target='_blank'
-          rel='noopener noreferrer'>
+          to={routes.BETA_SIGNUP}
+        >
           Join the Beta
-        </a>
+        </Link>
       </div>
     </div>
   )

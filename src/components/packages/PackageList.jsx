@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { Link } from 'react-router-dom'
 import { ethers } from 'ethers'
 import { get } from 'lodash'
 import { Query, graphql, withApollo } from 'react-apollo'
@@ -7,6 +8,7 @@ import { PackageListItem } from '~/components/packages/PackageListItem'
 import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import * as routes from '~/../config/routes'
 
 export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class _PackageList extends PureComponent {
   constructor (props) {
@@ -154,13 +156,12 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             <p className='message-body--text has-text-grey'>
               Want to see your package here?
             </p>
-            <a
+            <Link
               className='button is-purple is-pill'
-              href='http://zpl.in/betaregistration'
-              target='_blank'
-              rel='noopener noreferrer'>
+              to={routes.BETA_SIGNUP}
+            >
               Join the Beta
-            </a>
+            </Link>
           </div>
         </div>
 

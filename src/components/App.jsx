@@ -12,10 +12,10 @@ import { ResearcherPage } from '~/components/pages/ResearcherPage'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import { getPurePathname } from '~/utils/getPurePathname'
 import { mixpanel } from '~/mixpanel'
-import * as routes from '~/../config/routes'
 import { withSentryBoundary } from '~/components/withSentryBoundary'
 import { withTracker } from '~/components/withTracker'
 import { getSystemInfo } from '~/utils/getSystemInfo'
+import * as routes from '~/../config/routes'
 
 const App = class _App extends PureComponent {
   static propTypes = {
