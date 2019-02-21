@@ -1,12 +1,9 @@
-$addonsFormHeight: 57px;
-
 .form {
   padding: 3.5rem 0 8rem;
+}
 
-  @media (max-width: 800px) {
-    // margin: 0.25rem;
-    // padding: 0.5rem 0.5rem 8rem;
-  }
+.inline-form {
+  padding: 1rem 0;
 }
 
 .field:not(:last-child) {
@@ -100,11 +97,12 @@ label.radio,
 }
 
 .is-addons-form-toggler-height {
-  height: $addonsFormHeight + 24px;
+  height: 114px;
+  padding-top: 1rem;
 }
 
 .is-addons-form-height {
-  height: $addonsFormHeight;
+  height: 54px;
 }
 
 .field.has-addons {
