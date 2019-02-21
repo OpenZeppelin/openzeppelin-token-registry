@@ -135,7 +135,12 @@
 .accordion-exit-active {
   height: 1px;
   opacity: 0.01;
+  pointer-events: none;
   transition: all 600ms ease-in-out;
+}
+
+.accordion > * {
+  visibility: hidden;
 }
 
 // Important! Set the height custom for your specific accordion in another class:
@@ -147,13 +152,22 @@
 .accordion-enter-active,
 .accordion-enter-done {
   opacity: 1;
+  pointer-events: initial;
+}
+
+.accordion-enter-active > *,
+.accordion-enter-done > *,
+.accordion-exit > * {
+  visibility: visible;
 }
 
 .accordion-exit {
   opacity: 1;
+  pointer-events: initial;
 }
 
 .accordion-exit-active,
 .accordion-exit-done {
   opacity: 0.01;
+  pointer-events: none;
 }

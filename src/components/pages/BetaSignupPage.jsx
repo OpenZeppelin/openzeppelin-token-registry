@@ -401,12 +401,12 @@ export const BetaSignupPage = class _BetaSignupPage extends PureComponent {
                       <div className='hero is-dark is-medium has-text-centered'>
                         <ScrollToTop />
                         <div className='hero-body'>
-                          <h1 className='is-size-1 is-monospaced is-uppercase'>
+                          <h2 className='is-size-2 is-monospaced is-uppercase'>
                             Thank you!
-                          </h1>
-                          <h3 className='is-size-3 is-monospaced is-uppercase'>
+                          </h2>
+                          <h5 className='is-size-5 is-monospaced is-uppercase'>
                             We'll be in contact shortly.
-                          </h3>
+                          </h5>
                         </div>
                       </div>
                     </div>
