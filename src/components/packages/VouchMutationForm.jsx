@@ -404,7 +404,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
 
           return (
             <form
-              className={classnames('form', this.formClassName())}
+              className={classnames('inline-form', this.formClassName())}
               onSubmit={(e) => {
                 e.preventDefault()
                 this.handleSubmit()
