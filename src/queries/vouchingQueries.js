@@ -10,11 +10,13 @@ export const vouchingFragments = {
       description
     }
   `,
+  entryFragment: gql`
+    fragment entryFragment on Package {
+      entry: getEntry(id: $id)
+    }
+  `,
   packageFragment: gql`
     fragment packageFragment on Package {
-      id
-      __typename
-      entry: getEntry(id: $id)
       allEvents @pastEvents(extraTopics: { types: ["uint256"], values: [$id] })
     }
   `,
@@ -43,23 +45,38 @@ export const vouchingQueries = {
       }
     }
   `,
-  vouchesQuery: gql`
+  allEventsQuery: gql`
     query vouchesQuery {
-      Vouching @contract {
+      Vouching @contract(type: "AllEvents", id: "1") {
+        id
         allEvents @pastEvents
       }
     }
   `,
+  entryQuery: gql`
+    query entryQuery($id: String!) {
+      Vouching @contract(type: "Entry", id: $id) {
+        id
+        __typename
+        ...entryFragment
+      }
+    }
+    ${vouchingFragments.entryFragment}
+  `,
   vouchQuery: gql`
     query vouchQuery($id: String!) {
       Vouching @contract(type: "Package", id: $id) {
+        id
+        __typename
+        ...entryFragment
         ...packageFragment
       }
     }
+    ${vouchingFragments.entryFragment}
     ${vouchingFragments.packageFragment}
   `,
-  eventsQuery: gql`
-    query eventsQuery {
+  registeredEventsQuery: gql`
+    query registeredEventsQuery {
       Vouching @contract(type: "GlobalInfo", id: "1") {
         id
         __typename
@@ -73,10 +90,14 @@ export const vouchingQueries = {
         ...md
       }
       Vouching @contract(type: "Package", id: $id) {
+        id
+        __typename
         ...packageFragment
+        ...entryFragment
       }
     }
     ${vouchingFragments.metadataFragment}
     ${vouchingFragments.packageFragment}
+    ${vouchingFragments.entryFragment}
   `
 }

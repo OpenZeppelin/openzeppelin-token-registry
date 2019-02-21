@@ -15,7 +15,7 @@ import { ChallengeRow } from '~/components/challenges/ChallengeRow'
 import { VouchButton } from '~/components/packages/VouchButton'
 import { VouchRow } from '~/components/packages/VouchRow'
 import { challengeProjection } from '~/projections/challengeProjection'
-import { projectPackageEvents } from '~/projections/projectPackageEvents'
+import { projectPackageVouchTotals } from '~/projections/projectPackageVouchTotals'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 
@@ -189,7 +189,7 @@ export class PackageDetails extends Component {
                 {({ data }) => {
                   const { Vouching } = data || {}
                   const { allEvents } = Vouching || {}
-                  const packageProjection = projectPackageEvents(allEvents || [])
+                  const packageProjection = projectPackageVouchTotals(allEvents || [])
                   const { vouchTotals } = packageProjection.packages[id] || {}
                   const addresses = Object.keys(vouchTotals || {})
                   const vouches =

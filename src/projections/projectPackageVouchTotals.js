@@ -1,7 +1,15 @@
 import { ethers } from 'ethers'
 import { normalizeAddr } from '~/utils/normalizeAddr'
 
-export function projectPackageEvents (events) {
+function emptyPackage () {
+  return {
+    vouchTotals: {},
+    vouchTotal: ethers.utils.bigNumberify(0),
+    metadataURI: null
+  }
+}
+
+export function projectPackageVouchTotals (events) {
   let currentVouchTotal
 
   const result = {
@@ -12,27 +20,33 @@ export function projectPackageEvents (events) {
     const event = events[i]
     let { name, values } = event.parsedLog || {}
     // let { id, amount, owner, sender } = values || {}
-    let { id, amount, sender } = values || {}
+    let { id, amount, sender, metadataURI } = values || {}
+    let amountBN = ethers.utils.bigNumberify(amount || '0')
 
     switch (name) {
+      case 'Registered':
+        result.packages[id] = result.packages[id] || emptyPackage()
+        result.packages[id].metadataURI = metadataURI
+
+        break
+
       case 'Vouched':
         let addr = normalizeAddr(sender)
         // Ensure an object exists
-        result.packages[id] =
-          result.packages[id] ||
-            {
-              vouchTotals: {}
-            }
+        result.packages[id] = result.packages[id] || emptyPackage()
 
         currentVouchTotal = result.packages[id].vouchTotals[addr] || ethers.utils.bigNumberify(0)
-        result.packages[id].vouchTotals[addr] = currentVouchTotal.add(ethers.utils.bigNumberify(amount))
+        result.packages[id].vouchTotals[addr] = currentVouchTotal.add(amountBN)
+        result.packages[id].vouchTotal = result.packages[id].vouchTotal.add(amountBN)
 
         break
+
       case 'Unvouched':
         addr = normalizeAddr(sender)
 
         currentVouchTotal = result.packages[id].vouchTotals[addr]
-        result.packages[id].vouchTotals[addr] = currentVouchTotal.sub(ethers.utils.bigNumberify(amount))
+        result.packages[id].vouchTotals[addr] = currentVouchTotal.sub(amountBN)
+        result.packages[id].vouchTotal = result.packages[id].vouchTotal.sub(amountBN)
 
         if (result.packages[id].vouchTotals[addr].eq(ethers.utils.bigNumberify(0))) {
           delete result.packages[id].vouchTotals[addr]

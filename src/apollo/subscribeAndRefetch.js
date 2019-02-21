@@ -71,7 +71,7 @@ export function subscribeAndRefetch (apolloClient) {
       console.error(error)
     } else {
       apolloClient.query({
-        query: vouchingQueries.eventsQuery,
+        query: vouchingQueries.registeredEventsQuery,
         fetchPolicy: 'network-only'
       })
     }

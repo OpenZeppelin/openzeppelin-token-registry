@@ -32,7 +32,8 @@ export function Registered (id, owner) {
       name: 'Registered',
       values: {
         id: ethers.utils.bigNumberify(id),
-        owner
+        owner,
+        metadataURI: 'http://metadata.uri'
       }
     }
   }

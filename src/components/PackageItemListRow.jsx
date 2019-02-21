@@ -22,7 +22,7 @@ export class PackageItemListRow extends PureComponent {
     const address = normalizeAddr(this.props.address)
 
     return (
-      <Query query={vouchingQueries.eventsQuery}>
+      <Query query={vouchingQueries.registeredEventsQuery}>
         {({ loading, error, data }) => {
           if (loading) return null
           if (error) {
