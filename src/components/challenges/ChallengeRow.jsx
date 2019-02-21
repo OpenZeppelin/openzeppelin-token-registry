@@ -52,6 +52,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
     super(props)
 
     this.rowElementRef = React.createRef()
+    this.challengeDetailsRef = React.createRef()
   }
 
   displayPriority = (amount) => {
@@ -76,6 +77,20 @@ export const ChallengeRow = ReactTimeout(class extends Component {
     this.setState({ challengeRowHovered: false })
   }
 
+  belowTheFold = (elem) => {
+    return elem.getBoundingClientRect().top > (window.innerHeight || document.documentElement.clientHeight)
+  }
+
+  scrollToDetails = () => {
+    this.props.setTimeout(
+      () => {
+        if (this.belowTheFold(this.challengeDetailsRef.current)) {
+          this.rowElementRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+      , 500)
+  }
+
   handleChallengeRowClick = (e) => {
     // also settings the *RowHovered to the same state as *DetailsActive fixes a touch / mobile bug
     this.setState({
@@ -83,9 +98,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
       challengeRowHovered: !this.state.challengeDetailsActive
     }, () => {
       if (window && this.state.challengeDetailsActive) {
-        this.props.setTimeout(
-          () => { this.rowElementRef.current.scrollIntoView({ behavior: 'smooth' }) }
-          , 500)
+        this.scrollToDetails()
       }
     })
   }
@@ -197,10 +210,9 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                         Challenged <span className='has-text-weight-semibold'>{displayEthTimestamp(challenge.createdAt)}</span>
                         {/* TODO: Could be nice to have a unique challengeId Challenge #{challenge.entryID.toString()} */}
                       </h5>
-                      <h6 className='is-size-6 has-text-weight-semibold'>
+                      <h6 ref={this.challengeDetailsRef} className='is-size-6 has-text-weight-semibold'>
                         Challenger <ResearcherLink address={challenge.challenger.toString()} shorten />
                       </h6>
-
                     </span>
 
                     <span className='accordion--column accordion--column__1'>

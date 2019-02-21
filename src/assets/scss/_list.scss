@@ -126,6 +126,9 @@
   @media screen and (max-width: $mobile) {
     padding: 1rem;
   }
+  @media screen and (max-width: 320px) {
+    padding: 1rem 0.5rem;
+  }
 }
 
 
@@ -174,7 +177,7 @@
 
 .list--row_challenge .github svg {
   @media screen and (max-width: $mobile) {
-    margin: 0;
+    margin: 0 0 0 auto;
   }
 }
 
