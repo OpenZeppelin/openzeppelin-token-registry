@@ -14,7 +14,7 @@ import { ShortText } from '~/components/ShortText'
 import { vouchingFragments } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { challengeStatus } from '~/utils/challengeStatus'
-import { dateRelative } from '~/utils/dateRelative'
+import { displayEthTimestamp } from '~/utils/displayEthTimestamp'
 import * as constants from '~/constants'
 
 export const challengeRowQuery = gql`
@@ -194,7 +194,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                   <li className='accordion accordion--panel'>
                     <span className='accordion--header'>
                       <h5 className='is-size-5'>
-                        Challenged <span className='has-text-weight-semibold'>{dateRelative(challenge.createdAt)}</span>
+                        Challenged <span className='has-text-weight-semibold'>{displayEthTimestamp(challenge.createdAt)}</span>
                         {/* TODO: Could be nice to have a unique challengeId Challenge #{challenge.entryID.toString()} */}
                       </h5>
                       <h6 className='is-size-6 has-text-weight-semibold'>
@@ -210,7 +210,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                             <strong>Answer:</strong> {constants.CHALLENGE_ANSWER_LABEL[challenge.answer]}
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Answered:</strong> <span className='has-text-grey'>{dateRelative(challenge.answeredAt)}</span>
+                            <strong>Answered:</strong> <span className='has-text-grey'>{displayEthTimestamp(challenge.answeredAt)}</span>
                           </h6>
                           <br />
                           <h6 className='is-size-6 has-text-weight-semibold'>
@@ -227,7 +227,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                             <strong>Appealer:</strong> <ResearcherLink address={challenge.challenger.toString()} shorten />
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Appealed:</strong> <span className='has-text-grey'>{dateRelative(appeal.createdAt)}</span>
+                            <strong>Appealed:</strong> <span className='has-text-grey'>{displayEthTimestamp(appeal.createdAt)}</span>
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Appeal Amount:</strong> <span className='has-text-grey'>{displayWeiToEther(appeal.amount.toString())} Z</span>
