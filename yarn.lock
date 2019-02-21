@@ -1416,10 +1416,10 @@ apollo-link@^1.0.0, apollo-link@^1.2.6:
     apollo-utilities "^1.0.0"
     zen-observable-ts "^0.8.13"
 
-apollo-refetch-queries@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/apollo-refetch-queries/-/apollo-refetch-queries-0.0.1.tgz#b9d9d359211b65e0d0fe1b255bdd062594260581"
-  integrity sha512-MlMUJ+rQ9T2S9Rt7Gi5Hg02VwLc5Z/lSsNfRt9Iav5JYHjh0wxu9sGRhxgYejGbDLNp1livuzFeoxOTxoV83dw==
+apollo-refetch-queries@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/apollo-refetch-queries/-/apollo-refetch-queries-0.0.3.tgz#84e043da201d97f2d6210c50450a6695c8f874ea"
+  integrity sha512-ln594ILup2OAeeMIcOyNPvn1A+Z6vp8le8dOXvexv1kUXM+yjDDuitOksKwjI+dvLobp0j2kjO3UjqLJQEm+VA==
   dependencies:
     apollo-client "^2.4.13"
     lodash "^4.17.11"

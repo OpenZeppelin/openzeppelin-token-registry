@@ -43,7 +43,7 @@
     "apollo-link-ethereum": "0.0.24",
     "apollo-link-ethereum-resolver-ethersjs": "0.0.24",
     "apollo-link-state": "^0.4.2",
-    "apollo-refetch-queries": "^0.0.1",
+    "apollo-refetch-queries": "^0.0.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
