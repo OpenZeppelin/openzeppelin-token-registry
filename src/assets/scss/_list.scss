@@ -89,7 +89,6 @@
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.list--row.is-active > *,
 .list--row.list--row__hovered {
   background-color: darken($white-bis, 2%);
   transition: all 600ms ease-out;

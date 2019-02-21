@@ -140,8 +140,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                   'list--row',
                   'list--row_challenge',
                   {
-                    'list--row__hovered': this.state.challengeRowHovered,
-                    'is-active': this.state.challengeDetailsActive
+                    'list--row__hovered': this.state.challengeRowHovered || this.state.challengeDetailsActive
                   }
                 )
                 }>
