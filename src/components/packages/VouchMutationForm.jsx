@@ -163,12 +163,10 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         buttonText = () => {
           let text = 'Vouch'
 
-          if (this.vouchingTxError()) {
-            text = 'Retry'
+          if (this.vouchingTxError() || this.approveTxError()) {
+            text = 'Clear'
           } else if (this.vouchingTxCompleted()) {
             text = 'Done'
-          } else if (this.notEnoughZepError()) {
-            text = 'Vouch'
           } else if (this.notEnoughAllowance() && !this.approveTxSuccess()) {
             text = 'Approve'
           }
@@ -194,7 +192,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         }
 
         isButtonDisabled () {
-          return this.hasUncompletedTransaction() || this.notLoggedIn()
+          return this.notEnoughZepError() || this.hasUncompletedTransaction() || this.notLoggedIn()
         }
 
         formClassName () {
