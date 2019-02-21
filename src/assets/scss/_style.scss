@@ -193,3 +193,9 @@ a:hover .export-icon {
   font-size: 16px;
   top: 0;
 }
+
+// Hack to force hide Intercom, the settings are not working, nor is the JS code to hide it
+// Make sure to turn the sound effects off in the Intercom settings as well!
+.intercom-namespace {
+  display: none;
+}
