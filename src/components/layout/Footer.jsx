@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import ZeppelinLogo from '~/assets/images/zeppelin-logo.svg'
+import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {
   render () {
@@ -36,6 +38,13 @@ export const Footer = class _Footer extends Component {
               >
                 Site
               </a>
+
+              <Link
+                className='footer-item'
+                to={routes.BETA_SIGNUP}
+              >
+                Beta
+              </Link>
             </div>
           </div>
 

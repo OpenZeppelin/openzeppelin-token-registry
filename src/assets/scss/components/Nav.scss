@@ -99,7 +99,11 @@
 .navbar.is-dark .navbar-brand > a.navbar-item:hover,
 .navbar.is-dark .navbar-brand > a.navbar-item.is-active,
 .navbar.is-dark .navbar-brand .navbar-link:hover,
-.navbar.is-dark .navbar-brand .navbar-link.is-active {
+.navbar.is-dark .navbar-brand .navbar-link.is-active,
+.navbar.is-dark .navbar-end > a.navbar-item:hover,
+.navbar.is-dark .navbar-end > a.navbar-item.is-active,
+.navbar.is-dark .navbar-end .navbar-link:hover,
+.navbar.is-dark .navbar-end .navbar-link.is-active {
   background-color: transparent;
 }
 
@@ -139,7 +143,7 @@ a.navbar-item,
 .navbar-menu {
   @media screen and (max-width: $navbar-breakpoint) {
     display: block;
-    height: 250%;
+    height: auto;
     position: absolute;
     text-align: right;
     top: -250%;

@@ -91,6 +91,13 @@ export const Nav = class _Nav extends Component {
                   >
                       Site
                   </a>
+
+                  <Link
+                    className='navbar-item'
+                    to={routes.BETA_SIGNUP}
+                  >
+                    Beta
+                  </Link>
                 </div>
               </div>
             </div>
