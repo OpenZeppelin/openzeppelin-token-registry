@@ -8,7 +8,6 @@ import { MinusCircleOutline, PlusCircleOutline } from '@ant-design/icons'
 import { ethers } from 'ethers'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
-import { CodeSnippet } from '~/components/CodeSnippet'
 import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { ShortText } from '~/components/ShortText'
@@ -205,7 +204,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                     </span>
 
                     <span className='accordion--column accordion--column__1'>
-                      {hasAnswer ? (
+                      {hasAnswer &&
                         <>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Answer:</strong> {constants.CHALLENGE_ANSWER_LABEL[challenge.answer]}
@@ -218,17 +217,11 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                             <strong>Resolution:</strong> {constants.CHALLENGE_RESOLUTION_LABEL[challenge.resolution]}
                           </h6>
                         </>
-                      ) : (
-                        <span className='accordion--column__blank-state is-size-6'>
-                          Currently no responses. Respond with:
-                          <br />
-                          <CodeSnippet snippet='zos challenge fail' />
-                        </span>
-                      )}
+                      }
                     </span>
 
                     <span className='accordion--column accordion--column__2'>
-                      {hasAppeal ? (
+                      {hasAppeal &&
                         <>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Appealer:</strong> <ResearcherLink address={challenge.challenger.toString()} shorten />
@@ -240,13 +233,7 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                             <strong>Appeal Amount:</strong> <span className='has-text-grey'>{displayWeiToEther(appeal.amount.toString())} Z</span>
                           </h6>
                         </>
-                      ) : (
-                        <span className='accordion--column__blank-state is-size-6'>
-                          Currently no appeals. Appeal with:
-                          <br />
-                          <CodeSnippet snippet='zos challenge appeal' />
-                        </span>
-                      )}
+                      }
                     </span>
 
                     <span className='accordion--footer'>
