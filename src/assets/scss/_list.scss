@@ -46,7 +46,7 @@
 }
 
 .list__has-padding {
-  padding: 1rem 3px;
+  padding: 1rem 0.5rem;
 }
 
 .list--row__head .list--cell__head:first-child {
@@ -89,7 +89,7 @@
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.list--row.is-active *,
+.list--row.is-active > *,
 .list--row.list--row__hovered {
   background-color: darken($white-bis, 2%);
   transition: all 600ms ease-out;
@@ -102,7 +102,7 @@
 
 .list--row_challenge {
   grid-template-columns: 1fr 120px 100px 70px 40px 100px;
-  
+
   @media screen and (max-width: $desktop) {
     grid-template-columns: 1fr 120px minmax(60px, 80px) 50px 40px 100px;
   }
@@ -110,9 +110,10 @@
   @media screen and (max-width: $mobile) {
     border-top: 1px solid #ececec;
     border-bottom: 1px solid #ececec;
-    grid-template: 'desc desc desc more'
-      'status severity bounty github';
-    grid-template-columns: 1fr 1fr 100px 120px;
+
+    grid-template: 'desc desc more more' 'status severity bounty github';
+    grid-template-columns: 3fr 1fr 1.5fr 1fr;
+
     grid-template-rows: auto;
     margin-top: 3rem;
 
@@ -124,7 +125,7 @@
 
 .list--row_challenge .list__has-padding {
   @media screen and (max-width: $mobile) {
-    padding: 1.25rem;
+    padding: 1rem;
   }
 }
 
@@ -172,16 +173,9 @@
   }
 }
 
-.list--row_challenge .github .list__has-padding {
-  @media screen and (max-width: $mobile) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
 .list--row_challenge .github svg {
   @media screen and (max-width: $mobile) {
-    margin-left: auto;
+    margin: 0;
   }
 }
 

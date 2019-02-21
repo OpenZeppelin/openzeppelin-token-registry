@@ -161,19 +161,20 @@ export const ChallengeRow = ReactTimeout(class extends Component {
                   </ListCellButton>
                 </span>
                 <span className='list--cell bounty'>
-                  <ListCellButton>
+                  <ListCellButton
+                    extraClassNames='has-text-centered'>
                     {displayWeiToEther(amount)} Z
                   </ListCellButton>
                 </span>
                 <span className='list--cell github'>
                   <GitHubLink
                     url={htmlUrl}
-                    cssClassNames={defaultButtonClasses}
+                    cssClassNames={classnames(defaultButtonClasses)}
                   />
                 </span>
                 <span className='list--cell more'>
                   <ListCellButton
-                    extraClassNames='has-text-centered list--accordion-icon is-monospaced has-text-grey is-uppercase'
+                    extraClassNames='list--accordion-icon is-monospaced has-text-grey is-uppercase has-text-right'
                   >
                     <span className={classnames(
                       {
