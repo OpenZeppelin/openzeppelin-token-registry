@@ -5,7 +5,6 @@ import { AppContainer } from '~/components/App'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
 import { getReadProvider } from '~/web3/getReadProvider'
-import { subscribeAndRefetch } from '~/apollo/subscribeAndRefetch'
 import { createClient } from '~/apollo/createClient'
 import './index.scss'
 
@@ -27,9 +26,8 @@ window.addEventListener('load', async () => {
     if (network.chainId === 1) {
       defaultFromBlock = parseInt(process.env.REACT_APP_MAINNET_STARTING_BLOCK, 10)
     }
+
     const client = await createClient(provider, defaultFromBlock)
-    window.client = client
-    subscribeAndRefetch(client)
 
     let coreApp =
       <ApolloProvider client={client}>

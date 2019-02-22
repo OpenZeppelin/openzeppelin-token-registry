@@ -52,6 +52,7 @@ You can configure the app using environment variables:
 | REACT_APP_SENTRY_DSN | Optionally configure Sentry (error reporting) | Empty |
 | REACT_APP_MIXPANEL_ID | Mixpanel app id | e5f3a0b990d694b84981f493169f47c4 |
 | REACT_APP_GA_TRACKING_ID | Optional Google Analytics Tracking ID | No default |
+| REACT_APP_INTERCOM_APP_ID | Optional Intercom tracking ID (initially used for the beta signup form) | No default |
 
 ## Custom Contract Addresses
 

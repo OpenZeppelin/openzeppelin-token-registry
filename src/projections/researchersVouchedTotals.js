@@ -21,9 +21,14 @@ function setAmount (result, address, amount) {
   getResearcher(result, address).amount = amount
 }
 
-// Iterates through all events in the Vouching contract and
-// pull out amounts only for vouches (RegisteredEvent owners and
-// VouchedEvent senders)
+/**
+ * Iterates through passed in events from the Vouching contract and
+ * sums up vouch amounts for all vouchers (RegisteredEvent owners and
+ * VouchedEvent senders). Returns an object with those Voucher's
+ * summed amounts.
+ *
+ * @returns {Object}
+ */
 export const researchersVouchedTotals = function (events) {
   const result = {}
 

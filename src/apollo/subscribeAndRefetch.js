@@ -3,6 +3,13 @@ import { vouchingQueries } from '~/queries/vouchingQueries'
 import { web3Queries } from '~/queries/web3Queries'
 import * as queries from 'apollo-refetch-queries'
 
+/**
+ * Creates Apollo GraphQL subscriptions to watch for when data changes
+ * and then re-runs specific queries (or executes various behaviour)
+ * in response to those changes.
+ *
+ * @returns {undefined}
+ */
 export function subscribeAndRefetch (apolloClient) {
   // If the user signs in to MetaMask or logs out, we should ... (refresh the page?)
   let firstLoadAccount = true

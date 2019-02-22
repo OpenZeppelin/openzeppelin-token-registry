@@ -9,6 +9,13 @@ function emptyPackage () {
   }
 }
 
+/**
+ * Calculates the total vouched amounts for all packages passed in by
+ * Ethereum log events. This is done by comparing 'Registered', 'Vouched'
+ * and 'Unvouched' events and summing up the totals.
+ *
+ * @returns {Object}
+ */
 export function projectPackageVouchTotals (events) {
   let currentVouchTotal
 
@@ -19,7 +26,6 @@ export function projectPackageVouchTotals (events) {
   for (let i in events) {
     const event = events[i]
     let { name, values } = event.parsedLog || {}
-    // let { id, amount, owner, sender } = values || {}
     let { id, amount, sender, metadataURI } = values || {}
     let amountBN = ethers.utils.bigNumberify(amount || '0')
 

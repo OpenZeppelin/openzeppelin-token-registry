@@ -1,3 +1,8 @@
+/**
+ * Registers contract addresses (coming in via Truffle artifacts)
+ * specific to this DApp and stores them in the abiMapping object.
+ */
+
 import { AbiMapping } from 'apollo-link-ethereum'
 import VouchingAbi from './abi/VouchingAbi'
 import ZepTokenAbi from './abi/ZepTokenAbi'
