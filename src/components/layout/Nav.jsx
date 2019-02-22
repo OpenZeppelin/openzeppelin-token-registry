@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-import ZeppelinOSRegistryLogo from '~/assets/images/zeppelin-os-registry--logo.svg'
-import ZeppelinLogo from '~/assets/images/zeppelin_white.svg'
+import EVMRegistryLogo from '~/assets/images/evm-registry--logo.svg'
+import ZeppelinOSLogo from '~/assets/images/zeppelin-os--logo.svg'
 import * as routes from '~/../config/routes'
 
 export const Nav = class _Nav extends Component {
@@ -36,11 +36,11 @@ export const Nav = class _Nav extends Component {
             <div className='row navbar-menu-container'>
               <div className='navbar-brand col-xs-8 col-md-8'>
                 <Link to={routes.HOME} className='navbar-item'>
-                  <ZeppelinOSRegistryLogo />
+                  <EVMRegistryLogo />
                 </Link>
 
-                <a href='https://zeppelin.solutions/' className='navbar-item'>
-                  <ZeppelinLogo className='navbar-brand__tertiary-logo' />
+                <a href='https://zeppelinos.org/' className='navbar-item'>
+                  <ZeppelinOSLogo className='navbar-brand__tertiary-logo' />
                 </a>
               </div>
 
@@ -81,15 +81,6 @@ export const Nav = class _Nav extends Component {
                     className='navbar-item'
                   >
                       GitHub
-                  </a>
-
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href='https://zeppelinos.org/'
-                    className='navbar-item'
-                  >
-                      Site
                   </a>
 
                   <Link
