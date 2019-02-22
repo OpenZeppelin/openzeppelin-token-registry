@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import AntdIcon from '@ant-design/icons-react'
 import { ExclamationCircleOutline } from '@ant-design/icons'
 import { graphql } from 'react-apollo'
-import { Web3Mutations } from '~/mutations/Web3Mutations'
+import { sendTransactionMutation } from 'apollo-link-ethereum-mutations-ethersjs'
 import { tokenFragments } from '~/queries/tokenQueries'
 import { web3Queries } from '~/queries/web3Queries'
 import { toWei } from '~/utils/toWei'
@@ -25,7 +25,7 @@ const tokenQuery = gql`
   ${tokenFragments.allowanceFragment}
 `
 
-export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 'sendTransaction' })(
+export const VouchMutationForm = graphql(sendTransactionMutation, { name: 'sendTransaction' })(
   graphql(web3Queries.networkAccountQuery, { name: 'networkAccount' })(
     graphql(
       tokenQuery,
@@ -251,18 +251,14 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         }
 
         approveTransaction () {
-          const txData = {
-            contractName: 'ZepToken',
-            method: 'approve',
-            args: [
-              abiMapping.getAddress('Vouching', this.props.networkAccount.networkId),
-              this.vouchAmount()
-            ]
-          }
-
           this.props.sendTransaction({
             variables: {
-              txData
+              contractName: 'ZepToken',
+              method: 'approve',
+              args: [
+                abiMapping.getAddress('Vouching', this.props.networkAccount.networkId),
+                this.vouchAmount()
+              ]
             }
           }).then(({ data }) => {
             this.setState({
@@ -272,18 +268,14 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         }
 
         vouchTransaction () {
-          const txData = {
-            contractName: 'Vouching',
-            method: 'vouch',
-            args: [
-              this.props.packageId,
-              toWei(this.state.inputAmount)
-            ]
-          }
-
           this.props.sendTransaction({
             variables: {
-              txData
+              contractName: 'Vouching',
+              method: 'vouch',
+              args: [
+                this.props.packageId,
+                toWei(this.state.inputAmount)
+              ]
             }
           }).then(({ data }) => {
             this.setState({

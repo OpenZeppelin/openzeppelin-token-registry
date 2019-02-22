@@ -1378,22 +1378,31 @@ apollo-link-dedup@^1.0.0:
   dependencies:
     apollo-link "^1.2.6"
 
-apollo-link-ethereum-resolver-ethersjs@0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/apollo-link-ethereum-resolver-ethersjs/-/apollo-link-ethereum-resolver-ethersjs-0.0.24.tgz#80ddef55594ade648bf975ab5c918985982d4519"
-  integrity sha512-gc1bgspvW6sbfGIaAmTN8ASpVDwf0LZUlnMlKf3DZPxuMq9h72STn/SxTmUFqKJCQQMetrNjXgj+DvYo7jCBEQ==
+apollo-link-ethereum-mutations-ethersjs@0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/apollo-link-ethereum-mutations-ethersjs/-/apollo-link-ethereum-mutations-ethersjs-0.0.25.tgz#6d8eef8d955f58c8e8cd3fa4f4a4c836c3124577"
+  integrity sha512-9CZWT4/cjfoa8KkibYhVnRGDGFzEvl3QqZdqjlUa9CHvhJkd24Y7JmjyNYPkSLngLvcdO4FA8iq6a8nlz/QDWQ==
+  dependencies:
+    ethers "^4.0.26"
+    graphql "^14.0.2"
+    graphql-tag "^2.10.1"
+
+apollo-link-ethereum-resolver-ethersjs@0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/apollo-link-ethereum-resolver-ethersjs/-/apollo-link-ethereum-resolver-ethersjs-0.0.25.tgz#0fd53850d34123de50498be51ac7fa9dd5cc4e25"
+  integrity sha512-md8dXmhbY8VvaCC1IASQ8TEeVAWmngPC7EPfc+Qto6M4/nvJyrsN5znUQ0mS6mDBxLsk9FzjLQb/TxYGSdwc5w==
   dependencies:
     apollo-link "^1.2.6"
-    apollo-link-ethereum "^0.0.24"
+    apollo-link-ethereum "^0.0.25"
     apollo-utilities "^1.1.2"
     ethers "^4.0.23"
     graphql "^14.1.1"
     graphql-anywhere "^4.1.27"
 
-apollo-link-ethereum@0.0.24, apollo-link-ethereum@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/apollo-link-ethereum/-/apollo-link-ethereum-0.0.24.tgz#1592fb145ceb54b24f35ffa0915c6f7216c91996"
-  integrity sha512-5gwVdac1epXX2qJG7KFsdiPJSneBRyU3b1YiktXtXjdHXBn4VpddecjatblXzZ5h4zsiHyWlZagNum/JlA2dPw==
+apollo-link-ethereum@0.0.25, apollo-link-ethereum@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/apollo-link-ethereum/-/apollo-link-ethereum-0.0.25.tgz#e05e80d4f7a8db096b631124d2303c37a63bde1d"
+  integrity sha512-cxHbNc+tVkLT7Z/UKjcO7Z2NXz5A0EaZvNDPBO+bKvrhARhmGFSDtIsBkRAxwkKyYcJ1UQMUeEKG/tYa/i5pOg==
   dependencies:
     apollo-link "^1.2.6"
     apollo-utilities "^1.0.27"
@@ -4098,6 +4107,22 @@ ethers@^4.0.23:
     uuid "2.0.1"
     xmlhttprequest "1.8.0"
 
+ethers@^4.0.26:
+  version "4.0.26"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-4.0.26.tgz#a4b17184a0ed3db9c88d1b6d28beaa7d0e0ba3e4"
+  integrity sha512-3hK4S8eAGhuWZ/feip5z17MswjGgjb4lEPJqWO/O0dNqToYLSHhvu6gGQPs8d9f+XfpEB2EYexfF0qjhWiZjUA==
+  dependencies:
+    "@types/node" "^10.3.2"
+    aes-js "3.0.0"
+    bn.js "^4.4.0"
+    elliptic "6.3.3"
+    hash.js "1.1.3"
+    js-sha3 "0.5.7"
+    scrypt-js "2.0.4"
+    setimmediate "1.0.4"
+    uuid "2.0.1"
+    xmlhttprequest "1.8.0"
+
 eventemitter3@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.0.tgz#090b4d6cdbd645ed10bf750d4b5407942d7ba163"
@@ -4929,7 +4954,7 @@ graphql-anywhere@^4.1.0-alpha.0, graphql-anywhere@^4.1.24, graphql-anywhere@^4.1
     apollo-utilities "^1.1.2"
     tslib "^1.9.3"
 
-graphql-tag@^2.10.0:
+graphql-tag@^2.10.0, graphql-tag@^2.10.1:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
   integrity sha512-jApXqWBzNXQ8jYa/HLkZJaVw9jgwNqZkywa2zfFn16Iv1Zb7ELNHkJaXHR7Quvd5SIGsy6Ny7SUKATgnu05uEg==

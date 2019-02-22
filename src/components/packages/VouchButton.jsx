@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
-import { transactionQueries } from '~/queries/transactionQueries'
+import { allTransactionsQuery } from 'apollo-link-ethereum-mutations-ethersjs'
 import { VouchMutationForm } from '~/components/packages/VouchMutationForm'
 import { getSystemInfo } from '~/utils/getSystemInfo'
 import { findLast } from 'lodash'
 
-export const VouchButton = graphql(transactionQueries.allTransactionsQuery)(
+export const VouchButton = graphql(allTransactionsQuery)(
   class _VouchButton extends Component {
     state = {
       isVouching: false
