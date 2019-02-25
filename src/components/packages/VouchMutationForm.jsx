@@ -215,7 +215,7 @@ export const VouchMutationForm = graphql(sendTransactionMutation, { name: 'sendT
           var className = ''
 
           if (this.hasUncompletedTransaction()) {
-            className = 'has-text-link'
+            className = 'has-text-info'
           } else if (this.isWarning()) {
             className = 'has-text-warning'
           } else if (this.isDanger()) {
@@ -394,7 +394,11 @@ export const VouchMutationForm = graphql(sendTransactionMutation, { name: 'sendT
 
           return (
             <form
-              className={classnames('inline-form', this.formClassName())}
+              className={classnames(
+                'form',
+                'inline-form',
+                this.formClassName()
+              )}
               onSubmit={(e) => {
                 e.preventDefault()
                 this.handleSubmit()

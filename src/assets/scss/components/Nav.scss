@@ -36,11 +36,11 @@
 }
 
 .navbar-brand svg.navbar-brand__tertiary-logo {
-  margin-left: 6px;
-  margin-top: -0.125rem;
-  opacity: 0.75;
+  margin-left: 3px;
+  margin-top: -3px;
+  opacity: 0.86;
   transition: opacity 150ms ease-in-out;
-  width: 90px;
+  width: 100px;
 
   @media screen and (max-width: 460px) {
     display: none;
@@ -52,7 +52,7 @@
 }
 
 .navbar-brand svg {
-  width: 200px;
+  width: 130px;
 }
 
 .navbar-brand__secondary-logo {
