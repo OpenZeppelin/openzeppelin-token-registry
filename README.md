@@ -1,6 +1,6 @@
-# zOS Vouching App
+# zOS Registry
 
-The official front end for the Zeppelin OS vouching contracts.  The app is live [here](https://registry.zeppelinos.org)
+The official front end for Zeppelin OS EVM packages.  The app is live [here](https://registry.zeppelinos.org)
 
 To run the project against a local node you can use the [zos-vouching-mock](https://github.com/DeltaCamp/zos-vouching-mock).  The mock project allows you to easily bootstrap a local Ganache instance with test data so that you can develop the app locally.
 
