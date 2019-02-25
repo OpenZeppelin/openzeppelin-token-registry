@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import yn from 'yn'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
-import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
+import { isValidNetwork } from '~/web3/isValidNetwork'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { PhaseOneHero } from '~/components/PhaseOneHero'
@@ -72,11 +72,11 @@ export class PackageListPage extends PureComponent {
               <div className='col-xs-12'>
                 <Query query={web3Queries.networkIdQuery}>
                   {({ data }) => {
-                    const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
+                    const wrongNetwork = data && data.networkId && !isValidNetwork(data.networkId)
 
                     if (wrongNetwork) {
                       return <ErrorMessage errorMessage={
-                        `No packages available on the currently selected Ethereum network.`
+                        `No packages available on the currently selected Ethereum network.  Please switch to ${process.env.REACT_APP_DEFAULT_NETWORK_NAME}.`
                       } />
                     } else {
                       return showResearchersList

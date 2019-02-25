@@ -6,6 +6,9 @@ import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
 import { getReadProvider } from '~/web3/getReadProvider'
 import { createClient } from '~/apollo/createClient'
+import { isValidNetwork } from '~/web3/isValidNetwork'
+import { subscribeClientState } from '~/apollo/subscribeClientState'
+import { subscribeWeb3 } from '~/apollo/subscribeWeb3'
 import './index.scss'
 
 require('./ethers.extension')
@@ -27,7 +30,10 @@ window.addEventListener('load', async () => {
       defaultFromBlock = parseInt(process.env.REACT_APP_MAINNET_STARTING_BLOCK, 10)
     }
 
+    const validNetwork = isValidNetwork(network.chainId)
+
     const client = await createClient(provider, defaultFromBlock)
+    subscribeClientState(client)
 
     let coreApp =
       <ApolloProvider client={client}>
@@ -35,6 +41,10 @@ window.addEventListener('load', async () => {
           <AppContainer />
         </BrowserRouter>
       </ApolloProvider>
+
+    if (validNetwork) {
+      subscribeWeb3(client)
+    }
 
     ReactDOM.render(coreApp, document.getElementById('root'))
   } catch (error) {
