@@ -1,4 +1,4 @@
-# zOS Registry
+# ZeppelinOS Registry
 
 The official front end for Zeppelin OS EVM packages.  The app is live [here](https://registry.zeppelinos.org)
 
