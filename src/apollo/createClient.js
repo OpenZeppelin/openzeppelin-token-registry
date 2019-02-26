@@ -10,7 +10,6 @@ import { metadataResolvers } from './client-state/metadataResolvers'
 import { transactionResolvers } from './client-state/transactionResolvers'
 import { web3Resolvers } from './client-state/web3Resolvers'
 import { mutations } from './client-state/mutations'
-import { subscribeAndRefetch } from '~/apollo/subscribeAndRefetch'
 import { ethers } from 'ethers'
 
 /**
@@ -48,7 +47,6 @@ export const createClient = function (provider, defaultFromBlock) {
     link: ApolloLink.from([stateLink, ethereumLink])
   })
 
-  subscribeAndRefetch(client)
   window.client = client
 
   return client
