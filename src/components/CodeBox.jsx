@@ -13,10 +13,10 @@ export const CodeBox = ReactTimeout(class _CodeBox extends PureComponent {
   }
 
   handleCopyClick = () => {
-    ReactTooltip.show(ReactDOM.findDOMNode(this.refs.foo))
+    ReactTooltip.show(ReactDOM.findDOMNode(this.refs.copyTooltip))
 
     this.props.setTimeout(() => {
-      ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.foo))
+      ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.copyTooltip))
     }, 3000)
   }
 
@@ -31,12 +31,15 @@ export const CodeBox = ReactTimeout(class _CodeBox extends PureComponent {
         <span className='has-text-grey'>$</span> <span className='has-text-warning'>zos</span> <span className='has-text-info'>link</span> openzeppelin-eth
 
         <span className='has-text-right is-inline-block is-copy-button'>
-          <div ref='foo' data-tip='Copied to Clipboard' />
-          <ReactTooltip />
+          <div ref='copyTooltip' data-tip='Copied!' />
+
+          <ReactTooltip type='light' effect='solid' />
 
           <CopyToClipboard
             text='zos link openzeppelin-eth'
-            onCopy={this.handleCopyClick}>
+            onCopy={this.handleCopyClick}
+            data-tip='Copy to Clipboard'
+          >
             <span className='has-text-right'><AntdIcon type={CopyOutline} className='antd-icon' /></span>
           </CopyToClipboard>
         </span>

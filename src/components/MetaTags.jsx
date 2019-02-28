@@ -15,13 +15,13 @@ export const MetaTags = class _MetaTags extends PureComponent {
     const location = this.props.location || {}
 
     const logoPath = '/zeppelin-os-logo.svg'
-    const siteTitle = 'ZeppelinOS EVM Package Registry'
+    const siteTitle = 'ZeppelinOS Registry'
     const siteURL = 'https://zeppelin-vouching-app.netlify.com'
-    const siteDescription = 'This is the desc'
+    const siteDescription = 'The ZeppelinOS Registry for EVM Packages'
     const twitterHandle = 'zeppelinorg'
     const ownerCoName = 'Zeppelin Solutions'
-    const author = 'Zeppelin Solutions & Delta Camp'
-    const keywords = 'zeppelinos zos vouch'
+    const author = 'Delta Camp & Zeppelin Solutions'
+    const keywords = 'zeppelinos zos vouch ethereum evm packages'
     const themeColor = '#070707'
     const googleFontsURL = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono:400,700,900'
     const year = (new Date()).getFullYear()

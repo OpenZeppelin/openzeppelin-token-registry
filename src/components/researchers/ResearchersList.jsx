@@ -10,7 +10,7 @@ import { sortBigNumbers } from '~/utils/sortBigNumbers'
 export class ResearchersList extends PureComponent {
   render () {
     return (
-      <Query query={vouchingQueries.vouchesQuery}>
+      <Query query={vouchingQueries.allEventsQuery}>
         {({ loading, error, data }) => {
           let content
 

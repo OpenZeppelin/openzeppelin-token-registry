@@ -3,20 +3,21 @@ import PropTypes from 'prop-types'
 import gh from 'parse-github-url'
 import yn from 'yn'
 import classnames from 'classnames'
+import { mixpanel } from '~/mixpanel'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
-import { CodeSnippet } from '~/components/CodeSnippet'
+import { ZosCodeSnippet } from '~/components/ZosCodeSnippet'
 import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { GithubProfileImage } from '~/components/GithubProfileImage'
-import { ChallengeRow } from '~/components/packages/ChallengeRow'
+import { ChallengeHeaderRow } from '~/components/challenges/ChallengeHeaderRow'
+import { ChallengeRow } from '~/components/challenges/ChallengeRow'
 import { VouchButton } from '~/components/packages/VouchButton'
 import { VouchRow } from '~/components/packages/VouchRow'
-import { projectPackageEvents } from '~/projections/projectPackageEvents'
+import { challengeProjection } from '~/projections/challengeProjection'
+import { projectPackageVouchTotals } from '~/projections/projectPackageVouchTotals'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { mixpanel } from '~/mixpanel'
-import { challengeProjection } from '~/projections/challengeProjection'
 
 export class PackageDetails extends Component {
   state = { voted: false }
@@ -47,12 +48,14 @@ export class PackageDetails extends Component {
     const challenges = challengeProjection(vouching.allEvents)
     const noChallenges = challenges.length === 0
 
+    const { name } = metadata || {}
+
     return (
       <>
         <div className='row reverse-column-order'>
           <div className='col-xs-12 col-md-7'>
             <h1 className='title is-size-1 has-text-weight-normal'>
-              {metadata.name}
+              {name}
 
               <span className='package-item--version has-text-grey has-text-weight-light'>
                 v{metadata.version}
@@ -85,7 +88,7 @@ export class PackageDetails extends Component {
               Link this package:
             </h5>
             <div className='code-wrapper'>
-              <CodeSnippet metadata={metadata} />
+              <ZosCodeSnippet packageName={name} />
               <GitHubLink
                 url={`https://github.com/${repo}`}
                 viewLink
@@ -97,82 +100,86 @@ export class PackageDetails extends Component {
 
         <br />
 
-        <div className='row'>
-          <div className='col-xs-12'>
-            <div className={classnames(
-              'message',
-              'message-endorse',
-              {
-                'has-voted': this.state.voted
-              }
-            )}>
+        {!yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
+          <>
+            <div className='row'>
+              <div className='col-xs-12'>
+                <div className={classnames(
+                  'message',
+                  'message-vouch',
+                  {
+                    'has-voted': this.state.voted
+                  }
+                )}>
 
-              <CSSTransition
-                timeout={1000}
-                classNames='slide'
-                in={!this.state.voted}
-              >
-                {state => (
-                  <div className='message-body message--cta has-text-centered slide-exit message-endorse--question'>
-                    <p className='message-body--text'>
-                      Would you endorse this package?
-                    </p>
-                    <button
-                      className='button is-purple is-pill button-left'
-                      onClick={(e) => { this.handleVoteClick('yes', metadata.name, id) }}
-                    >
-                        Yes
-                    </button>
+                  <CSSTransition
+                    timeout={1000}
+                    classNames='slide'
+                    in={!this.state.voted}
+                  >
+                    {state => (
+                      <div className='message-body message--cta has-text-centered slide-exit message-vouch--question'>
+                        <p className='message-body--text'>
+                          Would you vouch for this package?
+                        </p>
+                        <button
+                          className='button is-purple is-pill button-left'
+                          onClick={(e) => { this.handleVoteClick('yes', name, id) }}
+                        >
+                            Yes
+                        </button>
 
-                    <button
-                      className='button is-pill button-right'
-                      onClick={(e) => { this.handleVoteClick('no', metadata.name, id) }}
-                    >
-                        No
-                    </button>
-                  </div>
-                )}
-              </CSSTransition>
+                        <button
+                          className='button is-pill button-right'
+                          onClick={(e) => { this.handleVoteClick('no', name, id) }}
+                        >
+                            No
+                        </button>
+                      </div>
+                    )}
+                  </CSSTransition>
 
-              <CSSTransition
-                timeout={1000}
-                classNames='slide'
-                in={this.state.voted && this.state.voted.answer === 'yes'}
-              >
-                {state => (
-                  <div className='message-body message--cta has-text-centered slide-enter message-endorse--positive-answer'>
-                    <p className='message-body--text has-text-grey'>
-                      Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages.
-                      &nbsp;<a
-                        href='https://docs.zeppelinos.org/docs/vouching.html'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='has-text-link has-hover-border'
-                      >Click here to learn more about our vouching mechanics and private beta.</a>
-                    </p>
-                  </div>
-                )}
-              </CSSTransition>
+                  <CSSTransition
+                    timeout={1000}
+                    classNames='slide'
+                    in={this.state.voted && this.state.voted.answer === 'yes'}
+                  >
+                    {state => (
+                      <div className='message-body message--cta has-text-centered slide-enter message-vouch--positive-answer'>
+                        <p className='message-body--text has-text-grey'>
+                          Thanks for your feedback. We are testing token mechanics with our ZEP token to incentivize and secure EVM packages.
+                          &nbsp;<a
+                            href='https://docs.zeppelinos.org/docs/vouching.html'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className='has-text-link has-hover-border'
+                          >Click here to learn more about our vouching mechanics and private beta.</a>
+                        </p>
+                      </div>
+                    )}
+                  </CSSTransition>
 
-              <CSSTransition
-                timeout={1000}
-                classNames='slide'
-                in={this.state.voted && this.state.voted.answer === 'no'}
-              >
-                {state => (
-                  <div className='message-body message--cta has-text-centered slide-enter message-endorse--negative-answer'>
-                    <p className='message-body--text has-text-grey'>
-                      Thank you for your feedback. Your feedback will be used to inform the rankings of EVM packages.
-                    </p>
-                  </div>
-                )}
-              </CSSTransition>
+                  <CSSTransition
+                    timeout={1000}
+                    classNames='slide'
+                    in={this.state.voted && this.state.voted.answer === 'no'}
+                  >
+                    {state => (
+                      <div className='message-body message--cta has-text-centered slide-enter message-vouch--negative-answer'>
+                        <p className='message-body--text has-text-grey'>
+                          Thank you for your feedback. Your feedback will be used to inform the rankings of EVM packages.
+                        </p>
+                      </div>
+                    )}
+                  </CSSTransition>
 
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <br />
+            <br />
+          </>
+        )}
 
         {yn(process.env.REACT_APP_NEXT_RELEASE_FEATURE_FLAG) && (
 
@@ -182,7 +189,7 @@ export class PackageDetails extends Component {
                 {({ data }) => {
                   const { Vouching } = data || {}
                   const { allEvents } = Vouching || {}
-                  const packageProjection = projectPackageEvents(allEvents || [])
+                  const packageProjection = projectPackageVouchTotals(allEvents || [])
                   const { vouchTotals } = packageProjection.packages[id] || {}
                   const addresses = Object.keys(vouchTotals || {})
                   const vouches =
@@ -198,6 +205,15 @@ export class PackageDetails extends Component {
 
                       <div className='list--wrapper'>
                         <ul className='list is-fullwidth'>
+                          <li className='list--row list--row__head list--row__three-column'>
+                            <span className='list--cell list--cell__head'>
+                              Address
+                            </span>
+                            <span className='list--cell list--cell__head'>
+                              Vouched
+                            </span>
+                            <span className='list--cell list--cell__head' />
+                          </li>
                           {vouches.map(vouch => {
                             return <VouchRow
                               address={vouch.address}
@@ -234,7 +250,7 @@ export class PackageDetails extends Component {
                   Create a challenge by running: &nbsp;
                   <br className='is-hidden-desktop' />
                   <br className='is-hidden-desktop' />
-                  <CodeSnippet metadata={metadata} action='challenge' />
+                  <ZosCodeSnippet packageName={name} action='challenge' />
                   <br className='is-hidden-desktop' />
                   <br className='is-hidden-desktop' />
                 </>
@@ -244,22 +260,7 @@ export class PackageDetails extends Component {
               <br />
 
               <ul className='list'>
-                <li className='list--row list--row__head list--row_challenge'>
-                  <span className='list--cell list--cell__head'>
-                      Name
-                  </span>
-                  <span className='list--cell list--cell__head'>
-                      Status
-                  </span>
-                  <span className='list--cell list--cell__head'>
-                      Severity
-                  </span>
-                  <span className='list--cell list--cell__head'>
-                      Bounty
-                  </span>
-                  <span className='list--cell list--cell__head' />
-                  <span className='list--cell list--cell__head' />
-                </li>
+                <ChallengeHeaderRow />
                 {
                   challenges.map(challenged =>
                     <ChallengeRow
@@ -275,7 +276,7 @@ export class PackageDetails extends Component {
                         There are currently no challenges. Create a challenge by running: &nbsp;
                     <br />
                     <br />
-                    <CodeSnippet metadata={metadata} action='challenge' />
+                    <ZosCodeSnippet packageName={name} action='challenge' />
                   </span>
                 </li>
                 }

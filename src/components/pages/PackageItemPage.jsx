@@ -41,7 +41,7 @@ export class PackageItemPage extends PureComponent {
                   </button>
                 </p>
 
-                <Query query={vouchingQueries.eventsQuery}>
+                <Query query={vouchingQueries.registeredEventsQuery}>
                   {({ loading, error, data }) => {
                     if (loading) return <PageDetailsLoader />
                     if (error) return <ErrorMessage errorMessage={error} />

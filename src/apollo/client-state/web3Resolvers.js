@@ -2,6 +2,9 @@ import { getReadProvider } from '~/web3/getReadProvider'
 import { getWriteProvider } from '~/web3/getWriteProvider'
 import { isToshi } from '~/web3/isToshi'
 
+/**
+ * Resolvers execute the behaviour when an Apollo query with the same name is run.
+ */
 export const web3Resolvers = {
   resolvers: {
     Query: {

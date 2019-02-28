@@ -1,8 +1,8 @@
-import { getNetworkName } from '~/web3/getNetworkName'
-import { ethers } from 'ethers'
+import { getReadProvider } from '~/web3/getReadProvider'
 
 export async function getNetworkId () {
-  const network = ethers.utils.getNetwork(await getNetworkName())
+  const provider = await getReadProvider()
+  const network = await provider.getNetwork()
   if (network) {
     return network.chainId
   }

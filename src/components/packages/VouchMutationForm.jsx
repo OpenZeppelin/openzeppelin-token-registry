@@ -3,10 +3,11 @@ import classnames from 'classnames'
 import AntdIcon from '@ant-design/icons-react'
 import { ExclamationCircleOutline } from '@ant-design/icons'
 import { graphql } from 'react-apollo'
-import { Web3Mutations } from '~/mutations/Web3Mutations'
+import { sendTransactionMutation } from 'apollo-link-ethereum-mutations-ethersjs'
 import { tokenFragments } from '~/queries/tokenQueries'
 import { web3Queries } from '~/queries/web3Queries'
 import { toWei } from '~/utils/toWei'
+import { bigNumberify } from '~/utils/bigNumberify'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import { abiMapping } from '~/apollo/abiMapping'
@@ -24,7 +25,7 @@ const tokenQuery = gql`
   ${tokenFragments.allowanceFragment}
 `
 
-export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 'sendTransaction' })(
+export const VouchMutationForm = graphql(sendTransactionMutation, { name: 'sendTransaction' })(
   graphql(web3Queries.networkAccountQuery, { name: 'networkAccount' })(
     graphql(
       tokenQuery,
@@ -41,26 +42,39 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
     )(
       class _VouchMutationForm extends Component {
         state = {
-          newVouch: false,
+          lastTransactionId: null,
+          inputAmount: '',
           amountError: false
         }
 
         constructor (props) {
           super(props)
           this.textInputRef = React.createRef()
-          const vouchTx = props.vouchTx
+          const { vouchTx, approveTx } = props
+
+          // If still on the fly, setup component
+          let lastTransactionId = null
+          let inputAmount = ''
+          if (vouchTx && !vouchTx.completed) {
+            lastTransactionId = vouchTx.id
+            inputAmount = ethers.utils.formatEther(vouchTx.args.values[1].toString())
+          } else if (approveTx && !approveTx.completed) {
+            lastTransactionId = approveTx.id
+            inputAmount = ethers.utils.formatEther(approveTx.args.values[1].toString())
+          }
+
           this.state = {
-            defaultAmount: vouchTx ? vouchTx.args.values[1].toString() : null
+            inputAmount,
+            lastTransactionId
           }
         }
 
         handleAmountChange = (e) => {
-          let amount = e.target.value.replace(new RegExp(/^-?![0-9]+/))
-          amount = toWei(amount)
+          let inputAmount = e.target.value.replace(new RegExp(/^-?![0-9]+/))
 
           this.setState({
-            amount,
-            amountError: false
+            amountError: false,
+            inputAmount
           })
         }
 
@@ -79,33 +93,41 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         }
 
         hasSentVouchTx () {
-          const vouchTx = this.props.vouchTx
-          return vouchTx && vouchTx.sent && !vouchTx.completed
+          return this.vouchTxMatches() && this.props.vouchTx.sent && !this.props.vouchTx.completed
         }
 
         hasSentApproveTx () {
-          const approveTx = this.props.approveTx
-          return approveTx && approveTx.sent && !approveTx.completed
+          return this.approveTxMatches() && this.props.approveTx.sent && !this.props.approveTx.completed
+        }
+
+        vouchTxMatches () {
+          const vouchTx = this.props.vouchTx
+          return vouchTx && vouchTx.id === this.state.lastTransactionId
         }
 
         vouchingTxError () {
-          const vouchTx = this.props.vouchTx
-          return !this.state.newVouch && vouchTx && !!vouchTx.error
+          return this.vouchTxMatches() && !!this.props.vouchTx.error
         }
 
         vouchingTxCompleted () {
-          const vouchTx = this.props.vouchTx
-          return !this.state.newVouch && vouchTx && vouchTx.completed
+          return this.vouchTxMatches() && this.props.vouchTx.completed
+        }
+
+        approveTxMatches () {
+          const approveTx = this.props.approveTx
+          return approveTx && approveTx.id === this.state.lastTransactionId
         }
 
         approveTxError () {
-          const approveTx = this.props.approveTx
-          return !this.state.newVouch && approveTx && !!approveTx.error
+          return this.approveTxMatches() && !!this.props.approveTx.error
         }
 
         approveTxCompleted () {
-          const approveTx = this.props.approveTx
-          return !this.state.newVouch && approveTx && approveTx.completed
+          return this.approveTxMatches() && this.props.approveTx.completed
+        }
+
+        approveTxSuccess () {
+          return this.approveTxCompleted() && !this.approveTxError()
         }
 
         helpText = () => {
@@ -115,8 +137,16 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
             text = `You will need to`
           } else if (this.hasSentTransaction()) {
             text = 'Waiting for confirmation...'
+          } else if (this.vouchingTxError()) {
+            text = 'Vouching was not completed'
+          } else if (this.vouchingTxCompleted()) {
+            text = 'Vouching completed'
           } else if (this.hasUncompletedTransaction()) {
             text = 'Waiting to receive transaction...'
+          } else if (this.approveTxError()) {
+            text = 'Approval was not completed'
+          } else if (this.approveTxCompleted()) {
+            text = 'Approval completed.  You may now vouch'
           } else if (this.notLoggedIn()) {
             text = `You need to login to MetaMask`
           } else if (this.notEnoughZepError()) {
@@ -125,10 +155,6 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
             text = `You must first approve ${displayWeiToEther(this.vouchAmount())} tokens`
           } else if (this.state.amountError) {
             text = 'Please enter an amount'
-          } else if (this.vouchingTxError()) {
-            text = 'Vouching was not completed'
-          } else if (this.vouchingTxCompleted()) {
-            text = 'Vouching completed'
           }
 
           return text
@@ -137,11 +163,11 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         buttonText = () => {
           let text = 'Vouch'
 
-          if (this.vouchingTxError()) {
-            text = 'Retry'
+          if (this.vouchingTxError() || this.approveTxError()) {
+            text = 'Clear'
           } else if (this.vouchingTxCompleted()) {
             text = 'Done'
-          } else if (this.notEnoughAllowance()) {
+          } else if (this.notEnoughAllowance() && !this.approveTxSuccess()) {
             text = 'Approve'
           }
 
@@ -153,19 +179,20 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         }
 
         isDanger () {
-          return this.state.amountError || this.vouchingTxError() || this.notEnoughZepError() || this.notLoggedIn()
+          return this.state.amountError || this.vouchingTxError() || this.approveTxError() || this.notEnoughZepError() || this.notLoggedIn()
         }
 
         isSuccess () {
-          return this.vouchingTxCompleted() && !this.vouchingTxError()
+          return (this.vouchingTxCompleted() && !this.vouchingTxError()) ||
+                 (this.approveTxCompleted() && !this.approveTxError())
         }
 
         isInputDisabled () {
-          return this.hasUncompletedTransaction() || this.vouchingTxCompleted() || this.vouchingTxError() || this.notLoggedIn()
+          return this.hasUncompletedTransaction() || this.notLoggedIn()
         }
 
         isButtonDisabled () {
-          return this.hasUncompletedTransaction() || this.vouchingTxError() || this.notLoggedIn()
+          return this.notEnoughZepError() || this.hasUncompletedTransaction() || this.notLoggedIn()
         }
 
         formClassName () {
@@ -188,7 +215,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
           var className = ''
 
           if (this.hasUncompletedTransaction()) {
-            className = 'has-text-link'
+            className = 'has-text-info'
           } else if (this.isWarning()) {
             className = 'has-text-warning'
           } else if (this.isDanger()) {
@@ -202,9 +229,10 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
 
         resetForm = () => {
           this.setState({
-            newVouch: true
+            lastTransactionId: null,
+            inputAmount: '',
+            amount: null
           })
-          this.textInputRef.current.value = ''
         }
 
         handleSubmit = () => {
@@ -215,7 +243,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
             this.resetForm()
           } else if (this.notEnoughAllowance()) {
             this.approveTransaction()
-          } else if (this.approveTxCompleted() || this.state.amount) {
+          } else if (this.approveTxCompleted() || this.state.inputAmount) {
             this.vouchTransaction()
           } else {
             this.setState({ amountError: true })
@@ -223,41 +251,36 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
         }
 
         approveTransaction () {
-          const txData = {
-            contractName: 'ZepToken',
-            method: 'approve',
-            args: [
-              abiMapping.getAddress('Vouching', this.props.networkAccount.networkId),
-              this.vouchAmount()
-            ]
-          }
-
           this.props.sendTransaction({
             variables: {
-              txData
+              contractName: 'ZepToken',
+              method: 'approve',
+              args: [
+                abiMapping.getAddress('Vouching', this.props.networkAccount.networkId),
+                this.vouchAmount()
+              ]
             }
+          }).then(({ data }) => {
+            this.setState({
+              lastTransactionId: data.sendTransaction.id
+            })
           })
         }
 
         vouchTransaction () {
-          const txData = {
-            contractName: 'Vouching',
-            method: 'vouch',
-            args: [
-              this.props.packageId,
-              this.state.amount
-            ]
-          }
-
           this.props.sendTransaction({
             variables: {
-              txData
-            },
-            onCompleted: () => {
-              this.setState({
-                newVouch: false
-              })
+              contractName: 'Vouching',
+              method: 'vouch',
+              args: [
+                this.props.packageId,
+                toWei(this.state.inputAmount)
+              ]
             }
+          }).then(({ data }) => {
+            this.setState({
+              lastTransactionId: data.sendTransaction.id
+            })
           })
         }
 
@@ -266,15 +289,15 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
           let notEnoughZepError = false
           if (token && token.ZepToken) {
             notEnoughZepError =
-              parseInt(this.state.amount, 10) > parseInt(token.ZepToken.myBalance)
+              toWei(this.state.inputAmount).gt(bigNumberify(token.ZepToken.myBalance))
           }
           return notEnoughZepError
         }
 
         vouchAmount () {
-          let vouchAmount = ethers.utils.bigNumberify(0)
-          if (this.state.amount) {
-            vouchAmount = ethers.utils.bigNumberify(this.state.amount)
+          let vouchAmount = bigNumberify(0)
+          if (this.state.inputAmount) {
+            vouchAmount = toWei(this.state.inputAmount)
           }
           return vouchAmount
         }
@@ -288,7 +311,7 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
             allowance = token.ZepToken.allowance
           }
           if (!allowance) {
-            allowance = ethers.utils.bigNumberify(0)
+            allowance = bigNumberify(0)
           }
           return allowance
         }
@@ -369,16 +392,13 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
           if (error) { return error.toString() }
           if (loading) { return null }
 
-          let extraInputProps = {}
-          if (this.state.defaultAmount) {
-            extraInputProps = {
-              defaultValue: displayWeiToEther(this.state.defaultAmount)
-            }
-          }
-
           return (
             <form
-              className={classnames('form', this.formClassName())}
+              className={classnames(
+                'form',
+                'inline-form',
+                this.formClassName()
+              )}
               onSubmit={(e) => {
                 e.preventDefault()
                 this.handleSubmit()
@@ -407,9 +427,9 @@ export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 
                     disabled={this.isInputDisabled()}
                     ref={this.textInputRef}
                     type='number'
-                    {...extraInputProps}
                     placeholder='0'
                     className='input is-large'
+                    value={this.state.inputAmount}
                     onChange={this.handleAmountChange}
                   />
                 </div>

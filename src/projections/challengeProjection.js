@@ -1,3 +1,8 @@
+/**
+ * Filters any Ethereum log events and returns only 'Challenged' events
+ *
+ * @returns {Array}
+ */
 export function challengeProjection (events) {
   const challenges = []
 

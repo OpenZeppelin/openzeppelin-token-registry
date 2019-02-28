@@ -1,6 +1,14 @@
 import { ethers } from 'ethers'
 import { normalizeAddr } from '~/utils/normalizeAddr'
 
+/**
+ * Calculates the total vouched amounts for packages vouched on
+ * by the Ethereum address passed in. Only needs to use 'Vouched'
+ * and 'Unvouched' events to sum the totals (as Vouched is
+ * triggered on Register)
+ *
+ * @returns {Object}
+ */
 export function projectResearcherVouchedPackages (address, events) {
   let currentVouchTotal
 

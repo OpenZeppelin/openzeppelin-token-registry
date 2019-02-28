@@ -1,26 +1,30 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import gh from 'parse-github-url'
 import gql from 'graphql-tag'
+import ReactTimeout from 'react-timeout'
 import AntdIcon from '@ant-design/icons-react'
 import { MinusCircleOutline, PlusCircleOutline } from '@ant-design/icons'
 import { ethers } from 'ethers'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
-import { CodeSnippet } from '~/components/CodeSnippet'
 import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
 import { ShortText } from '~/components/ShortText'
 import { vouchingFragments } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { challengeStatus } from '~/utils/challengeStatus'
-import { dateRelative } from '~/utils/dateRelative'
+import { displayEthTimestamp } from '~/utils/displayEthTimestamp'
 import * as constants from '~/constants'
 
 export const challengeRowQuery = gql`
   query challengeRowQuery($challengeId: String!, $uri: String!) {
     metadata(uri: $uri) @client {
-      ...md
+      id
+      title
+      body
+      htmlUrl: html_url
+      url
     }
     Vouching @contract(type: "Challenge", id: $challengeId) {
       ...challengeFragment
@@ -30,8 +34,26 @@ export const challengeRowQuery = gql`
   ${vouchingFragments.challengeFragment}
 `
 
-export const ChallengeRow = class extends Component {
-  state = { challengeDetailsActive: false }
+export const ChallengeRow = ReactTimeout(class extends Component {
+  state = {
+    challengeDetailsActive: false,
+    challengeRowHovered: false
+  }
+
+  static propTypes = {
+    packageTotalVouched: PropTypes.object.isRequired
+  }
+
+  static defaultProps = {
+    packageTotalVouched: ethers.utils.bigNumberify(0)
+  }
+
+  constructor (props) {
+    super(props)
+
+    this.rowElementRef = React.createRef()
+    this.challengeDetailsRef = React.createRef()
+  }
 
   displayPriority = (amount) => {
     const packageAmount = displayWeiToEther(this.props.packageTotalVouched)
@@ -48,26 +70,45 @@ export const ChallengeRow = class extends Component {
   }
 
   handleChallengeRowMouseOver = (e) => {
-    e.preventDefault()
     this.setState({ challengeRowHovered: true })
   }
 
-  handleChallengeRowMouseOut = (e) => {
-    e.preventDefault()
+  handleChallengeRowMouseLeave = (e) => {
     this.setState({ challengeRowHovered: false })
   }
 
+  belowTheFold = (elem) => {
+    return elem.getBoundingClientRect().top > (window.innerHeight || document.documentElement.clientHeight)
+  }
+
+  scrollToDetails = () => {
+    this.props.setTimeout(
+      () => {
+        if (this.belowTheFold(this.challengeDetailsRef.current)) {
+          this.rowElementRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+      , 500)
+  }
+
   handleChallengeRowClick = (e) => {
-    e.preventDefault()
-    this.setState({ challengeDetailsActive: !this.state.challengeDetailsActive })
+    // also settings the *RowHovered to the same state as *DetailsActive fixes a touch / mobile bug
+    this.setState({
+      challengeDetailsActive: !this.state.challengeDetailsActive,
+      challengeRowHovered: !this.state.challengeDetailsActive
+    }, () => {
+      if (window && this.state.challengeDetailsActive) {
+        this.scrollToDetails()
+      }
+    })
   }
 
   render () {
     const { challenged } = this.props
     const challengeId = challenged.parsedLog.values.challengeID
     const amount = ethers.utils.bigNumberify(challenged.parsedLog.values.amount.toString())
+
     const { metadataURI } = challenged.parsedLog.values
-    const { repo } = gh(metadataURI)
 
     const priority = this.displayPriority(amount)
 
@@ -84,79 +125,77 @@ export const ChallengeRow = class extends Component {
           const priorityColor = constants.CHALLENGE_PRIORITY_COLORS[priority]
 
           const { metadata } = data || {}
-
+          const { title, htmlUrl } = metadata
           const hasAnswer = parseInt(challenge.answeredAt, 10) > 0
           const hasAppeal = parseInt(appeal.createdAt, 10) > 0
 
+          const defaultButtonClasses = 'list__wrapping-anchor list__has-padding no-scale'
+
+          const ListCellButton = ({ children, extraClassNames }) => {
+            return (
+              <button
+                onMouseEnter={this.handleChallengeRowMouseOver}
+                onMouseLeave={this.handleChallengeRowMouseLeave}
+                onClick={this.handleChallengeRowClick}
+                className={`${defaultButtonClasses} ${extraClassNames}`}
+              >
+                {children}
+              </button>
+            )
+          }
+
           return (
             <>
-              <li className={classnames(
-                'list--row',
-                'list--row_challenge',
-                {
-                  'list--row__hovered': this.state.challengeRowHovered,
-                  'is-active': this.state.challengeDetailsActive
-                }
-              )}>
+              <li
+                ref={this.rowElementRef}
+                className={classnames(
+                  'list--row',
+                  'list--row_challenge',
+                  {
+                    'list--row__hovered': this.state.challengeRowHovered || this.state.challengeDetailsActive
+                  }
+                )
+                }>
                 <span className='list--cell desc'>
-                  <button
-                    onMouseOver={this.handleChallengeRowMouseOver}
-                    onMouseOut={this.handleChallengeRowMouseOut}
-                    onClick={this.handleChallengeRowClick}
-                    className='list__wrapping-anchor list__has-padding no-scale'
-                  >
-                    {/* TODO: this is completely incorrect, it should be the challenge description */}
-                    <ShortText text={metadata.description} />
-                  </button>
+                  <ListCellButton>
+                    <ShortText text={title} />
+                  </ListCellButton>
                 </span>
                 <span className={`list--cell status has-text-${statusLabel.colour}`}>
-                  <button
-                    onMouseOver={this.handleChallengeRowMouseOver}
-                    onMouseOut={this.handleChallengeRowMouseOut}
-                    onClick={this.handleChallengeRowClick}
-                    className='list__wrapping-anchor list__has-padding no-scale'
-                  >
+                  <ListCellButton>
                     {statusLabel.label}
-                  </button>
+                  </ListCellButton>
                 </span>
                 <span className={`list--cell severity has-text-${priorityColor}`}>
-                  <button
-                    onMouseOver={this.handleChallengeRowMouseOver}
-                    onMouseOut={this.handleChallengeRowMouseOut}
-                    onClick={this.handleChallengeRowClick}
-                    className='list__wrapping-anchor list__has-padding no-scale'
-                  >
+                  <ListCellButton>
                     {priority}
-                  </button>
+                  </ListCellButton>
                 </span>
                 <span className='list--cell bounty'>
-                  <button
-                    onMouseOver={this.handleChallengeRowMouseOver}
-                    onMouseOut={this.handleChallengeRowMouseOut}
-                    onClick={this.handleChallengeRowClick}
-                    className='list__wrapping-anchor list__has-padding no-scale'
-                  >
+                  <ListCellButton
+                    extraClassNames='has-text-centered'>
                     {displayWeiToEther(amount)} Z
-                  </button>
+                  </ListCellButton>
                 </span>
                 <span className='list--cell github'>
                   <GitHubLink
-                    url={`https://github.com/${repo}`}
-                    cssClassNames='list__wrapping-anchor list__has-padding no-scale'
+                    url={htmlUrl}
+                    cssClassNames={classnames(defaultButtonClasses)}
                   />
                 </span>
                 <span className='list--cell more'>
-                  <button
-                    onMouseOver={this.handleChallengeRowMouseOver}
-                    onMouseOut={this.handleChallengeRowMouseOut}
-                    onClick={this.handleChallengeRowClick}
-                    className='list__wrapping-anchor list__has-padding no-scale has-text-centered list--accordion-icon'
+                  <ListCellButton
+                    extraClassNames='list--accordion-icon is-monospaced has-text-grey is-uppercase has-text-right'
                   >
-                    <AntdIcon
+                    <span className={classnames(
+                      {
+                        'has-text-link': this.state.challengeRowHovered
+                      }
+                    )}> { this.state.challengeDetailsActive ? 'Close' : 'Open' }</span> <AntdIcon
                       type={this.state.challengeDetailsActive ? MinusCircleOutline : PlusCircleOutline}
                       className='antd-icon'
                     />
-                  </button>
+                  </ListCellButton>
                 </span>
               </li>
               <CSSTransition
@@ -168,63 +207,50 @@ export const ChallengeRow = class extends Component {
                   <li className='accordion accordion--panel'>
                     <span className='accordion--header'>
                       <h5 className='is-size-5'>
-                        Challenged <span className='has-text-weight-semibold'>{dateRelative(challenge.createdAt)}</span>
+                        Challenged <span className='has-text-weight-semibold'>{displayEthTimestamp(challenge.createdAt)}</span>
                         {/* TODO: Could be nice to have a unique challengeId Challenge #{challenge.entryID.toString()} */}
                       </h5>
-                      <h6 className='is-size-6 has-text-weight-semibold'>
+                      <h6 ref={this.challengeDetailsRef} className='is-size-6 has-text-weight-semibold'>
                         Challenger <ResearcherLink address={challenge.challenger.toString()} shorten />
                       </h6>
-
                     </span>
 
                     <span className='accordion--column accordion--column__1'>
-                      {hasAnswer ? (
+                      {hasAnswer &&
                         <>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Answer:</strong> {constants.CHALLENGE_ANSWER_LABEL[challenge.answer]}
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Answered:</strong> <span className='has-text-grey'>{dateRelative(challenge.answeredAt)}</span>
+                            <strong>Answered:</strong> <span className='has-text-grey'>{displayEthTimestamp(challenge.answeredAt)}</span>
                           </h6>
                           <br />
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Resolution:</strong> {constants.CHALLENGE_RESOLUTION_LABEL[challenge.resolution]}
                           </h6>
                         </>
-                      ) : (
-                        <span className='accordion--column__blank-state is-size-6'>
-                          Currently no responses. Respond with:
-                          <br />
-                          <CodeSnippet metadata={metadata} action='answer' id={challenge.entryID.toString()} />
-                        </span>
-                      )}
+                      }
                     </span>
 
                     <span className='accordion--column accordion--column__2'>
-                      {hasAppeal ? (
+                      {hasAppeal &&
                         <>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Appealer:</strong> <ResearcherLink address={challenge.challenger.toString()} shorten />
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
-                            <strong>Appealed:</strong> <span className='has-text-grey'>{dateRelative(appeal.createdAt)}</span>
+                            <strong>Appealed:</strong> <span className='has-text-grey'>{displayEthTimestamp(appeal.createdAt)}</span>
                           </h6>
                           <h6 className='is-size-6 has-text-weight-semibold'>
                             <strong>Appeal Amount:</strong> <span className='has-text-grey'>{displayWeiToEther(appeal.amount.toString())} Z</span>
                           </h6>
                         </>
-                      ) : (
-                        <span className='accordion--column__blank-state is-size-6'>
-                          Currently no appeals. Appeal with:
-                          <br />
-                          <CodeSnippet metadata={metadata} action='appeal' id={challenge.entryID.toString()} />
-                        </span>
-                      )}
+                      }
                     </span>
 
                     <span className='accordion--footer'>
                       <GitHubLink
-                        url={`https://github.com/${repo}/issues`}
+                        url={htmlUrl}
                         viewLink
                         cssClassNames='is-text'
                       />
@@ -239,4 +265,4 @@ export const ChallengeRow = class extends Component {
       </Query>
     )
   }
-}
+})

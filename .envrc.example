@@ -21,5 +21,8 @@ export REACT_APP_MIXPANEL_ID=e5f3a0b990d694b84981f493169f47c4
 # Configures the Google Analytics tracking ID
 # export REACT_APP_GA_TRACKING_ID=<your tracking id>
 
+# Configures the Intercom API Key
+# export REACT_APP_INTERCOM_APP_ID=<your app id>
+
 # Configures the block from which to retrieve events on mainnet.  Helps optimize queries.
 export REACT_APP_MAINNET_STARTING_BLOCK=7189521

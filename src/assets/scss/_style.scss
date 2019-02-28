@@ -168,10 +168,6 @@ a.is-dark {
   left: -8px;
 }
 
-.tx-in-progress .field.has-addons {
-  border-color: $blue;
-}
-
 .has-half-margin {
   margin-bottom: 0.5rem !important;
 }
@@ -182,4 +178,24 @@ a.is-dark {
 
 .has-break-word {
   overflow-wrap: break-word;
+}
+
+.export-icon {
+  color: lighten($link, 30%);
+  font-size: 12px;
+  position: relative;
+  top: -2px;
+  transition: all 300ms ease-in-out;
+}
+
+a:hover .export-icon {
+  color: $link-hover;
+  font-size: 16px;
+  top: 0;
+}
+
+// Hack to force hide Intercom, the settings are not working, nor is the JS code to hide it
+// Make sure to turn the sound effects off in the Intercom settings as well!
+.intercom-namespace {
+  display: none;
 }

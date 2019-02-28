@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import { normalizeAddr } from '~/utils/normalizeAddr'
 import ZepTokenLogo from '~/assets/images/zep-token-logo--fixed.svg'
 import * as routes from '~/../config/routes'
-import { normalizeAddr } from '~/utils/normalizeAddr'
 
 export class PackageItemListRow extends PureComponent {
   static propTypes = {
@@ -22,7 +22,7 @@ export class PackageItemListRow extends PureComponent {
     const address = normalizeAddr(this.props.address)
 
     return (
-      <Query query={vouchingQueries.eventsQuery}>
+      <Query query={vouchingQueries.registeredEventsQuery}>
         {({ loading, error, data }) => {
           if (loading) return null
           if (error) {

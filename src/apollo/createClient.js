@@ -12,6 +12,12 @@ import { web3Resolvers } from './client-state/web3Resolvers'
 import { mutations } from './client-state/mutations'
 import { ethers } from 'ethers'
 
+/**
+ * Configures and returns the Apollo client using all of it's mutations,
+ * resolvers and contract addresses
+ *
+ * @returns {Object}
+ */
 export const createClient = function (provider, defaultFromBlock) {
   window.provider = provider
   window.ethers = ethers
@@ -36,8 +42,12 @@ export const createClient = function (provider, defaultFromBlock) {
     cache
   })
 
-  return new ApolloClient({
+  const client = new ApolloClient({
     cache,
     link: ApolloLink.from([stateLink, ethereumLink])
   })
+
+  window.client = client
+
+  return client
 }
