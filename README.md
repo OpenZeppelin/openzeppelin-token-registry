@@ -1,4 +1,6 @@
-# ZeppelinOS Registry
+# OpenZeppelin Ethereum Packages registry
+
+**This registry was formerly known as ZeppelinOS EVM Packages registry. The documentation and site still have the old naming.**
 
 The official front end for Zeppelin OS EVM packages.  The app is live [here](https://registry.zeppelinos.org)
 
